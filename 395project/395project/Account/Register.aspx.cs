@@ -19,7 +19,7 @@ namespace _395project.Account
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
             var user = new ApplicationUser() { Id = Email.Text, Email = Email.Text, UserName = Email.Text };
-            IdentityResult result = manager.Create(user, Password.Text);
+            IdentityResult result = manager.Create(user, System.Web.Security.Membership.GeneratePassword(6, 0));
 
             if (result.Succeeded)
             {
@@ -50,13 +50,14 @@ namespace _395project.Account
 
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                string code = manager.GenerateEmailConfirmationToken(user.Id);
+                string code = manager.GeneratePasswordResetToken(user.Id);
                 string callbackUrl = IdentityHelper.GetResetPasswordRedirectUrl(code, Request);
-                manager.SendEmail(user.Id, "Confirm your Caraway Facilitator account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
+                manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking the following link: " + callbackUrl);
 
-                // signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
-                //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                /* signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
+                IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response); */
                 ErrorMessage.Text = "Account successfully created";
+                //Clear the email and facilitator fields
                 Email.Text = string.Empty;
                 Facilitator1First.Text = string.Empty;
                 Facilitator1Last.Text = string.Empty;

@@ -14,8 +14,27 @@ namespace _395project
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var sendGridUserName = "CarawayFacilitationProject";
+            var sentFrom = "carawayfacilitationproject@gmail.com";
+            var sendGridPassword = "395project";
+            
+            var client = new System.Net.Mail.SmtpClient("smtp.sendgrid.net", Convert.ToInt32(587));
+
+            client.Port = 587;
+            client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+
+            System.Net.NetworkCredential credentials =
+           new System.Net.NetworkCredential(sendGridUserName, sendGridPassword);
+            client.EnableSsl = true; client.Credentials = credentials;
+
+            // Create the message: 
+            var mail = new System.Net.Mail.MailMessage(sentFrom, message.Destination); 
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+
+            return client.SendMailAsync(mail);
+
         }
     }
 

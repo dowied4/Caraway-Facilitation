@@ -30,7 +30,8 @@ namespace _395project.Account
                     ErrorMessage.Text = "No user found";
                     return;
                 }
-                var result = manager.ResetPassword(user.Id, code, Password.Text);
+                var Code = code.Replace(" ", "+");
+                var result = manager.ResetPassword(user.Id, Code, Password.Text);
                 if (result.Succeeded)
                 {
                     Response.Redirect("~/Account/ResetPasswordConfirmation");
