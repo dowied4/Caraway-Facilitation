@@ -34,7 +34,7 @@
     vertical-align: middle;
 }
 
-.sign-out {
+.header-link {
     font-size: 16px;
     color: #130d19;
     font-family: 'Raleway', sans-serif;
@@ -77,6 +77,8 @@
     border: 1px solid #130d19;
     border-radius: 7px;
     background-color: rgba(42, 45, 64, 0.2);
+    font-family: "Raleway", sans-serif;
+    padding-left: 5px;
 }
 
 
@@ -86,8 +88,6 @@
     border-color: #1d2c3f;
     box-shadow: 0 0 10px #1d2c3f;
 }
-
-
 
 .blog-header {
     line-height: 1;
