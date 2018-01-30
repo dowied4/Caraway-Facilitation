@@ -1,0 +1,212 @@
+﻿@import url(https://fonts.googleapis.com/css?family=Raleway:400,,800,900);
+
+/* Bordered form */
+body {
+    /*background-color: #dbe0ff;*/
+    background: url('../Images/stardust.png') repeat 0 0;
+}
+
+/* Set a style for all buttons */
+button {
+    /*#4f92ff*/
+    vertical-align: middle;
+    position: relative;
+    background-color: #130d19;
+    border-radius: 10px;
+    color: #444349;
+    font-size: 20px;
+    padding: 3px 20px;
+    padding-top: 5px;
+    margin: 9px 0;
+    border: none;
+    width: 100px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    overflow: hidden;
+    font-family: 'Raleway', sans-serif;
+}
+
+button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+button:hover {
+    /*#4f92ff*/
+    background: #1d2c3f;
+}
+
+button:hover span{
+    padding-right: 15px;
+}
+
+button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -10px;
+    transition: 0.5s;
+}
+
+
+label {
+    color: #2767ce;
+    padding-top: 5px;
+    font-size: 36px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.header-links {
+    color: #130d19;
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.remember-me {
+    padding-top: 12px;
+    font-size: 20px;
+    color: #130d19;
+}
+
+.inputheader {
+    letter-spacing: 2px;
+    background: url('../Images/download.jpg') 150px 100px;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+.login-container {
+    height: 850px;
+    margin: auto;
+    padding-top: 200px;
+    max-width: 300px;
+    padding-bottom: 350px;
+}
+
+hr {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #130d19;
+}
+
+
+
+.inputfields {
+    width: 300px;
+    height: 35px;
+    border: 1px solid #130d19;
+    border-radius: 7px;
+}
+
+
+.inputfields:focus {
+    /*#4f92ff*/
+    outline: none;
+    border-color: #1d2c3f;
+    box-shadow: 0 0 10px #1d2c3f;
+}
+
+a {
+    /*#2767ce*/
+    color: #130d19;
+    font-size: 18px;
+    font-family: 'Raleway', sans-serif;
+}
+
+a:hover {
+    /*#4f92ff*/
+    color: #1d2c3f;
+    font: bold;
+    font-family: 'Raleway', sans-serif;
+
+}
+
+a:active {
+    color: orange;
+}
+
+.title-row {
+
+}
+
+.title {
+    /*#2767ce*/
+    padding-left: 30px;
+    font: normal 40px/normal 'Raleway', sans-serif;
+    color: #182132;
+    letter-spacing: 10px;
+    text-shadow: 2px 2px 0 #444349, 4px 4px 0 #182132;
+}
+
+.loginheader {
+    letter-spacing: 2px;
+    font-size: 60px;
+    background: url('../Images/download.jpg') 150px 100px;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    margin: 0 auto;
+    border-bottom: 2px dashed #130d19;
+}
+
+input[type="text"], textarea {
+    background-color: rgba(42, 45, 64, 0.8);
+}
+
+/* WebKit, Blink(Safari, Google Chrome, Opera 15+, Edge */
+::-webkit-input-placeholder {
+    color: #130d19;
+    font-family: 'Raleway', sans-serif;
+    padding-left: 4px;
+}
+
+/* Mozilla Firefox 4 to 18 */
+:-moz-placeholder {
+    color: #130d19;
+    font-family: 'Raleway', sans-serif;
+    padding-left: 4px;
+    opacity: 1;
+}
+
+/* Mozilla Firefox 19+ */
+::-moz-placeholder {
+    color: #130d19;
+    font-family: 'Raleway', sans-serif;
+    padding-left: 4px;
+    opacity: 1;
+}
+
+/* Internet Explorer 10-11 */
+:-ms-input-placeholder {
+    color: #130d19;
+    font-family: 'Raleway', sans-serif;
+    padding-left: 4px;
+}
+
+/* Microsoft Edge */
+:-ms-input-placeholder {
+    color: #130d19;
+    font-family: 'Raleway', sans-serif;
+    padding-left: 4px;
+}
+
+/* Most modern browsers support this*/
+::placeholder {
+    color: #130d19;
+    font-family: 'Raleway', sans-serif;
+    padding-left: 4px;
+}
+
+/*TEST*/

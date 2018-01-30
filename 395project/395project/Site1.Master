@@ -37,7 +37,7 @@
           </div>
           <div class="col-1 justify-content-end ">
            
-            <a class="text-muted" href="#">Sign out</a>
+            <a class="sign-out" href="#">Sign out</a>
           </div>
               
         </div>

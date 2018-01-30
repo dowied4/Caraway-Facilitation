@@ -1,4 +1,84 @@
 ﻿/* stylelint-disable selector-list-comma-newline-after */
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,,800,900);
+
+.mybutton {
+    /*#4f92ff*/
+    vertical-align: middle;
+    position: relative;
+    background-color: #130d19;
+    border-radius: 10px;
+    color: white/*#444349*/;
+    font-size: 20px;
+    padding: 3px 20px;
+    padding-top: 5px;
+    margin: 9px 0;
+    border: none;
+    width: 100px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    font-family: 'Raleway', sans-serif;
+}
+
+
+.mybutton:hover {
+    /*#4f92ff*/
+    background: #1d2c3f;
+}
+
+.sign-out {
+    font-size: 16px;
+    color: #130d19;
+    font-family: 'Raleway', sans-serif;
+}
+
+
+.sign-out:active {
+    color: blue;
+}
+
+.remember-me {
+    padding-top: 12px;
+    font-size: 20px;
+    color: #130d19;
+    font-family: 'Raleway', sans-serif;
+}
+
+.forgot-pwd {
+    /*#2767ce*/
+    color: #130d19;
+    font-size: 18px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.forgot-pwd:active {
+    color: blue;
+}
+
+.input-header {
+    letter-spacing: 2px;
+    font-size: 20px;
+    background: url('../Images/download.jpg') 150px 100px;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+.inputfields {
+    width: 300px;
+    height: 35px;
+    border: 1px solid #130d19;
+    border-radius: 7px;
+    background-color: rgba(42, 45, 64, 0.2);
+}
+
+
+.inputfields:focus {
+    /*#4f92ff*/
+    outline: none;
+    border-color: #1d2c3f;
+    box-shadow: 0 0 10px #1d2c3f;
+}
+
+
 
 .blog-header {
     line-height: 1;
@@ -6,7 +86,7 @@
 }
 
 .blog-header-logo {
-    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-family: "Raleway", sans-serif;
     font-size: 2.25rem;
 }
 
@@ -15,7 +95,11 @@
     }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-family: "Raleway", sans-serif;
+    letter-spacing: 2px;
+    background: url('../Images/download.jpg') 150px 100px;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
 }
 
 .display-4 {
