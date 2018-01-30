@@ -14,60 +14,125 @@ namespace _395project.Account
 {
     public partial class Register : Page
     {
+
+        protected void AddChild_Click(object sender, EventArgs e)
+        {
+            //Check if account already exists before creating it
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var check = manager.FindByName(ChildEmail.Text);
+            if (check == null)
+            {
+                ErrorMessage.Text = "There is no account with that email";
+                ChildEmail.Text = string.Empty;
+            }
+            else
+            {
+                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                conn.Open();
+                string insert = "insert into Children(Id,FirstName, LastName, Grade, Class) values (@Email,@ChildFirst, @ChildLast, @Grade, @Class)";
+                SqlCommand cmd = new SqlCommand(insert, conn);
+                cmd.Parameters.AddWithValue("@Email", ChildEmail.Text);
+                cmd.Parameters.AddWithValue("@ChildFirst", ChildFirst.Text);
+                cmd.Parameters.AddWithValue("@ChildLast", ChildLast.Text);
+                cmd.Parameters.AddWithValue("@Grade", Grade.Text);
+                cmd.Parameters.AddWithValue("@Class", Class.Text);
+                cmd.ExecuteNonQuery();
+                //Remove if one of the fields is empty
+                string remove = "delete from Children where ID = '' or FirstName = '' or LastName = '' or Grade = '' or Class = ''";
+                SqlCommand rm = new SqlCommand(remove, conn);
+                rm.ExecuteNonQuery();
+                conn.Close();
+                ChildFirst.Text = string.Empty;
+                ChildLast.Text = string.Empty;
+                Grade.Text = string.Empty;
+                Class.Text = string.Empty;
+                ErrorMessage.Text = "Child Successfully Added";
+            }
+        }
+
+        protected void AddFacilitator_Click(object sender, EventArgs e)
+        {
+            //Check if account already exists before creating it
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var check = manager.FindByName(FacilitatorEmail.Text);
+            if (check == null)
+            {
+                ErrorMessage.Text = "There is no account with that email";
+                FacilitatorEmail.Text = string.Empty;
+            }
+            else
+            {
+                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                conn.Open();
+                string insert = "insert into Facilitators(Id,FirstName, LastName) values (@Email,@FacilitatorFirst, @FacilitatorLast)";
+                SqlCommand cmd = new SqlCommand(insert, conn);
+                cmd.Parameters.AddWithValue("@Email", FacilitatorEmail.Text);
+                cmd.Parameters.AddWithValue("@FacilitatorFirst", FacilitatorFirst.Text);
+                cmd.Parameters.AddWithValue("@FacilitatorLast", FacilitatorLast.Text);
+                cmd.ExecuteNonQuery();
+
+                //Remove if one of the fields is empty
+                string remove = "delete from Facilitators where ID = '' or FirstName = '' or LastName = ''";
+                SqlCommand rm = new SqlCommand(remove, conn);
+                rm.ExecuteNonQuery();
+                conn.Close();
+                FacilitatorFirst.Text = string.Empty;
+                FacilitatorLast.Text = string.Empty;
+                ErrorMessage.Text = "Facilitator Successfully Added";
+            }
+
+        }
+
         protected void CreateUser_Click(object sender, EventArgs e)
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
-            var user = new ApplicationUser() { Id = Email.Text, Email = Email.Text, UserName = Email.Text };
-            IdentityResult result = manager.Create(user, System.Web.Security.Membership.GeneratePassword(6, 0));
-
-            if (result.Succeeded)
+            //Check if account already exists before creating it
+            var check = manager.FindByName(Email.Text);
+            if (check != null)
             {
-
-
-                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-                conn.Open();
-                string insert = "insert into facilitators(Id,FirstName, LastName) values (@Email,@Facilitator1First, @Facilitator1Last)";
-                SqlCommand cmd = new SqlCommand(insert, conn);
-                cmd.Parameters.AddWithValue("@Email", Email.Text);
-                cmd.Parameters.AddWithValue("@Facilitator1First", Facilitator1First.Text);
-                cmd.Parameters.AddWithValue("@Facilitator1Last", Facilitator1Last.Text);
-                cmd.ExecuteNonQuery();
-                string insert2 = "insert into facilitators(Id,FirstName, LastName) values (@Email2,@Facilitator2First, @Facilitator2Last)";
-                SqlCommand cmd2 = new SqlCommand(insert2, conn);
-                cmd2.Parameters.AddWithValue("@Email2", Email.Text);
-                cmd2.Parameters.AddWithValue("@Facilitator2First", Facilitator2First.Text);
-                cmd2.Parameters.AddWithValue("@Facilitator2Last", Facilitator2Last.Text);
-                cmd2.ExecuteNonQuery();
-                //Removes empty facilitators if 1 or 0 are entered
-                string remove = "delete from facilitators where FirstName = '' and LastName = '' ";
-                SqlCommand removeCommand = new SqlCommand(remove, conn);
-                removeCommand.ExecuteNonQuery();
-                conn.Close();
-
-
-
-
-
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                string code = manager.GeneratePasswordResetToken(user.Id);
-                string callbackUrl = IdentityHelper.GetResetPasswordRedirectUrl(code, Request);
-                manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking the following link: " + callbackUrl);
-
-                /* signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
-                IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response); */
-                ErrorMessage.Text = "Account successfully created";
-                //Clear the email and facilitator fields
+                ErrorMessage.Text = "There is already an account with that email";
                 Email.Text = string.Empty;
-                Facilitator1First.Text = string.Empty;
-                Facilitator1Last.Text = string.Empty;
-                Facilitator2First.Text = string.Empty;
-                Facilitator2Last.Text = string.Empty;
             }
             else
             {
-                ErrorMessage.Text = result.Errors.FirstOrDefault();
+                var user = new ApplicationUser() { Id = Email.Text, Email = Email.Text, UserName = Email.Text };
+                IdentityResult result = manager.Create(user, System.Web.Security.Membership.GeneratePassword(6, 0));
+
+                if (result.Succeeded)
+                {
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    string code = manager.GeneratePasswordResetToken(user.Id);
+                    string callbackUrl = IdentityHelper.GetResetPasswordRedirectUrl(code, Request);
+                    manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking the following link: " + callbackUrl);
+
+                    /* signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
+                    IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response); */
+                    ErrorMessage.Text = "Account Successfully Created";
+                    //Set the child and facilitator email fields and clear the new account email field
+                    FacilitatorEmail.Text = Email.Text;
+                    ChildEmail.Text = Email.Text;
+                    Email.Text = string.Empty;
+                }
+                else
+                {
+                    ErrorMessage.Text = result.Errors.FirstOrDefault();
+                }
             }
+        }
+
+        protected void Clear_Click(object sender, EventArgs e)
+        {
+            Email.Text = string.Empty;
+            FacilitatorEmail.Text = string.Empty;
+            FacilitatorFirst.Text = string.Empty;
+            FacilitatorLast.Text = string.Empty;
+            ChildEmail.Text = string.Empty;
+            ChildFirst.Text = string.Empty;
+            ChildLast.Text = string.Empty;
+            Grade.Text = string.Empty;
+            Class.Text = string.Empty;
         }
     }
 }

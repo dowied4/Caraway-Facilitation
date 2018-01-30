@@ -31,39 +31,75 @@ namespace _395project.Account {
         protected global::System.Web.UI.WebControls.TextBox Email;
         
         /// <summary>
-        /// Facilitator1First control.
+        /// FacilitatorEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Facilitator1First;
+        protected global::System.Web.UI.WebControls.TextBox FacilitatorEmail;
         
         /// <summary>
-        /// Facilitator1Last control.
+        /// FacilitatorFirst control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Facilitator1Last;
+        protected global::System.Web.UI.WebControls.TextBox FacilitatorFirst;
         
         /// <summary>
-        /// Facilitator2First control.
+        /// FacilitatorLast control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Facilitator2First;
+        protected global::System.Web.UI.WebControls.TextBox FacilitatorLast;
         
         /// <summary>
-        /// Facilitator2Last control.
+        /// ChildEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Facilitator2Last;
+        protected global::System.Web.UI.WebControls.TextBox ChildEmail;
+        
+        /// <summary>
+        /// ChildFirst control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ChildFirst;
+        
+        /// <summary>
+        /// ChildLast control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ChildLast;
+        
+        /// <summary>
+        /// Class control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Class;
+        
+        /// <summary>
+        /// Grade control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Grade;
     }
 }

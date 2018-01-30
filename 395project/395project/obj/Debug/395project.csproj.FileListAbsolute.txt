@@ -154,7 +154,6 @@ C:\Users\Robert Sullivan\Desktop\395project\395project\395project\bin\Microsoft.
 C:\Users\Robert Sullivan\Desktop\395project\395project\395project\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\Robert Sullivan\Desktop\395project\395project\395project\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Robert Sullivan\Desktop\395project\395project\395project\bin\Microsoft.AI.Web.xml
-C:\Users\Robert Sullivan\Desktop\395project\395project\395project\obj\Debug\395project.csprojResolveAssemblyReference.cache
 C:\Users\Robert Sullivan\Desktop\395project\395project\395project\obj\Debug\395project.csproj.CoreCompileInputs.cache
 C:\Users\Robert Sullivan\Desktop\395project\395project\395project\obj\Debug\395project.dll
 C:\Users\Robert Sullivan\Desktop\395project\395project\395project\obj\Debug\395project.pdb
@@ -238,3 +237,4 @@ C:\Users\Abdul Rehman\Desktop\395project\395project\395project\obj\Debug\395proj
 C:\Users\Abdul Rehman\Desktop\395project\395project\395project\obj\Debug\395project.csproj.CoreCompileInputs.cache
 C:\Users\Abdul Rehman\Desktop\395project\395project\395project\obj\Debug\395project.dll
 C:\Users\Abdul Rehman\Desktop\395project\395project\395project\obj\Debug\395project.pdb
+C:\Users\Robert Sullivan\Desktop\395project\395project\395project\bin\AjaxControlToolkit.dll
