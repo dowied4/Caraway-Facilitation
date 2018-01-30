@@ -3,18 +3,17 @@
 
 .mybutton {
     /*#4f92ff*/
-    vertical-align: middle;
-    position: relative;
     background-color: #130d19;
     border-radius: 10px;
     color: white/*#444349*/;
     font-size: 20px;
-    padding: 3px 20px;
     padding-top: 5px;
-    margin: 9px 0;
+    padding-bottom: 5px;
     border: none;
-    width: 100px;
+    width: auto;
     cursor: pointer;
+    /*margin-left: auto;
+    margin-right: auto;*/
     transition: all 0.5s ease;
     font-family: 'Raleway', sans-serif;
 }
@@ -22,7 +21,17 @@
 
 .mybutton:hover {
     /*#4f92ff*/
-    background: #1d2c3f;
+    background: #719add;
+    text-shadow: 4px 4px 2px #333;
+}
+
+.error-text {
+    font-family: 'Raleway', sans-serif;
+    color: #fd0005;
+}
+
+.form-group{
+    vertical-align: middle;
 }
 
 .sign-out {

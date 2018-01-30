@@ -10,7 +10,7 @@
             <div class="login-container" id="loginForm">
                 <div class="form-horizontal">
                     <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
-                        <p class="text-danger">
+                        <p class="error-text">
                             <asp:Literal runat="server" ID="FailureText" />
                         </p>
                     </asp:PlaceHolder>
@@ -19,14 +19,14 @@
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="Email" placeholder="Enter Email" CssClass="inputfields" TextMode="Email" />
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="Email"
-                                CssClass="text-danger" ErrorMessage="The email field is required." />
+                                CssClass="error-text" ErrorMessage="The email field is required." />
                         </div>
                     </div>
                     <div class="form-group">
                         <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 input-header">Password</asp:Label>
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="Password" TextMode="Password" placeholder="Enter Password" CssClass="inputfields" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="The password field is required." />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="error-text" ErrorMessage="The password field is required." />
                         </div>
                     </div>
                     <div class="form-group">
