@@ -41,17 +41,10 @@
                         <div class="col-md-offset-2 col-md-10">
                             <asp:Button runat="server" OnClick="LogIn" Text="Login" class="mybutton"></asp:Button>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <asp:HyperLink runat="server" ID="resetHyperLink" ViewStateMode="Disabled" NavigateUrl="~/Account/ResetPassword.aspx" CssClass="forgot-pwd">Forgot Password?</asp:HyperLink>
-                        </div>
-                    </div>
+                    </div> 
                 </div>
                 <p>
-                    <%-- Enable this once you have account confirmation enabled for password reset functionality
-                    <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink" ViewStateMode="Disabled">Forgot your password?</asp:HyperLink>
-                    --%>
+                    <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink"  NavigateUrl="~/Account/Forgot.aspx" ViewStateMode="Disabled">Forgot your password?</asp:HyperLink>
                 </p>
             </div>
         </div>

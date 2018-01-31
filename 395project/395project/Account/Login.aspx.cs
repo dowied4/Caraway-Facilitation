@@ -11,16 +11,13 @@ namespace _395project.Account
     public partial class Login : Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {   //DOES NOT REDIRECT FOR PASSWORD RESET YET
-            //ForgotHyperLink.NavigateUrl = "ResetPassword";
-            // Enable this once you have account confirmation enabled for password reset functionality
-            //ForgotPasswordHyperLink.NavigateUrl = "Forgot";
-           /* OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
+        {   //Redirects the user to Forgot page where they can enter their email and have a password reset link sent to them
+            ForgotPasswordHyperLink.NavigateUrl = "Forgot";
             var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
             if (!String.IsNullOrEmpty(returnUrl))
             {
-                //ForgotHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
-            }*/
+                ForgotPasswordHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
+            }
         }
 
         protected void LogIn(object sender, EventArgs e)
