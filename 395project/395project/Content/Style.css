@@ -92,9 +92,6 @@ label {
 }
 
 hr {
-    width: 200%;
-    position: relative;
-    left: -50%;
     display: block;
     margin-top: auto;
     margin-bottom: auto;
