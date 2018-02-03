@@ -98,7 +98,7 @@
                             <a href="index.aspx"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#""><i class="fa fa-table fa-fw"></i> Sign Up</a>
+                            <a href="..""><i class="fa fa-table fa-fw"></i> Sign Up</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics<span class="fa arrow"></span></a>
@@ -116,16 +116,19 @@
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Request Forms<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Facilitator Absence</a>
+                                    <a href="RequestFacilitator.aspx">Additional Facilitator</a>
                                 </li>
                                 <li>
-                                    <a href="#">Child Absence</a>
+                                    <a href="FacilitatorAbsence.aspx">Facilitator Absence</a>
                                 </li>
                                 <li>
-                                    <a href="#"">Vacation Absence</a>
+                                    <a href="ChildAbsence.aspx">Child Absence</a>
                                 </li>
                                 <li>
-                                    <a href="#"">Donate Hours</a>
+                                    <a href="VacationAbsence.aspx">Vacation Absence</a>
+                                </li>
+                                <li>
+                                    <a href="DonateHours.aspx">Donate Hours</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

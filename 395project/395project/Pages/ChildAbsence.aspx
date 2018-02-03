@@ -1,36 +1,32 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="RequestFacilitator.aspx.cs" Inherits="_395project.Pages.RequestFacilitator" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="ChildAbsence.aspx.cs" Inherits="_395project.Pages.ChildAbsence" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Request Additional Facilitators</h1>
+
+    <!-- When we get into integrating js and server side, we will have a drop down menu where 
+        they can choose how many children and the form will print out that many number of forms
+        -->
+
+        <h1>Request Child Absence</h1>
     <br />
                     <div class="row">
                                 <div class="col-lg-4">
                                     <form role="form">
                                         <div class="form-group">
-                                            <p class="help-block">First Name</p>
-                                            <input class="form-control" id="firstName">
+                                            <p class="help-block">Child's First Name</p>
+                                            <input class="form-control" id="childfirstName">
                                             <br />
-                                            <p class="help-block">Last Name</p>
-                                            <input class="form-control" id="lastName">
+                                            <p class="help-block">Child's Last Name</p>
+                                            <input class="form-control" id="childlastName">
                                             <br />
-                                            <p class="help-block">Email</p>
-                                            <input class="form-control" id="email">
-                                           
-
                                         </div>
-                                        <br />
                                         <button type="submit" class="btn btn-default">Submit</button>
-                                        <button type="reset" class="btn btn-default">Reset</button>
                                         </form>
                                         </div>
                                         
                         </div>
-
-
-
 
 
 </asp:Content>

@@ -231,8 +231,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Pages\ChildAbsence.aspx" />
+    <Content Include="Pages\DonateHours.aspx" />
+    <Content Include="Pages\FacilitatorAbsence.aspx" />
     <Content Include="Pages\index.aspx" />
     <Content Include="Pages\RequestFacilitator.aspx" />
+    <Content Include="Pages\VacationAbsence.aspx" />
     <Content Include="WebForm1.aspx" />
     <Content Include="Master\Main.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -421,6 +425,27 @@
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Pages\ChildAbsence.aspx.cs">
+      <DependentUpon>ChildAbsence.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ChildAbsence.aspx.designer.cs">
+      <DependentUpon>ChildAbsence.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DonateHours.aspx.cs">
+      <DependentUpon>DonateHours.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\DonateHours.aspx.designer.cs">
+      <DependentUpon>DonateHours.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FacilitatorAbsence.aspx.cs">
+      <DependentUpon>FacilitatorAbsence.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\FacilitatorAbsence.aspx.designer.cs">
+      <DependentUpon>FacilitatorAbsence.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -434,6 +459,13 @@
     </Compile>
     <Compile Include="Pages\RequestFacilitator.aspx.designer.cs">
       <DependentUpon>RequestFacilitator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\VacationAbsence.aspx.cs">
+      <DependentUpon>VacationAbsence.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\VacationAbsence.aspx.designer.cs">
+      <DependentUpon>VacationAbsence.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
