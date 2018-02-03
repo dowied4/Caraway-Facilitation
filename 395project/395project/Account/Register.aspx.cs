@@ -98,6 +98,9 @@ namespace _395project.Account
             {
                 var user = new ApplicationUser() { Id = Email.Text, Email = Email.Text, UserName = Email.Text };
                 IdentityResult result = manager.Create(user, System.Web.Security.Membership.GeneratePassword(6, 0));
+                var currentUser = manager.FindByName(user.UserName);
+
+                var roleresult = manager.AddToRole(currentUser.Id, UserRoleDropDown.SelectedValue);
 
                 if (result.Succeeded)
                 {

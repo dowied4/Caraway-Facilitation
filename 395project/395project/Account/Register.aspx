@@ -21,6 +21,13 @@
             </div>
         </div>
 		<div class="form-group">
+			<asp:Label runat="server" AssociatedControlID="UserRoleDropDown" CssClass="col-md-2 input-header">Role</asp:Label>
+			<div class="col-md-10">
+				<asp:DropDownList ID="UserRoleDropDown" runat="server" DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="Name"></asp:DropDownList>
+				<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT [Name] FROM [AspNetRoles] ORDER BY [Id]"></asp:SqlDataSource>
+			</div>
+		</div>
+		<div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <asp:Button runat="server" OnClick="CreateUser_Click" Text="Register" CssClass="mybutton" />
             </div>
