@@ -30,9 +30,18 @@
     color: #fd0005;
 }
 
-.form-group{
-    vertical-align: middle;
+.login-container{
+    height: 600px;
+    margin: auto;
+    padding-top: 75px;
+    max-width: 300px;
 }
+
+#carTitle {
+    text-align: center;
+    padding-top: 50px;
+}
+
 
 .header-link {
     font-size: 16px;
@@ -46,17 +55,19 @@
 }
 
 .remember-me {
-    padding-top: 12px;
     font-size: 20px;
     color: #130d19;
     font-family: 'Raleway', sans-serif;
+    padding-bottom: 5px;
 }
 
 .forgot-pwd {
     /*#2767ce*/
+    display: block;
     color: #130d19;
     font-size: 18px;
     font-family: 'Raleway', sans-serif;
+    padding-top: 15px;
 }
 
 .forgot-pwd:active {
@@ -89,6 +100,11 @@
     box-shadow: 0 0 10px #1d2c3f;
 }
 
+footer {
+    font-family: "Raleway", sans-serif;
+}
+
+/* Unkown */
 .blog-header {
     line-height: 1;
     border-bottom: 1px solid #e5e5e5;
@@ -110,6 +126,7 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
 }
+
 
 .display-4 {
     font-size: 2.5rem;
