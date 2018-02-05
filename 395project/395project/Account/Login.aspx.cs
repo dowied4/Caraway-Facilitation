@@ -35,7 +35,7 @@ namespace _395project.Account
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        Response.Redirect("Pages/index.aspx");
+                        Response.Redirect("/Account/Register.aspx");
                         //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                         break;
                     case SignInStatus.LockedOut:
