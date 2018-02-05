@@ -24,6 +24,10 @@ namespace _395project.Account
             {
                 ErrorMessage.Text = "There is no account with that email";
                 ChildEmail.Text = string.Empty;
+                ChildFirst.Text = string.Empty;
+                ChildLast.Text = string.Empty;
+                Grade.Text = string.Empty;
+                Class.Text = string.Empty;
             }
             else
             {
@@ -59,6 +63,8 @@ namespace _395project.Account
             {
                 ErrorMessage.Text = "There is no account with that email";
                 FacilitatorEmail.Text = string.Empty;
+                FacilitatorFirst.Text = string.Empty;
+                FacilitatorLast.Text = string.Empty;
             }
             else
             {
@@ -123,19 +129,6 @@ namespace _395project.Account
                     ErrorMessage.Text = result.Errors.FirstOrDefault();
                 }
             }
-        }
-
-        protected void Clear_Click(object sender, EventArgs e)
-        {
-            Email.Text = string.Empty;
-            FacilitatorEmail.Text = string.Empty;
-            FacilitatorFirst.Text = string.Empty;
-            FacilitatorLast.Text = string.Empty;
-            ChildEmail.Text = string.Empty;
-            ChildFirst.Text = string.Empty;
-            ChildLast.Text = string.Empty;
-            Grade.Text = string.Empty;
-            Class.Text = string.Empty;
         }
     }
 }

@@ -11,10 +11,26 @@
 	<div class="thing">
 		<div class="row">
             <div class="col-md-6">
-                <asp:Button runat="server" OnClick="Clear_Click" Text="Clear" CssClass="mybutton" />
+                <asp:Button runat="server" Text="Clear" CssClass="mybutton"  OnClientClick="return cancel();" CausesValidation="false"/>
             </div>
         </div>
     </div>
+
+	<!--Clears all TextBoxes, overrides the email validator -->
+	<script>
+        function cancel() {
+			document.getElementById('<%=Email.ClientID%>').value = "";
+			document.getElementById('<%=FacilitatorEmail.ClientID%>').value = "";
+			document.getElementById('<%=FacilitatorFirst.ClientID%>').value = "";
+			document.getElementById('<%=FacilitatorLast.ClientID%>').value = "";
+			document.getElementById('<%=ChildEmail.ClientID%>').value = "";
+			document.getElementById('<%=ChildFirst.ClientID%>').value = "";
+			document.getElementById('<%=ChildLast.ClientID%>').value = "";
+			document.getElementById('<%=Class.ClientID%>').value = "";
+			document.getElementById('<%=Grade.ClientID%>').value = "";
+            return false;
+        }
+	</script>
 
     <!-- CREATE ACCOUNT: Label -->
     <div class="form-horizontal">
