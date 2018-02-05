@@ -30,6 +30,10 @@
     color: #fd0005;
 }
 
+.page-title{
+    padding-bottom: 10px;
+}
+
 .login-container{
     height: 600px;
     margin: auto;
@@ -77,6 +81,7 @@
 .input-header {
     letter-spacing: 2px;
     font-size: 20px;
+    padding-top: 30px;
     background: url('../Images/download.jpg') 150px 100px;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;

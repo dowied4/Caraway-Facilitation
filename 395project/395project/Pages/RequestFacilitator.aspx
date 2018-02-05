@@ -1,38 +1,70 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="RequestFacilitator.aspx.cs" Inherits="_395project.Pages.RequestFacilitator" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Request Additional Facilitators</h1>
-    <br />
-                    <div class="row">
-                                <div class="col-lg-4">
-                                    <form role="form">
-                                        <div class="form-group">
-                                            <p class="help-block">First Name</p>
-                                            <input class="form-control" id="firstName">
-                                            <br />
-                                            <p class="help-block">Last Name</p>
-                                            <input class="form-control" id="lastName">
-                                            <br />
-                                            <p class="help-block">Email</p>
-                                            <input class="form-control" id="email">
-                                           
+﻿<%@ Page Title="Request Additional Facilitators" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="RequestFacilitator.aspx.cs" Inherits="_395project.Pages.RequestFacilitator" %>
 
-                                        </div>
-                                        <br />
-                                        <button type="submit" class="btn btn-default">Submit</button>
-                                        <button type="reset" class="btn btn-default">Reset</button>
-                                        </form>
-                                        </div>
-                                        
-                        </div>
+<asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
+   <link href="../Content/dashboard.css" rel="stylesheet" />
+   <h2 class="page-title"><%: Title %></h2>
 
+    <p class="error-text">
+        <asp:Literal runat="server" ID="ErrorMessage" />
+    </p>
+    
+    <div class="form-horizontal">
+        <asp:ValidationSummary runat="server" CssClass="error-text" />
 
+        <!-- REQUEST: First Name -->
+        <div class="thing">
+            <div class="row">
+                <div class="col-md-6">
+			        <asp:Label runat="server" AssociatedControlID="FacilitatorFirst" CssClass="input-header">Facilitator First Name</asp:Label>
+                </div>
+            </div>
+			<div class="row">
+                <div class="col-md-6">
+                    <asp:TextBox runat="server" ID="FacilitatorFirst" CssClass="inputfields" />
+                </div>
+			</div>
+		</div>
 
+        <!-- REQUEST: Last Name -->
+        <div class="thing">
+            <div class="row">
+                <div class="col-md-6">
+			        <asp:Label runat="server" AssociatedControlID="FacilitatorLast" CssClass="input-header">Facilitator Last Name</asp:Label>
+                </div>
+            </div>
+			<div class="row">
+                <div class="col-md-6">
+                    <asp:TextBox runat="server" ID="FacilitatorLast" CssClass="inputfields" />
+                </div>
+			</div>
+		</div>
 
+        <!-- REQUEST: Email -->
+        <div class="thing">
+            <div class="row">
+                <div class="col-md-6">
+                    <asp:Label runat="server" AssociatedControlID="FacilitatorEmail" CssClass="input-header">Email</asp:Label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <asp:TextBox runat="server" ID="FacilitatorEmail" CssClass="inputfields" TextMode="Email" />
+                </div>
+            </div>
+        </div>
 
-</asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="footer" runat="server">
+        <!-- ADD FACILITATOR: Submit Button -->
+		<div class="thing" style="padding-top: 30px;">
+            <div class="row">
+                <div style="float: left; padding-left: 15px">
+                    <!-- OnClick="AddFacilitator_Click" -->
+                    <asp:Button runat="server" Text="Submit" CssClass="mybutton" />
+                </div>
+                <div style="float: left; padding-left: 10px">
+                    <!-- OnClick="AddFacilitator_Click" -->
+                    <asp:Button runat="server" Text="Reset" CssClass="mybutton" />
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>

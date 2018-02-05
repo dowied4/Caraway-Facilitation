@@ -1,33 +1,53 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="FacilitatorAbsence.aspx.cs" Inherits="_395project.Pages.FacilitatorAbsence" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-        <!-- When we get into integrating js and server side, we will have a drop down menu where 
-        they can choose how many facilitators and the form will print out that many number of forms
-        -->
+﻿<%@ Page Title="Request Facilitation Absence" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="FacilitatorAbsence.aspx.cs" Inherits="_395project.Pages.FacilitatorAbsence" %>
 
-        <h1>Request Facilitators Absence</h1>
-    <br />
-                    <div class="row">
-                                <div class="col-lg-4">
-                                    <form role="form">
-                                        <div class="form-group">
-                                            <p class="help-block">Facilitator's First Name</p>
-                                            <input class="form-control" id="childfirstName">
-                                            <br />
-                                            <p class="help-block">Facilitator's Last Name</p>
-                                            <input class="form-control" id="childlastName">
-                                            <br />
-                                        </div>
-                                        <button type="submit" class="btn btn-default">Submit</button>
-                                        </form>
-                                        </div>
-                                        
-                        </div>
+<asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
+    <link href="../Content/dashboard.css" rel="stylesheet" />
 
+    <h2 class="page-title"><%: Title %></h2>
 
-</asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="footer" runat="server">
+    <p class="error-text">
+        <asp:Literal runat="server" ID="ErrorMessage" />
+    </p>
+    
+    <div class="form-horizontal">
+        <asp:ValidationSummary runat="server" CssClass="error-text" />
+
+        <!-- Time From -->
+        <div class="thing">
+            <div class="row">
+                <div class="col-md-6">
+			        <asp:Label runat="server" AssociatedControlID="timeFrom" CssClass="input-header">From (MM/DD/YY)</asp:Label>
+                </div>
+            </div>
+			<div class="row">
+                <div class="col-md-6">
+                    <asp:TextBox runat="server" ID="timeFrom" CssClass="inputfields" />
+                </div>
+			</div>
+		</div>
+
+        <!-- Time To -->
+        <div class="thing">
+            <div class="row">
+                <div class="col-md-6">
+			        <asp:Label runat="server" AssociatedControlID="timeTo" CssClass="input-header">To (MM/DD/YY)</asp:Label>
+                </div>
+            </div>
+			<div class="row">
+                <div class="col-md-6">
+                    <asp:TextBox runat="server" ID="timeTo" CssClass="inputfields" />
+                </div>
+			</div>
+		</div>
+
+        <!-- Submit Button -->
+		<div class="thing" style="padding-top: 30px;">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Click -->
+                    <asp:Button runat="server" Text="Submit" CssClass="mybutton" />
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>

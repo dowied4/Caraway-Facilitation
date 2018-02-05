@@ -2,7 +2,7 @@
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
    <link href="../Content/dashboard.css" rel="stylesheet" />
-   <h2><%: Title %></h2>
+   <h2 class="page-title"><%: Title %></h2>
     <p class="error-text">
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>
@@ -10,7 +10,7 @@
     <!-- MANAGE ACCOUNT: Clear Button -->
 	<div class="thing">
 		<div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" style="padding-top: 30px;">
                 <asp:Button runat="server" Text="Clear" CssClass="mybutton"  OnClientClick="return cancel();" CausesValidation="false"/>
             </div>
         </div>
@@ -61,14 +61,14 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-				    <asp:DropDownList ID="UserRoleDropDown" runat="server" DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="Name"></asp:DropDownList>
+				    <asp:DropDownList ID="UserRoleDropDown" runat="server" DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="Name" CssClass="inputfields"></asp:DropDownList>
 				    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT [Name] FROM [AspNetRoles] ORDER BY [Id]"></asp:SqlDataSource>
 			    </div>
            </div>
 		</div>
 
         <!-- CREATE ACCOUNT: Register Button -->
-		<div class="thing" style="padding-top: 10px;">
+		<div class="thing" style="padding-top: 30px;">
             <div class="row">
                 <div class="col-md-6">
                     <asp:Button runat="server" OnClick="CreateUser_Click" Text="Register" CssClass="mybutton" />
@@ -123,7 +123,7 @@
 		</div>
 
         <!-- ADD FACILITATOR: Facilitator Button -->
-		<div class="thing" style="padding-top: 10px;">
+		<div class="thing" style="padding-top: 30px;"">
             <div class="row">
                 <div class="col-md-6">
                     <asp:Button runat="server" OnClick="AddFacilitator_Click" Text="Add Facilitator" CssClass="mybutton" />
@@ -206,7 +206,7 @@
 		</div>
 
         <!-- ADD CHILD: Child Button -->
-		<div class="thing" style="padding-top: 10px;">
+		<div class="thing" style="padding-top: 30px;"">
             <div class="row">
                 <div class="col-md-6">
                     <asp:Button runat="server" OnClick="AddChild_Click" Text="Add Child" CssClass="mybutton" />
