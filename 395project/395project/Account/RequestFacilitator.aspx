@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Request Facilitator Form" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="RequestFacilitator.aspx.cs" Inherits="_395project.Account.RequestFacilitator" %>
+﻿<%@ Page Title="Request Facilitator Form" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="RequestFacilitator.aspx.cs" Inherits="_395project.Account.RequestFacilitator" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <h2><%: Title %></h2>
