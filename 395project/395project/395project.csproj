@@ -230,6 +230,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Pages\AccountList.aspx" />
     <Content Include="Pages\ChildAbsence.aspx" />
     <Content Include="Pages\DonateHours.aspx" />
     <Content Include="Pages\FacilitatorAbsence.aspx" />
@@ -417,6 +418,13 @@
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Pages\AccountList.aspx.cs">
+      <DependentUpon>AccountList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\AccountList.aspx.designer.cs">
+      <DependentUpon>AccountList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ChildAbsence.aspx.cs">
       <DependentUpon>ChildAbsence.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

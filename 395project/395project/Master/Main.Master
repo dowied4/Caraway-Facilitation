@@ -1,5 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="_395project.Master.Main" %>
 
+
+
 <!DOCTYPE html>
 
 <html>
@@ -140,7 +142,7 @@
                                     <a href="#">Notifications</a>
                                 </li>
                                 <li>
-                                    <a href="#">Account List</a>
+                                    <a href="AccountList.aspx">Account List</a>
                                 </li>
                                 <li>
                                     <a href="#">Add/Remove Facilitators</a>
