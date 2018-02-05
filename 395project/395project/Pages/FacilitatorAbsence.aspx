@@ -8,7 +8,7 @@
     <p class="error-text">
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>
-    
+    <hr />
     <div class="form-horizontal">
         <asp:ValidationSummary runat="server" CssClass="error-text" />
 
