@@ -13,6 +13,7 @@ namespace _395project.Pages
 {
     public partial class AccountList : System.Web.UI.Page
     {
+
         StringBuilder table = new StringBuilder();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -22,8 +23,29 @@ namespace _395project.Pages
             {
                 ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
             };
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+
             con.Open();
 
+            //Query to fetch data
+            string query = "Select UserName,Email,EmailConfirmed,PhoneNumber,AccessFailedCount from [AspNetUsers]";
+
+            SqlCommand SqlCommand = new SqlCommand(query, con);
+            adapter.SelectCommand = new SqlCommand(query, con);
+
+            //Execture the querey
+            SqlDataReader reader = SqlCommand.ExecuteReader();
+
+            //Assign results
+            GridView1.DataSource = reader;
+
+            //Bind the data
+            GridView1.DataBind();
+            
+            
+            /*
+             * 
             //gets data from aspnetusers table
             SqlCommand cmd = new SqlCommand
             {
@@ -63,7 +85,7 @@ namespace _395project.Pages
             rd.Close();
 
 
-
+            */
 
         }
     }
