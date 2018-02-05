@@ -27,7 +27,7 @@ namespace _395project.Account
                 // Validate the user password
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
-
+          
                 // This doen't count login failures towards account lockout
                 // To enable password failures to trigger lockout, change to shouldLockout: true
                 var result = signinManager.PasswordSignIn(Email.Text, Password.Text, RememberMe.Checked, shouldLockout: false);
@@ -35,7 +35,14 @@ namespace _395project.Account
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        Response.Redirect("/Account/Register.aspx");
+                        if(User.IsInRole(role: "Admin") || User.IsInRole(role: "SuperUser")) 
+                        {
+                            Response.Redirect("/Account/Register.aspx");
+                        }
+                        else
+                        {
+                            Response.Redirect("/Account/Manage.aspx");
+                        }
                         //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                         break;
                     case SignInStatus.LockedOut:
