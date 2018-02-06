@@ -124,3 +124,34 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-background-clip: text;
 }
 
+.myGridClass {
+    width: 80%;
+    /*this will be the color of the odd row*/
+    background-color: #f8f8f8;
+    margin: 5px 0 10px 0;
+    border: solid 1px #140e1c;
+    border-collapse: collapse;
+}
+
+/*data elements*/
+.myGridClass td {
+    font-family: "Raleway", sans-serif;
+    padding: 2px;
+    border: solid 1px #140e1c;
+    color: #140e1c;
+}
+
+/*header elements*/
+.myGridClass th {
+    font-family: "Raleway", sans-serif;
+    padding: 4px 2px;
+    color: #fff;
+    background: #337ab7;
+    border-left: solid 1px #525252;
+    font-size: 0.9em;
+}
+
+.myGridClass .alt { 
+    background: rgba(51, 122, 183, 0.1);
+
+}
