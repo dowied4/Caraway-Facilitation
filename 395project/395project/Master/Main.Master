@@ -103,16 +103,8 @@
                             <a href="..""><i class="fa fa-table fa-fw"></i> Sign Up</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Total Hours</a>
-                                </li>
-                                <li>
-                                    <a href="#">Achievments</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Personal Statistics</a>
+                       
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Request Forms<span class="fa arrow"></span></a>
@@ -154,16 +146,16 @@
                                     <a href="#">Statistics <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Facilitators</a>
+                                            <a href="#">By Account</a>
                                         </li>
                                         <li>
-                                            <a href="#">add</a>
+                                            <a href="#">By Classroom</a>
                                         </li>
                                         <li>
-                                            <a href="#">add</a>
+                                            <a href="#">By Grades</a>
                                         </li>
                                         <li>
-                                            <a href="#">add</a>
+                                            <a href="#">By Date</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->

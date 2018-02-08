@@ -74,6 +74,7 @@
 
                         <asp:ListItem Selected="True" Value="Morning"> Morning </asp:ListItem>
                         <asp:ListItem Value="Afternoon"> Afternoon </asp:ListItem>
+                        <asp:ListItem Value="Afternoon"> Evening </asp:ListItem>
                         <asp:ListItem Value="Full-Day"> Full Day </asp:ListItem>
 
                     </asp:DropDownList>

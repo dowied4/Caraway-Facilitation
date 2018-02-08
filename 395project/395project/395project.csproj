@@ -239,6 +239,9 @@
     <Content Include="Pages\VacationAbsence.aspx" />
     <Content Include="WebForm1.aspx" />
     <Content Include="Master\Main.Master" />
+    <Content Include="Master\Facilitator.Master" />
+    <Content Include="Master\BoardMember.Master" />
+    <Content Include="Master\Teacher.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="img\Caraway-logo.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -410,12 +413,33 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Master\BoardMember.Master.cs">
+      <DependentUpon>BoardMember.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\BoardMember.Master.designer.cs">
+      <DependentUpon>BoardMember.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Facilitator.Master.cs">
+      <DependentUpon>Facilitator.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\Facilitator.Master.designer.cs">
+      <DependentUpon>Facilitator.Master</DependentUpon>
+    </Compile>
     <Compile Include="Master\Main.Master.cs">
       <DependentUpon>Main.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Master\Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Teacher.Master.cs">
+      <DependentUpon>Teacher.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\Teacher.Master.designer.cs">
+      <DependentUpon>Teacher.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Pages\AccountList.aspx.cs">
