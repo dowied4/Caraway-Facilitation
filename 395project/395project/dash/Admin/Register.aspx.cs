@@ -127,7 +127,7 @@ namespace _395project.Account
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     string code = manager.GeneratePasswordResetToken(user.Id);
                     string callbackUrl = IdentityHelper.GetResetPasswordRedirectUrl(code, Request);
-                    manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking the following link: " + callbackUrl);
+                    manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking this link: " + callbackUrl);
 
                     /* signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
                     IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response); */

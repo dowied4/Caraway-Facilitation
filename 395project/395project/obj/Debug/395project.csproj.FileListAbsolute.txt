@@ -632,7 +632,7 @@ C:\Users\skate\Documents\CMPT\395project\395project\395project\bin\Microsoft.AI.
 C:\Users\skate\Documents\CMPT\395project\395project\395project\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\skate\Documents\CMPT\395project\395project\395project\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\skate\Documents\CMPT\395project\395project\395project\bin\Microsoft.AI.Web.xml
-C:\Users\skate\Documents\CMPT\395project\395project\395project\obj\Debug\395project.csprojResolveAssemblyReference.cache
 C:\Users\skate\Documents\CMPT\395project\395project\395project\obj\Debug\395project.csproj.CoreCompileInputs.cache
 C:\Users\skate\Documents\CMPT\395project\395project\395project\obj\Debug\395project.dll
 C:\Users\skate\Documents\CMPT\395project\395project\395project\obj\Debug\395project.pdb
+C:\Users\skate\Documents\CMPT\395project\395project\395project\obj\Debug\395project.csprojResolveAssemblyReference.cache
