@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Child Absence" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="ChildAbsence.aspx.cs" Inherits="_395project.Pages.ChildAbsence" %>
+﻿<%@ Page Title="Child Absence" Language="C#" MasterPageFile="~/Master/Facilitator.Master" AutoEventWireup="true" CodeBehind="ChildAbsence.aspx.cs" Inherits="_395project.Pages.ChildAbsence" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
    <link href="../Content/dashboard.css" rel="stylesheet" />

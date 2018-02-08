@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Lockout.aspx.cs" Inherits="_395project.Account.Lockout" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="/Caraway.Master" AutoEventWireup="true" CodeBehind="Lockout.aspx.cs" Inherits="_395project.Account.Lockout" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <hgroup>

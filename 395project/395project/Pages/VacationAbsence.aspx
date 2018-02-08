@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="VacationAbsence.aspx.cs" Inherits="_395project.Pages.VacationAbsence" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="/Master/Facilitator.Master" AutoEventWireup="true" CodeBehind="VacationAbsence.aspx.cs" Inherits="_395project.Pages.VacationAbsence" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">

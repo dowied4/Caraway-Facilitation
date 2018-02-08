@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Caraway Facilitation" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="_395project.Account.Login" Async="true" %>
+﻿<%@ Page Title="Caraway Facilitation" Language="C#" MasterPageFile="/Caraway.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="_395project.Account.Login" Async="true" %>
 
 <%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 

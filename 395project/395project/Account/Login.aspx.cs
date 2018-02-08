@@ -35,14 +35,15 @@ namespace _395project.Account
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        if(User.IsInRole("Admin") || User.IsInRole("SuperUser")) 
+                        Response.Redirect("/Pages/index.aspx");
+                       /* if(User.IsInRole("Admin") || User.IsInRole("SuperUser")) 
                         {
                             Response.Redirect("/Account/Register.aspx");
                         }
                         else
                         {
                             Response.Redirect("/Account/Manage.aspx");
-                        }
+                        }*/
                         //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                         break;
                     case SignInStatus.LockedOut:
