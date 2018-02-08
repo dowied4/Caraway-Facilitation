@@ -58,7 +58,7 @@ namespace _395project.Account
                 if (message != null)
                 {
                     // Strip the query string from action
-                    Form.Action = ResolveUrl("~/Account/Manage");
+                    Form.Action = ResolveUrl("/dash/Manage");
                 }
             }
         }

@@ -47,7 +47,7 @@ namespace _395project.Account
                 var result = manager.ResetPassword(user.Id, Code, Password.Text);
                 if (result.Succeeded)
                 {
-                    Response.Redirect("~/dash/ResetPasswordConfirmation");
+                    Response.Redirect("/dash/ResetPasswordConfirmation");
                     return;
                 }
                 ErrorMessage.Text = result.Errors.FirstOrDefault();
