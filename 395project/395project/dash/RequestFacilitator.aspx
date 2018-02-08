@@ -15,7 +15,7 @@
         <div class="thing">
             <div class="row">
                 <div class="col-md-6">
-			        <asp:Label runat="server" AssociatedControlID="FacilitatorFirst" CssClass="input-header">Facilitator First Name</asp:Label>
+			        <asp:Label runat="server" AssociatedControlID="FacilitatorFirst" CssClass="input-header">Facilitator First Name, Holla at cha boi</asp:Label>
                 </div>
             </div>
 			<div class="row">
