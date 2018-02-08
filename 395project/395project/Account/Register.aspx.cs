@@ -82,7 +82,8 @@ namespace _395project.Account
             {
                 SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 conn.Open();
-                string insert = "insert into Facilitators(Id,FirstName, LastName) values (@Email,@FacilitatorFirst, @FacilitatorLast)";
+                string insert = "BEGIN IF NOT EXISTS (select * from Facilitators as F where F.Id = @Email and F.FirstName = @FacilitatorFirst and F.LastName = @FacilitatorLast)" +
+                    " BEGIN insert into Facilitators(Id,FirstName, LastName) values (@Email,@FacilitatorFirst, @FacilitatorLast) END END";
                 SqlCommand cmd = new SqlCommand(insert, conn);
                 cmd.Parameters.AddWithValue("@Email", FacilitatorEmail.Text);
                 cmd.Parameters.AddWithValue("@FacilitatorFirst", FacilitatorFirst.Text);
