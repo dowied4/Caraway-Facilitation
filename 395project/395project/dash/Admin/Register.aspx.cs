@@ -131,7 +131,7 @@ namespace _395project.Account
 
                     /* signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
                     IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response); */
-                    ErrorMessage.Text = "Account Successfully Created";
+                    ErrorMessage.Text = "Account Successfully Created an email was sent to " + user.Id;
                     //Set the child and facilitator email fields and clear the new account email field
                     FacilitatorEmail.Text = Email.Text;
                     ChildEmail.Text = Email.Text;
