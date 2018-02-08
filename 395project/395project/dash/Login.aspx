@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Caraway Facilitation" Language="C#" MasterPageFile="/Caraway.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="_395project.Account.Login" Async="true" %>
 
-<%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
+<%@ Register Src="/Dash/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <h2 id="carTitle"><%: Title %></h2>

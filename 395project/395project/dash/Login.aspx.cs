@@ -35,7 +35,7 @@ namespace _395project.Account
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        Response.Redirect("/Pages/index.aspx");
+                        Response.Redirect("/Dash/index.aspx");
                        /* if(User.IsInRole("Admin") || User.IsInRole("SuperUser")) 
                         {
                             Response.Redirect("/Account/Register.aspx");
