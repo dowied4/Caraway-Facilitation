@@ -712,7 +712,7 @@ C:\Users\skate\Documents\CMPT\395project\395project\395project\obj\Debug\395proj
 \\Mac\Home\Documents\CMPT\w18purple\395project\395project\bin\Microsoft.AI.ServerTelemetryChannel.xml
 \\Mac\Home\Documents\CMPT\w18purple\395project\395project\bin\Microsoft.AI.WindowsServer.xml
 \\Mac\Home\Documents\CMPT\w18purple\395project\395project\bin\Microsoft.AI.Web.xml
-\\Mac\Home\Documents\CMPT\w18purple\395project\395project\obj\Debug\395project.csprojResolveAssemblyReference.cache
 \\Mac\Home\Documents\CMPT\w18purple\395project\395project\obj\Debug\395project.csproj.CoreCompileInputs.cache
 \\Mac\Home\Documents\CMPT\w18purple\395project\395project\obj\Debug\395project.dll
 \\Mac\Home\Documents\CMPT\w18purple\395project\395project\obj\Debug\395project.pdb
+\\Mac\Home\Documents\CMPT\w18purple\395project\395project\obj\Debug\395project.csprojResolveAssemblyReference.cache

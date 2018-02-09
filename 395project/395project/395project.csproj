@@ -201,7 +201,7 @@
     <Content Include="dash\Confirm.aspx" />
     <Content Include="dash\Forgot.aspx" />
     <Content Include="dash\Lockout.aspx" />
-    <Content Include="dash\Login.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="dash\Manage.aspx" />
     <Content Include="dash\ManageLogins.aspx" />
     <Content Include="dash\ManagePassword.aspx" />
@@ -308,11 +308,11 @@
     <Compile Include="dash\Lockout.aspx.designer.cs">
       <DependentUpon>Lockout.aspx</DependentUpon>
     </Compile>
-    <Compile Include="dash\Login.aspx.cs">
+    <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="dash\Login.aspx.designer.cs">
+    <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="dash\Manage.aspx.cs">
