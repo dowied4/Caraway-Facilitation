@@ -46,7 +46,7 @@
             
 
                 <ul class="nav navbar-top-links navbar-right">
-                    <li><a runat="server" href="~/Account/Manage" title="Manage your account">Welcome <%: Context.User.Identity.GetUserName()  %> </a></li>
+                    <li><a runat="server" href="/dash/Manage" title="Manage your account">Welcome <%: Context.User.Identity.GetUserName()  %> </a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
