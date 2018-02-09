@@ -41,7 +41,7 @@ namespace _395project.Account
                 manager.SmsService.Send(message);
             }
 
-            Response.Redirect("/Account/VerifyPhoneNumber?PhoneNumber=" + HttpUtility.UrlEncode(PhoneNumber.Text));
+            Response.Redirect("/dash/VerifyPhoneNumber?PhoneNumber=" + HttpUtility.UrlEncode(PhoneNumber.Text));
         }
     }
 }

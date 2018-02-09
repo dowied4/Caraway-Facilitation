@@ -80,7 +80,7 @@ namespace _395project.Account
                 if (message != null)
                 {
                     // Strip the query string from action
-                    Form.Action = ResolveUrl("~/Account/Manage");
+                    Form.Action = ResolveUrl("/dash/Manage");
 
                     SuccessMessage =
                         message == "ChangePwdSuccess" ? "Your password has been changed."
@@ -117,7 +117,7 @@ namespace _395project.Account
             if (user != null)
             {
                 signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
-                Response.Redirect("/Account/Manage?m=RemovePhoneNumberSuccess");
+                Response.Redirect("/dash/Manage?m=RemovePhoneNumberSuccess");
             }
         }
 
@@ -127,7 +127,7 @@ namespace _395project.Account
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             manager.SetTwoFactorEnabled(User.Identity.GetUserId(), false);
 
-            Response.Redirect("/Account/Manage");
+            Response.Redirect("/dash/Manage");
         }
 
         //EnableTwoFactorAuthentication 
@@ -136,7 +136,7 @@ namespace _395project.Account
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             manager.SetTwoFactorEnabled(User.Identity.GetUserId(), true);
 
-            Response.Redirect("/Account/Manage");
+            Response.Redirect("/dash/Manage");
         }
     }
 }
