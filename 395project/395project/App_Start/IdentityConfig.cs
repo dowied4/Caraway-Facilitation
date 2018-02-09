@@ -7,17 +7,21 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using _395project.Models;
+using System.Security;
 
 namespace _395project
+
 {
     public class EmailService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)
         {
-            var sendGridUserName = "CarawayFacilitationProject";
-            var sentFrom = "carawayfacilitationproject@gmail.com";
-            var sendGridPassword = "395project";
-            
+            var sendGridUserName = "CarawayFacilitation";
+            var sentFrom = "carawayfacilitation@gmail.com";
+            char[] chars = { '3', '9', '5', 'p', 'r', 'o', 'j', 'e', 'c', 't' };
+            SecureString Pass = new SecureString();
+            foreach (char ch in chars)
+                Pass.AppendChar(ch);
             var client = new System.Net.Mail.SmtpClient("smtp.sendgrid.net", Convert.ToInt32(587));
 
             client.Port = 587;
@@ -25,7 +29,7 @@ namespace _395project
             client.UseDefaultCredentials = false;
 
             System.Net.NetworkCredential credentials =
-           new System.Net.NetworkCredential(sendGridUserName, sendGridPassword);
+           new System.Net.NetworkCredential(sendGridUserName, Pass);
             client.EnableSsl = true; client.Credentials = credentials;
 
             // Create the message: 
