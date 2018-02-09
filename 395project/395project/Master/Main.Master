@@ -134,7 +134,7 @@
                                     <a href="#">Notifications</a>
                                 </li>
                                 <li>
-                                    <a href="/dash/Admin/dashList.aspx">Account List</a>
+                                    <a href="/dash/Admin/AccountList.aspx">Account List</a>
                                 </li>
                                 <li>
                                     <a href="/dash/Admin/Register.aspx">Add/Remove Facilitators</a>
