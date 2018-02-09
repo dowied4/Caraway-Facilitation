@@ -37,7 +37,7 @@ namespace _395project.Account
 
         private void RedirectOnFail()
         {
-            Response.Redirect((User.Identity.IsAuthenticated) ? "/dash/Manage" : "/dash/Login");
+            Response.Redirect((User.Identity.IsAuthenticated) ? "/dash/Manage" : "/Login");
         }
 
         protected void Page_Load()
