@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="/Caraway.Master" AutoEventWireup="true" CodeBehind="ManageLogins.aspx.cs" Inherits="_395project.Account.ManageLogins" %>
-<%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
+<%@ Register Src="/dash/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Manage your external logins.</h2>
@@ -37,6 +37,6 @@
         </section>
     </div>
     <div>
-        <uc:OpenAuthProviders runat="server" ReturnUrl="~/Account/ManageLogins" />
+        <uc:OpenAuthProviders runat="server" ReturnUrl="/dash/ManageLogins" />
     </div>
 </asp:Content>

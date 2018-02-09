@@ -43,7 +43,7 @@
             
 
                 <ul class="nav navbar-top-links navbar-right">
-                    <li><a runat="server" href="~/Account/Manage" title="Manage your account">Welcome <%: Context.User.Identity.GetUserName()  %> </a></li>
+                    <li><a runat="server" href="/dash/Manage" title="Manage your account">Welcome <%: Context.User.Identity.GetUserName()  %> </a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -95,10 +95,10 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.aspx"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="/dash/index.aspx"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="index.aspx"><i class="fa fa-bell fa-fw"></i> Notifications</a>
+                            <a href="/dash/index.aspx"><i class="fa fa-bell fa-fw"></i> Notifications</a>
                         </li>
                         <li>
                             <a href="..""><i class="fa fa-table fa-fw"></i> Sign Up</a>
@@ -110,19 +110,19 @@
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Request Forms<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="RequestFacilitator.aspx">Additional Facilitator</a>
+                                    <a href="/dash/RequestFacilitator.aspx">Additional Facilitator</a>
                                 </li>
                                 <li>
-                                    <a href="FacilitatorAbsence.aspx">Facilitator Absence</a>
+                                    <a href="/dash/FacilitatorAbsence.aspx">Facilitator Absence</a>
                                 </li>
                                 <li>
-                                    <a href="ChildAbsence.aspx">Child Absence</a>
+                                    <a href="/dash/ChildAbsence.aspx">Child Absence</a>
                                 </li>
                                 <li>
-                                    <a href="VacationAbsence.aspx">Vacation Absence</a>
+                                    <a href="/dash/VacationAbsence.aspx">Vacation Absence</a>
                                 </li>
                                 <li>
-                                    <a href="DonateHours.aspx">Donate Hours</a>
+                                    <a href="/dash/DonateHours.aspx">Donate Hours</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -134,7 +134,7 @@
                                     <a href="#">Notifications</a>
                                 </li>
                                 <li>
-                                    <a href="/Admin/AccountList.aspx">Account List</a>
+                                    <a href="/dash/Admin/AccountList.aspx">Account List</a>
                                 </li>
                                 <li>
                                     <a href="#">Statistics <span class="fa arrow"></span></a>

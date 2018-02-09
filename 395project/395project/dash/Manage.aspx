@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Manage Account" Language="C#" MasterPageFile="/Caraway.Master" AutoEventWireup="true" CodeBehind="Manage.aspx.cs" Inherits="_395project.Account.Manage" %>
 
-<%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
+<%@ Register Src="/dash/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>.</h2>
@@ -19,12 +19,12 @@
                 <dl class="dl-horizontal">
                     <dt>Password:</dt>
                     <dd>
-                        <asp:HyperLink NavigateUrl="/Account/ManagePassword" Text="[Change]" Visible="false" ID="ChangePassword" runat="server" />
-                        <asp:HyperLink NavigateUrl="/Account/ManagePassword" Text="[Create]" Visible="false" ID="CreatePassword" runat="server" />
+                        <asp:HyperLink NavigateUrl="/dash/ManagePassword" Text="[Change]" Visible="false" ID="ChangePassword" runat="server" />
+                        <asp:HyperLink NavigateUrl="/dash/ManagePassword" Text="[Create]" Visible="false" ID="CreatePassword" runat="server" />
                     </dd>
                     <%-- %><dt>External Logins:</dt>
                     <dd><%: LoginsCount %>
-                        <asp:HyperLink NavigateUrl="/Account/ManageLogins" Text="[Manage]" runat="server" />
+                        <asp:HyperLink NavigateUrl="/dash/ManageLogins" Text="[Manage]" runat="server" />
 
                     </dd>--%>
                     <%--
@@ -38,14 +38,14 @@
                     <% if (HasPhoneNumber)
                        { %>
                     <dd>
-                        <asp:HyperLink NavigateUrl="/Account/AddPhoneNumber" runat="server" Text="[Add]" />
+                        <asp:HyperLink NavigateUrl="/dash/AddPhoneNumber" runat="server" Text="[Add]" />
                     </dd>
                     <% }
                        else
                        { %>
                     <dd>
                         <asp:Label Text="" ID="PhoneNumber" runat="server" />
-                        <asp:HyperLink NavigateUrl="/Account/AddPhoneNumber" runat="server" Text="[Change]" /> &nbsp;|&nbsp;
+                        <asp:HyperLink NavigateUrl="/dash/AddPhoneNumber" runat="server" Text="[Change]" /> &nbsp;|&nbsp;
                         <asp:LinkButton Text="[Remove]" OnClick="RemovePhone_Click" runat="server" />
                     </dd>
                     <% } %>

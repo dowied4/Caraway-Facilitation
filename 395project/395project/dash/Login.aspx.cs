@@ -38,19 +38,19 @@ namespace _395project.Account
                         Response.Redirect("/Dash/index.aspx");
                        /* if(User.IsInRole("Admin") || User.IsInRole("SuperUser")) 
                         {
-                            Response.Redirect("/Account/Register.aspx");
+                            Response.Redirect("/dash/Admin/Register.aspx");
                         }
                         else
                         {
-                            Response.Redirect("/Account/Manage.aspx");
+                            Response.Redirect("/dash/Manage.aspx");
                         }*/
                         //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                         break;
                     case SignInStatus.LockedOut:
-                        Response.Redirect("/Account/Lockout");
+                        Response.Redirect("/dash/Lockout");
                         break;
                     case SignInStatus.RequiresVerification:
-                        Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}", 
+                        Response.Redirect(String.Format("/dash/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}", 
                                                         Request.QueryString["ReturnUrl"],
                                                         RememberMe.Checked),
                                           true);

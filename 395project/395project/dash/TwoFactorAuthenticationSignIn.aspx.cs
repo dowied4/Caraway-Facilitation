@@ -41,7 +41,7 @@ namespace _395project.Account
             var userId = signinManager.GetVerifiedUserId<ApplicationUser, string>();
             if (userId == null)
             {
-                Response.Redirect("/Account/Error", true);
+                Response.Redirect("/dash/Error", true);
             }
             var userFactors = manager.GetValidTwoFactorProviders(userId);
             Providers.DataSource = userFactors.Select(x => x).ToList();
@@ -60,7 +60,7 @@ namespace _395project.Account
                     IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                     break;
                 case SignInStatus.LockedOut:
-                    Response.Redirect("/Account/Lockout");
+                    Response.Redirect("/dash/Lockout");
                     break;
                 case SignInStatus.Failure:
                 default:
@@ -74,7 +74,7 @@ namespace _395project.Account
         {
             if (!signinManager.SendTwoFactorCode(Providers.SelectedValue))
             {
-                Response.Redirect("/Account/Error");
+                Response.Redirect("/dash/Error");
             }
 
             var user = manager.FindById(signinManager.GetVerifiedUserId<ApplicationUser, string>());
