@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Manage Accounts" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="_395project.Account.Register" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-   <link href="../Content/dashboard.css" rel="stylesheet" />
+   <link href="../../Content/dashboard.css" rel="stylesheet" />
    <h2 class="page-title"><%: Title %></h2>
     <p class="error-text">
         <asp:Literal runat="server" ID="ErrorMessage" />
