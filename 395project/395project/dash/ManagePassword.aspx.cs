@@ -74,7 +74,7 @@ namespace _395project.Account
                 {
                     var user = manager.FindById(User.Identity.GetUserId());
                     signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
-                    Response.Redirect("~/Account/Manage?m=ChangePwdSuccess");
+                    Response.Redirect("/dash/Manage?m=ChangePwdSuccess");
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace _395project.Account
                 IdentityResult result = manager.AddPassword(User.Identity.GetUserId(), password.Text);
                 if (result.Succeeded)
                 {
-                    Response.Redirect("~/Account/Manage?m=SetPwdSuccess");
+                    Response.Redirect("/dash/Manage?m=SetPwdSuccess");
                 }
                 else
                 {

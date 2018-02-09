@@ -69,7 +69,7 @@ namespace _395project.Account
                 signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 msg = "?m=RemoveLoginSuccess";
             }
-            Response.Redirect("~/Account/ManageLogins" + msg);
+            Response.Redirect("/dash/ManageLogins" + msg);
         }
     }
 }
