@@ -107,6 +107,24 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Personal Statistics</a>
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Other Statistics<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="#">By Account</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">By Classroom</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">By Grades</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">By Date</a>
+                                        </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Request Forms<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -135,24 +153,6 @@
                                 </li>
                                 <li>
                                     <a href="/dash/Admin/AccountList.aspx">Account List</a>
-                                </li>
-                                <li>
-                                    <a href="#">Statistics <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#">By Facilitators</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">By Classrooms</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">By Grades</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">By Date</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
