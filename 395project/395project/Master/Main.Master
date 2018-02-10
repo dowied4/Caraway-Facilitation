@@ -102,11 +102,32 @@
                             <a href="/dash/index.aspx"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="..""><i class="fa fa-table fa-fw"></i> Sign Up</a>
+                            <a href="/dash/index.aspx"><i class="fa fa-bell fa-fw"></i> Notifications</a>
+                        </li>
+                        <li>
+                            <a href="/dash/index.aspx""><i class="fa fa-table fa-fw"></i> Sign Up</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Personal Statistics</a>
                        
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Other Statistics<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="#">By Account</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">By Classroom</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">By Grades</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">By Date</a>
+                                        </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Request Forms<span class="fa arrow"></span></a>
@@ -133,9 +154,6 @@
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Admin Tools<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Notifications</a>
-                                </li>
-                                <li>
                                     <a href="/dash/Admin/AccountList.aspx">Account List</a>
                                 </li>
                                 <li>
@@ -144,36 +162,7 @@
                                 <li>
                                     <a href="#">Edit Calendar</a>
                                 </li>
-                                <li>
-                                    <a href="#">Statistics <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#">By Account</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">By Classroom</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">By Grades</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">By Date</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Work<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#"">Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href="#"">Login Page</a>
-                                </li>
+                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
