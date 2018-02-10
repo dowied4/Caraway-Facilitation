@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="AccountList.aspx.cs" Inherits="_395project.Pages.AccountList" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <link href="../Content/dashboard.css" rel="stylesheet" />
+    <link href="/Content/dashboard.css" rel="stylesheet" />
     <h1 class="page-header">Account List</h1>
 	<asp:TextBox ID="SearchBox" runat="server"></asp:TextBox>
 	<asp:Button ID="SearchButton" runat="server" Text="Search" OnClick="Search_Click" />
