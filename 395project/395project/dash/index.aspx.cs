@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _395project.App_Code;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,14 +18,8 @@ namespace _395project.Pages
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            if (User.IsInRole("SuperUser"))
-                MasterPageFile = "/Master/Main.master";
-            else if (User.IsInRole("Admin"))
-                MasterPageFile = "/Master/BoardMember.master";
-            else if (User.IsInRole("Teacher"))
-                MasterPageFile = "/Master/Teacher.master";
-            else if (User.IsInRole("Facilitator"))
-                MasterPageFile = "/Master/Facilitator.master";
+            ChooseMaster choose = new ChooseMaster();
+            MasterPageFile = choose.GetMaster();
         }
     }
 }
