@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Forgot your password?" Language="C#" MasterPageFile="/Caraway.Master" AutoEventWireup="true" CodeBehind="Forgot.aspx.cs" Inherits="_395project.Account.ForgotPassword" Async="true" %>
+﻿<%@ Page Title="Forgot your password?" Language="C#" MasterPageFile="Caraway.Master" AutoEventWireup="true" CodeFile="Forgot.aspx.cs" Inherits="_395project.Account.ForgotPassword" Async="true" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <h2><%: Title %></h2>
