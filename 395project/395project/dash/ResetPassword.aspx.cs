@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
 using _395project.Models;
+using _395project.App_Code;
 
 namespace _395project.Account
 {
@@ -15,14 +16,8 @@ namespace _395project.Account
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            if (User.IsInRole("SuperUser"))
-                MasterPageFile = "/Master/Main.master";
-            else if (User.IsInRole("Admin"))
-                MasterPageFile = "/Master/BoardMember.master";
-            else if (User.IsInRole("Teacher"))
-                MasterPageFile = "/Master/Teacher.master";
-            else if (User.IsInRole("Facilitator"))
-                MasterPageFile = "/Master/Facilitator.master";
+            ChooseMaster choose = new ChooseMaster();
+            MasterPageFile = choose.GetMaster();
         }
         protected string StatusMessage
         {
