@@ -1,13 +1,13 @@
-﻿<%@ Page Title="Forgot password" Language="C#" MasterPageFile="/Caraway.Master" AutoEventWireup="true" CodeBehind="Forgot.aspx.cs" Inherits="_395project.Account.ForgotPassword" Async="true" %>
+﻿<%@ Page Title="Forgot your password?" Language="C#" MasterPageFile="/Caraway.Master" AutoEventWireup="true" CodeBehind="Forgot.aspx.cs" Inherits="_395project.Account.ForgotPassword" Async="true" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <h2><%: Title %>.</h2>
+    <h2><%: Title %></h2>
 
     <div class="row">
         <div class="col-md-8">
             <asp:PlaceHolder id="loginForm" runat="server">
                 <div class="form-horizontal">
-                    <h4>Forgot your password?</h4>
+                    <h4>Enter your email here:</h4>
                     <hr />
                     <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
                         <p class="text-danger">

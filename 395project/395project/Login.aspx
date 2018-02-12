@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <p>
-                    <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink"  NavigateUrl="/dash/Forgot.aspx" ViewStateMode="Disabled" CssClass="forgot-pwd">Forgot your password?</asp:HyperLink>
+                    <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink"  NavigateUrl="Forgot.aspx" ViewStateMode="Disabled" CssClass="forgot-pwd">Forgot your password?</asp:HyperLink>
                 </p>
             </div>
         </div>
