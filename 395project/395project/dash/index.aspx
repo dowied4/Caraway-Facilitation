@@ -30,10 +30,10 @@
 			        <asp:Label runat="server" CssClass="stats-info" >Nothing!</asp:Label>
                 </div>
                 <div class="col-md-offset-1 col-md-3" style="padding-top: 20px; padding-left: 76px;">
-			        <asp:Label runat="server" CssClass="stats-info" ID="WeeklyHoursLabel" >Test</asp:Label>
+			        <asp:Label runat="server" CssClass="stats-info" ID="WeeklyHoursLabel" >0</asp:Label>
                 </div>
                 <div class="col-md-offset-1 col-md-3" style="padding-top: 20px; padding-left: 76px;">
-			        <asp:Label runat="server" CssClass="stats-info" ID="MonthlyHoursLabel" >Test</asp:Label>
+			        <asp:Label runat="server" CssClass="stats-info" ID="MonthlyHoursLabel" >0</asp:Label>
                 </div>
             </div>
 	    </div>

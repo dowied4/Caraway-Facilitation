@@ -55,16 +55,14 @@ namespace _395project.Pages
 
 
             //Get Weekly Hours
-            string WeeklyHours = "SELECT SUM(S.WeeklyHours) as WeeklyHours FROM dbo.Stats AS S WHERE S.Id = @CurrentUser AND S.Week = @Week";
+            string WeeklyHours = "SELECT SUM(S.WeeklyHours) as WeeklyHours FROM dbo.Stats AS S WHERE S.Id = @CurrentUser AND S.Week = @Week GROUP BY S.Id";
             SqlCommand getWeeklyHours = new SqlCommand(WeeklyHours, con);
             getWeeklyHours.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
             getWeeklyHours.Parameters.AddWithValue("@Week", GetWeekOfMonth.GetWeekNumberOfMonth(DateTime.Now));
 
             SqlDataReader WeeklyHoursReader = getWeeklyHours.ExecuteReader();
             if (WeeklyHoursReader.Read())
-                WeeklyHoursLabel.Text = WeeklyHoursReader.GetValue(0).ToString();
-            else
-                WeeklyHoursLabel.Text = "0";
+                WeeklyHoursLabel.Text = WeeklyHoursReader["WeeklyHours"].ToString();
             WeeklyHoursReader.Close();
 
             //Get Monthly Hours
@@ -75,9 +73,7 @@ namespace _395project.Pages
 
             SqlDataReader MonthlyHoursReader = getMonthlyHours.ExecuteReader();
             if (MonthlyHoursReader.Read())
-                MonthlyHoursLabel.Text = MonthlyHoursReader.GetValue(0).ToString();
-            else
-                MonthlyHoursLabel.Text = "0";
+                MonthlyHoursLabel.Text = MonthlyHoursReader["MonthlyHours"].ToString();
             MonthlyHoursReader.Close();
 
             //close connection
