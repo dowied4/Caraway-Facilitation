@@ -27,13 +27,13 @@
             <!-- Stats Labels Row -->
             <div class="row">
                 <div class="col-md-offset-1 col-md-3" style="padding-top: 20px; padding-left: 48px;">
-			        <asp:Label runat="server" CssClass="stats-info">Test</asp:Label>
+			        <asp:Label runat="server" CssClass="stats-info" >Nothing!</asp:Label>
                 </div>
                 <div class="col-md-offset-1 col-md-3" style="padding-top: 20px; padding-left: 76px;">
-			        <asp:Label runat="server" CssClass="stats-info">Test</asp:Label>
+			        <asp:Label runat="server" CssClass="stats-info" ID="WeeklyHoursLabel" >0</asp:Label>
                 </div>
                 <div class="col-md-offset-1 col-md-3" style="padding-top: 20px; padding-left: 76px;">
-			        <asp:Label runat="server" CssClass="stats-info">Test</asp:Label>
+			        <asp:Label runat="server" CssClass="stats-info" ID="MonthlyHoursLabel" >0</asp:Label>
                 </div>
             </div>
 	    </div>
@@ -49,7 +49,7 @@
                  <div class="col-md-6">
                     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="myGridClass" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
                         <Columns>
-                            <asp:BoundField DataField="Email" HeaderText="Facilitators"  ItemStyle-Width="400px"/>
+                            <asp:BoundField DataField="FacilitatorName" HeaderText="Name"  ItemStyle-Width="400px"/>
                         </Columns>
                     </asp:GridView> 
                 </div>
@@ -63,7 +63,7 @@
                  <div class="col-md-6">
                     <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" CssClass="myGridClass" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
                         <Columns>
-                            <asp:BoundField DataField="Children" HeaderText="Children"  ItemStyle-Width="400px"/>
+                            <asp:BoundField DataField="Name" HeaderText="Children"  ItemStyle-Width="400px"/>
                             <asp:BoundField DataField="Grade" HeaderText="Grade"  ItemStyle-Width="400px"/>
                             <asp:BoundField DataField="Classroom" HeaderText="Classroom"  ItemStyle-Width="400px"/>
                         </Columns>
