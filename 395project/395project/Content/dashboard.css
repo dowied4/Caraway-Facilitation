@@ -87,6 +87,35 @@
     -webkit-background-clip: text;
 }
 
+.dash-header {
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 2px;
+    font-size: 24px;
+    padding-top: 30px;
+    background: url('../Images/download.jpg') 150px 100px;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+.hours-header {
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 2px;
+    font-size: 36px;
+    padding-top: 30px;
+    background: url('../Images/download.jpg') 150px 100px;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+.stats-info {
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 2px;
+    font-size: 20px;
+    background: url('../Images/download.jpg') 150px 100px;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
 .inputfields {
     width: 300px;
     height: 35px;
