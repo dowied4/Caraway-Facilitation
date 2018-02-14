@@ -199,9 +199,9 @@
     <Content Include="About.aspx" />
     <Content Include="dash\AddPhoneNumber.aspx" />
     <Content Include="dash\Confirm.aspx" />
-    <Content Include="dash\Forgot.aspx" />
     <Content Include="dash\Lockout.aspx" />
-    <Content Include="dash\Login.aspx" />
+    <Content Include="Forgot.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="dash\Manage.aspx" />
     <Content Include="dash\ManageLogins.aspx" />
     <Content Include="dash\ManagePassword.aspx" />
@@ -280,6 +280,10 @@
     <Content Include="Views\web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\ChooseMaster.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App_Code\GetWeekOfMonth.cs" />
     <Compile Include="dash\AddPhoneNumber.aspx.cs">
       <DependentUpon>AddPhoneNumber.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -294,13 +298,6 @@
     <Compile Include="dash\Confirm.aspx.designer.cs">
       <DependentUpon>Confirm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="dash\Forgot.aspx.cs">
-      <DependentUpon>Forgot.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="dash\Forgot.aspx.designer.cs">
-      <DependentUpon>Forgot.aspx</DependentUpon>
-    </Compile>
     <Compile Include="dash\Lockout.aspx.cs">
       <DependentUpon>Lockout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -308,11 +305,18 @@
     <Compile Include="dash\Lockout.aspx.designer.cs">
       <DependentUpon>Lockout.aspx</DependentUpon>
     </Compile>
-    <Compile Include="dash\Login.aspx.cs">
+    <Compile Include="Forgot.aspx.cs">
+      <DependentUpon>Forgot.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forgot.aspx.designer.cs">
+      <DependentUpon>Forgot.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="dash\Login.aspx.designer.cs">
+    <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="dash\Manage.aspx.cs">

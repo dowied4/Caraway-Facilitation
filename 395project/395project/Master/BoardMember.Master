@@ -8,11 +8,11 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
         </asp:ContentPlaceHolder>
             <!-- Bootstrap Core CSS -->
-    <link href="../Content/master.min.css" rel="stylesheet">
+    <link href="/Content/master.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="../Content/sb-admin-2.css" rel="stylesheet">
+    <link href="/Content/sb-admin-2.css" rel="stylesheet">
     <!-- Custom Fonts -->
-    <link href="../fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -73,7 +73,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="/dash/logout.aspx"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user end -->
@@ -107,6 +107,24 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Personal Statistics</a>
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Other Statistics<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="#">By Account</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">By Classroom</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">By Grades</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">By Date</a>
+                                        </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Request Forms<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -135,24 +153,6 @@
                                 </li>
                                 <li>
                                     <a href="/dash/Admin/AccountList.aspx">Account List</a>
-                                </li>
-                                <li>
-                                    <a href="#">Statistics <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#">By Facilitators</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">By Classrooms</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">By Grades</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">By Date</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -193,17 +193,17 @@
         <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="../Scripts/jquery.min.js"></script>
+    <script src="/Scripts/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../Scripts/master.min.js"></script>
+    <script src="/Scripts/master.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="../Scripts/metisMenu.min.js"></script>
+    <script src="/Scripts/metisMenu.min.js"></script>
 
 
     <!-- Custom Theme JavaScript -->
-    <script src="../Scripts/sb-admin-2.js"></script>
+    <script src="/Scripts/sb-admin-2.js"></script>
 </body>
 </html>
 

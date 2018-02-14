@@ -12,7 +12,7 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
 <body>
@@ -58,7 +58,7 @@
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="/dash/Admin/Register">Register</a></li>
-                                <li><a runat="server" href="/dash/Login">Log in</a></li>
+                                <li><a runat="server" href="Login">Log in</a></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
