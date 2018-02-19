@@ -42,8 +42,6 @@
                 </button>
                 <a class="navbar-brand" href="/dash/index.aspx">Caraway Facilitation</a>
             </div>
-            
-
                 <ul class="nav navbar-top-links navbar-right">
                     <li><a runat="server" href="/dash/Manage" title="Manage your account">Welcome <%: Context.User.Identity.GetUserName()  %> </a></li>
                 <li class="dropdown">

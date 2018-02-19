@@ -43,7 +43,7 @@
 
     <!-- Facilitators Label and GridView -->
     <div class="row" style="padding-top: 25px">
-        <div class="col-md-6">
+        <div class="col-md-3">
              <asp:Label runat="server" CssClass="dash-header">Facilitators</asp:Label>
              <div class="row" id="userFacil" runat="server">
                  <div class="col-md-6">
@@ -57,7 +57,7 @@
         </div>
 
         <!-- Children Label and GridView -->
-        <div class="col-md-6">
+        <div class="col-md-3">
              <asp:Label runat="server" CssClass="dash-header">Children</asp:Label>
              <div class="row" id="userChildren" runat="server">
                  <div class="col-md-6">
