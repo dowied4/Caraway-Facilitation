@@ -796,3 +796,4 @@ C:\Users\skate\Documents\CMPT\w18purple\395project\395project\obj\Debug\395proje
 C:\Users\skate\Documents\CMPT\w18purple\395project\395project\obj\Debug\395project.dll
 C:\Users\skate\Documents\CMPT\w18purple\395project\395project\obj\Debug\395project.pdb
 C:\Users\skate\Documents\CMPT\w18purple\395project\395project\obj\Debug\395project.csprojResolveAssemblyReference.cache
+C:\Users\Robert Sullivan\Desktop\395project\395project\395project\bin\DayPilot.dll
