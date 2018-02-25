@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Manage Accounts" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="_395project.Account.Register" %>
+﻿<%@ Page Title="Manage Accounts" Language="C#" MasterPageFile="/Master/Main.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="_395project.Account.Register" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
    <link href="../../Content/dashboard.css" rel="stylesheet" />
