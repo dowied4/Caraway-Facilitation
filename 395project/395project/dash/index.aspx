@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="Dashboard" Language="C#" MasterPageFile="/Master/Facilitator.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="_395project.Pages.index" %>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
+
+
    <link href="../Content/dashboard.css" rel="stylesheet" />
    <h2 class="page-title"><%: Title %></h2>
 
@@ -72,5 +74,6 @@
             </div>
         </div>
     </div>
-
+        <asp:Button ID="btnConfirm" runat="server" OnClick = "OnConfirm" Text ="Raise Confirm" OnClientClick = "Confirm()"/>
+        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
 </asp:Content>

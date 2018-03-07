@@ -11,10 +11,20 @@ using Microsoft.AspNet.Identity;
 
 namespace _395project.Pages
 {
+
+   
     public partial class index : System.Web.UI.Page
+
     {
         protected void Page_Load(object sender, EventArgs e)
-        {   //Open Connection
+        {
+            DateTime startDate;
+            //startdate would be grabbed from database
+            startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 13, 45, 6);
+
+            
+
+            //Open Connection
             SqlConnection con = new SqlConnection
             {
                 ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
@@ -76,10 +86,23 @@ namespace _395project.Pages
                 MonthlyHoursLabel.Text = MonthlyHoursReader["MonthlyHours"].ToString();
             MonthlyHoursReader.Close();
 
+            //checks to see if time now is greater than startdate
+            /*if(DateTime.Now >= startDate)
+            {
+                //runs script on startup
+                ScriptManager.RegisterStartupScript(this, GetType(), "Confirm", "Confirm();", true);
+                
+                
+                //problem is fetching the data from the javascript and using it in OnConfirm() function
+                //a solution would be to create a button that appears on the page after the volunteeting date to confirm if they have went or not but issue with that
+                // is that they may forgot to look at it
+
+            }*/
+            Label1.Text = startDate.ToString();
             //close connection
             con.Close();
 
-
+            
         }
         //Chooses master page based on User Role
         protected override void OnPreInit(EventArgs e)
@@ -87,6 +110,19 @@ namespace _395project.Pages
             base.OnPreInit(e);
             ChooseMaster choose = new ChooseMaster();
             MasterPageFile = choose.GetMaster();
+        }
+
+        public void OnConfirm(object sender, EventArgs e)
+        {
+            string confirmValue = Request.Form["confirm_value"];
+            if (confirmValue == "Yes")
+            {
+                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked Yes!')", true);
+            }
+            else
+            {
+                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked No!')", true);
+            }
         }
     }
 }
