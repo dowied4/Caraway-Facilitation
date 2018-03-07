@@ -23,8 +23,23 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script type = "text/javascript">
+        function Confirm() {
+            var confirm_value = document.createElement("INPUT");
+            confirm_value.type = "hidden";
+            var date = new Date().toLocaleString();
+            confirm_value.name = "confirm_value";
+            if (confirm("Confirm that you have volunteered at Caraway at " + date)) 
+                confirm_value.value = "Yes";
+            } else {
+                confirm_value.value = "No";
+            }
+            document.forms[0].appendChild(confirm_value);
+        }
+    </script>  
 </head>
-<body>
+<body >
+    
     <form id="header" runat="server">
         <div>
             <asp:ContentPlaceHolder ID="body" runat="server">
@@ -211,5 +226,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/Scripts/sb-admin-2.js"></script>
+
+ 
 </body>
 </html>
