@@ -34,6 +34,23 @@ namespace _395project.Pages
 
             con.Open();
 
+            //Upcoming Hours
+            string upc = "SELECT (F.FacilitatorFirstName + ' '+ F.FacilitatorLastName) AS FacilitatorName, F.StartTime, F.EndTime, F.RoomId FROM dbo.Calendar AS F WHERE " +
+                            "F.Id = @CurrentUser";
+            SqlCommand getup = new SqlCommand(upc, con);
+            getup.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
+
+            adapter.SelectCommand = new SqlCommand(upc, con);
+
+            //Execture the querey
+            SqlDataReader ss = getup.ExecuteReader();
+            //Assign results
+            GridView3.DataSource = ss;
+            //Bind the data
+            GridView3.DataBind();
+            ss.Close();
+
+
             //Get Facilitators
             string Facilitators = "SELECT (F.FirstName + ' '+ F.LastName) AS FacilitatorName FROM dbo.Facilitators AS F WHERE " +
                             "F.Id = @CurrentUser";
@@ -98,7 +115,7 @@ namespace _395project.Pages
                 // is that they may forgot to look at it
 
             }*/
-            Label1.Text = startDate.ToString();
+            
             //close connection
             con.Close();
 
@@ -110,6 +127,22 @@ namespace _395project.Pages
             base.OnPreInit(e);
             ChooseMaster choose = new ChooseMaster();
             MasterPageFile = choose.GetMaster();
+        }
+
+        //this function is the 
+        protected void MyButtonClick(object sender, System.EventArgs e)
+        {
+            //Get the button that raised the event
+            LinkButton btn = (LinkButton)sender;
+            
+            //Get the row that contains this button
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+
+            //sets the link name to confirmed
+            btn.Text = "Confirmed";
+            //outside label
+            Label1.Text = "Row clicked = " + gvr.RowIndex.ToString();
+
         }
 
         public void OnConfirm(object sender, EventArgs e)
@@ -124,5 +157,6 @@ namespace _395project.Pages
                 this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked No!')", true);
             }
         }
+
     }
 }

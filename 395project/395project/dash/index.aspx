@@ -74,6 +74,23 @@
             </div>
         </div>
     </div>
-        <asp:Button ID="btnConfirm" runat="server" OnClick = "OnConfirm" Text ="Raise Confirm" OnClientClick = "Confirm()"/>
-        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+    <asp:Label runat="server" ID="Label2" CssClass="dash-header">Upcoming Hours</asp:Label>
+         <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="false" CssClass="myGridClass" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+      <Columns>
+         <asp:BoundField DataField="FacilitatorName" HeaderText="Facilitator Name"  ItemStyle-Width="400px"/>
+          <asp:BoundField DataField="StartTime" HeaderText="StartTime"  ItemStyle-Width="400px"/>
+          <asp:BoundField DataField="EndTime" HeaderText="EndTime"  ItemStyle-Width="400px"/>
+          <asp:BoundField DataField="RoomId" HeaderText="RoomId"  ItemStyle-Width="400px"/>
+          <asp:TemplateField HeaderText ="Confirm">
+                <ItemTemplate>
+                <asp:LinkButton ID="Button1" runat="server" Text="Here" 
+                    OnClick="MyButtonClick" />
+                </ItemTemplate>
+        </asp:TemplateField>
+
+          
+      </Columns>
+     </asp:GridView> 
+    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+
 </asp:Content>
