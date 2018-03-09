@@ -115,7 +115,7 @@
                             <a href="/dash/index.aspx"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="/dash/index.aspx"><i class="fa fa-bell fa-fw"></i> Notifications</a>
+                            <a href="/dash/Admin/Notifications"><i class="fa fa-bell fa-fw"></i> Notifications</a>
                         </li>
                         <li>
                             <a href="/dash/Calendar.aspx"><i class="fa fa-table fa-fw"></i> Sign Up</a>

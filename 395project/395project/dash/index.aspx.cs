@@ -36,20 +36,49 @@ namespace _395project.Pages
 
             //Upcoming Hours
             string upc = "SELECT (F.FacilitatorFirstName + ' '+ F.FacilitatorLastName) AS FacilitatorName, F.StartTime, F.EndTime, F.RoomId FROM dbo.Calendar AS F WHERE " +
-                            "F.Id = @CurrentUser";
+                            "F.Id = @CurrentUser and F.EndTime > @CurrentTime";
             SqlCommand getup = new SqlCommand(upc, con);
             getup.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
-
+            getup.Parameters.AddWithValue("@CurrentTime", DateTime.Now);
             adapter.SelectCommand = new SqlCommand(upc, con);
 
             //Execture the querey
-            SqlDataReader ss = getup.ExecuteReader();
-            //Assign results
-            GridView3.DataSource = ss;
-            //Bind the data
-            GridView3.DataBind();
-            ss.Close();
+            SqlDataReader upcompQuery = getup.ExecuteReader();
+            GridView3.DataSource = upcompQuery;
 
+            GridView3.DataBind();
+            if (!upcompQuery.HasRows) {
+                spacer.Controls.Add(new LiteralControl("<br />"));
+                Label1.Visible = true;
+
+            } 
+            upcompQuery.Close();
+
+
+            
+            //Completed Hours
+            string comp = "SELECT (F.FacilitatorFirstName + ' '+ F.FacilitatorLastName) AS FacilitatorName, F.StartTime, " +
+                            "F.EndTime, F.RoomId FROM dbo.Calendar AS F WHERE " +
+                            "F.Id = @CurrentUser and F.EndTime < @CurrentTime";
+            SqlCommand getComp = new SqlCommand(comp, con);
+            getComp.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
+            getComp.Parameters.AddWithValue("@CurrentTime", DateTime.Now);
+
+            adapter.SelectCommand = new SqlCommand(comp, con);
+
+            //Execture the querey
+            SqlDataReader completedQuery = getComp.ExecuteReader();
+            //Assign results
+            GridView4.DataSource = completedQuery;
+            //Bind the data
+            GridView4.DataBind();
+            if (!completedQuery.HasRows)
+            {
+                spacer.Controls.Add(new LiteralControl("<br />"));
+                Label4.Visible = true;
+            }
+            completedQuery.Close();
+            
 
             //Get Facilitators
             string Facilitators = "SELECT (F.FirstName + ' '+ F.LastName) AS FacilitatorName FROM dbo.Facilitators AS F WHERE " +
@@ -82,10 +111,14 @@ namespace _395project.Pages
 
 
             //Get Weekly Hours
-            string WeeklyHours = "SELECT SUM(S.WeeklyHours) as WeeklyHours FROM dbo.Stats AS S WHERE S.Id = @CurrentUser AND S.Week = @Week GROUP BY S.Id";
+            string WeeklyHours = "SELECT SUM(S.WeeklyHours) as WeeklyHours FROM dbo.Stats AS S WHERE S.Id = @CurrentUser AND S.Week = @Week " +
+                "AND S.Month = @Month and S.Year = @Year GROUP BY S.Id";
             SqlCommand getWeeklyHours = new SqlCommand(WeeklyHours, con);
             getWeeklyHours.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
             getWeeklyHours.Parameters.AddWithValue("@Week", GetWeekOfMonth.GetWeekNumberOfMonth(DateTime.Now));
+            getWeeklyHours.Parameters.AddWithValue("@Month", DateTime.Now.Month);
+            getWeeklyHours.Parameters.AddWithValue("@Year", DateTime.Now.Year);
+
 
             SqlDataReader WeeklyHoursReader = getWeeklyHours.ExecuteReader();
             if (WeeklyHoursReader.Read())
@@ -93,16 +126,17 @@ namespace _395project.Pages
             WeeklyHoursReader.Close();
 
             //Get Monthly Hours
-            string MonthlyHours = "(SELECT SUM(S.WeeklyHours) AS MonthlyHours FROM dbo.Stats AS S WHERE S.Id = @CurrentUser AND S.Month = @Month GROUP BY S.Id)";
+            string MonthlyHours = "(SELECT SUM(S.WeeklyHours) AS MonthlyHours FROM dbo.Stats AS S WHERE S.Id = @CurrentUser AND S.Month = @Month " +
+                "AND S.Year = @Year GROUP BY S.Id)";
             SqlCommand getMonthlyHours = new SqlCommand(MonthlyHours, con);
             getMonthlyHours.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
             getMonthlyHours.Parameters.AddWithValue("@Month", DateTime.Now.Month);
+            getMonthlyHours.Parameters.AddWithValue("@Year", DateTime.Now.Year);
 
             SqlDataReader MonthlyHoursReader = getMonthlyHours.ExecuteReader();
             if (MonthlyHoursReader.Read())
                 MonthlyHoursLabel.Text = MonthlyHoursReader["MonthlyHours"].ToString();
             MonthlyHoursReader.Close();
-
             //checks to see if time now is greater than startdate
             /*if(DateTime.Now >= startDate)
             {
@@ -115,7 +149,7 @@ namespace _395project.Pages
                 // is that they may forgot to look at it
 
             }*/
-            
+
             //close connection
             con.Close();
 
@@ -130,7 +164,7 @@ namespace _395project.Pages
         }
 
         //this function is the 
-        protected void MyButtonClick(object sender, System.EventArgs e)
+        protected void ConfirmButton(object sender, System.EventArgs e)
         {
             //Get the button that raised the event
             LinkButton btn = (LinkButton)sender;
@@ -138,14 +172,105 @@ namespace _395project.Pages
             //Get the row that contains this button
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
 
-            //sets the link name to confirmed
-            btn.Text = "Confirmed";
-            //outside label
-            Label1.Text = "Row clicked = " + gvr.RowIndex.ToString();
+            //Grid row number
+            int num = gvr.RowIndex;
+            int WeekOfMonth = GetWeekOfMonth.GetWeekNumberOfMonth(Convert.ToDateTime(gvr.Cells[2].Text));
+            //Label1.Text = WeekOfMonth.ToString();
+
+            string[] name;
+            string firstName;
+            string lastName;
+            string startTime;
+            string endTime;
+            string[] startDate;
+            string[] endDate;
+            string[] array;
+            string month;
+            string year;
+            DateTime dt = Convert.ToDateTime(gvr.Cells[1].Text);
+            DateTime dt1 = Convert.ToDateTime(gvr.Cells[2].Text);
+
+            float totalHours = (float) (dt1 - dt).TotalHours;
+            
+            name = gvr.Cells[0].Text.Split(' ');
+            firstName = name[0];
+            lastName = name[1];
+
+            startDate = gvr.Cells[1].Text.Split(' ');
+            startTime = startDate[1];
+            endDate = gvr.Cells[2].Text.Split(' ');
+            endTime = endDate[1];
+            array = endDate[0].Split('/');
+            month = array[0];
+            year = "20"+array[2];
+
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            string CompletedHours = ("INSERT INTO Stats (Id, FacilitatorFirstName, FacilitatorLastName, " +
+                                      "Week, Month, Year, WeeklyHours) VALUES (@CurrentUser, @FirstName, " +
+                                      "@LastName, @Week, @Month, @Year, @WeeklyHours); " +
+                                      "DELETE FROM Calendar WHERE Id = @CurrentUser and FacilitatorFirstName = @FirstName and FacilitatorLastName = @LastName " +
+                                      "and StartTime = @StartTime and EndTime = @EndTime and RoomId = @Room");
+            SqlCommand GetCompletedHours = new SqlCommand(CompletedHours, con);
+            GetCompletedHours.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
+            GetCompletedHours.Parameters.AddWithValue("@FirstName", firstName);
+            GetCompletedHours.Parameters.AddWithValue("@LastName", lastName);
+            GetCompletedHours.Parameters.AddWithValue("@Week", WeekOfMonth);
+            GetCompletedHours.Parameters.AddWithValue("@Month", month);
+            GetCompletedHours.Parameters.AddWithValue("@Year", year);
+            GetCompletedHours.Parameters.AddWithValue("@WeeklyHours", totalHours);
+            GetCompletedHours.Parameters.AddWithValue("@StartTime", dt);
+            GetCompletedHours.Parameters.AddWithValue("@EndTime", dt1);
+            GetCompletedHours.Parameters.AddWithValue("@Room", gvr.Cells[3].Text);
+            SqlDataReader addHoursReader = GetCompletedHours.ExecuteReader();
+
+            Page_Load(null, EventArgs.Empty);
+        }
+
+        protected void DeclineButton(object sender, System.EventArgs e)
+        {
+            //Get the button that raised the event
+            LinkButton btn = (LinkButton)sender;
+
+            //Get the row that contains this button
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+
+            //Grid row number
+            int num = gvr.RowIndex;
+            int WeekOfMonth = GetWeekOfMonth.GetWeekNumberOfMonth(Convert.ToDateTime(gvr.Cells[2].Text));
+
+            string[] name;
+            string firstName;
+            string lastName;
+            DateTime dt = Convert.ToDateTime(gvr.Cells[1].Text);
+            DateTime dt1 = Convert.ToDateTime(gvr.Cells[2].Text);
+            name = gvr.Cells[0].Text.Split(' ');
+            firstName = name[0];
+            lastName = name[1];
+
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            string CompletedHours =  ("DELETE FROM Calendar WHERE Id = @CurrentUser " +
+                                        "and FacilitatorFirstName = @FirstName and FacilitatorLastName = @LastName " +
+                                        "and StartTime = @StartTime and EndTime = @EndTime and RoomId = @Room");
+            SqlCommand GetCompletedHours = new SqlCommand(CompletedHours, con);
+            GetCompletedHours.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
+            GetCompletedHours.Parameters.AddWithValue("@FirstName", firstName);
+            GetCompletedHours.Parameters.AddWithValue("@LastName", lastName);
+            GetCompletedHours.Parameters.AddWithValue("@StartTime", dt);
+            GetCompletedHours.Parameters.AddWithValue("@EndTime", dt1);
+            GetCompletedHours.Parameters.AddWithValue("@Room", gvr.Cells[3].Text);
+            SqlDataReader addHoursReader = GetCompletedHours.ExecuteReader();
+
+            Page_Load(null, EventArgs.Empty);
+
 
         }
 
-        public void OnConfirm(object sender, EventArgs e)
+
+            public void OnConfirm(object sender, EventArgs e)
         {
             string confirmValue = Request.Form["confirm_value"];
             if (confirmValue == "Yes")

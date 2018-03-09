@@ -17,9 +17,6 @@
         <div class="thing">
             <div class="row">
                 <div class="col-md-offset-1 col-md-3">
-			        <asp:Label runat="server" CssClass="dash-header">Upcoming</asp:Label>
-                </div>
-                <div class="col-md-offset-1 col-md-3">
 			        <asp:Label runat="server" CssClass="dash-header">Weekly Total</asp:Label>
                 </div>
                 <div class="col-md-offset-1 col-md-3">
@@ -28,9 +25,6 @@
             </div>
             <!-- Stats Labels Row -->
             <div class="row">
-                <div class="col-md-offset-1 col-md-3" style="padding-top: 20px; padding-left: 48px;">
-			        <asp:Label runat="server" CssClass="stats-info" >Nothing!</asp:Label>
-                </div>
                 <div class="col-md-offset-1 col-md-3" style="padding-top: 20px; padding-left: 76px;">
 			        <asp:Label runat="server" CssClass="stats-info" ID="WeeklyHoursLabel" >0</asp:Label>
                 </div>
@@ -75,7 +69,27 @@
         </div>
     </div>
     <asp:Label runat="server" ID="Label2" CssClass="dash-header">Upcoming Hours</asp:Label>
+    <div id="container" runat="server">
+        <asp:PlaceHolder id="spacer" runat="server" />
+    </div>
+    <asp:Label runat="server" ID="Label1" Visible="false" CssClass="dash-header">None</asp:Label>
+
          <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="false" CssClass="myGridClass" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+      <Columns>
+         <asp:BoundField DataField="FacilitatorName" HeaderText="Facilitator Name"  ItemStyle-Width="400px"/>
+          <asp:BoundField DataField="StartTime" HeaderText="StartTime"  ItemStyle-Width="400px"/>
+          <asp:BoundField DataField="EndTime" HeaderText="EndTime"  ItemStyle-Width="400px"/>
+          <asp:BoundField DataField="RoomId" HeaderText="RoomId"  ItemStyle-Width="400px"/>
+      </Columns>
+     </asp:GridView> 
+
+       <asp:Label runat="server" ID="Label3" CssClass="dash-header">Completed Hours</asp:Label>
+    <div id="Div1" runat="server">
+        <asp:PlaceHolder id="PlaceHolder1" runat="server" />
+    </div>
+    <asp:Label runat="server" ID="Label4" Visible="false" CssClass="dash-header">None</asp:Label>
+
+         <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="false" CssClass="myGridClass" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
       <Columns>
          <asp:BoundField DataField="FacilitatorName" HeaderText="Facilitator Name"  ItemStyle-Width="400px"/>
           <asp:BoundField DataField="StartTime" HeaderText="StartTime"  ItemStyle-Width="400px"/>
@@ -83,14 +97,18 @@
           <asp:BoundField DataField="RoomId" HeaderText="RoomId"  ItemStyle-Width="400px"/>
           <asp:TemplateField HeaderText ="Confirm">
                 <ItemTemplate>
-                <asp:LinkButton ID="Button1" runat="server" Text="Here" 
-                    OnClick="MyButtonClick" />
+                <asp:LinkButton ID="comfirmButtons" runat="server" Text="Confirm" 
+                    OnClick="ConfirmButton" />
                 </ItemTemplate>
         </asp:TemplateField>
-
-          
+          <asp:TemplateField HeaderText ="Decline">
+                <ItemTemplate>
+                <asp:LinkButton ID="declineButtons" runat="server" Text="Decline" 
+                    OnClick="DeclineButton" />
+                </ItemTemplate>
+        </asp:TemplateField>
       </Columns>
      </asp:GridView> 
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+
 
 </asp:Content>
