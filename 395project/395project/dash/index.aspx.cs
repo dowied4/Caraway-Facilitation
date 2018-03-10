@@ -202,7 +202,7 @@ namespace _395project.Pages
             endTime = endDate[1];
             array = endDate[0].Split('/');
             month = array[0];
-            year = "20"+array[2];
+            year = array[2];
 
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
