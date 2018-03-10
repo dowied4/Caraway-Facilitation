@@ -108,8 +108,10 @@
         <asp:PlaceHolder id="spacer" runat="server" />
     </div>
 
-    <asp:Label runat="server" ID="Label1" Visible="false" CssClass="dash-header">None</asp:Label>
-    
+    <div class="dashboardMargins" id="dashboardNoneLabel1">
+        <asp:Label runat="server" ID="Label1" Visible="false" CssClass="dash-header">None</asp:Label>
+    </div>
+
     <div id="dashboardGridUpcoming" class="dashboardMargins">
         <div class="rounded_corners" style="width: 600px">
             <asp:GridView ID="GridView3" runat="server" Width="600px" AutoGenerateColumns="false" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt" ShowFooter="true" >
@@ -136,7 +138,9 @@
         <asp:PlaceHolder id="PlaceHolder1" runat="server" />
     </div>
 
-    <asp:Label runat="server" ID="Label4" Visible="false" CssClass="dash-header">None</asp:Label>
+    <div class="dashboardMargins" id="dashboardNoneLabel2">
+        <asp:Label runat="server" ID="Label4" Visible="false" CssClass="dash-header">None</asp:Label>
+    </div>
 
     <div id="dashboardGridCompleted" class="dashboardMargins">
         <div class="rounded_corners" style="width: 600px">

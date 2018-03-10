@@ -275,9 +275,10 @@ tr.AlternatingRowStyle:hover {
     width: 50px;
 }
 
-#dashboardCompletedLabel, #dashboardUpcomingLabel, #dashboardFacilitatorsLabel, #dashboardChildrenLabel, #dashboardWeeklyLabel, #dashboardMonthlyLabel, #dashboardHoursLabel, #dashboardInfoLabel {
+#dashboardCompletedLabel, #dashboardUpcomingLabel, #dashboardFacilitatorsLabel, #dashboardChildrenLabel,
+#dashboardWeeklyLabel, #dashboardMonthlyLabel, #dashboardHoursLabel, #dashboardInfoLabel, #dashboardNoneLabel1, #dashboardNoneLabel2 {
     width: 100%;
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     padding-top: 20px;
 }
