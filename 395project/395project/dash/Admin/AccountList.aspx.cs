@@ -66,52 +66,22 @@ namespace _395project.Pages
             con.Close();
             
             
-            /*
-             * 
-            //gets data from aspnetusers table
-            SqlCommand cmd = new SqlCommand
-            {
-                CommandText = "Select * from [AspNetUsers]",
-                Connection = con
-            };
-            SqlDataReader rd = cmd.ExecuteReader();
-
-            //creates a new stringbuilder and creates format of table, below is the context of the table
-            table.Append("<table border = '1'>");
-            table.Append("<tr><th>  Id  </th><th>  Email  </th><th>  Role Id  </th><th>  Stats  </th>");
-            table.Append("</tr>");
-
-            //checks if aspusers has rows and starts printing from database
-            //needs to be able to use data from other databases as well but since it loops through just 1 currently it wont go asproles database for example
-            if(rd.HasRows)
-            {
-                while(rd.Read())
-                {
-                    table.Append("<tr>");
-                    table.Append("<td>" + rd[0] + "</td>");
-                    table.Append("<td>" + rd[1] + "</td>");
-                    table.Append("<td>  N/A  </td>");
-                    table.Append("<td>  N/A  </td>");
-                    table.Append("</tr");
-                    table.Append(Environment.NewLine); //this new line may be why footer gets fucked
-
-                }
-            }
-
-            
-            table.Append("</table");
-            
-            df.Controls.Add(new Literal { Text = table.ToString() });
-            
-
-            rd.Close();
-
-
-            */
 
         }
 
-        protected void Search_Click(object sender, EventArgs e)
+        protected void EditButton(object sender, EventArgs e)
+        {
+            LinkButton btn = (LinkButton)sender;
+
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+
+            String ID;
+            ID = gvr.Cells[0].Text;
+            Response.Redirect("/dash/amin/EditAccount.aspx?ID=" + ID);
+
+        }
+
+            protected void Search_Click(object sender, EventArgs e)
         {
             //opens a connection to the server
             SqlConnection con = new SqlConnection
