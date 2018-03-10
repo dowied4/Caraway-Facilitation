@@ -97,10 +97,10 @@
     -webkit-background-clip: text;
 }
 
-.hours-header {
+.section-header {
     font-family: 'Raleway', sans-serif;
     letter-spacing: 2px;
-    font-size: 36px;
+    font-size: 46px;
     padding-top: 30px;
     background: url('../Images/download.jpg') 150px 100px;
     -webkit-text-fill-color: transparent;
@@ -153,24 +153,26 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-background-clip: text;
 }
 
+/*
 .myGridClass {
     width: 80%;
-    /*this will be the color of the odd row*/
     background-color: #f8f8f8;
     margin: 5px 0 10px 0;
     border: solid 1px #140e1c;
     border-collapse: collapse;
 }
-
+    */
 /*data elements*/
+/*
 .myGridClass td {
     font-family: "Raleway", sans-serif;
     padding: 2px;
     border: solid 1px #140e1c;
     color: #140e1c;
 }
-
+*/
 /*header elements*/
+/*
 .myGridClass th {
     font-family: "Raleway", sans-serif;
     padding: 4px 2px;
@@ -178,9 +180,104 @@ h1, h2, h3, h4, h5, h6 {
     background: #337ab7;
     border-left: solid 1px #525252;
     font-size: 0.9em;
-}
-
+}*/
+/*
 .myGridClass .alt { 
     background: rgba(51, 122, 183, 0.1);
 
+}*/
+
+.myGridView {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    table-layout: auto;
+    font-size: 14px;
+}
+
+.HeaderStyle {
+    border:1px, solid, #ddd; 
+    background-color:#938ede; 
+}
+
+ 
+
+.HeaderStyle th {
+    padding:5px 0px 5px 0px; 
+    color:#333; 
+    text-align:center; 
+}
+
+tr.RowStyle {
+    text-align: center;
+    background-color: #ffffff;
+}
+
+tr.AlternatingRowStyle {
+    text-align: center;
+    background-color: #7fefae;
+}
+
+tr.RowStyle:hover {
+    cursor: pointer;
+    background-color: #f69542;
+}
+
+tr.AlternatingRowStyle:hover {
+    cursor: pointer;
+    background-color: #f69542;
+}
+
+.FooterStyle {
+    background-color: #938ede;
+    height: 25px;
+}
+
+.rounded_corners {
+    border: 1px solid #A1DCF2;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.rounded_corners td {
+    border: 1px solid #A1DCF2;
+    font-family: Arial;
+    font-size: 10pt;
+    text-align: center;
+}
+
+.rounded_corners th {
+    border: 1px solid #A1DCF2;
+    font-family: Arial;
+    font-size: 10pt;
+    text-align: center;
+}
+
+.rounded_corners table table td {
+    border-style: none;
+}
+
+.dashboardMargins {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#dashboardGridCompleted, #dashboardGridUpcoming {
+    width: 600px;
+}
+
+#dashboardGridFacilitator, #dashboardGridChildren {
+    width: 300px;
+}
+
+#dashboardWeeklyTotal, #dashboardMonthlyTotal {
+    width: 50px;
+}
+
+#dashboardCompletedLabel, #dashboardUpcomingLabel, #dashboardFacilitatorsLabel, #dashboardChildrenLabel, #dashboardWeeklyLabel, #dashboardMonthlyLabel, #dashboardHoursLabel, #dashboardInfoLabel {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 20px;
 }
