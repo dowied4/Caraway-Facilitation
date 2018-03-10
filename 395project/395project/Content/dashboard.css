@@ -82,9 +82,12 @@
     letter-spacing: 2px;
     font-size: 20px;
     padding-top: 30px;
-    background: url('../Images/download.jpg') 150px 100px;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
+}
+
+.signup-input-header {
+    letter-spacing: 2px;
+    font-size: 20px;
+    padding-top: 5px;
 }
 
 .dash-header {
@@ -92,28 +95,20 @@
     letter-spacing: 2px;
     font-size: 24px;
     padding-top: 30px;
-    background: url('../Images/download.jpg') 150px 100px;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
+    text-decoration: underline;
 }
 
 .section-header {
-    font-family: 'Raleway', sans-serif;
-    letter-spacing: 2px;
+    font-family: 'Raleway Semi-Bold', sans-serif;
     font-size: 46px;
     padding-top: 30px;
-    background: url('../Images/download.jpg') 150px 100px;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
+    letter-spacing: 2px;
 }
 
 .stats-info {
     font-family: 'Raleway', sans-serif;
     letter-spacing: 2px;
     font-size: 20px;
-    background: url('../Images/download.jpg') 150px 100px;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
 }
 
 .inputfields {
@@ -196,59 +191,59 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .HeaderStyle {
-    border:1px, solid, #ddd; 
-    background-color:#938ede; 
+    border: 1px, solid, #ddd;
+    background-color: #337ab7;
 }
 
  
 
 .HeaderStyle th {
     padding:5px 0px 5px 0px; 
-    color:#333; 
+    color:#bcbabe; 
     text-align:center; 
 }
 
 tr.RowStyle {
     text-align: center;
-    background-color: #ffffff;
+    background-color: #f1f1f2;
 }
 
 tr.AlternatingRowStyle {
     text-align: center;
-    background-color: #7fefae;
+    background-color: #f1f1f2;
 }
 
 tr.RowStyle:hover {
     cursor: pointer;
-    background-color: #f69542;
+    background-color: #a1d6e2;
 }
 
 tr.AlternatingRowStyle:hover {
     cursor: pointer;
-    background-color: #f69542;
+    background-color: #a1d6e2;
 }
 
 .FooterStyle {
-    background-color: #938ede;
+    background-color: #f8f8f8;
     height: 25px;
 }
 
 .rounded_corners {
-    border: 1px solid #A1DCF2;
+    border: 1px solid #1995AD;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
     overflow: hidden;
 }
 .rounded_corners td {
-    border: 1px solid #A1DCF2;
+    border: 1px solid #1995AD;
     font-family: Arial;
     font-size: 10pt;
     text-align: center;
 }
 
 .rounded_corners th {
-    border: 1px solid #A1DCF2;
+    border: 1px solid #1995AD;
     font-family: Arial;
     font-size: 10pt;
     text-align: center;
@@ -271,14 +266,94 @@ tr.AlternatingRowStyle:hover {
     width: 300px;
 }
 
+#signupCalender {
+    width: 400px;
+}
+
 #dashboardWeeklyTotal, #dashboardMonthlyTotal {
     width: 50px;
 }
 
 #dashboardCompletedLabel, #dashboardUpcomingLabel, #dashboardFacilitatorsLabel, #dashboardChildrenLabel,
-#dashboardWeeklyLabel, #dashboardMonthlyLabel, #dashboardHoursLabel, #dashboardInfoLabel, #dashboardNoneLabel1, #dashboardNoneLabel2 {
+#dashboardWeeklyLabel, #dashboardMonthlyLabel, #dashboardHoursLabel, #dashboardInfoLabel, #dashboardNoneLabel1, 
+#dashboardNoneLabel2, #signupLabel, #signupFacilitator {
     width: 100%;
     text-align: center;
     padding-bottom: 5px;
     padding-top: 20px;
+}
+
+.signupDropDown {
+    width: 200px;
+    height: 35px;
+    border: 1px solid #337ab7;
+    border-radius: 7px;
+    background-color: #f2f2f2;
+    font-family: "Raleway", sans-serif;
+    padding-left: 5px;
+}
+
+
+.signupDropDown:focus {
+    /*#4f92ff*/
+    outline: none;
+    border-color: #1995ad;
+    box-shadow: 0 0 10px #1995ad;
+}
+
+.calender {
+    background-color: #f2f2f2;
+    width: 156px;
+    border: 8px solid #25bae4 !important;
+    border-top: 0px !important;
+    font-family: "Raleway", sans-serif;
+}
+
+.myCalendar a {
+    text-decoration: none;
+}
+
+.calSelectedDay {
+    font-weight: bold !important;
+    background-color: #25bae4 !important;
+}
+
+.calTodayDay {
+    color: black;
+    background-color: #cccccc;
+}
+
+.calNextPrev {
+    text-align: center;
+}
+
+.calNextPrev a {
+    font-size: 16px;
+}
+
+.calTitle {
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    background-color: #25bae4;
+    color: #ffffff;
+}
+
+th.calDayHeader {
+    height: 25px;
+    border-bottom: outset 2px #fbfbfb;
+    border-right: outset 2px #fbfbfb;
+    text-align: center;
+}
+
+td.calDay {
+    border: outset 2px #fbfbfb;
+}
+
+td.calSelector a {
+    background-color: #25bae5;
+}
+
+#signupDiv {
+    padding-bottom: 20px;
 }

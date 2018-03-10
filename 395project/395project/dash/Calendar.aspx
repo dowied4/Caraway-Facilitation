@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="Calendar.aspx.cs" Inherits="_395project.dash.Calendar1" %>
+﻿<%@ Page Title="Facilitation Sign Up" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="Calendar.aspx.cs" Inherits="_395project.dash.Calendar1" %>
 <%@ Register Assembly="DayPilot" Namespace="DayPilot.Web.Ui" TagPrefix="DayPilot" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -6,48 +6,95 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Title" runat="server">
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
-<asp:Calendar ID="Calendar" runat="server" OnSelectionChanged="Calendar_SelectionChanged"></asp:Calendar>
-<asp:Label ID="Label1" runat="server" Text="Label" Visible="False" Font-Size="Large"></asp:Label>	
-<DayPilot:DayPilotScheduler 
-  ID="DayPilotScheduler1" 
-  runat="server" 
-  
-  DataStartField="StartTime" 
-  DataEndField="EndTime" 
-  DataTextField="FullName" 
-  DataIdField="Id" 
-  DataResourceField="RoomId" 
-  
-  CellGroupBy="Day"
-  Scale="Day" BackColor="#FFFFD5" BorderColor="#000000" CssClassPrefix="scheduler_default" DataValueField="VolunteerId" DurationBarColor="Blue" EventBackColor="#FFFFFF" EventBorderColor="#000000" EventHeight="25" HeaderFontColor="0, 0, 0" HeaderHeight="17" HourBorderColor="#EAD098" HourNameBackColor="#ECE9D8" HourNameBorderColor="#ACA899" HoverColor="#FFED95" NonBusinessBackColor="#FFF4BC" StartDate="" style="top: 0px; left: 1px" BusinessBeginsHour="8" BusinessEndsHour="17" CellWidth="50"
-  >
-</DayPilot:DayPilotScheduler>
 
-		<asp:Panel ID="Panel1" runat="server">
-		<div>
-			<asp:Label ID="SignUpLabel" runat="server" Text="Sign Up" Font-Bold="True" Font-Size="Larger"></asp:Label>
-		</div>
-		<asp:Label ID="FacilitatorLabel" runat="server" Text="Facilitator"></asp:Label>
-		<asp:DropDownList ID="FacilitatorDropDown" runat="server" DataSourceID="Facilitators" DataTextField="FullName" DataValueField="FullName"></asp:DropDownList>
-		<asp:SqlDataSource ID="Facilitators" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT FullName FROM Facilitators WHERE (Id = @CurrentUser)">
-			<SelectParameters>
-				<asp:Parameter DefaultValue="Anonymous" Name="CurrentUser" />
-			</SelectParameters>
-		</asp:SqlDataSource>
-		<asp:Label ID="RoomLabel" runat="server" Text="Room"></asp:Label>
-		<asp:DropDownList ID="RoomDropDown" runat="server" DataSourceID="Rooms" DataTextField="Room" DataValueField="Room"></asp:DropDownList>
-		<asp:SqlDataSource ID="Rooms" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT [Room] FROM [Rooms]"></asp:SqlDataSource>
-		<asp:Label ID="TimeSlotLabel" runat="server" Text="Time Slot"></asp:Label>
-		<asp:DropDownList ID="TimeSlotDropDown" runat="server">
-			<asp:ListItem Value="Morning">Morning (8:45-12)</asp:ListItem>
-			<asp:ListItem Value="Lunch">Lunch (12-1) X2</asp:ListItem>
-			<asp:ListItem Value="Afternoon">Afternoon (1-3:45)</asp:ListItem>
-			</asp:DropDownList>
-			<div>
-				<asp:Button ID="SignUpButton" runat="server" Text="Sign Up" OnClick="SignUpButton_Click" />
-			</div>
-	</asp:Panel>
+<asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
+    <link href="../Content/dashboard.css" rel="stylesheet" />
+    <h2 class="page-title"><%: Title %></h2>
+
+    <hr />
+    
+    <div class="dashboardMargins" id="signupLabel" style="padding-bottom:60px; text-decoration:underline;">
+			<asp:Label ID="SignUpLabel" runat="server" CssClass="section-header">Sign Up</asp:Label>
+	</div>
+
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-6">
+            <div class="dashboardMargins" id="signupCalender">
+                <div class="calenderWrapper">
+                    <asp:Calendar ID="Calendar" runat="server" OnSelectionChanged="Calendar_SelectionChanged" Width="400px" Height="300px" CssClass="calender">
+                        <OtherMonthDayStyle ForeColor="#b0b0b0" />
+                        <SelectorStyle CssClass="calSelector" />
+                        <SelectedDayStyle CssClass="calSelectedDay"/>
+                        <TitleStyle CssClass="calTitle" />
+                        <TodayDayStyle CssClass="calTodayDay" />
+                        <NextPrevStyle CssClass="calNextPrev" />
+                        <DayHeaderStyle CssClass="calDayHeader" />
+                        <DayStyle CssClass="calDay" ForeColor="#2d3338" />
+                    </asp:Calendar>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2">
+            <div class="dashboardMargins" id="signupFacilitator">
+                <!-- Facilitator Choice -->
+                <asp:Label id="FacilitatorLabel" runat="server" CssClass="input-header">Facilitator</asp:Label>
+                <div class="row" style="padding-bottom:10px;">
+                    <asp:DropDownList ID="FacilitatorDropDown" runat="server" DataSourceID="Facilitators" DataTextField="FullName" DataValueField="FullName" CssClass="signupDropDown"></asp:DropDownList>
+                    <asp:SqlDataSource ID="Facilitators" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT FullName FROM Facilitators WHERE (Id = @CurrentUser)">
+                        <SelectParameters>
+	                        <asp:Parameter DefaultValue="Anonymous" Name="CurrentUser" />
+                        </SelectParameters>
+                    </asp:SqlDataSource>
+                </div>
+
+                <!-- Room Choice -->
+                <div class="row">
+	                <asp:Label ID="RoomLabel" runat="server" CssClass="input-header">Room</asp:Label>
+                </div>
+                <div class="row" style="padding-bottom:10px;">
+	                <asp:DropDownList ID="RoomDropDown" runat="server" DataSourceID="Rooms" DataTextField="Room" DataValueField="Room" CssClass="signupDropDown"></asp:DropDownList>
+	                <asp:SqlDataSource ID="Rooms" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT [Room] FROM [Rooms]"></asp:SqlDataSource>
+                </div>
+
+                <!-- Time Slot Choice -->
+                <div class="row">
+                    <asp:Label ID="TimeSlotLabel" runat="server" CssClass="input-header">Time Slot</asp:Label>
+                </div>
+                <div class="row" style="padding-bottom:10px;">
+		            <asp:DropDownList ID="TimeSlotDropDown" runat="server" CssClass="signupDropDown">
+			            <asp:ListItem Value="Morning">Morning (8:45-12)</asp:ListItem>
+			            <asp:ListItem Value="Lunch">Lunch (12-1) X2</asp:ListItem>
+			            <asp:ListItem Value="Afternoon">Afternoon (1-3:45)</asp:ListItem>
+	                </asp:DropDownList>
+               </div>
+
+                <!-- Sign Up Button -->
+                <div class="row">
+		            <asp:Button ID="SignUpButton" runat="server" Text="Sign Up" OnClick="SignUpButton_Click" CssClass="mybutton"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <asp:Label ID="Label1" runat="server" Text="Label" Visible="False" Font-Size="Large"></asp:Label>	
+    
+    <DayPilot:DayPilotScheduler 
+      ID="DayPilotScheduler1" 
+      runat="server" 
+  
+      DataStartField="StartTime" 
+      DataEndField="EndTime" 
+      DataTextField="FullName" 
+      DataIdField="Id" 
+      DataResourceField="RoomId" 
+  
+      CellGroupBy="Day"
+      Scale="Day" BackColor="#FFFFD5" BorderColor="#000000" CssClassPrefix="scheduler_default" DataValueField="VolunteerId" DurationBarColor="Blue" EventBackColor="#FFFFFF" EventBorderColor="#000000" EventHeight="25" HeaderFontColor="0, 0, 0" HeaderHeight="17" HourBorderColor="#EAD098" HourNameBackColor="#ECE9D8" HourNameBorderColor="#ACA899" HoverColor="#FFED95" NonBusinessBackColor="#FFF4BC" StartDate="" style="top: 0px; left: 1px" BusinessBeginsHour="8" BusinessEndsHour="17" CellWidth="50"
+      >
+    </DayPilot:DayPilotScheduler>
+
 </asp:Content>
+
 <asp:Content ID="Content5" ContentPlaceHolderID="footer" runat="server">
 </asp:Content>
