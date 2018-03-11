@@ -26,10 +26,13 @@ namespace _395project.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             string vars = (string)(Session["register"]);
-            string[] myStrings = vars.Split(',');
-            FacilitatorEmail.Text = myStrings[0];
-            FacilitatorFirst.Text = myStrings[1];
-            FacilitatorLast.Text = myStrings[2];
+            if (vars != null)
+            {
+                string[] myStrings = vars.Split(',');
+                FacilitatorEmail.Text = myStrings[0];
+                FacilitatorFirst.Text = myStrings[1];
+                FacilitatorLast.Text = myStrings[2];
+            }
         }
 
         protected void AddChild_Click(object sender, EventArgs e)

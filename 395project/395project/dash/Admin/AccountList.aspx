@@ -10,10 +10,20 @@
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="myGridClass" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
             <Columns>
                 <asp:BoundField DataField="Email" HeaderText="Email"  ItemStyle-Width="400px"/>
-                <asp:BoundField DataField="NumFacilitators" HeaderText="Number of Facilitators" ItemStyle-Width="108px" NullDisplayText="0" />
-                <asp:BoundField DataField="NumChildren" HeaderText="Number of Children" NullDisplayText="0" />
-                <asp:BoundField DataField="MonthlyHours" HeaderText="Hours This Month" ItemStyle-Width="128px" NullDisplayText="0" />
-				<asp:BoundField DataField="YearlyHours" HeaderText="Hours This Year" ItemStyle-Width="128px" NullDisplayText="0" />
+                <asp:BoundField DataField="NumFacilitators" HeaderText="Number of Facilitators" ItemStyle-Width="200px" NullDisplayText="0" />
+                <asp:BoundField DataField="NumChildren" HeaderText="Number of Children" ItemStyle-Width="200px" NullDisplayText="0" />
+                <asp:BoundField DataField="MonthlyHours" HeaderText="Hours This Month" ItemStyle-Width="200px" NullDisplayText="0" />
+				<asp:BoundField DataField="YearlyHours" HeaderText="Hours This Year" ItemStyle-Width="200px" NullDisplayText="0" />
+                <asp:TemplateField HeaderText ="Stats" ItemStyle-Width="80px">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="StatLink" runat="server" Text="Stats"/>
+                        </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText ="Edit Account" ItemStyle-Width="200px">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="EditLink" runat="server" Text="Edit" OnClick="EditButton"/>
+                        </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
         </asp:GridView> 
     </div>
