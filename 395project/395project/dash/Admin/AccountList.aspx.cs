@@ -77,7 +77,7 @@ namespace _395project.Pages
 
             String ID;
             ID = gvr.Cells[0].Text;
-            Response.Redirect("/dash/amin/EditAccount.aspx?ID=" + ID);
+            Response.Redirect("/dash/Admin/EditAccounts.aspx?ID=" + ID);
 
         }
 

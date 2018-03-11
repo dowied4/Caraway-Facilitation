@@ -14,12 +14,12 @@
                 <asp:BoundField DataField="NumChildren" HeaderText="Number of Children" ItemStyle-Width="200px" NullDisplayText="0" />
                 <asp:BoundField DataField="MonthlyHours" HeaderText="Hours This Month" ItemStyle-Width="200px" NullDisplayText="0" />
 				<asp:BoundField DataField="YearlyHours" HeaderText="Hours This Year" ItemStyle-Width="200px" NullDisplayText="0" />
-                <asp:TemplateField HeaderText ="Stats">
+                <asp:TemplateField HeaderText ="Stats" ItemStyle-Width="80px">
                         <ItemTemplate>
                             <asp:LinkButton ID="StatLink" runat="server" Text="Stats"/>
                         </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText ="Edit Account">
+                <asp:TemplateField HeaderText ="Edit Account" ItemStyle-Width="200px">
                         <ItemTemplate>
                             <asp:LinkButton ID="EditLink" runat="server" Text="Edit" OnClick="EditButton"/>
                         </ItemTemplate>
