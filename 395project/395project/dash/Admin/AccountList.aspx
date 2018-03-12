@@ -16,7 +16,7 @@
 				<asp:BoundField DataField="YearlyHours" HeaderText="Hours This Year" ItemStyle-Width="200px" NullDisplayText="0" />
                 <asp:TemplateField HeaderText ="Stats" ItemStyle-Width="80px">
                         <ItemTemplate>
-                            <asp:LinkButton ID="StatLink" runat="server" Text="Stats"/>
+                            <asp:LinkButton ID="StatLink" runat="server" Text="Stats" OnClick="StatButton"/>
                         </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText ="Edit Account" ItemStyle-Width="200px">
