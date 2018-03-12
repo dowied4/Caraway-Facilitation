@@ -30,8 +30,12 @@ namespace _395project.dash.Admin
             if (!IsPostBack)
             {
                 Children.SelectParameters.Add("CurrentUser", ID);
-
                 Facilitators.SelectParameters.Add("CurrentUser", ID);// "sullivanr5@mymacewan.ca");
+                loadRole(ID);
+                
+
+
+
             }
             string vars = (string)(Session["register"]);
             if (vars != null)
@@ -81,23 +85,55 @@ namespace _395project.dash.Admin
                 ErrorMessage.Text = "Child Successfully Added";
             }
         }
+        protected void loadRole(String ID)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            con.Open();
+            string getRole = ("SELECT RoleId FROM AspNetUserRoles WHERE UserId = @CurrentUser");
+            SqlCommand sqlRole = new SqlCommand(getRole, con);
+            sqlRole.Parameters.AddWithValue("@CurrentUser", ID);// "sullivanr5@mymacewan.ca");
+            SqlDataReader roleReader = sqlRole.ExecuteReader();
+            roleReader.Read();
+            if (roleReader.HasRows)
+            {
 
-        //does not work
+                String num = roleReader["RoleId"].ToString();
+
+                switch (num)
+                {
+                    case "1": role.InnerHtml = "Edit Role: (Current Role: Facilitator)"; break;
+                    case "2": role.InnerHtml = "Edit Role: (Current Role: Teacher)"; break;
+                    case "3": role.InnerHtml = "Edit Role: (Current Role: Admin)"; break;
+                    case "4": role.InnerHtml = "Edit Role: (Current Role: SuperUser)"; break;
+                }
+
+
+
+            }
+            con.Close();
+
+        }
         protected void ChangeRole(object sender, EventArgs e)
         {
             String ID = Request.QueryString["ID"];
-            String role = RoleDropDown.Text;
+            int role = RoleDropDown.SelectedIndex + 1 ;
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             con.Open();
 
-            string change = ("UPDATE AspNetUserRoles SET RoleId WHERE RoleId = @Roles");
+            string change = ("IF EXISTS (SELECT UserId FROM AspNetUserRoles WHERE UserId = @CurrentUser)" +
+                                " UPDATE AspNetUserRoles SET RoleId = @Roles WHERE UserId = @CurrentUser ELSE" +
+                             " INSERT INTO AspNetUserRoles(UserId, RoleId) VALUES (@CurrentUser, @Roles) ");
             SqlCommand rr = new SqlCommand(change, con);
             rr.Parameters.AddWithValue("@Roles", role);
+            rr.Parameters.AddWithValue("@CurrentUser", ID);
+            rr.ExecuteNonQuery();
             
-            SqlDataReader changeReader = rr.ExecuteReader();
-            RoleDropDown.DataBind();
+            
             con.Close();
+            ErrorMessage.Text = "Role Sucessfully Changed to: " + role;
+            loadRole(ID);
         }
 
         protected void RemoveChild(object sender, EventArgs e)
@@ -123,15 +159,41 @@ namespace _395project.dash.Admin
             con.Close();
         }
 
+        protected void ChangeDB(String ID, String DB, String[] Name)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            string changeQuery = ("IF EXISTS (SELECT Id FROM " + DB + " WHERE Id = @CurrentUser)" +
+                                   " DELETE FROM "+ DB + " WHERE Id = @CurrentUser");
+            SqlCommand change = new SqlCommand(changeQuery, con);
+            change.Parameters.AddWithValue("@CurrentUser", ID);// "sullivanr5@mymacewan.ca");
+           /* change.Parameters.AddWithValue("@FirstName", Name[0]);
+            change.Parameters.AddWithValue("@LastName", Name[1]);
+            change.Parameters.AddWithValue("@FacilitatorFirstName", Name[0]);
+            change.Parameters.AddWithValue("@FacilitatorLastName", Name[1]);
+            change.Parameters.AddWithValue("@FullName", FacilitatorDropDown.Text);*/
+            SqlDataReader exc_remove = change.ExecuteReader();
+
+            con.Close();
+
+        }
+
         protected void RemoveFacilitator(object sender, EventArgs e)
         {
             String ID = Request.QueryString["ID"];
+            
             String[] name = FacilitatorDropDown.Text.Split(' ');
             String firstName = name[0];
             String lastName = name[1];
 
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-            con.Open();
+            ChangeDB(ID, "Stats", name);
+            ChangeDB(ID, "Calendar", name);
+            ChangeDB(ID, "Facilitators", name);
+            
+            
+
+
+            /*
             string removeQuery = ("DELETE FROM Facilitators WHERE Id = @CurrentUser " +
                                         "and FirstName = @FirstName and LastName = @LastName " +
                                         "and FullName = @FullName");
@@ -141,11 +203,11 @@ namespace _395project.dash.Admin
             Remove.Parameters.AddWithValue("@LastName", lastName);
             Remove.Parameters.AddWithValue("@FullName", FacilitatorDropDown.Text);
             SqlDataReader exc_remove = Remove.ExecuteReader();
-            
+            */
             ErrorMessage.Text = "Facilitator Successfully Removed";
 
             FacilitatorDropDown.DataBind();
-            con.Close();
+            
         }
 
         protected void AddFacilitator_Click(object sender, EventArgs e)
@@ -181,7 +243,8 @@ namespace _395project.dash.Admin
                 FacilitatorFirst.Text = string.Empty;
                 FacilitatorLast.Text = string.Empty;
                 ErrorMessage.Text = "Facilitator Successfully Added";
-                
+                FacilitatorDropDown.DataBind();
+
             }
 
         }

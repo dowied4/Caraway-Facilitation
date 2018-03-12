@@ -16,7 +16,7 @@
     </p>
     <asp:ValidationSummary runat="server" CssClass="error-text" />
 
-    <h2 id="role">Edit Role: (does not work)</h2>
+    <h2 id="role" runat="server">Edit Role: (Current: None)</h2>
     <div class="panel-body">
          <div class="row">
               <div class="col-lg-6">    
