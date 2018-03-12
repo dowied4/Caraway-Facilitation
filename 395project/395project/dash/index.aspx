@@ -122,9 +122,9 @@
                 <AlternatingRowStyle CssClass="AlternatingRowStyle" />
                 <Columns>
                     <asp:BoundField DataField="FacilitatorName" HeaderText="Facilitator Name" />
-                    <asp:BoundField DataField="StartTime" HeaderText="StartTime" />
-                    <asp:BoundField DataField="EndTime" HeaderText="EndTime" />
-                    <asp:BoundField DataField="RoomId" HeaderText="RoomId" />
+                    <asp:BoundField DataField="StartTime" HeaderText="Start Time" />
+                    <asp:BoundField DataField="EndTime" HeaderText="End Time" />
+                    <asp:BoundField DataField="Room" HeaderText="Room" />
                 </Columns>
             </asp:GridView>
         </div>
@@ -152,9 +152,9 @@
                 <AlternatingRowStyle CssClass="AlternatingRowStyle" />
                 <Columns>
                     <asp:BoundField DataField="FacilitatorName" HeaderText="Facilitator Name" />
-                    <asp:BoundField DataField="StartTime" HeaderText="StartTime" />
-                    <asp:BoundField DataField="EndTime" HeaderText="EndTime" />
-                    <asp:BoundField DataField="RoomId" HeaderText="RoomId" />
+                    <asp:BoundField DataField="StartTime" HeaderText="Start Time" />
+                    <asp:BoundField DataField="EndTime" HeaderText="End Time" />
+                    <asp:BoundField DataField="Room" HeaderText="Room" />
                     <asp:TemplateField HeaderText="Confirm">
                         <ItemTemplate>
                             <asp:LinkButton ID="comfirmButtons" runat="server" Text="Confirm" OnClick="ConfirmButton" />

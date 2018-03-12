@@ -35,8 +35,8 @@ namespace _395project.Pages
             con.Open();
 
             //Upcoming Hours
-            string upc = "SELECT (F.FacilitatorFirstName + ' '+ F.FacilitatorLastName) AS FacilitatorName, F.StartTime, F.EndTime, F.RoomId FROM dbo.Calendar AS F WHERE " +
-                            "F.Id = @CurrentUser and F.EndTime > @CurrentTime";
+            string upc = "SELECT (F.FacilitatorFirstName + ' '+ F.FacilitatorLastName) AS FacilitatorName, F.StartTime, F.EndTime, R.Room FROM dbo.Calendar AS F, Rooms as R WHERE " +
+                            "F.Id = @CurrentUser and F.EndTime > @CurrentTime and F.RoomId = R.RoomId";
             SqlCommand getup = new SqlCommand(upc, con);
             getup.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
             getup.Parameters.AddWithValue("@CurrentTime", DateTime.Now);
@@ -58,8 +58,8 @@ namespace _395project.Pages
             
             //Completed Hours
             string comp = "SELECT (F.FacilitatorFirstName + ' '+ F.FacilitatorLastName) AS FacilitatorName, F.StartTime, " +
-                            "F.EndTime, F.RoomId FROM dbo.Calendar AS F WHERE " +
-                            "F.Id = @CurrentUser and F.EndTime < @CurrentTime";
+                            "F.EndTime, R.Room FROM dbo.Calendar AS F, Rooms as R WHERE " +
+                            "F.Id = @CurrentUser and F.EndTime < @CurrentTime and R.RoomId = F.RoomId";
             SqlCommand getComp = new SqlCommand(comp, con);
             getComp.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
             getComp.Parameters.AddWithValue("@CurrentTime", DateTime.Now);

@@ -25,7 +25,7 @@ namespace _395project.dash
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
+            {   
                 LoadResources();
                 DayPilotScheduler1.StartDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
                 DayPilotScheduler1.DataSource = DbGetEvents(DayPilotScheduler1.StartDate, 1);
@@ -33,6 +33,8 @@ namespace _395project.dash
                 Calendar.SelectedDate = DayPilotScheduler1.StartDate;
                 Label1.Text = Calendar.SelectedDate.ToShortDateString();
                 Label1.Visible = true;
+                BindTimeSlots();
+                SetTimeTextBoxes();
             }
             else
             {
@@ -41,8 +43,41 @@ namespace _395project.dash
                 DayPilotScheduler1.DataSource = DbGetEvents(DayPilotScheduler1.StartDate, 1);
                 DayPilotScheduler1.DataBind();
             }
+
         }
-        
+
+        //DataBind TimeSlotDropDown with TimeSlots and FieldTrips
+        private void BindTimeSlots()
+        {
+
+            //Look for Field Trips to fill Time Slot DropDown
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+            };
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+
+            con.Open();
+
+            SqlDataAdapter getFieldTrips = new SqlDataAdapter("Select Location From FieldTrips where CONVERT(DATE, StartTime) = @CurrentDate",
+                ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            getFieldTrips.SelectCommand.Parameters.AddWithValue("@CurrentDate", Calendar.SelectedDate.Date);
+            DataTable dt = new DataTable();
+            getFieldTrips.Fill(dt);
+
+            //Add regular time slots if no fieldtrips
+            if (dt.Rows.Count == 0)
+            {
+                SqlDataAdapter getTimeSlots = new SqlDataAdapter("Select Location From TimeSlots order by StartTime",
+                    ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                getTimeSlots.Fill(dt);
+            }
+
+            TimeSlotDropDown.DataSource = dt;
+            TimeSlotDropDown.DataTextField = "Location";
+            TimeSlotDropDown.DataBind();
+        }
         //Loads the classrooms for DayPilot
         private void LoadResources()
         {
@@ -75,6 +110,8 @@ namespace _395project.dash
         //Changes the day when its selected on the calendar
         protected void Calendar_SelectionChanged(object sender, EventArgs e)
         {
+            BindTimeSlots();
+            SetTimeTextBoxes();
             Page_Load(null, EventArgs.Empty);
         }
 
@@ -100,44 +137,92 @@ namespace _395project.dash
         }
 
         //Adds a signup to the database
-        protected void SignUpButton_Click(object sender, EventArgs e)
-        {   //Split the name into first and last name
+        protected void SignUpButton_Click(object sender, EventArgs e)            
+        {   
+            
+            //Split the name into first and last name
             string[] name = FacilitatorDropDown.Text.Split(' ');
             //Get Start and End times
-            DateTime Start = new DateTime(Calendar.SelectedDate.Year, Calendar.SelectedDate.Month, Calendar.SelectedDate.Day, 11, 00, 00);
-            DateTime End = new DateTime(Calendar.SelectedDate.Year, Calendar.SelectedDate.Month, Calendar.SelectedDate.Day, 12, 00, 00);
-            //Temporary, 3 default timeslots
-            switch (TimeSlotDropDown.Text)
+            int startHour = 0;
+            int startMinute = 0;
+            int endHour = 0;
+            int endMinute = 0;
+
+            //Checks for a properly formatted time in start time
+            if (StartTimeTextBox.Text.Contains(':'))
+                {
+                string[] startTime = StartTimeTextBox.Text.Split(':');
+                Int32.TryParse(startTime[0], out startHour);
+                Int32.TryParse(startTime[1], out startMinute);
+                }
+            //Checks for a properly formatted time in end time
+            if (EndTimeTextBox.Text.Contains(':'))
             {
-                case "Morning":
-                    Start = new DateTime(Calendar.SelectedDate.Year, Calendar.SelectedDate.Month, Calendar.SelectedDate.Day, 8, 30, 00);
-                    End = new DateTime(Calendar.SelectedDate.Year, Calendar.SelectedDate.Month, Calendar.SelectedDate.Day, 12, 00, 00);
-                    break;
-
-                case "Lunch":
-                    Start = new DateTime(Calendar.SelectedDate.Year, Calendar.SelectedDate.Month, Calendar.SelectedDate.Day, 12, 00, 00);
-                    End = new DateTime(Calendar.SelectedDate.Year, Calendar.SelectedDate.Month, Calendar.SelectedDate.Day, 13, 00, 00);
-                    break;
-
-                case "Afternoon":
-                    Start = new DateTime(Calendar.SelectedDate.Year, Calendar.SelectedDate.Month, Calendar.SelectedDate.Day, 13, 00, 00);
-                    End = new DateTime(Calendar.SelectedDate.Year, Calendar.SelectedDate.Month, Calendar.SelectedDate.Day, 15, 45, 00);
-                    break;
+                string[] endTime = EndTimeTextBox.Text.Split(':');
+                Int32.TryParse(endTime[0], out endHour);
+                Int32.TryParse(endTime[1], out endMinute);
             }
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-            conn.Open();
-            string volunteer = "Insert into Calendar(Id, FacilitatorFirstName, FacilitatorLastName, StartTime, EndTime, RoomId) " +
-                                "Values (@Id, @FirstName, @LastName, @Start, @End, @Room)";
-            SqlCommand cmd = new SqlCommand(volunteer, conn);
-            cmd.Parameters.AddWithValue("@Id", User.Identity.Name);
-            cmd.Parameters.AddWithValue("@FirstName", name[0]);
-            cmd.Parameters.AddWithValue("@LastName", name[1]);
-            cmd.Parameters.AddWithValue("@Start", Start);
-            cmd.Parameters.AddWithValue("@End", End);
-            cmd.Parameters.AddWithValue("@Room", GetRoom(RoomDropDown.Text));
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            Page_Load(null, EventArgs.Empty);
+            //Adds to the database if startTime and endTime are properly formatted
+            if (StartTimeTextBox.Text.Contains(':') && EndTimeTextBox.Text.Contains(':'))
+            {
+                DateTime Start = ChangeTime(startHour, startMinute);
+                DateTime End = ChangeTime(endHour, endMinute);
+
+                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                conn.Open();
+                string volunteer = "Insert into Calendar(Id, FacilitatorFirstName, FacilitatorLastName, StartTime, EndTime, RoomId) " +
+                                    "Values (@Id, @FirstName, @LastName, @Start, @End, @Room)";
+                SqlCommand cmd = new SqlCommand(volunteer, conn);
+                cmd.Parameters.AddWithValue("@Id", User.Identity.Name);
+                cmd.Parameters.AddWithValue("@FirstName", name[0]);
+                cmd.Parameters.AddWithValue("@LastName", name[1]);
+                cmd.Parameters.AddWithValue("@Start", Start);
+                cmd.Parameters.AddWithValue("@End", End);
+                cmd.Parameters.AddWithValue("@Room", GetRoom(RoomDropDown.Text));
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                Page_Load(null, EventArgs.Empty);
+            }
+
+
+        }
+
+        //Gets a DateTime object from the selected calendar date
+        public DateTime ChangeTime(int hour, int minute)
+        {
+            return new DateTime(Calendar.SelectedDate.Year, Calendar.SelectedDate.Month, Calendar.SelectedDate.Day, hour, minute, 0);
+        }
+
+        //Runs SetTimeTextBoxes when the dropdown menu choice is changed
+        protected void TimeSlotDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetTimeTextBoxes();
+        }
+
+        //Sets the text boxes with the start/end times of the selected time Slot
+        private void SetTimeTextBoxes()
+        {
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+            };
+            //Gets the time from either StartTime or Fieldtrips
+            string times = "Select CAST(StartTime AS time) as StartTime , CAST(EndTime AS TIME) as EndTime from FieldTrips " +
+                            "where Location = @Location UNION Select CAST(StartTime AS time) as StartTime, " +
+                            "CAST(EndTime AS TIME) as EndTime from dbo.TimeSlots where Location = @Location";
+            SqlCommand getTimes = new SqlCommand(times, con);
+            getTimes.Parameters.AddWithValue("@Location", TimeSlotDropDown.Text);
+            con.Open();
+            getTimes.ExecuteNonQuery();
+            SqlDataReader dr = getTimes.ExecuteReader();
+            while (dr.Read())
+            {
+                StartTimeTextBox.Text = (string)dr["StartTime"].ToString();
+
+                dr["StartTime"].ToString();
+                EndTimeTextBox.Text = (string)dr["EndTime"].ToString();
+            }
+            con.Close();
         }
     }
 }

@@ -60,15 +60,17 @@
                 <!-- Time Slot Choice -->
                 <div class="row">
                     <asp:Label ID="TimeSlotLabel" runat="server" CssClass="input-header">Time Slot</asp:Label>
-                </div>
-                <div class="row" style="padding-bottom:10px;">
-		            <asp:DropDownList ID="TimeSlotDropDown" runat="server" CssClass="signupDropDown">
-			            <asp:ListItem Value="Morning">Morning (8:45-12)</asp:ListItem>
-			            <asp:ListItem Value="Lunch">Lunch (12-1) X2</asp:ListItem>
-			            <asp:ListItem Value="Afternoon">Afternoon (1-3:45)</asp:ListItem>
-	                </asp:DropDownList>
-               </div>
-
+                </div>										
+				<div class="row" style="padding-bottom:10px;">
+					<asp:DropDownList ID="TimeSlotDropDown" runat="server" AutoPostBack="true" CssClass="signupDropDown" OnSelectedIndexChanged="TimeSlotDropDown_SelectedIndexChanged">
+					</asp:DropDownList>
+				</div>
+						<div class="row" style="padding-bottom:10px;">
+               				<asp:TextBox ID="StartTimeTextBox" runat="server" CssClass="inputfields"></asp:TextBox>
+						</div>
+						<div class="row" style="padding-bottom:10px;">
+							<asp:TextBox ID="EndTimeTextBox" runat="server" CssClass="inputfields"></asp:TextBox>
+						</div>
                 <!-- Sign Up Button -->
                 <div class="row">
 		            <asp:Button ID="SignUpButton" runat="server" Text="Sign Up" OnClick="SignUpButton_Click" CssClass="mybutton"/>
