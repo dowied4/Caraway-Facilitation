@@ -3,29 +3,41 @@
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <link href="/Content/dashboard.css" rel="stylesheet" />
     <h1 class="page-header">Account List</h1>
-	<asp:TextBox ID="SearchBox" runat="server"></asp:TextBox>
-	<asp:Button ID="SearchButton" runat="server" Text="Search" OnClick="Search_Click" />
-	<asp:Button ID="Button1" runat="server" Text="Clear" OnClick="Page_Load" />
-    <div id="df" runat="server">
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="myGridClass" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
-            <Columns>
-                <asp:BoundField DataField="Email" HeaderText="Email"  ItemStyle-Width="400px"/>
-                <asp:BoundField DataField="NumFacilitators" HeaderText="Number of Facilitators" ItemStyle-Width="200px" NullDisplayText="0" />
-                <asp:BoundField DataField="NumChildren" HeaderText="Number of Children" ItemStyle-Width="200px" NullDisplayText="0" />
-                <asp:BoundField DataField="MonthlyHours" HeaderText="Hours This Month" ItemStyle-Width="200px" NullDisplayText="0" />
-				<asp:BoundField DataField="YearlyHours" HeaderText="Hours This Year" ItemStyle-Width="200px" NullDisplayText="0" />
-                <asp:TemplateField HeaderText ="Stats" ItemStyle-Width="80px">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="StatLink" runat="server" Text="Stats" OnClick="StatButton"/>
-                        </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText ="Edit Account" ItemStyle-Width="200px">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="EditLink" runat="server" Text="Edit" OnClick="EditButton"/>
-                        </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView> 
+  
+    <div class="dashboardMargins" id="alSearch" style="padding-bottom: 20px;">
+	    <asp:TextBox ID="SearchBox" runat="server" CssClass="signupDropDown" placeholder="Enter Email"/>
+	    <asp:Button ID="SearchButton" runat="server" Text="Search" OnClick="Search_Click"  CssClass="mybutton"/>
+	    <asp:Button ID="Button1" runat="server" Text="Clear" OnClick="Page_Load" CssClass="mybutton"/>
+    </div>
+    
+    <div class="row" id="df" runat="server">
+        <div id="accountListGrid" class="dashboardMargins">
+            <div class="rounded_corners" style="width: 1200px">
+                <asp:GridView ID="GridView1" runat="server" Width="1200px" AutoGenerateColumns="false" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+                    <HeaderStyle CssClass="HeaderStyle" />
+                    <FooterStyle CssClass="FooterStyle" />
+                    <RowStyle CssClass="RowStyle" />
+                    <AlternatingRowStyle CssClass="AlternatingRowStyle" />
+                    <Columns>
+                        <asp:BoundField DataField="Email" HeaderText="Email" />
+                        <asp:BoundField DataField="NumFacilitators" HeaderText="Number of Facilitators" NullDisplayText="0" />
+                        <asp:BoundField DataField="NumChildren" HeaderText="Number of Children" NullDisplayText="0" />
+                        <asp:BoundField DataField="MonthlyHours" HeaderText="Hours This Month" NullDisplayText="0" />
+				        <asp:BoundField DataField="YearlyHours" HeaderText="Hours This Year" NullDisplayText="0" />
+                        <asp:TemplateField HeaderText ="Stats">
+                            <ItemTemplate>
+                                    <asp:LinkButton ID="StatLink" runat="server" Text="Stats" OnClick="StatButton"/>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText ="Edit Account">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="EditLink" runat="server" Text="Edit" OnClick="EditButton"/>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+            </div>
+         </div>
     </div>
 
 </asp:Content>

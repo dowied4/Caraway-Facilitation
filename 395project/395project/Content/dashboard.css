@@ -266,6 +266,9 @@ tr.AlternatingRowStyle:hover {
     width: 300px;
 }
 
+#accountListGrid {
+    width: 1200px;
+}
 #signupCalender {
     width: 400px;
 }
@@ -276,7 +279,7 @@ tr.AlternatingRowStyle:hover {
 
 #dashboardCompletedLabel, #dashboardUpcomingLabel, #dashboardFacilitatorsLabel, #dashboardChildrenLabel,
 #dashboardWeeklyLabel, #dashboardMonthlyLabel, #dashboardHoursLabel, #dashboardInfoLabel, #dashboardNoneLabel1, 
-#dashboardNoneLabel2, #signupLabel, #signupFacilitator {
+#dashboardNoneLabel2, #signupLabel, #signupFacilitator, #alSearch {
     width: 100%;
     text-align: center;
     padding-bottom: 5px;
