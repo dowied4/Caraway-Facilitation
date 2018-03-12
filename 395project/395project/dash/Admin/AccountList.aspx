@@ -3,6 +3,7 @@
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <link href="/Content/dashboard.css" rel="stylesheet" />
     <h1 class="page-header">Account List</h1>
+  
     <div class="dashboardMargins" id="alSearch" style="padding-bottom: 20px;">
 	    <asp:TextBox ID="SearchBox" runat="server" CssClass="signupDropDown" placeholder="Enter Email"/>
 	    <asp:Button ID="SearchButton" runat="server" Text="Search" OnClick="Search_Click"  CssClass="mybutton"/>
@@ -25,7 +26,7 @@
 				        <asp:BoundField DataField="YearlyHours" HeaderText="Hours This Year" NullDisplayText="0" />
                         <asp:TemplateField HeaderText ="Stats">
                             <ItemTemplate>
-                                    <asp:LinkButton ID="StatLink" runat="server" Text="Stats"/>
+                                    <asp:LinkButton ID="StatLink" runat="server" Text="Stats" OnClick="StatButton"/>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText ="Edit Account">
