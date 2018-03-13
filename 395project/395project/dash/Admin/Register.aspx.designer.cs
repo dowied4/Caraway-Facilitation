@@ -103,21 +103,21 @@ namespace _395project.Account {
         protected global::System.Web.UI.WebControls.TextBox ChildLast;
         
         /// <summary>
-        /// Class control.
+        /// Room control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Class;
+        protected global::System.Web.UI.WebControls.DropDownList Room;
         
         /// <summary>
-        /// Grade control.
+        /// Rank control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Grade;
+        protected global::System.Web.UI.WebControls.DropDownList Rank;
     }
 }
