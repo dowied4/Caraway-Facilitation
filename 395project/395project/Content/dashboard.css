@@ -273,18 +273,18 @@ tr.AlternatingRowStyle:hover {
     width: 400px;
 }
 
-#dashboardWeeklyTotal, #dashboardMonthlyTotal {
+#dashboardWeeklyTotal, #dashboardMonthlyTotal, #statsYearlyTotal, #statsMonthlyTotal, #statsMonthlyTotal, #week1, #week2, #week3, #week4 {
     width: 50px;
 }
 
-#dashboardCompletedLabel, #dashboardUpcomingLabel, #dashboardFacilitatorsLabel, #dashboardChildrenLabel,
-#dashboardWeeklyLabel, #dashboardMonthlyLabel, #dashboardHoursLabel, #dashboardInfoLabel, #dashboardNoneLabel1, 
-#dashboardNoneLabel2, #signupLabel, #signupFacilitator, #alSearch {
-    width: 100%;
-    text-align: center;
-    padding-bottom: 5px;
-    padding-top: 20px;
-}
+    #dashboardCompletedLabel, #dashboardUpcomingLabel, #dashboardFacilitatorsLabel, #dashboardChildrenLabel,
+    #dashboardWeeklyLabel, #dashboardMonthlyLabel, #dashboardHoursLabel, #dashboardInfoLabel, #dashboardNoneLabel1,
+    #dashboardNoneLabel2, #signupLabel, #signupFacilitator, #weekLabel1, #weekLabel2, #weekLabel3, #weekLabel4, #Week1Label, #Week2Label, #Week3Label, #Week4Label, #statsYearlyLabel, #yearlyHoursLabel, #monthlyHoursLabel, #statsMonthlyLabel, #alSearch {
+        width: 100%;
+        text-align: center;
+        padding-bottom: 5px;
+        padding-top: 20px;
+    }
 
 .signupDropDown {
     width: 200px;
