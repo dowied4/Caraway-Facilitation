@@ -81,6 +81,16 @@ namespace _395project.Pages
 
         }
 
+        protected void StatButton(object sender, EventArgs e)
+        {
+            LinkButton link = (LinkButton)sender;
+            GridViewRow grid = (GridViewRow)link.NamingContainer;
+            String ID;
+            ID = grid.Cells[0].Text;
+            Response.Redirect("/dash/Admin/AccountStat.aspx?ID=" + ID);
+        }
+
+
             protected void Search_Click(object sender, EventArgs e)
         {
             //opens a connection to the server

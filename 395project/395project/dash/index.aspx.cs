@@ -163,7 +163,10 @@ namespace _395project.Pages
             MasterPageFile = choose.GetMaster();
         }
 
-        //this function is the 
+
+        
+
+            
         protected void ConfirmButton(object sender, System.EventArgs e)
         {
             //Get the button that raised the event
@@ -200,9 +203,17 @@ namespace _395project.Pages
             startTime = startDate[1];
             endDate = gvr.Cells[2].Text.Split(' ');
             endTime = endDate[1];
-            array = endDate[0].Split('/');
-            month = array[0];
-            year = array[2];
+            //fixes the case where time is split on "-" or "/"
+            if(endDate[0].Contains('-'))
+            {
+                array = endDate[0].Split('-');
+                month = array[0];
+                year = array[2];
+            } else {
+                array = endDate[0].Split('/');
+                month = array[0];
+                year = array[2];
+            }
 
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
