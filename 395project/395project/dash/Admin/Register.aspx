@@ -26,8 +26,8 @@
 			document.getElementById('<%=ChildEmail.ClientID%>').value = "";
 			document.getElementById('<%=ChildFirst.ClientID%>').value = "";
 			document.getElementById('<%=ChildLast.ClientID%>').value = "";
-			document.getElementById('<%=Class.ClientID%>').value = "";
-			document.getElementById('<%=Grade.ClientID%>').value = "";
+			document.getElementById('<%=Room.ClientID%>').value = "";
+			document.getElementById('<%=Rank.ClientID%>').value = "";
             return false;
         }
 	</script>
@@ -181,12 +181,18 @@
 		<div class="thing">
             <div class="row">
                 <div class="col-md-6">
-			        <asp:Label runat="server" AssociatedControlID="Class" CssClass="input-header">Class</asp:Label>
+			        <asp:Label runat="server" AssociatedControlID="Room" CssClass="input-header">Class</asp:Label>
                 </div>
             </div>
 			<div class="row">
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="Class" CssClass="inputfields" />
+                    <asp:DropDownList runat="server" ID="Room" CssClass="inputfields" >
+                        <asp:ListItem Text="Blue" Value="Blue"></asp:ListItem>
+                        <asp:ListItem Text="Purple" Value="Purple"></asp:ListItem>
+                        <asp:ListItem Text="Green" Value="Green"></asp:ListItem>
+                        <asp:ListItem Text="Red" Value="Red"></asp:ListItem>
+                        <asp:ListItem Text="Grey" Value="Grey"></asp:ListItem>
+                    </asp:DropDownList>
                 </div>
 			</div>
 		</div>
@@ -195,12 +201,26 @@
 		<div class="thing">
             <div class="row">
                 <div class="col-md-6">
-			        <asp:Label runat="server" AssociatedControlID="Grade" CssClass="input-header">Grade</asp:Label>
+			        <asp:Label runat="server" AssociatedControlID="Rank" CssClass="input-header">Grade</asp:Label>
                 </div>
             </div>
 			<div class="row">
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="Grade" CssClass="inputfields" />
+                    <asp:DropDownList runat="server" ID="Rank" CssClass="inputfields" >
+                        <asp:ListItem Text="K" Value="K"></asp:ListItem>
+                        <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="3" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="4" Value="4"></asp:ListItem>
+                        <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                        <asp:ListItem Text="6" Value="6"></asp:ListItem>
+                        <asp:ListItem Text="7" Value="7"></asp:ListItem>
+                        <asp:ListItem Text="8" Value="8"></asp:ListItem>
+                        <asp:ListItem Text="9" Value="9"></asp:ListItem>
+                        <asp:ListItem Text="10" Value="10"></asp:ListItem>
+                        <asp:ListItem Text="11" Value="11"></asp:ListItem>
+                        <asp:ListItem Text="12" Value="12"></asp:ListItem>
+                    </asp:DropDownList>
                 </div>
 			</div>
 		</div>
