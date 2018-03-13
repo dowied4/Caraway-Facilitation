@@ -21,7 +21,7 @@ namespace _395project.dash.Admin
             ChooseMaster choose = new ChooseMaster();
             MasterPageFile = choose.GetMaster();
         }
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             String ID = Request.QueryString["ID"];
@@ -32,6 +32,13 @@ namespace _395project.dash.Admin
                 Children.SelectParameters.Add("CurrentUser", ID);
                 Facilitators.SelectParameters.Add("CurrentUser", ID);// "sullivanr5@mymacewan.ca");
                 loadRole(ID);
+                
+                if(GradeDropDown.SelectedValue != "0")
+                {
+                    ClassDropDown.Enabled = false;
+                    
+                }
+
             }
             string vars = (string)(Session["register"]);
             if (vars != null)
@@ -41,46 +48,87 @@ namespace _395project.dash.Admin
                 FacilitatorLast.Text = myStrings[2];
             }
         }
-
-        protected void AddChild_Click(object sender, EventArgs e)
+        
+        protected void ChildLast_Rename(object sender, EventArgs e)
         {
-
             String ID = Request.QueryString["ID"];
-            //Check if account already exists before creating it
-            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var check = manager.FindByName(ID);
-            if (check == null)
-            {
-                ErrorMessage.Text = "There is no account with that email";
-                ChildFirst.Text = string.Empty;
-                ChildLast.Text = string.Empty;
-                Grade.Text = string.Empty;
-                Class.Text = string.Empty;
-            }
-            else
-            {
-                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-                conn.Open();
-                string insert = "insert into Children(Id,FirstName, LastName, Grade, Class) values (@Email,@ChildFirst, @ChildLast, @Grade, @Class)";
-                SqlCommand cmd = new SqlCommand(insert, conn);
-                cmd.Parameters.AddWithValue("@Email", ID);
-                cmd.Parameters.AddWithValue("@ChildFirst", ChildFirst.Text);
-                cmd.Parameters.AddWithValue("@ChildLast", ChildLast.Text);
-                cmd.Parameters.AddWithValue("@Grade", Grade.Text);
-                cmd.Parameters.AddWithValue("@Class", Class.Text);
-                cmd.ExecuteNonQuery();
-                //Remove if one of the fields is empty
-                string remove = "delete from Children where ID = '' or FirstName = '' or LastName = '' or Grade = '' or Class = ''";
-                SqlCommand rm = new SqlCommand(remove, conn);
-                rm.ExecuteNonQuery();
-                conn.Close();
-                ChildFirst.Text = string.Empty;
-                ChildLast.Text = string.Empty;
-                Grade.Text = string.Empty;
-                Class.Text = string.Empty;
-                ErrorMessage.Text = "Child Successfully Added";
-            }
+            String Name = ChildLast.Text;
+            String[] FullName = EditChildrenDropDown.Text.Split(' ');
+            UpdateVariableDB(ID, "Children", "LastName", Name, FullName);
+            ErrorMessage.Text = "Sucessfully Renamed: " + EditChildrenDropDown.Text + " to: " + Name;
+            EditChildrenDropDown.DataBind();
+            ChildrenDropDown.DataBind();
+            ChildLast.Text = "";
         }
+
+        protected void ChildFirst_Rename(object sender, EventArgs e)
+        {
+            String ID = Request.QueryString["ID"];
+            String Name = ChildFirst.Text;
+            String[] FullName = EditChildrenDropDown.Text.Split(' ');
+            UpdateVariableDB(ID, "Children", "FirstName", Name, FullName);
+            ErrorMessage.Text = "Sucessfully Renamed: " + EditChildrenDropDown.Text + " to: " + Name;
+            EditChildrenDropDown.DataBind();
+            ChildrenDropDown.DataBind();
+            ChildFirst.Text = "";
+        }
+        
+        protected void FacilitatorFirst_Rename(object sender, EventArgs e)
+        {
+            String ID = Request.QueryString["ID"];
+            String Name = FacilitatorFirst.Text;
+            String[] FullName = EditFacilitatorDropDown.Text.Split(' ');
+            UpdateVariableDB(ID, "Stats", "FacilitatorFirstName", Name, FullName);
+            UpdateVariableDB(ID, "Facilitators", "FirstName", Name, FullName);
+            ErrorMessage.Text = "Sucessfully Renamed: " + EditFacilitatorDropDown.Text + " to: " + Name;
+            EditFacilitatorDropDown.DataBind();
+            FacilitatorDropDown.DataBind();
+            FacilitatorFirst.Text = "";
+        }
+        protected void FacilitatorLast_Rename(object sender, EventArgs e)
+        {
+            String ID = Request.QueryString["ID"];
+            String Name = FacilitatorLast.Text;
+            String[] FullName = EditFacilitatorDropDown.Text.Split(' ');
+            UpdateVariableDB(ID, "Stats", "FacilitatorLastName", Name, FullName);
+            UpdateVariableDB(ID, "Facilitators", "LastName", Name, FullName);
+            ErrorMessage.Text = "Sucessfully Renamed: " + EditFacilitatorDropDown.Text + " to: " + Name;
+            EditFacilitatorDropDown.DataBind();
+            FacilitatorDropDown.DataBind();
+            FacilitatorLast.Text = "";
+        }
+        
+        protected void UpdateVariableDB(String ID, String DB, String DBValue, String Update, String[] Name)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+
+            if(DB == "Stats")
+            {
+                string change = ("IF EXISTS (SELECT Id FROM " + DB + " WHERE Id = @CurrentUser AND FacilitatorFirstName = @FirstName AND FacilitatorLastName = @LastName)" +
+                                    " UPDATE " + DB + " SET " + DBValue + " = @Update WHERE Id = @CurrentUser AND FacilitatorFirstName = @FirstName AND FacilitatorLastName = @LastName");
+                SqlCommand rr = new SqlCommand(change, con);
+                rr.Parameters.AddWithValue("@FirstName", Name[0]);
+                rr.Parameters.AddWithValue("@LastName", Name[1]);
+                rr.Parameters.AddWithValue("@Update", Update);
+                rr.Parameters.AddWithValue("@CurrentUser", ID);
+                rr.ExecuteNonQuery();
+            } else { 
+            
+                string change = ("IF EXISTS (SELECT Id FROM " + DB + " WHERE Id = @CurrentUser AND FirstName = @FirstName AND LastName = @LastName)" +
+                                    " UPDATE " + DB + " SET " + DBValue + " = @Update WHERE Id = @CurrentUser AND FirstName = @FirstName AND LastName = @LastName");
+                SqlCommand rr = new SqlCommand(change, con);
+                rr.Parameters.AddWithValue("@FirstName", Name[0]);
+                rr.Parameters.AddWithValue("@LastName", Name[1]);
+                rr.Parameters.AddWithValue("@Update", Update);
+                rr.Parameters.AddWithValue("@CurrentUser", ID);
+                rr.ExecuteNonQuery();
+
+            }
+            con.Close();
+
+        }
+
         protected void loadRole(String ID)
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
@@ -103,13 +151,27 @@ namespace _395project.dash.Admin
                     case "3": role.InnerHtml = "Edit Role: (Current Role: Admin)"; break;
                     case "4": role.InnerHtml = "Edit Role: (Current Role: SuperUser)"; break;
                 }
-
-
-
             }
             con.Close();
 
         }
+
+        protected void UpdateDB(String ID, String DB, String FirstName, String LastName, String[] Name)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+
+            string change = ("IF EXISTS (SELECT UserId FROM AspNetUserRoles WHERE UserId = @CurrentUser)" +
+                                " UPDATE AspNetUserRoles SET RoleId = @Roles WHERE UserId = @CurrentUser ELSE" +
+                             " INSERT INTO AspNetUserRoles(UserId, RoleId) VALUES (@CurrentUser, @Roles) ");
+            SqlCommand rr = new SqlCommand(change, con);
+            rr.Parameters.AddWithValue("@Roles", role);
+            rr.Parameters.AddWithValue("@CurrentUser", ID);
+            rr.ExecuteNonQuery();
+            con.Close();
+
+        }
+
         protected void ChangeRole(object sender, EventArgs e)
         {
             String ID = Request.QueryString["ID"];
@@ -152,6 +214,7 @@ namespace _395project.dash.Admin
             ErrorMessage.Text = "Child Successfully Removed";
 
             ChildrenDropDown.DataBind();
+            EditChildrenDropDown.DataBind();
             con.Close();
         }
 
@@ -173,8 +236,6 @@ namespace _395project.dash.Admin
 
         }
 
-
-
         protected void RemoveFacilitator(object sender, EventArgs e)
         {
             String ID = Request.QueryString["ID"];
@@ -182,54 +243,14 @@ namespace _395project.dash.Admin
             String[] name = FacilitatorDropDown.Text.Split(' ');
             String firstName = name[0];
             String lastName = name[1];
-
-            RemoveDB(ID, "Stats", "FacilitatorFirstName", "FacilitatorLastName", name);
-            RemoveDB(ID, "Calendar", "FacilitatorFirstName", "FacilitatorLastName", name);
+            
             RemoveDB(ID, "Facilitators", "FirstName", "LastName", name);
             ErrorMessage.Text = "Facilitator Successfully Removed";
             FacilitatorDropDown.DataBind();
+            EditFacilitatorDropDown.DataBind();
             
         }
 
-        protected void AddFacilitator_Click(object sender, EventArgs e)
-        {
-            //Check if account already exists before creating it
-            String ID = Request.QueryString["ID"];
-            //String ID = "sullivanr5@mymacewan.ca";
-            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var check = manager.FindByName(ID);
-            if (check == null)
-            {
-                ErrorMessage.Text = "There is no account with that email";
-                FacilitatorFirst.Text = string.Empty;
-                FacilitatorLast.Text = string.Empty;
-            }
-            else
-            {
-                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-                conn.Open();
-                string insert = "BEGIN IF NOT EXISTS (select * from Facilitators as F where F.Id = @Email and F.FirstName = @FacilitatorFirst and F.LastName = @FacilitatorLast)" +
-                    " BEGIN insert into Facilitators(Id,FirstName, LastName) values (@Email,@FacilitatorFirst, @FacilitatorLast) END END";
-                SqlCommand cmd = new SqlCommand(insert, conn);
-                cmd.Parameters.AddWithValue("@Email", ID);
-                cmd.Parameters.AddWithValue("@FacilitatorFirst", FacilitatorFirst.Text);
-                cmd.Parameters.AddWithValue("@FacilitatorLast", FacilitatorLast.Text);
-                cmd.ExecuteNonQuery();
 
-                //Remove if one of the fields is empty
-                string remove = "delete from Facilitators where ID = '' or FirstName = '' or LastName = ''";
-                SqlCommand rm = new SqlCommand(remove, conn);
-                rm.ExecuteNonQuery();
-                conn.Close();
-                FacilitatorFirst.Text = string.Empty;
-                FacilitatorLast.Text = string.Empty;
-                ErrorMessage.Text = "Facilitator Successfully Added";
-                FacilitatorDropDown.DataBind();
-
-            }
-
-        }
-
-     
     }
 }

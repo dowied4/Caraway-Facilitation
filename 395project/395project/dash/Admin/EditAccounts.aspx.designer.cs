@@ -58,6 +58,24 @@ namespace _395project.dash.Admin {
         protected global::System.Web.UI.WebControls.SqlDataSource Roles;
         
         /// <summary>
+        /// EditFacilitatorDropDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList EditFacilitatorDropDown;
+        
+        /// <summary>
+        /// EditFacilitatorSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource EditFacilitatorSource;
+        
+        /// <summary>
         /// FacilitatorFirst control.
         /// </summary>
         /// <remarks>
@@ -67,6 +85,15 @@ namespace _395project.dash.Admin {
         protected global::System.Web.UI.WebControls.TextBox FacilitatorFirst;
         
         /// <summary>
+        /// FirstButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button FirstButton;
+        
+        /// <summary>
         /// FacilitatorLast control.
         /// </summary>
         /// <remarks>
@@ -74,6 +101,15 @@ namespace _395project.dash.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox FacilitatorLast;
+        
+        /// <summary>
+        /// LastButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button LastButton;
         
         /// <summary>
         /// FacilitatorDropDown control.
@@ -94,6 +130,24 @@ namespace _395project.dash.Admin {
         protected global::System.Web.UI.WebControls.SqlDataSource Facilitators;
         
         /// <summary>
+        /// EditChildrenDropDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList EditChildrenDropDown;
+        
+        /// <summary>
+        /// EditChildrenSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource EditChildrenSource;
+        
+        /// <summary>
         /// ChildFirst control.
         /// </summary>
         /// <remarks>
@@ -101,6 +155,15 @@ namespace _395project.dash.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ChildFirst;
+        
+        /// <summary>
+        /// ChildFirstRename control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ChildFirstRename;
         
         /// <summary>
         /// ChildLast control.
@@ -112,22 +175,31 @@ namespace _395project.dash.Admin {
         protected global::System.Web.UI.WebControls.TextBox ChildLast;
         
         /// <summary>
-        /// Class control.
+        /// ChildLastRename control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Class;
+        protected global::System.Web.UI.WebControls.Button ChildLastRename;
         
         /// <summary>
-        /// Grade control.
+        /// GradeDropDown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Grade;
+        protected global::System.Web.UI.WebControls.DropDownList GradeDropDown;
+        
+        /// <summary>
+        /// ClassDropDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ClassDropDown;
         
         /// <summary>
         /// ChildrenDropDown control.
