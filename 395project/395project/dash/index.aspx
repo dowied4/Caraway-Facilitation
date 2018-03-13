@@ -24,7 +24,7 @@
             <div class="row">
                 <div id="dashboardWeeklyTotal" class="dashboardMargins">
                     <div>
-                        <asp:Label runat="server" CssClass="stats-info" ID="WeeklyHoursLabel">Error</asp:Label>
+                        <asp:Label runat="server" CssClass="stats-info" ID="WeeklyHoursLabel">0</asp:Label>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <div class="row">
                 <div id="dashboardMonthlyTotal" class="dashboardMargins">
                     <div>
-                        <asp:Label runat="server" CssClass="stats-info" ID="MonthlyHoursLabel">Error</asp:Label>
+                        <asp:Label runat="server" CssClass="stats-info" ID="MonthlyHoursLabel">0</asp:Label>
                     </div>
                 </div>
             </div>
