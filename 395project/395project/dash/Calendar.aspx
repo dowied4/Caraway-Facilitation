@@ -66,10 +66,10 @@
 					</asp:DropDownList>
 				</div>
 						<div class="row" style="padding-bottom:10px;">
-               				<asp:TextBox ID="StartTimeTextBox" runat="server" CssClass="inputfields"></asp:TextBox>
+               				<asp:TextBox ID="StartTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
 						</div>
 						<div class="row" style="padding-bottom:10px;">
-							<asp:TextBox ID="EndTimeTextBox" runat="server" CssClass="inputfields"></asp:TextBox>
+							<asp:TextBox ID="EndTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
 						</div>
                 <!-- Sign Up Button -->
                 <div class="row">
