@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity;
 namespace _395project.Pages
 {
 
-   
+
     public partial class index : System.Web.UI.Page
 
     {
@@ -22,7 +22,7 @@ namespace _395project.Pages
             //startdate would be grabbed from database
             startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 13, 45, 6);
 
-            
+
 
             //Open Connection
             SqlConnection con = new SqlConnection
@@ -47,15 +47,16 @@ namespace _395project.Pages
             GridView3.DataSource = upcompQuery;
 
             GridView3.DataBind();
-            if (!upcompQuery.HasRows) {
+            if (!upcompQuery.HasRows)
+            {
                 spacer.Controls.Add(new LiteralControl("<br />"));
                 Label1.Visible = true;
 
-            } 
+            }
             upcompQuery.Close();
 
 
-            
+
             //Completed Hours
             string comp = "SELECT (F.FacilitatorFirstName + ' '+ F.FacilitatorLastName) AS FacilitatorName, F.StartTime, " +
                             "F.EndTime, R.Room FROM dbo.Calendar AS F, Rooms as R WHERE " +
@@ -78,7 +79,7 @@ namespace _395project.Pages
                 Label4.Visible = true;
             }
             completedQuery.Close();
-            
+
 
             //Get Facilitators
             string Facilitators = "SELECT (F.FirstName + ' '+ F.LastName) AS FacilitatorName FROM dbo.Facilitators AS F WHERE " +
@@ -153,7 +154,7 @@ namespace _395project.Pages
             //close connection
             con.Close();
 
-            
+
         }
         //Chooses master page based on User Role
         protected override void OnPreInit(EventArgs e)
@@ -164,21 +165,22 @@ namespace _395project.Pages
         }
 
 
-        
 
-            
+
+
         protected void ConfirmButton(object sender, System.EventArgs e)
         {
             //Get the button that raised the event
             LinkButton btn = (LinkButton)sender;
-            
+
             //Get the row that contains this button
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
 
             //Grid row number
             int num = gvr.RowIndex;
             int WeekOfMonth = GetWeekOfMonth.GetWeekNumberOfMonth(Convert.ToDateTime(gvr.Cells[2].Text));
-            //Label1.Text = WeekOfMonth.ToString();
+           /* Label1.Visible = true;
+            Label1.Text = WeekOfMonth.ToString(); */
 
             string[] name;
             string firstName;
@@ -193,8 +195,8 @@ namespace _395project.Pages
             DateTime dt = Convert.ToDateTime(gvr.Cells[1].Text);
             DateTime dt1 = Convert.ToDateTime(gvr.Cells[2].Text);
 
-            float totalHours = (float) (dt1 - dt).TotalHours;
-            
+            float totalHours = (float)(dt1 - dt).TotalHours;
+
             name = gvr.Cells[0].Text.Split(' ');
             firstName = name[0];
             lastName = name[1];
@@ -204,12 +206,14 @@ namespace _395project.Pages
             endDate = gvr.Cells[2].Text.Split(' ');
             endTime = endDate[1];
             //fixes the case where time is split on "-" or "/"
-            if(endDate[0].Contains('-'))
+            if (endDate[0].Contains('-'))
             {
                 array = endDate[0].Split('-');
-                month = array[0];
-                year = array[2];
-            } else {
+                month = array[1];
+                year = array[0];
+            }
+            else
+            {
                 array = endDate[0].Split('/');
                 month = array[0];
                 year = array[2];
@@ -233,7 +237,7 @@ namespace _395project.Pages
             GetCompletedHours.Parameters.AddWithValue("@WeeklyHours", totalHours);
             GetCompletedHours.Parameters.AddWithValue("@StartTime", dt);
             GetCompletedHours.Parameters.AddWithValue("@EndTime", dt1);
-            GetCompletedHours.Parameters.AddWithValue("@Room", gvr.Cells[3].Text);
+            GetCompletedHours.Parameters.AddWithValue("@Room", GetRoomId(gvr.Cells[3].Text));
             SqlDataReader addHoursReader = GetCompletedHours.ExecuteReader();
 
             Page_Load(null, EventArgs.Empty);
@@ -263,7 +267,7 @@ namespace _395project.Pages
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             con.Open();
-            string CompletedHours =  ("DELETE FROM Calendar WHERE Id = @CurrentUser " +
+            string CompletedHours = ("DELETE FROM Calendar WHERE Id = @CurrentUser " +
                                         "and FacilitatorFirstName = @FirstName and FacilitatorLastName = @LastName " +
                                         "and StartTime = @StartTime and EndTime = @EndTime and RoomId = @Room");
             SqlCommand GetCompletedHours = new SqlCommand(CompletedHours, con);
@@ -272,7 +276,7 @@ namespace _395project.Pages
             GetCompletedHours.Parameters.AddWithValue("@LastName", lastName);
             GetCompletedHours.Parameters.AddWithValue("@StartTime", dt);
             GetCompletedHours.Parameters.AddWithValue("@EndTime", dt1);
-            GetCompletedHours.Parameters.AddWithValue("@Room", gvr.Cells[3].Text);
+            GetCompletedHours.Parameters.AddWithValue("@Room", GetRoomId(gvr.Cells[3].Text));
             SqlDataReader addHoursReader = GetCompletedHours.ExecuteReader();
 
             Page_Load(null, EventArgs.Empty);
@@ -281,7 +285,7 @@ namespace _395project.Pages
         }
 
 
-            public void OnConfirm(object sender, EventArgs e)
+        public void OnConfirm(object sender, EventArgs e)
         {
             string confirmValue = Request.Form["confirm_value"];
             if (confirmValue == "Yes")
@@ -292,6 +296,35 @@ namespace _395project.Pages
             {
                 this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked No!')", true);
             }
+        }
+
+        //Takes the room name as a string (As it is stored in the gridview and gets the room Id for inserting into stats DB
+        private int GetRoomId(string roomName)
+        {
+            //Open Connection
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+            };
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+
+            con.Open();
+
+            //Get Weekly Hours
+            string roomId = "SELECT [RoomId] FROM [Rooms] WHERE [Room] = @SelectedRoom";
+            SqlCommand getWeeklyHours = new SqlCommand(roomId, con);
+            getWeeklyHours.Parameters.AddWithValue("@SelectedRoom", roomName);
+
+
+            SqlDataReader roomIdReader = getWeeklyHours.ExecuteReader();
+            if (roomIdReader.Read())
+                return (int)roomIdReader["RoomId"];
+
+            roomIdReader.Close();
+            return 0;
+
+
         }
 
     }

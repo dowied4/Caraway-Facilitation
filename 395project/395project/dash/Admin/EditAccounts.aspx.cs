@@ -32,10 +32,6 @@ namespace _395project.dash.Admin
                 Children.SelectParameters.Add("CurrentUser", ID);
                 Facilitators.SelectParameters.Add("CurrentUser", ID);// "sullivanr5@mymacewan.ca");
                 loadRole(ID);
-                
-
-
-
             }
             string vars = (string)(Session["register"]);
             if (vars != null)
@@ -159,24 +155,25 @@ namespace _395project.dash.Admin
             con.Close();
         }
 
-        protected void ChangeDB(String ID, String DB, String[] Name)
+        protected void RemoveDB(String ID, String DB, String FirstName, String LastName, String[] Name)
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             con.Open();
-            string changeQuery = ("IF EXISTS (SELECT Id FROM " + DB + " WHERE Id = @CurrentUser)" +
-                                   " DELETE FROM "+ DB + " WHERE Id = @CurrentUser");
+            string changeQuery = ("IF EXISTS (SELECT * FROM " + DB + " WHERE Id = @CurrentUser" +
+                                    " AND " + FirstName + " = @FirstName AND " + LastName + "= @LastName)" +
+                                   " DELETE FROM "+ DB + " WHERE Id = @CurrentUser AND " + FirstName + " = @FirstName" + 
+                                   " AND " + LastName + " = @LastName");
             SqlCommand change = new SqlCommand(changeQuery, con);
-            change.Parameters.AddWithValue("@CurrentUser", ID);// "sullivanr5@mymacewan.ca");
-           /* change.Parameters.AddWithValue("@FirstName", Name[0]);
+            change.Parameters.AddWithValue("@CurrentUser", ID);
+            change.Parameters.AddWithValue("@FirstName", Name[0]);
             change.Parameters.AddWithValue("@LastName", Name[1]);
-            change.Parameters.AddWithValue("@FacilitatorFirstName", Name[0]);
-            change.Parameters.AddWithValue("@FacilitatorLastName", Name[1]);
-            change.Parameters.AddWithValue("@FullName", FacilitatorDropDown.Text);*/
             SqlDataReader exc_remove = change.ExecuteReader();
 
             con.Close();
 
         }
+
+
 
         protected void RemoveFacilitator(object sender, EventArgs e)
         {
@@ -186,26 +183,10 @@ namespace _395project.dash.Admin
             String firstName = name[0];
             String lastName = name[1];
 
-            ChangeDB(ID, "Stats", name);
-            ChangeDB(ID, "Calendar", name);
-            ChangeDB(ID, "Facilitators", name);
-            
-            
-
-
-            /*
-            string removeQuery = ("DELETE FROM Facilitators WHERE Id = @CurrentUser " +
-                                        "and FirstName = @FirstName and LastName = @LastName " +
-                                        "and FullName = @FullName");
-            SqlCommand Remove = new SqlCommand(removeQuery, con);
-            Remove.Parameters.AddWithValue("@CurrentUser", ID);// "sullivanr5@mymacewan.ca");
-            Remove.Parameters.AddWithValue("@FirstName", firstName);
-            Remove.Parameters.AddWithValue("@LastName", lastName);
-            Remove.Parameters.AddWithValue("@FullName", FacilitatorDropDown.Text);
-            SqlDataReader exc_remove = Remove.ExecuteReader();
-            */
+            RemoveDB(ID, "Stats", "FacilitatorFirstName", "FacilitatorLastName", name);
+            RemoveDB(ID, "Calendar", "FacilitatorFirstName", "FacilitatorLastName", name);
+            RemoveDB(ID, "Facilitators", "FirstName", "LastName", name);
             ErrorMessage.Text = "Facilitator Successfully Removed";
-
             FacilitatorDropDown.DataBind();
             
         }

@@ -46,8 +46,8 @@ namespace _395project.Account
                 ChildEmail.Text = string.Empty;
                 ChildFirst.Text = string.Empty;
                 ChildLast.Text = string.Empty;
-                Grade.Text = string.Empty;
-                Class.Text = string.Empty;
+                Rank.Text = string.Empty;
+                Room.Text = string.Empty;
             }
             else
             {
@@ -58,8 +58,8 @@ namespace _395project.Account
                 cmd.Parameters.AddWithValue("@Email", ChildEmail.Text);
                 cmd.Parameters.AddWithValue("@ChildFirst", ChildFirst.Text);
                 cmd.Parameters.AddWithValue("@ChildLast", ChildLast.Text);
-                cmd.Parameters.AddWithValue("@Grade", Grade.Text);
-                cmd.Parameters.AddWithValue("@Class", Class.Text);
+                cmd.Parameters.AddWithValue("@Grade", Rank.Text);
+                cmd.Parameters.AddWithValue("@Class", Room.Text);
                 cmd.ExecuteNonQuery();
                 //Remove if one of the fields is empty
                 string remove = "delete from Children where ID = '' or FirstName = '' or LastName = '' or Grade = '' or Class = ''";
@@ -68,8 +68,8 @@ namespace _395project.Account
                 conn.Close();
                 ChildFirst.Text = string.Empty;
                 ChildLast.Text = string.Empty;
-                Grade.Text = string.Empty;
-                Class.Text = string.Empty;
+                Rank.Text = string.Empty;
+                Room.Text = string.Empty;
                 ErrorMessage.Text = "Child Successfully Added";
             }
         }
