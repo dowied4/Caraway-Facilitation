@@ -22,12 +22,10 @@
               <div class="col-lg-6">    
                     <div class="row" style="padding-bottom:30px;">
                         <div class="col-md-6">
-				            <asp:DropDownList ID="RoleDropDown" runat="server" DataSourceID="Roles" DataTextField="Name" DataValueField="Name" CssClass="form-control"></asp:DropDownList>
+				            <asp:DropDownList ID="RoleDropDown" runat="server" Height="40px" DataSourceID="Roles" DataTextField="Name" DataValueField="Name" CssClass="form-control"></asp:DropDownList>
 				            <asp:SqlDataSource ID="Roles" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT [Name] FROM [AspNetRoles] ORDER BY [Id]"></asp:SqlDataSource>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
+                        <div>
                             <asp:Button runat="server" OnClick="ChangeRole" Text="Confirm" CssClass="mybutton" />
                         </div>
                     </div>
@@ -45,9 +43,21 @@
                       <div class="col-lg-6">
                           <div class="row">
                               <div class="col-md-6">
-                                    <h2>Add</h2>
+                                    <h2>Edit</h2>
                                   </div>
                               </div>
+                            <div class="row" style="padding-top:30px; padding-bottom:5px;">
+                                  <div class="col-md-6">
+			                            <asp:Label runat="server" CssClass="input-header" Font-Bold="true">Select Facilitator</asp:Label>
+                                  </div>
+                            </div>
+                            <div class="row">
+                                  <div class="col-md-6">
+                                       <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="Facilitators" DataTextField="FullName" DataValueField="FullName" CssClass="form-control" Width="250px"></asp:DropDownList>
+                                       <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT FullName FROM Facilitators WHERE (Id = @CurrentUser)">       
+                                       </asp:SqlDataSource>
+                                  </div>
+                            </div>
                              <div class="row">
                                     <div class="col-md-6">
 			                            <asp:Label runat="server" AssociatedControlID="FacilitatorFirst" CssClass="input-header">First Name</asp:Label>
@@ -56,6 +66,9 @@
 			                <div class="row">
                                     <div class="col-md-6">
                                          <asp:TextBox runat="server" ID="FacilitatorFirst" CssClass="form-control" Width="250px"/>
+                                     </div>
+                                     <div>
+                                        <asp:Button ID="Button5" runat="server" Text="Rename" Height="35px" CssClass="mybutton"  />
                                      </div>
 			                </div>
                             <div class="row">
@@ -67,15 +80,11 @@
                                 <div class="col-md-6">
                                     <asp:TextBox runat="server" ID="FacilitatorLast" CssClass="form-control" Width="250px" />
                                 </div>
+                                <div>
+                                    <asp:Button ID="Button6" runat="server" Text="Rename" Height="35px" CssClass="mybutton"  />
+                                </div>
 			                </div>
 
-		                    <div class="thing" style="padding-top: 30px;">
-                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <asp:Button runat="server" OnClick="AddFacilitator_Click" Text="Add Facilitator" CssClass="mybutton" />
-                                    </div>
-                                </div>
-                            </div>
 
                       </div>
                             <div class="row">
@@ -96,7 +105,7 @@
                                             </asp:SqlDataSource>
                                             </div>
                                        <div class="row">
-                                           <div class="col-md-6" style="margin-top: 135px;">
+                                           <div class="col-md-6" style="margin-top: 30px;">
                                                
                                                 <asp:Button runat="server" OnClick="RemoveFacilitator" Text="Remove Facilitator" CssClass="mybutton" />
                                           </div>
@@ -116,9 +125,21 @@
                 <div class="col-lg-6">
                     <div class="row">
                            <div class="col-md-6">
-                                 <h2>Add</h2>
+                                 <h2>Edit</h2>
                            </div>
-                    </div>     
+                    </div>
+                    <div class="row" style="padding-top:30px; padding-bottom:5px;">
+                          <div class="col-md-6">
+			                    <asp:Label runat="server" CssClass="input-header" Font-Bold="true">Select Child</asp:Label>
+                          </div>
+                    </div>
+                    <div class="row">
+                          <div class="col-md-6">
+                                <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="Children" DataTextField="FullName" DataValueField="FullName" CssClass="form-control" Width="250px"></asp:DropDownList>
+                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT (FirstName + ' ' + LastName) AS FullName FROM Children WHERE (Id = @CurrentUser)">
+                                </asp:SqlDataSource>
+                          </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
 			                <asp:Label runat="server" AssociatedControlID="ChildFirst" CssClass="input-header">Child First Name</asp:Label>
@@ -128,6 +149,10 @@
                         <div class="col-md-6">
                             <asp:TextBox runat="server" ID="ChildFirst" Width="250px" CssClass="form-control" />
                         </div>
+                        <div>
+                            <asp:Button ID="Button2" runat="server" Text="Rename" Height="35px" CssClass="mybutton" />
+                        </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -137,6 +162,9 @@
 			        <div class="row">
                         <div class="col-md-6">
                             <asp:TextBox runat="server" ID="ChildLast" Width="250px" CssClass="form-control" />
+                        </div>
+                        <div>
+                            <asp:Button ID="Button1" runat="server" Text="Rename" Height="35px" CssClass="mybutton"  />
                         </div>
 			        </div>
                     <div class="row">
@@ -148,6 +176,9 @@
                         <div class="col-md-6">
                             <asp:TextBox runat="server" ID="Class" Width="250px" CssClass="form-control" />
                         </div>
+                        <div>
+                            <asp:Button ID="Button3" runat="server" Text="Rename" Height="35px" CssClass="mybutton"  />
+                        </div>
 			        </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -158,14 +189,10 @@
                         <div class="col-md-6">
                             <asp:TextBox runat="server" ID="Grade" Width="250px" CssClass="form-control" />
                         </div>
-			        </div>
-		            <div class="thing" style="padding-top: 30px;"">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <asp:Button runat="server" OnClick="AddChild_Click" Text="Add Child" CssClass="mybutton" />
-                            </div>
+                        <div>
+                            <asp:Button ID="Button4" runat="server" Text="Rename" Height="35px" CssClass="mybutton"  />
                         </div>
-                    </div>
+			        </div>
                 </div>
                 <div class="col-lg-6">
                         <div class="row">

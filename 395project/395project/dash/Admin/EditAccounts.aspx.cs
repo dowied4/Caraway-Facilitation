@@ -24,7 +24,7 @@ namespace _395project.dash.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            String ID = Request.QueryString["ID"];
+            String ID = "sullivanr5@mymacewan.ca";// Request.QueryString["ID"];
             head.InnerHtml = "Account: " + ID;
             
             if (!IsPostBack)
@@ -110,7 +110,23 @@ namespace _395project.dash.Admin
             con.Close();
 
         }
-        protected void ChangeRole(object sender, EventArgs e)
+
+        protected void UpdateDB(String ID, String DB, String FirstName, String LastName, String[] Name)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+
+            string change = ("IF EXISTS (SELECT UserId FROM AspNetUserRoles WHERE UserId = @CurrentUser)" +
+                                " UPDATE AspNetUserRoles SET RoleId = @Roles WHERE UserId = @CurrentUser ELSE" +
+                             " INSERT INTO AspNetUserRoles(UserId, RoleId) VALUES (@CurrentUser, @Roles) ");
+            SqlCommand rr = new SqlCommand(change, con);
+            rr.Parameters.AddWithValue("@Roles", role);
+            rr.Parameters.AddWithValue("@CurrentUser", ID);
+            rr.ExecuteNonQuery();
+            con.Close();
+
+        }
+            protected void ChangeRole(object sender, EventArgs e)
         {
             String ID = Request.QueryString["ID"];
             int role = RoleDropDown.SelectedIndex + 1 ;
