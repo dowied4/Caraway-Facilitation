@@ -55,6 +55,9 @@ namespace _395project.Pages
                 precon.Close();
             }
 
+        }
+        protected void CancelButton(object sender, EventArgs e)
+        {
             SqlConnection con = new SqlConnection
             {
                 ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
@@ -71,7 +74,7 @@ namespace _395project.Pages
             con.Close();
         }
 
-        protected void EditButton(object sender, EventArgs e)
+            protected void EditButton(object sender, EventArgs e)
         {
             
             LinkButton btn = (LinkButton)sender;

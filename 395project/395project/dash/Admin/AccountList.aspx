@@ -7,7 +7,7 @@
     <div class="dashboardMargins" id="alSearch" style="padding-bottom: 20px;">
 	    <asp:TextBox ID="SearchBox" runat="server" CssClass="signupDropDown" placeholder="Enter Email"/>
 	    <asp:Button ID="SearchButton" runat="server" Text="Search" OnClick="Search_Click"  CssClass="mybutton"/>
-	    <asp:Button ID="Button1" runat="server" Text="Clear" OnClick="Page_Load" CssClass="mybutton"/>
+	    <asp:Button ID="Button1" runat="server" Text="Clear" OnClick="CancelButton" CssClass="mybutton"/>
     </div>
     
     <div class="row" id="df" runat="server">
