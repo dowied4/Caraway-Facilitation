@@ -176,21 +176,24 @@
                     </div>
 			        <div class="row">
                         <div class="col-md-6">
-                        <asp:DropDownList ID="GradeDropDown" Width="250px" CssClass="form-control" runat="server">
-                                <asp:ListItem Value="0" Text="Kindergarden"></asp:ListItem>
-                                <asp:ListItem Value="0" Text="1"></asp:ListItem>
-                                <asp:ListItem Value="0" Text="2"></asp:ListItem>
-                                <asp:ListItem Value="1" Text="3"></asp:ListItem>
-                                <asp:ListItem Value="1" Text="4"></asp:ListItem>
-                                <asp:ListItem Value="1" Text="5"></asp:ListItem>
-                                <asp:ListItem Value="1" Text="6"></asp:ListItem>
-                                <asp:ListItem Value="1" Text="7"></asp:ListItem>
-                                <asp:ListItem Value="1" Text="8"></asp:ListItem>
-                                <asp:ListItem Value="1" Text="9"></asp:ListItem>
-                                <asp:ListItem Value="1" Text="10"></asp:ListItem>
-                                <asp:ListItem Value="1" Text="11"></asp:ListItem>
-                                <asp:ListItem Value="1" Text="12"></asp:ListItem>
+                        <asp:DropDownList ID="GradeDropDown" OnSelectedIndexChanged="ChangeClass" AutoPostBack="true" Width="250px" CssClass="form-control" runat="server">
+                                <asp:ListItem Value="K" Text="Kindergarden"></asp:ListItem>
+                                <asp:ListItem Value="1" Text="1"></asp:ListItem>
+                                <asp:ListItem Value="2" Text="2"></asp:ListItem>
+                                <asp:ListItem Value="3" Text="3"></asp:ListItem>
+                                <asp:ListItem Value="4" Text="4"></asp:ListItem>
+                                <asp:ListItem Value="5" Text="5"></asp:ListItem>
+                                <asp:ListItem Value="6" Text="6"></asp:ListItem>
+                                <asp:ListItem Value="7" Text="7"></asp:ListItem>
+                                <asp:ListItem Value="8" Text="8"></asp:ListItem>
+                                <asp:ListItem Value="9" Text="9"></asp:ListItem>
+                                <asp:ListItem Value="10" Text="10"></asp:ListItem>
+                                <asp:ListItem Value="11" Text="11"></asp:ListItem>
+                                <asp:ListItem Value="12" Text="12"></asp:ListItem>
                             </asp:DropDownList>
+                        </div>
+                        <div>
+                            <asp:Button ID="ChangeGradeButton" OnClick="UpdateGrade" runat="server" Text="Change" Height="35px" CssClass="mybutton"  />
                         </div>
 			        </div>
                     <div class="row">
@@ -200,9 +203,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-			                    <asp:DropDownList ID="ClassDropDown" Width="250px" CssClass="form-control" runat="server">
-                                <asp:ListItem Value="0" Text="Blue"></asp:ListItem>
-                                <asp:ListItem Value="1" Text="Purple"></asp:ListItem>
+			                    <asp:DropDownList ID="ClassDropDown" Enabled="true" Width="250px" CssClass="form-control" runat="server">
+                                <asp:ListItem Text="Blue"></asp:ListItem>
+                                <asp:ListItem Text="Purple"></asp:ListItem>
                                 </asp:DropDownList>
                         </div>
                     </div>

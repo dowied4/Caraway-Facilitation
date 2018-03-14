@@ -33,11 +33,6 @@ namespace _395project.dash.Admin
                 Facilitators.SelectParameters.Add("CurrentUser", ID);// "sullivanr5@mymacewan.ca");
                 loadRole(ID);
                 
-                if(GradeDropDown.SelectedValue != "0")
-                {
-                    ClassDropDown.Enabled = false;
-                    
-                }
 
             }
             string vars = (string)(Session["register"]);
@@ -251,6 +246,61 @@ namespace _395project.dash.Admin
             
         }
 
+        protected void ChangeClass(object sender, EventArgs e)
+        {
+            String value = GradeDropDown.SelectedItem.Value;
 
-    }
+            switch(value)
+            {
+                case "K": ClassDropDown.Enabled = true; break;
+                case "1": ClassDropDown.Enabled = true; break;
+                case "2": ClassDropDown.Enabled = true; break;
+                default: ClassDropDown.Enabled = false; ClassDropDown.ToolTip = "Disabled"; break;
+            }
+
+           
+        }
+        protected void UpdateGrade(object sender, EventArgs e)
+        {
+            String ID = Request.QueryString["ID"];
+            String[] ChildName = EditChildrenDropDown.SelectedItem.Text.Split(' ');
+            String value = GradeDropDown.SelectedItem.Value;
+            String change;
+            int num = 0;
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+
+            if (value == "K" || value == "1" || value == "2")
+            {
+                change = ("IF EXISTS (SELECT * FROM Children WHERE Id = @CurrentUser AND FirstName = @FirstName AND LastName = @LastName)" +
+                    " UPDATE Children SET Grade = @Grade, Class = @Class WHERE Id = @CurrentUser" +
+                    " AND FirstName = @FirstName AND LastName = @LastName");
+                num++;
+            }
+            else
+            {
+                change = ("IF EXISTS (SELECT * FROM Children WHERE Id = @CurrentUser AND FirstName = @FirstName AND LastName = @LastName)" +
+                                " UPDATE Children SET Grade = @Grade WHERE Id = @CurrentUser" +
+                                " AND FirstName = @FirstName AND LastName = @LastName");
+                
+            }
+            SqlCommand rr = new SqlCommand(change, con);
+            rr.Parameters.AddWithValue("@FirstName", ChildName[0]);
+            rr.Parameters.AddWithValue("@LastName", ChildName[1]);
+            rr.Parameters.AddWithValue("@Grade", GradeDropDown.SelectedItem.Value);
+
+            if(num == 1)
+            {
+                rr.Parameters.AddWithValue("@Class", ClassDropDown.SelectedItem.Text);
+            }
+            
+            rr.Parameters.AddWithValue("@CurrentUser", ID);
+            rr.ExecuteNonQuery();
+            con.Close();
+            ErrorMessage.Text = "Child Grade Sucessfully Changed to: " + GradeDropDown.SelectedItem.Text;
+            GradeDropDown.SelectedIndex = 0;
+            ClassDropDown.SelectedIndex = 0;
+            ClassDropDown.Enabled = true;
+        }
+        }
 }

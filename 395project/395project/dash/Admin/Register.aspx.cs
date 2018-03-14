@@ -35,6 +35,21 @@ namespace _395project.Account
             }
         }
 
+        protected void ChangeClass(object sender, EventArgs e)
+        {
+            String value = Rank.SelectedItem.Value;
+
+            switch (value)
+            {
+                case "K": Room.Enabled = true; break;
+                case "1": Room.Enabled = true; break;
+                case "2": Room.Enabled = true; break;
+                default: Room.Enabled = false; Room.ToolTip = "Disabled";  break;
+            }
+
+
+        }
+
         protected void AddChild_Click(object sender, EventArgs e)
         {
             //Check if account already exists before creating it
@@ -51,6 +66,9 @@ namespace _395project.Account
             }
             else
             {
+                String Class = Room.SelectedItem.Text;
+                String Grade = Rank.SelectedItem.Value;
+
                 SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 conn.Open();
                 string insert = "insert into Children(Id,FirstName, LastName, Grade, Class) values (@Email,@ChildFirst, @ChildLast, @Grade, @Class)";
@@ -59,7 +77,24 @@ namespace _395project.Account
                 cmd.Parameters.AddWithValue("@ChildFirst", ChildFirst.Text);
                 cmd.Parameters.AddWithValue("@ChildLast", ChildLast.Text);
                 cmd.Parameters.AddWithValue("@Grade", Rank.Text);
-                cmd.Parameters.AddWithValue("@Class", Room.Text);
+
+                switch(Grade)
+                {
+                    case "K": cmd.Parameters.AddWithValue("@Class", Class); break;
+                    case "1": cmd.Parameters.AddWithValue("@Class", Class); break;
+                    case "2": cmd.Parameters.AddWithValue("@Class", Class); break;
+                    case "3": cmd.Parameters.AddWithValue("@Class", "Green"); break;
+                    case "4": cmd.Parameters.AddWithValue("@Class", "Green"); break;
+                    case "5": cmd.Parameters.AddWithValue("@Class", "Green"); break;
+                    case "6": cmd.Parameters.AddWithValue("@Class", "Red"); break;
+                    case "7": cmd.Parameters.AddWithValue("@Class", "Red"); break;
+                    case "8": cmd.Parameters.AddWithValue("@Class", "Red"); break;
+                    case "9": cmd.Parameters.AddWithValue("@Class", "Red"); break;
+                    case "10": cmd.Parameters.AddWithValue("@Class", "Grey"); break;
+                    case "11": cmd.Parameters.AddWithValue("@Class", "Grey"); break;
+                    case "12": cmd.Parameters.AddWithValue("@Class", "Grey"); break;
+                }
+                //cmd.Parameters.AddWithValue("@Class", Room.Text);
                 cmd.ExecuteNonQuery();
                 //Remove if one of the fields is empty
                 string remove = "delete from Children where ID = '' or FirstName = '' or LastName = '' or Grade = '' or Class = ''";
@@ -68,8 +103,11 @@ namespace _395project.Account
                 conn.Close();
                 ChildFirst.Text = string.Empty;
                 ChildLast.Text = string.Empty;
-                Rank.Text = string.Empty;
-                Room.Text = string.Empty;
+                Rank.SelectedIndex = 0;
+                Room.SelectedIndex = 0;
+                Room.Enabled = true;
+                //Rank.Text = string.Empty;
+               // Room.Text = string.Empty;
                 ErrorMessage.Text = "Child Successfully Added";
             }
         }

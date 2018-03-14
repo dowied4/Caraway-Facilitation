@@ -47,7 +47,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="Email" CssClass="inputfields" TextMode="Email" />
+                    <asp:TextBox runat="server" ID="Email" CssClass="form-control" TextMode="Email" Width="300px" />
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-				    <asp:DropDownList ID="UserRoleDropDown" runat="server" DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="Name" CssClass="inputfields"></asp:DropDownList>
+				    <asp:DropDownList ID="UserRoleDropDown" runat="server" DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="Name" CssClass="form-control" Width="300px"></asp:DropDownList>
 				    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT [Name] FROM [AspNetRoles] ORDER BY [Id]"></asp:SqlDataSource>
 			    </div>
            </div>
@@ -89,7 +89,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="FacilitatorEmail" CssClass="inputfields" TextMode="Email" />
+                    <asp:TextBox runat="server" ID="FacilitatorEmail" CssClass="form-control" Width="300px" TextMode="Email" />
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@
             </div>
 			<div class="row">
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="FacilitatorFirst" CssClass="inputfields" />
+                    <asp:TextBox runat="server" ID="FacilitatorFirst" CssClass="form-control" Width="300px" />
                 </div>
 			</div>
 		</div>
@@ -117,7 +117,7 @@
             </div>
 			<div class="row">
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="FacilitatorLast" CssClass="inputfields" />
+                    <asp:TextBox runat="server" ID="FacilitatorLast" CssClass="form-control" Width="300px" />
                 </div>
 			</div>
 		</div>
@@ -144,7 +144,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="ChildEmail" CssClass="inputfields" TextMode="Email" />
+                    <asp:TextBox runat="server" ID="ChildEmail" CssClass="form-control" TextMode="Email" Width="300px" />
                 </div>
             </div>
         </div>
@@ -158,7 +158,7 @@
             </div>
 			<div class="row">
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="ChildFirst" CssClass="inputfields" />
+                    <asp:TextBox runat="server" ID="ChildFirst" CssClass="form-control" Width="300px" />
                 </div>
             </div>
 		</div>
@@ -172,27 +172,7 @@
             </div>
 			<div class="row">
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="ChildLast" CssClass="inputfields" />
-                </div>
-			</div>
-		</div>
-
-        <!-- ADD CHILD: Class -->
-		<div class="thing">
-            <div class="row">
-                <div class="col-md-6">
-			        <asp:Label runat="server" AssociatedControlID="Room" CssClass="input-header">Class</asp:Label>
-                </div>
-            </div>
-			<div class="row">
-                <div class="col-md-6">
-                    <asp:DropDownList runat="server" ID="Room" CssClass="inputfields" >
-                        <asp:ListItem Text="Blue" Value="Blue"></asp:ListItem>
-                        <asp:ListItem Text="Purple" Value="Purple"></asp:ListItem>
-                        <asp:ListItem Text="Green" Value="Green"></asp:ListItem>
-                        <asp:ListItem Text="Red" Value="Red"></asp:ListItem>
-                        <asp:ListItem Text="Grey" Value="Grey"></asp:ListItem>
-                    </asp:DropDownList>
+                    <asp:TextBox runat="server" ID="ChildLast" CssClass="form-control" Width="300px" />
                 </div>
 			</div>
 		</div>
@@ -206,7 +186,7 @@
             </div>
 			<div class="row">
                 <div class="col-md-6">
-                    <asp:DropDownList runat="server" ID="Rank" CssClass="inputfields" >
+                    <asp:DropDownList runat="server" Width="300px" OnSelectedIndexChanged="ChangeClass" AutoPostBack="true" ID="Rank" CssClass="form-control" >
                         <asp:ListItem Text="K" Value="K"></asp:ListItem>
                         <asp:ListItem Text="1" Value="1"></asp:ListItem>
                         <asp:ListItem Text="2" Value="2"></asp:ListItem>
@@ -220,6 +200,24 @@
                         <asp:ListItem Text="10" Value="10"></asp:ListItem>
                         <asp:ListItem Text="11" Value="11"></asp:ListItem>
                         <asp:ListItem Text="12" Value="12"></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+			</div>
+		</div>
+
+        <!-- ADD CHILD: Class -->
+		<div class="thing">
+            <div class="row">
+                <div class="col-md-6">
+			        <asp:Label runat="server" AssociatedControlID="Room" CssClass="input-header">Class</asp:Label>
+                </div>
+            </div>
+			<div class="row">
+                <div class="col-md-6">
+                    <asp:DropDownList runat="server" ID="Room" CssClass="form-control" Width="300px" >
+                        <asp:ListItem Text="Blue" Value="Blue"></asp:ListItem>
+                        <asp:ListItem Text="Purple" Value="Purple"></asp:ListItem>
+                        
                     </asp:DropDownList>
                 </div>
 			</div>
