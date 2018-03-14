@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using System.Globalization;
 
 namespace _395project.Pages
 {
@@ -109,15 +110,15 @@ namespace _395project.Pages
             //Bind the data
             GridView2.DataBind();
             childReader.Close();
-
+           /*Label1.Visible = true;
+            Label1.Text = GetWeekOfMonth.GetWeekOfYear(new DateTime(2018, 2,28)).ToString();*/
 
             //Get Weekly Hours
-            string WeeklyHours = "SELECT SUM(S.WeeklyHours) as WeeklyHours FROM dbo.Stats AS S WHERE S.Id = @CurrentUser AND S.Week = @Week " +
-                "AND S.Month = @Month and S.Year = @Year GROUP BY S.Id";
+            string WeeklyHours = "SELECT SUM(S.WeeklyHours) as WeeklyHours FROM dbo.Stats AS S WHERE S.Id = @CurrentUser AND S.WeekOfYear = @WeekOfYear " +
+                " and S.Year = @Year GROUP BY S.Id";
             SqlCommand getWeeklyHours = new SqlCommand(WeeklyHours, con);
             getWeeklyHours.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
-            getWeeklyHours.Parameters.AddWithValue("@Week", GetWeekOfMonth.GetWeekNumberOfMonth(DateTime.Now));
-            getWeeklyHours.Parameters.AddWithValue("@Month", DateTime.Now.Month);
+            getWeeklyHours.Parameters.AddWithValue("@WeekOfYear", GetWeekOfMonth.GetWeekOfYear(DateTime.Now));
             getWeeklyHours.Parameters.AddWithValue("@Year", DateTime.Now.Year);
 
 
@@ -138,20 +139,7 @@ namespace _395project.Pages
             if (MonthlyHoursReader.Read())
                 MonthlyHoursLabel.Text = MonthlyHoursReader["MonthlyHours"].ToString();
             MonthlyHoursReader.Close();
-            //checks to see if time now is greater than startdate
-            /*if(DateTime.Now >= startDate)
-            {
-                //runs script on startup
-                ScriptManager.RegisterStartupScript(this, GetType(), "Confirm", "Confirm();", true);
-                
-                
-                //problem is fetching the data from the javascript and using it in OnConfirm() function
-                //a solution would be to create a button that appears on the page after the volunteeting date to confirm if they have went or not but issue with that
-                // is that they may forgot to look at it
 
-            }*/
-
-            //close connection
             con.Close();
 
 
@@ -223,15 +211,16 @@ namespace _395project.Pages
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             con.Open();
             string CompletedHours = ("INSERT INTO Stats (Id, FacilitatorFirstName, FacilitatorLastName, " +
-                                      "Week, Month, Year, WeeklyHours) VALUES (@CurrentUser, @FirstName, " +
-                                      "@LastName, @Week, @Month, @Year, @WeeklyHours); " +
+                                      "WeekOfMonth, WeekOfYear, Month, Year, WeeklyHours) VALUES (@CurrentUser, @FirstName, " +
+                                      "@LastName, @WeekOfMonth, @WeekOfYear, @Month, @Year, @WeeklyHours); " +
                                       "DELETE FROM Calendar WHERE Id = @CurrentUser and FacilitatorFirstName = @FirstName and FacilitatorLastName = @LastName " +
                                       "and StartTime = @StartTime and EndTime = @EndTime and RoomId = @Room");
             SqlCommand GetCompletedHours = new SqlCommand(CompletedHours, con);
             GetCompletedHours.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
             GetCompletedHours.Parameters.AddWithValue("@FirstName", firstName);
             GetCompletedHours.Parameters.AddWithValue("@LastName", lastName);
-            GetCompletedHours.Parameters.AddWithValue("@Week", WeekOfMonth);
+            GetCompletedHours.Parameters.AddWithValue("@WeekOfMonth", WeekOfMonth);
+            GetCompletedHours.Parameters.AddWithValue("@WeekOfYear", GetWeekOfMonth.GetWeekOfYear(DateTime.Parse(gvr.Cells[2].Text)));
             GetCompletedHours.Parameters.AddWithValue("@Month", month);
             GetCompletedHours.Parameters.AddWithValue("@Year", year);
             GetCompletedHours.Parameters.AddWithValue("@WeeklyHours", totalHours);

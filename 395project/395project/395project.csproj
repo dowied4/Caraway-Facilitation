@@ -203,6 +203,9 @@
     <Content Include="bin\395project.dll" />
     <Content Include="bin\395project.pdb" />
     <Content Include="dash\AddPhoneNumber.aspx" />
+    <Content Include="dash\Admin\AccountStat.aspx" />
+    <Content Include="dash\Admin\EditAccounts.aspx" />
+    <Content Include="dash\Admin\Notifications.aspx" />
     <Content Include="dash\Calendar.aspx" />
     <Content Include="dash\Confirm.aspx" />
     <Content Include="dash\Lockout.aspx" />
@@ -296,6 +299,27 @@
     </Compile>
     <Compile Include="dash\AddPhoneNumber.aspx.designer.cs">
       <DependentUpon>AddPhoneNumber.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dash\Admin\AccountStat.aspx.cs">
+      <DependentUpon>AccountStat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dash\Admin\AccountStat.aspx.designer.cs">
+      <DependentUpon>AccountStat.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dash\Admin\EditAccounts.aspx.cs">
+      <DependentUpon>EditAccounts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dash\Admin\EditAccounts.aspx.designer.cs">
+      <DependentUpon>EditAccounts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dash\Admin\Notifications.aspx.cs">
+      <DependentUpon>Notifications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dash\Admin\Notifications.aspx.designer.cs">
+      <DependentUpon>Notifications.aspx</DependentUpon>
     </Compile>
     <Compile Include="dash\Calendar.aspx.cs">
       <DependentUpon>Calendar.aspx</DependentUpon>
