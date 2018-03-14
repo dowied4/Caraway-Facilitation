@@ -139,9 +139,6 @@
                                 <li>
                                     <a href="/dash/VacationAbsence.aspx">Vacation Absence</a>
                                 </li>
-                                <li>
-                                    <a href="/dash/DonateHours.aspx">Donate Hours</a>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -149,10 +146,10 @@
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Boardmember Tools<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Notifications</a>
+                                    <a href="/dash/Admin/Notifications.aspx">Notifications</a>
                                 </li>
                                 <li>
-                                    <a href="/dash/Admin/AccountList.aspx">Account List</a>
+                                    <a href="/dash/Admin/AccountList.aspx">Manage Accounts</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

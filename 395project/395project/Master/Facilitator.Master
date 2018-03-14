@@ -122,9 +122,6 @@
                                 <li>
                                     <a href="VacationAbsence.aspx">Vacation Absence</a>
                                 </li>
-                                <li>
-                                    <a href="DonateHours.aspx">Donate Hours</a>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

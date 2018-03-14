@@ -193,6 +193,15 @@ namespace _395project.dash.Admin {
         protected global::System.Web.UI.WebControls.DropDownList GradeDropDown;
         
         /// <summary>
+        /// ChangeGradeButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ChangeGradeButton;
+        
+        /// <summary>
         /// ClassDropDown control.
         /// </summary>
         /// <remarks>
