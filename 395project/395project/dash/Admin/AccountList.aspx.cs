@@ -31,50 +31,52 @@ namespace _395project.Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //opens a connection to the server
+
+            if (!IsPostBack)
+            {
+                //opens a connection to the server
+                SqlConnection precon = new SqlConnection
+                {
+                    ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+                };
+
+                precon.Open();
+
+                //Query to fetch data
+                string query1 = "SELECT Id FROM AspNetUsers";
+                SqlCommand SqlCommand1 = new SqlCommand(query1, precon);
+                //Execture the querey
+                SqlDataReader reader1 = SqlCommand1.ExecuteReader();
+
+                //Assign results
+                GridView1.DataSource = reader1;
+                //Bind the data
+                GridView1.DataBind();
+                precon.Close();
+            }
+
             SqlConnection con = new SqlConnection
             {
                 ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
             };
 
-            SqlDataAdapter adapter = new SqlDataAdapter();
-
             con.Open();
 
             //Query to fetch data
-            string query = "SELECT U.Email, (SELECT COUNT (*) FROM dbo.Facilitators AS F " + 
-                "WHERE U.Email = F.Id GROUP BY F.Id) AS NumFacilitators, " +
-				"(SELECT COUNT(*) FROM dbo.Children AS C WHERE U.Email = C.Id GROUP BY C.Id) AS NumChildren, " +
-				"(SELECT SUM(WeeklyHours) FROM dbo.Stats AS S WHERE U.Email = S.Id AND S.Month = @Month GROUP BY S.Id) AS MonthlyHours, " +
-				"(SELECT SUM(WeeklyHours) FROM dbo.Stats AS S WHERE U.Email = S.Id AND S.Year = @Year GROUP BY S.Id) AS YearlyHours " +
-                "FROM dbo.AspNetUsers AS U";
-
+            string query = "SELECT Id FROM AspNetUsers";
             SqlCommand SqlCommand = new SqlCommand(query, con);
-            SqlCommand.Parameters.AddWithValue("@Month", DateTime.Now.Month);
-            SqlCommand.Parameters.AddWithValue("@Year", DateTime.Now.Year);
-            adapter.SelectCommand = new SqlCommand(query, con);
-
-            //Execture the querey
             SqlDataReader reader = SqlCommand.ExecuteReader();
-
-            //Assign results
             GridView1.DataSource = reader;
-
-            //Bind the data
             GridView1.DataBind();
-
             con.Close();
-            
-            
-
         }
 
         protected void EditButton(object sender, EventArgs e)
         {
+            
             LinkButton btn = (LinkButton)sender;
-
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-
+            
             String ID;
             ID = gvr.Cells[0].Text;
             Response.Redirect("/dash/Admin/EditAccounts.aspx?ID=" + ID);
@@ -90,8 +92,7 @@ namespace _395project.Pages
             Response.Redirect("/dash/Admin/AccountStat.aspx?ID=" + ID);
         }
 
-
-            protected void Search_Click(object sender, EventArgs e)
+        protected void Search_Click(object sender, EventArgs e)
         {
             //opens a connection to the server
             SqlConnection con = new SqlConnection
@@ -99,21 +100,13 @@ namespace _395project.Pages
                 ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
             };
 
-            SqlDataAdapter adapter = new SqlDataAdapter();
+            //SqlDataAdapter adapter = new SqlDataAdapter();
 
             con.Open();
-            string query = "SELECT U.Email, (SELECT COUNT (*) FROM dbo.Facilitators AS F " +
-               "WHERE U.Email = F.Id GROUP BY F.Id) AS NumFacilitators, " +
-               "(SELECT COUNT(*) FROM dbo.Children AS C WHERE U.Email = C.Id GROUP BY C.Id) AS NumChildren, " +
-               "(SELECT SUM(WeeklyHours) FROM dbo.Stats AS S WHERE U.Email = S.Id AND S.Month = @Month GROUP BY S.Id) AS MonthlyHours, " +
-               "(SELECT SUM(WeeklyHours) FROM dbo.Stats AS S WHERE U.Email = S.Id AND S.Year = @Year GROUP BY S.Id) AS YearlyHours " +
-               "FROM dbo.AspNetUsers AS U where U.Email like '%'+@Search+'%'";
+            string query = "SELECT U.Id FROM AspNetUsers AS U where U.Id like '%'+@Search+'%'";
 
             SqlCommand SqlCommand = new SqlCommand(query, con);
-            SqlCommand.Parameters.AddWithValue("@Month", DateTime.Now.Month);
-            SqlCommand.Parameters.AddWithValue("@Year", DateTime.Now.Year);
             SqlCommand.Parameters.AddWithValue("@Search", SearchBox.Text);
-            adapter.SelectCommand = new SqlCommand(query, con);
 
             //Execture the querey
             SqlDataReader reader = SqlCommand.ExecuteReader();
@@ -126,7 +119,6 @@ namespace _395project.Pages
 
             //Clear the textbox
             SearchBox.Text = String.Empty;
-
         }
 
     }

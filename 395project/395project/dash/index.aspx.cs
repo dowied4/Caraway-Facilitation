@@ -204,7 +204,7 @@ namespace _395project.Pages
             {
                 array = endDate[0].Split('/');
                 month = array[0];
-                year = array[2];
+                year = "20"+array[2];
             }
 
 
