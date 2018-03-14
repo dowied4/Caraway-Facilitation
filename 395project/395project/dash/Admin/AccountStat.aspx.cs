@@ -91,17 +91,18 @@ namespace _395project.dash.Admin
                 yearlyHoursLabel.Text = YearlyHoursReader["YearlyHours"].ToString();
             YearlyHoursReader.Close();
 
-
+            //Gets the week of the year of the first full week of the month
+            int firstWeekOfMonth = GetWeekOfMonth.FirstMonday(DateTime.Now.Month);
 
 
             //Get Week 1
             string weekHours = "(SELECT SUM(S.WeeklyHours) AS weekHours FROM dbo.Stats AS S WHERE S.Id = @CurrentUser AND S.Month = @Month " +
-                "AND S.Year= @Year AND S.Week = @Week GROUP BY S.Id)"; 
+                "AND S.Year= @Year AND S.WeekOfYear = @Week GROUP BY S.Id)"; 
             SqlCommand getWeek1 = new SqlCommand(weekHours, con);
             getWeek1.Parameters.AddWithValue("@CurrentUser", ID);
             getWeek1.Parameters.AddWithValue("@Month", DateTime.Now.Month);
             getWeek1.Parameters.AddWithValue("@Year", DateTime.Now.Year);
-            getWeek1.Parameters.AddWithValue("@Week", 1);
+            getWeek1.Parameters.AddWithValue("@Week", firstWeekOfMonth);
             SqlDataReader Week1HourReader = getWeek1.ExecuteReader();
             if (Week1HourReader.Read())
                 weekLabel1.Text = Week1HourReader["weekHours"].ToString();
@@ -112,7 +113,7 @@ namespace _395project.dash.Admin
             getWeek2.Parameters.AddWithValue("@CurrentUser", ID);
             getWeek2.Parameters.AddWithValue("@Month", DateTime.Now.Month);
             getWeek2.Parameters.AddWithValue("@Year", DateTime.Now.Year);
-            getWeek2.Parameters.AddWithValue("@Week", 2);
+            getWeek2.Parameters.AddWithValue("@Week", firstWeekOfMonth+1);
             SqlDataReader Week2HourReader = getWeek2.ExecuteReader();
             if (Week2HourReader.Read())
                 weekLabel2.Text = Week2HourReader["weekHours"].ToString();
@@ -123,7 +124,7 @@ namespace _395project.dash.Admin
             getWeek3.Parameters.AddWithValue("@CurrentUser", ID);
             getWeek3.Parameters.AddWithValue("@Month", DateTime.Now.Month);
             getWeek3.Parameters.AddWithValue("@Year", DateTime.Now.Year);
-            getWeek3.Parameters.AddWithValue("@Week", 3);
+            getWeek3.Parameters.AddWithValue("@Week", firstWeekOfMonth+2);
             SqlDataReader Week3HourReader = getWeek3.ExecuteReader();
             if (Week3HourReader.Read())
                 weekLabel3.Text = Week3HourReader["weekHours"].ToString();
@@ -134,7 +135,7 @@ namespace _395project.dash.Admin
             getWeek4.Parameters.AddWithValue("@CurrentUser", ID);
             getWeek4.Parameters.AddWithValue("@Month", DateTime.Now.Month);
             getWeek4.Parameters.AddWithValue("@Year", DateTime.Now.Year);
-            getWeek4.Parameters.AddWithValue("@Week", 4);
+            getWeek4.Parameters.AddWithValue("@Week", firstWeekOfMonth+3);
             SqlDataReader Week4HourReader = getWeek4.ExecuteReader();
             if (Week4HourReader.Read())
                 weekLabel4.Text = Week4HourReader["weekHours"].ToString();
