@@ -124,12 +124,6 @@
                                 <li>
                                     <a href="FacilitatorAbsence.aspx">Facilitator Absence</a>
                                 </li>
-                                <li>
-                                    <a href="ChildAbsence.aspx">Child Absence</a>
-                                </li>
-                                <li>
-                                    <a href="VacationAbsence.aspx">Vacation Absence</a>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

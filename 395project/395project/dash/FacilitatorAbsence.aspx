@@ -21,7 +21,7 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <asp:DropDownList runat="server" Width="300px" AutoPostBack="true" OnSelectedIndexChanged="FromYear_Change" ID="fromYear" CssClass="form-control" >
+                    <asp:DropDownList runat="server" Width="200px" AutoPostBack="true" OnSelectedIndexChanged="FromYear_Change" ID="fromYear" CssClass="form-control" >
                         <asp:ListItem Text="Pick a year" Value="-1"></asp:ListItem>
                         <asp:ListItem Text="2018" Value="2018"></asp:ListItem>
                         <asp:ListItem Text="2019" Value="2019"></asp:ListItem>
@@ -29,12 +29,12 @@
                     </asp:DropDownList>
                 </div>
                 <div class="col-md-3">
-                    <asp:DropDownList runat="server" Width="300px" AutoPostBack="true" OnSelectedIndexChanged="FromMonth_Change" ID="fromMonth" CssClass="form-control" >
+                    <asp:DropDownList runat="server" Width="200px" AutoPostBack="true" OnSelectedIndexChanged="FromMonth_Change" ID="fromMonth" CssClass="form-control" >
                         <asp:ListItem Text="Pick a month" Value="-1"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <div class="col-md-3">
-                    <asp:DropDownList runat="server" Width="300px" AutoPostBack="true" ID="fromDay" CssClass="form-control" >
+                    <asp:DropDownList runat="server" Width="200px" AutoPostBack="true" ID="fromDay" CssClass="form-control" >
                         <asp:ListItem Text="Pick a day" Value="-1"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
@@ -50,7 +50,7 @@
             </div>
 			<div class="row">
                 <div class="col-md-3">
-                    <asp:DropDownList runat="server" Width="300px" AutoPostBack="true" OnSelectedIndexChanged="ToYear_Change" ID="toYear" CssClass="form-control" >
+                    <asp:DropDownList runat="server" Width="200px" AutoPostBack="true" OnSelectedIndexChanged="ToYear_Change" ID="toYear" CssClass="form-control" >
                         <asp:ListItem Text="Pick a year" Value="-1"></asp:ListItem>
                         <asp:ListItem Text="2018" Value="2018"></asp:ListItem>
                         <asp:ListItem Text="2019" Value="2019"></asp:ListItem>
@@ -58,12 +58,12 @@
                     </asp:DropDownList>
                 </div>
                 <div class="col-md-3">
-                    <asp:DropDownList runat="server" Width="300px" AutoPostBack="true" OnSelectedIndexChanged="ToMonth_Change" ID="toMonth" CssClass="form-control" >
+                    <asp:DropDownList runat="server" Width="200px" AutoPostBack="true" OnSelectedIndexChanged="ToMonth_Change" ID="toMonth" CssClass="form-control" >
                         <asp:ListItem Text="Pick a month" Value="-1"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <div class="col-md-3">
-                    <asp:DropDownList runat="server" Width="300px" AutoPostBack="true" ID="toDay" CssClass="form-control" >
+                    <asp:DropDownList runat="server" Width="200px" AutoPostBack="true" ID="toDay" CssClass="form-control" >
                         <asp:ListItem Text="Pick a day" Value="-1"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
