@@ -44,12 +44,15 @@ namespace _395project.Pages
 
             FacilitatorFirst.Text = string.Empty;
             FacilitatorLast.Text = string.Empty;
+            ErrorMessage.Visible = true;
+            ErrorMessage.Text = "Request Facilitator Sent";
         }
 
         protected void Clear_Click(object sender, EventArgs e)
         {
             FacilitatorFirst.Text = string.Empty;
             FacilitatorLast.Text = string.Empty;
+            ErrorMessage.Visible = false;
         }
     }
 }

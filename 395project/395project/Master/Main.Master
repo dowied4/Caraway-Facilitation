@@ -67,12 +67,12 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <strong>Abdul Stinks</strong>
+                                    <strong id="notifName">Notification</strong>
                                     <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
+                                        <em id="dateStamp">Date</em>
                                     </span>
                                 </div>
-                                <div>Abdul still doesnt know git hub</div>
+                                <div id="Notification">Abdul still doesnt know git hub</div>
                             </a>
                         </li>
                         </ul>
@@ -150,12 +150,6 @@
                                 </li>
                                 <li>
                                     <a href="/dash/FacilitatorAbsence.aspx">Facilitator Absence</a>
-                                </li>
-                                <li>
-                                    <a href="/dash/ChildAbsence.aspx">Child Absence</a>
-                                </li>
-                                <li>
-                                    <a href="/dash/VacationAbsence.aspx">Vacation Absence</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

@@ -133,12 +133,6 @@
                                 <li>
                                     <a href="/dash/FacilitatorAbsence.aspx">Facilitator Absence</a>
                                 </li>
-                                <li>
-                                    <a href="/dash/ChildAbsence.aspx">Child Absence</a>
-                                </li>
-                                <li>
-                                    <a href="/dash/VacationAbsence.aspx">Vacation Absence</a>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

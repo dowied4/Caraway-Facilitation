@@ -3,11 +3,10 @@
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
    <link href="../Content/dashboard.css" rel="stylesheet" />
    <h2 class="page-title"><%: Title %></h2>
-
+    <hr />
     <p class="error-text">
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>
-    <hr />
     <div class="form-horizontal">
         <asp:ValidationSummary runat="server" CssClass="error-text" />
 
@@ -20,7 +19,7 @@
             </div>
 			<div class="row">
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="FacilitatorFirst" CssClass="inputfields" />
+                    <asp:TextBox runat="server" ID="FacilitatorFirst" CssClass="form-control" Width="300px" />
                 </div>
 			</div>
 		</div>
@@ -34,7 +33,7 @@
             </div>
 			<div class="row">
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="FacilitatorLast" CssClass="inputfields" />
+                    <asp:TextBox runat="server" ID="FacilitatorLast" CssClass="form-control" Width="300px" />
                 </div>
 			</div>
 		</div>

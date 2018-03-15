@@ -55,8 +55,25 @@ namespace _395project.dash.Admin
         protected void Confirm_Click(object sender, EventArgs e)
         {
             if (((Button)sender).CommandName.Equals("Facilitator")){
-                Session["register"] = ((Button)sender).CommandArgument;
-                Server.Transfer("Register.aspx", true);
+                string vars = ((Button)sender).CommandArgument;
+                string[] splitVars = vars.Split(',');
+                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                conn.Open();
+                string insert = "BEGIN IF NOT EXISTS (select * from Facilitators as F where F.Id = @Email and F.FirstName = @FacilitatorFirst and F.LastName = @FacilitatorLast)" +
+                    " BEGIN insert into Facilitators(Id,FirstName, LastName) values (@Email,@FacilitatorFirst, @FacilitatorLast) END END";
+                SqlCommand cmd = new SqlCommand(insert, conn);
+                cmd.Parameters.AddWithValue("@Email", splitVars[0]);
+                cmd.Parameters.AddWithValue("@FacilitatorFirst", splitVars[1]);
+                cmd.Parameters.AddWithValue("@FacilitatorLast", splitVars[2]);
+                cmd.ExecuteNonQuery();
+
+                //Remove if one of the fields is empty
+                string remove = "delete from Facilitators where ID = '' or FirstName = '' or LastName = ''";
+                SqlCommand rm = new SqlCommand(remove, conn);
+                rm.ExecuteNonQuery();
+                conn.Close();
+                Response.Redirect(Request.RawUrl);
+
             }
             if (((Button)sender).CommandName.Equals("Absence")){
                 Session["absence"] = ((Button)sender).CommandArgument;
