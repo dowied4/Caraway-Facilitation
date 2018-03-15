@@ -69,7 +69,7 @@ namespace _395project
 
         public static string GetResetPasswordRedirectUrl(string code, HttpRequest request)
         {
-            var absoluteUri = "/dash/ResetPassword?" + CodeKey + "=" + HttpUtility.UrlEncode(code);
+            var absoluteUri = "/ResetPassword?" + CodeKey + "=" + HttpUtility.UrlEncode(code);
             return new Uri(request.Url, absoluteUri).AbsoluteUri.ToString();
         }
 
