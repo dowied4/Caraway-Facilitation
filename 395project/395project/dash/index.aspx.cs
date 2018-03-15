@@ -228,8 +228,8 @@ namespace _395project.Pages
             GetCompletedHours.Parameters.AddWithValue("@EndTime", dt1);
             GetCompletedHours.Parameters.AddWithValue("@Room", GetRoomId(gvr.Cells[3].Text));
             SqlDataReader addHoursReader = GetCompletedHours.ExecuteReader();
-
-            Page_Load(null, EventArgs.Empty);
+            //Page_Load(null, EventArgs.Empty);
+            Response.Redirect(Request.RawUrl);
         }
 
         protected void DeclineButton(object sender, System.EventArgs e)
@@ -268,8 +268,8 @@ namespace _395project.Pages
             GetCompletedHours.Parameters.AddWithValue("@Room", GetRoomId(gvr.Cells[3].Text));
             SqlDataReader addHoursReader = GetCompletedHours.ExecuteReader();
 
-            Page_Load(null, EventArgs.Empty);
-
+            //Page_Load(null, EventArgs.Empty);
+            Response.Redirect(Request.RawUrl);
 
         }
 
