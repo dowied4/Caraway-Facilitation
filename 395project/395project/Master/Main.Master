@@ -170,7 +170,7 @@
                                     <a href="/dash/Admin/Register.aspx">Add Accounts</a>
                                 </li>
                                 <li>
-                                    <a href="#">Edit Calendar</a>
+                                    <a href="/dash/Admin/FieldTrip.aspx">Edit Calendar</a>
                                 </li>
                                 
                             </ul>
