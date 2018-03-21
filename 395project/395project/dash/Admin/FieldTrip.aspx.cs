@@ -16,8 +16,8 @@ namespace _395project.dash.Admin
             //Sets the default time to 8:30-4:00 (all day)
             if (!IsPostBack)
             {
-                StartTimeTextBox.Text = "8:30";
-                EndTimeTextBox.Text = "16:00";
+                StartTimeTextBox.Text = "8:45";
+                EndTimeTextBox.Text = "15:15";
                 Calendar.SelectedDate = DateTime.Now.Date;
             }
         }

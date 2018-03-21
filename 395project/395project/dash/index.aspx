@@ -125,6 +125,11 @@
                     <asp:BoundField DataField="StartTime" HeaderText="Start Time" />
                     <asp:BoundField DataField="EndTime" HeaderText="End Time" />
                     <asp:BoundField DataField="Room" HeaderText="Room" />
+					<asp:TemplateField HeaderText="Cancel">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="CancelButton" runat="server" Text="Cancel" OnClick="DeclineButton" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
         </div>
