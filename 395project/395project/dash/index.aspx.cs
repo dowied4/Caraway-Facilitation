@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using System.Globalization;
+using System.Data;
 
 namespace _395project.Pages
 {
@@ -19,6 +20,7 @@ namespace _395project.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             DateTime startDate;
             //startdate would be grabbed from database
             startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 13, 45, 6);
@@ -208,6 +210,37 @@ namespace _395project.Pages
             }
 
 
+            //Checks if the timeslot is the lunch hour and gives double time if it is
+            if((TimeSpan.Compare(dt.TimeOfDay, new TimeSpan(12,0,0)) == 0 || 
+                TimeSpan.Compare(dt.TimeOfDay, new TimeSpan(12, 0, 0)) == -1) &&
+               (TimeSpan.Compare(dt1.TimeOfDay, new TimeSpan(13, 0, 0)) == 0 ||
+                TimeSpan.Compare(dt1.TimeOfDay, new TimeSpan(13, 0, 0)) == 1))
+            {
+
+                //Look for Field Trips (Only double time for lunch on regular days)
+                SqlConnection fieldTripCheck = new SqlConnection
+                {
+                    ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+                };
+
+                SqlDataAdapter adapter = new SqlDataAdapter();
+
+                fieldTripCheck.Open();
+
+                SqlDataAdapter getFieldTrips = new SqlDataAdapter("Select Location From FieldTrips where CONVERT(DATE, StartTime) = @CurrentDate",
+                    ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                getFieldTrips.SelectCommand.Parameters.AddWithValue("@CurrentDate", dt.Date);
+                DataTable table = new DataTable();
+                getFieldTrips.Fill(table);
+
+                //If not a fieldtrip give double time for lunch hour
+                if (table.Rows.Count == 0)
+                {
+                    totalHours += 1;
+                }
+                fieldTripCheck.Close();
+            }
+
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             con.Open();
             string CompletedHours = ("INSERT INTO Stats (Id, FacilitatorFirstName, FacilitatorLastName, " +
@@ -268,8 +301,7 @@ namespace _395project.Pages
             GetCompletedHours.Parameters.AddWithValue("@Room", GetRoomId(gvr.Cells[3].Text));
             SqlDataReader addHoursReader = GetCompletedHours.ExecuteReader();
 
-            //Page_Load(null, EventArgs.Empty);
-            Response.Redirect(Request.RawUrl);
+            Response.Redirect("index.aspx");
 
         }
 
@@ -315,6 +347,7 @@ namespace _395project.Pages
 
 
         }
+
 
     }
 }
