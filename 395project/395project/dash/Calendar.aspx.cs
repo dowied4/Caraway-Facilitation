@@ -196,6 +196,16 @@ namespace _395project.dash
         //Runs SetTimeTextBoxes when the dropdown menu choice is changed
         protected void TimeSlotDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int ind = TimeSlotDropDown.SelectedIndex;
+            //If Custom Time Exists Remove it
+            TimeSlotDropDown.SelectedIndex = 0;
+            if (TimeSlotDropDown.Text.Contains("Custom"))
+            {
+                TimeSlotDropDown.Items.RemoveAt(0);
+                ind -= 1;
+            }
+
+            TimeSlotDropDown.SelectedIndex = ind;
             SetTimeTextBoxes();
         }
 
@@ -223,6 +233,50 @@ namespace _395project.dash
                 EndTimeTextBox.Text = (string)dr["EndTime"].ToString();
             }
             con.Close();
+        }
+        protected void onCancel(object sender, EventArgs e)
+        {
+            ModalPopupExtender1.Hide();
+            SetTimeTextBoxes();
+        }
+
+        protected void onConfirm(object sender, EventArgs e)
+        {
+            //Get Start and End times
+            int startHour = 0;
+            int startMinute = 0;
+            int endHour = 0;
+            int endMinute = 0;
+
+            //If Custom Time Exists Remove it
+            if (TimeSlotDropDown.Text.Contains("Custom"))
+                TimeSlotDropDown.Items.RemoveAt(0);
+
+            //Checks for a properly formatted time in start time
+            if (StartTimeTextBox.Text.Contains(':'))
+            {
+                string[] startTime = StartTimeTextBox.Text.Split(':');
+                Int32.TryParse(startTime[0], out startHour);
+                Int32.TryParse(startTime[1], out startMinute);
+            }
+            //Checks for a properly formatted time in end time
+            if (EndTimeTextBox.Text.Contains(':'))
+            {
+                string[] endTime = EndTimeTextBox.Text.Split(':');
+                Int32.TryParse(endTime[0], out endHour);
+                Int32.TryParse(endTime[1], out endMinute);
+            }
+            if(endMinute != 0)
+                TimeSlotDropDown.Items.Insert(0, new ListItem("Custom Time (" + startHour + ":" + startMinute + "-" + endHour + ":" + endMinute + ")"));
+
+            else
+                TimeSlotDropDown.Items.Insert(0, new ListItem("Custom Time (" + startHour + ":" + startMinute + "-" + endHour + ":00)"));
+            TimeSlotDropDown.SelectedIndex = 0;
+            ModalPopupExtender1.Hide();
+        }
+        protected void editButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
