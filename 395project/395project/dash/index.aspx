@@ -100,6 +100,8 @@
         </div>
     </div>
 
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
     <!-- Upcoming Hours -->
     <div class="dashboardMargins" id="dashboardUpcomingLabel">
         <asp:Label runat="server" ID="Label2" CssClass="dash-header">Upcoming Hours</asp:Label>
@@ -112,7 +114,6 @@
     <div class="dashboardMargins" id="dashboardNoneLabel1">
         <asp:Label runat="server" ID="Label1" Visible="false" CssClass="dash-header">None</asp:Label>
     </div>
-
     <div id="dashboardGridUpcoming" class="dashboardMargins">
         <div class="rounded_corners" style="width: 600px">
             <asp:GridView ID="GridView3" runat="server" Width="600px" AutoGenerateColumns="false" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
@@ -128,6 +129,7 @@
 					<asp:TemplateField HeaderText="Cancel">
                         <ItemTemplate>
                             <asp:LinkButton ID="CancelButton" runat="server" Text="Cancel" OnClick="DeclineButton" />
+                            <ajaxToolkit:ConfirmButtonExtender ID="ConfirmButtonExtender1" runat="server" ConfirmText="Are you sure you want to cancel your shift?" TargetControlID="CancelButton" ConfirmOnFormSubmit="True" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -168,6 +170,7 @@
                     <asp:TemplateField HeaderText="Decline">
                         <ItemTemplate>
                             <asp:LinkButton ID="declineButtons" runat="server" Text="Decline" OnClick="DeclineButton" />
+                            <ajaxToolkit:ConfirmButtonExtender ID="ConfirmButtonExtender2" runat="server" ConfirmText="Are you sure you want to decline your shift?" TargetControlID="declineButtons" ConfirmOnFormSubmit="True" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
