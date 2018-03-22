@@ -247,7 +247,7 @@ namespace _395project.dash
             int startMinute = 0;
             int endHour = 0;
             int endMinute = 0;
-
+            string customLine = "Custom Time (";
             //If Custom Time Exists Remove it
             if (TimeSlotDropDown.Text.Contains("Custom"))
                 TimeSlotDropDown.Items.RemoveAt(0);
@@ -266,11 +266,19 @@ namespace _395project.dash
                 Int32.TryParse(endTime[0], out endHour);
                 Int32.TryParse(endTime[1], out endMinute);
             }
-            if(endMinute != 0)
-                TimeSlotDropDown.Items.Insert(0, new ListItem("Custom Time (" + startHour + ":" + startMinute + "-" + endHour + ":" + endMinute + ")"));
-
+            customLine += startHour;
+            if (startMinute == 0)
+                customLine += ":00" + " - ";
             else
-                TimeSlotDropDown.Items.Insert(0, new ListItem("Custom Time (" + startHour + ":" + startMinute + "-" + endHour + ":00)"));
+                customLine += ":" + startMinute + " - ";
+
+            customLine += endHour;
+            if (endMinute == 0)
+                customLine += ":00)";
+            else
+                customLine += ":" + endMinute + ")";
+
+            TimeSlotDropDown.Items.Insert(0, new ListItem(customLine));
             TimeSlotDropDown.SelectedIndex = 0;
             ModalPopupExtender1.Hide();
         }
