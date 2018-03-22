@@ -63,7 +63,7 @@
                 <div class="row" style="padding-right:14px;">
                     <asp:Label ID="TimeSlotLabel" runat="server" CssClass="input-header">Time Slot</asp:Label>
                 </div>										
-				<div class="row" style="padding-bottom:10px;padding-left:16px;" >
+				<div class="row" style="padding-bottom:10px;" >
 					<asp:DropDownList ID="TimeSlotDropDown" runat="server" AutoPostBack="true" CssClass="signupDropDown" OnSelectedIndexChanged="TimeSlotDropDown_SelectedIndexChanged">
 					</asp:DropDownList>
                     <button runat="server" id="editRun" class="btn btn-default" title="Edit">
@@ -71,8 +71,8 @@
                     </button>
 				</div>
                 
-                <asp:Panel ID="Panel1" runat ="server" >
-                    <div class="row" style="padding-bottom:10px;">
+                <asp:Panel ID="Panel1" runat ="server">
+                    <div class="row" style="padding-bottom:10px;" >
                		    <asp:TextBox ID="StartTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
 					</div>
 					<div class="row" style="padding-bottom:10px;">
@@ -82,7 +82,7 @@
                     <asp:Button ID="cancelButton" runat="server" Text="Cancel" OnClick="onCancel" CssClass="mybutton"/>
                     <asp:Label ID="testLabel" Visible="false" runat="server"></asp:Label>
                 </asp:Panel>
-                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="Panel1" BackgroundCssClass="modal-dialog" TargetControlID="editRun" X="1550" Y="450" RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
+                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="Panel1" BackgroundCssClass="modal" TargetControlID="editRun" X="-1" Y="-1" RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
                 <!-- Sign Up Button -->
                 <div class="row">
 		            <asp:Button ID="SignUpButton" runat="server" Text="Sign Up" OnClick="SignUpButton_Click" CssClass="mybutton"/>

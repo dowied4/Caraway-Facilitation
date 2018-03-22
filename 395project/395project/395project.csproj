@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=18.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.18.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="DayPilot, Version=5.0.303.0, Culture=neutral, PublicKeyToken=ce5d34538e20ef65, processorArchitecture=MSIL">
       <HintPath>..\packages\DayPilot.5.0.303\lib\DayPilot.dll</HintPath>
     </Reference>
@@ -209,6 +212,7 @@
     <Content Include="dash\Calendar.aspx" />
     <Content Include="dash\Confirm.aspx" />
     <Content Include="dash\Lockout.aspx" />
+    <Content Include="dash\Logout.aspx" />
     <Content Include="Forgot.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="dash\Manage.aspx" />
@@ -217,8 +221,6 @@
     <Content Include="dash\OpenAuthProviders.ascx" />
     <Content Include="dash\Admin\Register.aspx" />
     <Content Include="dash\RegisterExternalLogin.aspx" />
-    <Content Include="dash\ResetPassword.aspx" />
-    <Content Include="dash\ResetPasswordConfirmation.aspx" />
     <Content Include="dash\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="dash\VerifyPhoneNumber.aspx" />
     <Content Include="Contact.aspx" />
@@ -246,6 +248,8 @@
     <Content Include="dash\index.aspx" />
     <Content Include="dash\RequestFacilitator.aspx" />
     <Content Include="dash\VacationAbsence.aspx" />
+    <Content Include="ResetPassword.aspx" />
+    <Content Include="ResetPasswordConfirmation.aspx" />
     <Content Include="WebForm1.aspx" />
     <Content Include="Master\Main.Master" />
     <Content Include="Master\Facilitator.Master" />
@@ -342,6 +346,13 @@
     <Compile Include="dash\Lockout.aspx.designer.cs">
       <DependentUpon>Lockout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="dash\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dash\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Forgot.aspx.cs">
       <DependentUpon>Forgot.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -397,20 +408,6 @@
     </Compile>
     <Compile Include="dash\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="dash\ResetPassword.aspx.cs">
-      <DependentUpon>ResetPassword.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="dash\ResetPassword.aspx.designer.cs">
-      <DependentUpon>ResetPassword.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="dash\ResetPasswordConfirmation.aspx.cs">
-      <DependentUpon>ResetPasswordConfirmation.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="dash\ResetPasswordConfirmation.aspx.designer.cs">
-      <DependentUpon>ResetPasswordConfirmation.aspx</DependentUpon>
     </Compile>
     <Compile Include="dash\TwoFactorAuthenticationSignIn.aspx.cs">
       <DependentUpon>TwoFactorAuthenticationSignIn.aspx</DependentUpon>
@@ -533,6 +530,20 @@
       <DependentUpon>VacationAbsence.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ResetPasswordConfirmation.aspx.cs">
+      <DependentUpon>ResetPasswordConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResetPasswordConfirmation.aspx.designer.cs">
+      <DependentUpon>ResetPasswordConfirmation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
