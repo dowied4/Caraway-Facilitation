@@ -98,14 +98,11 @@
                             <a href="index.aspx"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="/dash/Calendar.aspx"><i class="fa fa-table fa-fw"></i> Sign Up</a>
+                            <a href="/dash/ViewCalendar.aspx"><i class="fa fa-table fa-fw"></i> View Calendar</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Personal Stats</a>
-                                </li>
                                 <li>
                                     <a href="#">By Classroom</a>
                                 </li>
