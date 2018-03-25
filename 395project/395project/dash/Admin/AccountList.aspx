@@ -3,7 +3,10 @@
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <link href="/Content/dashboard.css" rel="stylesheet" />
     <h1 class="page-header">Account List</h1>
-  
+      <p class="error-text">
+        <asp:Literal runat="server" ID="ErrorMessage" />
+    </p>
+    <asp:ValidationSummary runat="server" CssClass="error-text" />
     <div class="dashboardMargins" id="alSearch" style="padding-bottom: 20px;">
 	    <asp:TextBox ID="SearchBox" runat="server" CssClass="signupDropDown" placeholder="Enter Email"/>
 	    <asp:Button ID="SearchButton" runat="server" Text="Search" OnClick="Search_Click"  CssClass="mybutton"/>
@@ -28,6 +31,11 @@
                         <asp:TemplateField HeaderText ="Edit Account">
                             <ItemTemplate>
                                 <asp:LinkButton ID="EditLink" runat="server" Text="Edit" OnClick="EditButton"/>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText ="Remove Account">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="RemoveAcc" runat="server" Text="Remove" OnClick="RemoveAcc"/>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
