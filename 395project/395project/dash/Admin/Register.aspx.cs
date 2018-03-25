@@ -32,6 +32,7 @@ namespace _395project.Account
                 FacilitatorEmail.Text = myStrings[0];
                 FacilitatorFirst.Text = myStrings[1];
                 FacilitatorLast.Text = myStrings[2];
+                Session.Remove("register");
             }
         }
 

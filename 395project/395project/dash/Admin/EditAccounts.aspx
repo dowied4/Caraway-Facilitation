@@ -65,7 +65,7 @@
                              </div>
 			                <div class="row">
                                     <div class="col-md-6">
-                                         <asp:TextBox runat="server" ID="FacilitatorFirst" CssClass="form-control" Width="250px"/>
+                                         <asp:TextBox runat="server" ID="FacilitatorFirst" CssClass="form-control" Width="200px"/>
                                      </div>
                                      <div>
                                         <asp:Button ID="FirstButton" OnClick="FacilitatorFirst_Rename" runat="server" Text="Rename" Height="35px" CssClass="mybutton"  />
@@ -78,7 +78,7 @@
                             </div>
 			                <div class="row">
                                 <div class="col-md-6">
-                                    <asp:TextBox runat="server" ID="FacilitatorLast" CssClass="form-control" Width="250px" />
+                                    <asp:TextBox runat="server" ID="FacilitatorLast" CssClass="form-control" Width="200px" />
                                 </div>
                                 <div>
                                     <asp:Button ID="LastButton" OnClick="FacilitatorLast_Rename" runat="server" Text="Rename" Height="35px" CssClass="mybutton"  />
@@ -99,7 +99,7 @@
                            
                                    <div class="row">
                                         <div class="col-md-6">
-                                             <asp:DropDownList ID="FacilitatorDropDown" runat="server" DataSourceID="Facilitators" DataTextField="FullName" DataValueField="FullName" CssClass="form-control" Width="300px"></asp:DropDownList>
+                                             <asp:DropDownList ID="FacilitatorDropDown" runat="server" DataSourceID="Facilitators" DataTextField="FullName" DataValueField="FullName" CssClass="form-control" Width="250px"></asp:DropDownList>
                                              <asp:SqlDataSource ID="Facilitators" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT FullName FROM Facilitators WHERE (Id = @CurrentUser)">
                                                 
                                             </asp:SqlDataSource>
@@ -149,7 +149,7 @@
                     </div>
 			        <div class="row">
                         <div class="col-md-6">
-                            <asp:TextBox runat="server" ID="ChildFirst" Width="250px" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="ChildFirst" Width="200px" CssClass="form-control" />
                         </div>
                         <div>
                             <asp:Button ID="ChildFirstRename" OnClick="ChildFirst_Rename" runat="server" Text="Rename" Height="35px" CssClass="mybutton" />
@@ -163,7 +163,7 @@
                     </div>
 			        <div class="row">
                         <div class="col-md-6">
-                            <asp:TextBox runat="server" ID="ChildLast" Width="250px" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="ChildLast" Width="200px" CssClass="form-control" />
                         </div>
                         <div>
                             <asp:Button ID="ChildLastRename" OnClick="ChildLast_Rename" runat="server" Text="Rename" Height="35px" CssClass="mybutton"  />
@@ -176,7 +176,7 @@
                     </div>
 			        <div class="row">
                         <div class="col-md-6">
-                        <asp:DropDownList ID="GradeDropDown" OnSelectedIndexChanged="ChangeClass" AutoPostBack="true" Width="250px" CssClass="form-control" runat="server">
+                        <asp:DropDownList ID="GradeDropDown" OnSelectedIndexChanged="ChangeClass" AutoPostBack="true" Width="200px" CssClass="form-control" runat="server">
                                 <asp:ListItem Value="K" Text="Kindergarden"></asp:ListItem>
                                 <asp:ListItem Value="1" Text="1"></asp:ListItem>
                                 <asp:ListItem Value="2" Text="2"></asp:ListItem>
@@ -223,7 +223,7 @@
                         </div>
                         <div class="row">
                                <div class="col-md-6">
-                                     <asp:DropDownList ID="ChildrenDropDown" runat="server" DataSourceID="Children" DataTextField="FullName" DataValueField="FullName" CssClass="form-control" Width="300px"></asp:DropDownList>
+                                     <asp:DropDownList ID="ChildrenDropDown" runat="server" DataSourceID="Children" DataTextField="FullName" DataValueField="FullName" CssClass="form-control" Width="250px"></asp:DropDownList>
                                       <asp:SqlDataSource ID="Children" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT (FirstName + ' ' + LastName) AS FullName FROM Children WHERE (Id = @CurrentUser)">
                                       </asp:SqlDataSource>
                                 </div>

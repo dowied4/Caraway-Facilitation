@@ -8,6 +8,8 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
+     <link href="/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <link href="../Content/dashboard.css" rel="stylesheet" />
     <h2 class="page-title"><%: Title %></h2>
 
@@ -39,7 +41,7 @@
             <div class="dashboardMargins" id="signupFacilitator">
                 <!-- Facilitator Choice -->
                 <asp:Label id="FacilitatorLabel" runat="server" CssClass="input-header">Facilitator</asp:Label>
-                <div class="row" style="padding-bottom:10px;">
+                <div class="row" style="padding-bottom:10px;padding-right:14px;">
                     <asp:DropDownList ID="FacilitatorDropDown" runat="server" DataSourceID="Facilitators" DataTextField="FullName" DataValueField="FullName" CssClass="signupDropDown"></asp:DropDownList>
                     <asp:SqlDataSource ID="Facilitators" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT FullName FROM Facilitators WHERE (Id = @CurrentUser)">
                         <SelectParameters>
@@ -49,32 +51,44 @@
                 </div>
 
                 <!-- Room Choice -->
-                <div class="row">
+                <div class="row" style="padding-right:14px;">
 	                <asp:Label ID="RoomLabel" runat="server" CssClass="input-header">Room</asp:Label>
                 </div>
-                <div class="row" style="padding-bottom:10px;">
+                <div class="row" style="padding-bottom:10px;padding-right:14px;">
 	                <asp:DropDownList ID="RoomDropDown" runat="server" DataSourceID="Rooms" DataTextField="Room" DataValueField="Room" CssClass="signupDropDown"></asp:DropDownList>
 	                <asp:SqlDataSource ID="Rooms" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT [Room] FROM [Rooms]"></asp:SqlDataSource>
                 </div>
 
                 <!-- Time Slot Choice -->
-                <div class="row">
+                <div class="row" style="padding-right:14px;">
                     <asp:Label ID="TimeSlotLabel" runat="server" CssClass="input-header">Time Slot</asp:Label>
                 </div>										
-				<div class="row" style="padding-bottom:10px;">
+				<div class="row" style="padding-bottom:10px;" >
 					<asp:DropDownList ID="TimeSlotDropDown" runat="server" AutoPostBack="true" CssClass="signupDropDown" OnSelectedIndexChanged="TimeSlotDropDown_SelectedIndexChanged">
 					</asp:DropDownList>
+                    <button runat="server" id="editRun" class="btn btn-default" title="Edit">
+                        <i class="fa fa-edit"></i>
+                    </button>
 				</div>
-						<div class="row" style="padding-bottom:10px;">
-               				<asp:TextBox ID="StartTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
-						</div>
-						<div class="row" style="padding-bottom:10px;">
-							<asp:TextBox ID="EndTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
-						</div>
+                
+                <asp:Panel ID="Panel1" runat ="server">
+                    <div class="row" style="padding-bottom:10px;" >
+               		    <asp:TextBox ID="StartTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
+					</div>
+					<div class="row" style="padding-bottom:10px;">
+					    <asp:TextBox ID="EndTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
+					</div>
+                    <asp:Button ID="okButton" runat="server" Text="Confirm" OnClick="onConfirm" CssClass="mybutton"/>
+                    <asp:Button ID="cancelButton" runat="server" Text="Cancel" OnClick="onCancel" CssClass="mybutton"/>
+                    <asp:Label ID="testLabel" Visible="false" runat="server"></asp:Label>
+                </asp:Panel>
+                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="Panel1" BackgroundCssClass="modal" TargetControlID="editRun" X="-1" Y="-1" RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
                 <!-- Sign Up Button -->
                 <div class="row">
 		            <asp:Button ID="SignUpButton" runat="server" Text="Sign Up" OnClick="SignUpButton_Click" CssClass="mybutton"/>
                 </div>
+
+
             </div>
         </div>
     </div>

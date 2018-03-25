@@ -24,7 +24,7 @@ namespace _395project.dash.Admin
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            String ID = Request.QueryString["ID"];
+            String ID = Request.QueryString["ID"]; //"sullivanr5@mymacewan.ca"
             head.InnerHtml = "Account: " + ID;
             
             if (!IsPostBack)
