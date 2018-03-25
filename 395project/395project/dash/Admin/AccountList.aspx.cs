@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Text;
-
+using Microsoft.AspNet.Identity;
 
 namespace _395project.Pages
 {
@@ -56,6 +56,61 @@ namespace _395project.Pages
             }
 
         }
+
+        protected void RemoveAcc(object sender, EventArgs e)
+        {
+
+            LinkButton btn = (LinkButton)sender;
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            String ID;
+            ID = gvr.Cells[0].Text;
+
+            if (User.Identity.GetUserId() == ID)
+            {
+                ErrorMessage.Visible = true;
+                ErrorMessage.Text = "You cannot delete your own account!";
+                //Response.Redirect("/dash/logout.aspx");
+            }
+            else
+            {
+
+                ErrorMessage.Visible = false;
+                SqlConnection con = new SqlConnection
+                {
+                    ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+                };
+
+                con.Open();
+
+                //Query to fetch data
+                string query1 = "DELETE FROM AspNetUsers WHERE Id = @CurrentUser";
+                SqlCommand remove = new SqlCommand(query1, con);
+                remove.Parameters.AddWithValue("@CurrentUser", ID);
+                //Execture the querey
+                SqlDataReader reader = remove.ExecuteReader();
+                con.Close();
+                RefreshList();
+            }
+
+        }
+        protected void RefreshList()
+        {
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+            };
+
+            con.Open();
+
+            //Query to fetch data
+            string query = "SELECT Id FROM AspNetUsers";
+            SqlCommand SqlCommand = new SqlCommand(query, con);
+            SqlDataReader reader = SqlCommand.ExecuteReader();
+            GridView1.DataSource = reader;
+            GridView1.DataBind();
+            con.Close();
+        }
+
         protected void CancelButton(object sender, EventArgs e)
         {
             SqlConnection con = new SqlConnection
@@ -74,7 +129,7 @@ namespace _395project.Pages
             con.Close();
         }
 
-            protected void EditButton(object sender, EventArgs e)
+        protected void EditButton(object sender, EventArgs e)
         {
             
             LinkButton btn = (LinkButton)sender;
