@@ -173,10 +173,39 @@
                             <ajaxToolkit:ConfirmButtonExtender ID="ConfirmButtonExtender2" runat="server" ConfirmText="Are you sure you want to decline your shift?" TargetControlID="declineButtons" ConfirmOnFormSubmit="True" />
                         </ItemTemplate>
                     </asp:TemplateField>
+					<asp:TemplateField HeaderText="Donate">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="DonateButton" runat="server" Text="Donate" OnClick="DonateButton" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
         </div>
     </div>
+	<ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="Panel1" 
+		BackgroundCssClass="modalBackground" TargetControlID="btn" X="-1" Y="-1" 
+		RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
+	<asp:Panel ID="Panel1" runat ="server">
+		<div class="row" style="padding-bottom:10px;" >
+			<asp:Label ID="Label5" runat="server" Text="Email" CssClass="input-header"></asp:Label>
+            <asp:TextBox ID="EmailTextbox" AutoPostBack="true" runat="server" CssClass="signupDropDown" OnTextChanged="EmailTextbox_TextChanged"></asp:TextBox>
+		</div>
+		<div class="row" style="padding-bottom:10px;">
+			<asp:Label ID="Label6" runat="server" Text="Facilitator" CssClass="input-header"></asp:Label>
+			 <asp:DropDownList ID="FacilitatorDropDown" runat="server" DataSourceID="Facilitators" DataTextField="FullName" DataValueField="FullName" CssClass="signupDropDown"></asp:DropDownList>
+            <asp:SqlDataSource ID="Facilitators" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT FullName FROM Facilitators WHERE (Id = @SelectedUser)">
+                <SelectParameters>
+	                <asp:Parameter DefaultValue="Anonymous" Name="SelectedUser" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+		</div>
+			<asp:Button ID="okButton" runat="server" Text="Confirm" OnClick="onConfirm" CssClass="mybutton"/>
+			<asp:Button ID="cancelButton" runat="server" Text="Cancel" OnClick="onCancel" CssClass="mybutton"/>
+     </asp:Panel>
+	<!-- Hidden button to link to modalpopup -->
+	<div style="visibility:hidden">
+		<asp:Button id="btn" runat="server"/>
+	</div>
 
 
 </asp:Content>

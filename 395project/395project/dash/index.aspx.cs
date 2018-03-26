@@ -14,10 +14,20 @@ using System.Data;
 namespace _395project.Pages
 {
 
-
     public partial class index : System.Web.UI.Page
-
+        
     {
+        //Global GridViewRow to save selected index for when popups are triggered
+        public static GridViewRow gvr;
+        
+        //Chooses master page based on User Role
+        protected override void OnPreInit(EventArgs e)
+        {
+            base.OnPreInit(e);
+            ChooseMaster choose = new ChooseMaster();
+            MasterPageFile = choose.GetMaster();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -146,18 +156,9 @@ namespace _395project.Pages
 
 
         }
-        //Chooses master page based on User Role
-        protected override void OnPreInit(EventArgs e)
-        {
-            base.OnPreInit(e);
-            ChooseMaster choose = new ChooseMaster();
-            MasterPageFile = choose.GetMaster();
-        }
 
 
-
-
-
+        //Confirm button on completed hours grid
         protected void ConfirmButton(object sender, System.EventArgs e)
         {
             //Get the button that raised the event
@@ -169,8 +170,7 @@ namespace _395project.Pages
             //Grid row number
             int num = gvr.RowIndex;
             int WeekOfMonth = GetWeekOfMonth.GetWeekNumberOfMonth(Convert.ToDateTime(gvr.Cells[2].Text));
-           /* Label1.Visible = true;
-            Label1.Text = WeekOfMonth.ToString(); */
+
 
             string[] name;
             string firstName;
@@ -265,6 +265,8 @@ namespace _395project.Pages
             Response.Redirect(Request.RawUrl);
         }
 
+        /* Decline button for the completed hours gridview
+         */
         protected void DeclineButton(object sender, System.EventArgs e)
         {
             //Get the button that raised the event
@@ -303,21 +305,7 @@ namespace _395project.Pages
 
             Response.Redirect("index.aspx");
 
-        }
-
-
-        public void OnConfirm(object sender, EventArgs e)
-        {
-            string confirmValue = Request.Form["confirm_value"];
-            if (confirmValue == "Yes")
-            {
-                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked Yes!')", true);
-            }
-            else
-            {
-                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked No!')", true);
-            }
-        }
+        }    
 
         //Takes the room name as a string (As it is stored in the gridview and gets the room Id for inserting into stats DB
         private int GetRoomId(string roomName)
@@ -346,6 +334,155 @@ namespace _395project.Pages
             return 0;
 
 
+        }
+
+
+        //Shows the popup when the donate button is clicked
+        protected void DonateButton(object sender, System.EventArgs e)
+        {
+            LinkButton btn = (LinkButton)sender;
+
+            //Get the row that contains this button
+            gvr = (GridViewRow)btn.NamingContainer;
+
+            ModalPopupExtender1.Show();
+        }
+
+        //Gets the facilitators and populates the dropdown from the Email Textbox
+        protected void EmailTextbox_TextChanged(object sender, EventArgs e)
+        {
+            Facilitators.SelectParameters["SelectedUser"].DefaultValue = EmailTextbox.Text;
+            ModalPopupExtender1.Show();
+        }
+
+        /*Submits the hours to stats with the donated hours going to the updated email
+         * **Code mostly repeated from Confirm button to be refactored** 
+         */
+        protected void onConfirm(object sender, EventArgs e)
+        {
+            //GridViewRow gvr = GridView4.SelectedRow;
+            /*
+            //Get the button that raised the event
+            LinkButton btn = (LinkButton)sender;
+
+            //Get the row that contains this button
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer; */
+
+            //Grid row number
+            int num = gvr.RowIndex;
+            int WeekOfMonth = GetWeekOfMonth.GetWeekNumberOfMonth(Convert.ToDateTime(gvr.Cells[2].Text));
+
+
+            string[] name;
+            string firstName;
+            string lastName;
+            string newFirstName;
+            string newLastName;
+            string startTime;
+            string endTime;
+            string[] startDate;
+            string[] endDate;
+            string[] array;
+            string month;
+            string year;
+            DateTime dt = Convert.ToDateTime(gvr.Cells[1].Text);
+            DateTime dt1 = Convert.ToDateTime(gvr.Cells[2].Text);
+
+            float totalHours = (float)(dt1 - dt).TotalHours;
+
+            //Gets the selected facilitator name from the dropdown
+            name = FacilitatorDropDown.Text.Split(' ');
+            newFirstName = name[0];
+            newLastName = name[1];
+
+            //Gets the original facilitator so that the proper row in Calendar dataTable gets deleted
+            name = gvr.Cells[0].Text.Split(' ');
+            firstName = name[0];
+            lastName = name[1];
+
+            startDate = gvr.Cells[1].Text.Split(' ');
+            startTime = startDate[1];
+            endDate = gvr.Cells[2].Text.Split(' ');
+            endTime = endDate[1];
+
+            //fixes the case where time is split on "-" or "/"
+            if (endDate[0].Contains('-'))
+            {
+                array = endDate[0].Split('-');
+                month = array[1];
+                year = array[0];
+            }
+            else
+            {
+                array = endDate[0].Split('/');
+                month = array[0];
+                year = "20" + array[2];
+            }
+
+
+            //Checks if the timeslot is the lunch hour and gives double time if it is
+            if ((TimeSpan.Compare(dt.TimeOfDay, new TimeSpan(12, 0, 0)) == 0 ||
+                TimeSpan.Compare(dt.TimeOfDay, new TimeSpan(12, 0, 0)) == -1) &&
+               (TimeSpan.Compare(dt1.TimeOfDay, new TimeSpan(13, 0, 0)) == 0 ||
+                TimeSpan.Compare(dt1.TimeOfDay, new TimeSpan(13, 0, 0)) == 1))
+            {
+
+                //Look for Field Trips (Only double time for lunch on regular days)
+                SqlConnection fieldTripCheck = new SqlConnection
+                {
+                    ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+                };
+
+                SqlDataAdapter adapter = new SqlDataAdapter();
+
+                fieldTripCheck.Open();
+
+                SqlDataAdapter getFieldTrips = new SqlDataAdapter("Select Location From FieldTrips where CONVERT(DATE, StartTime) = @CurrentDate",
+                    ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                getFieldTrips.SelectCommand.Parameters.AddWithValue("@CurrentDate", dt.Date);
+                DataTable table = new DataTable();
+                getFieldTrips.Fill(table);
+
+                //If not a fieldtrip give double time for lunch hour
+                if (table.Rows.Count == 0)
+                {
+                    totalHours += 1;
+                }
+                fieldTripCheck.Close(); 
+            }
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            string CompletedHours = ("INSERT INTO Stats (Id, FacilitatorFirstName, FacilitatorLastName, " +
+                                      "WeekOfMonth, WeekOfYear, Month, Year, WeeklyHours) VALUES (@NewUser, @NewFirstName, " +
+                                      "@NewLastName, @WeekOfMonth, @WeekOfYear, @Month, @Year, @WeeklyHours); " +
+                                      "DELETE FROM Calendar WHERE Id = @CurrentUser and FacilitatorFirstName = @FirstName and FacilitatorLastName = @LastName " +
+                                      "and StartTime = @StartTime and EndTime = @EndTime and RoomId = @Room");
+            SqlCommand GetCompletedHours = new SqlCommand(CompletedHours, con);
+            //The userID is gotte
+            GetCompletedHours.Parameters.AddWithValue("@NewUser", EmailTextbox.Text);
+            GetCompletedHours.Parameters.AddWithValue("@NewFirstName", newFirstName);
+            GetCompletedHours.Parameters.AddWithValue("@NewLastName", newLastName);
+            GetCompletedHours.Parameters.AddWithValue("@WeekOfMonth", WeekOfMonth);
+            GetCompletedHours.Parameters.AddWithValue("@WeekOfYear", GetWeekOfMonth.GetWeekOfYear(DateTime.Parse(gvr.Cells[2].Text)));
+            GetCompletedHours.Parameters.AddWithValue("@Month", month);
+            GetCompletedHours.Parameters.AddWithValue("@Year", year);
+            GetCompletedHours.Parameters.AddWithValue("@WeeklyHours", totalHours);
+            GetCompletedHours.Parameters.AddWithValue("@StartTime", dt);
+            GetCompletedHours.Parameters.AddWithValue("@EndTime", dt1);
+            GetCompletedHours.Parameters.AddWithValue("@Room", GetRoomId(gvr.Cells[3].Text));
+            GetCompletedHours.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
+            GetCompletedHours.Parameters.AddWithValue("@FirstName", firstName);
+            GetCompletedHours.Parameters.AddWithValue("@LastName", lastName);
+            SqlDataReader addHoursReader = GetCompletedHours.ExecuteReader();
+
+            Response.Redirect(Request.RawUrl); 
+
+        }
+
+        protected void onCancel(object sender, EventArgs e)
+        {
+            ModalPopupExtender1.Hide();
         }
 
 
