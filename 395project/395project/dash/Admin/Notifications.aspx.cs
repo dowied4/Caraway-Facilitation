@@ -72,7 +72,9 @@ namespace _395project.dash.Admin
                 SqlCommand rm = new SqlCommand(remove, conn);
                 rm.ExecuteNonQuery();
                 conn.Close();
+                removeOnConfirm(Int32.Parse(splitVars[3]), ((Button)sender).CommandName);
                 Response.Redirect(Request.RawUrl);
+                //ErrorMessage.Text = "Added " + splitVars[1] + " " + splitVars[2] + " as a Facilitator to " + splitVars[0];
 
             }
             if (((Button)sender).CommandName.Equals("Absence")){
@@ -102,6 +104,26 @@ namespace _395project.dash.Admin
             Response.Redirect(Request.RawUrl);
         }
 
+        protected void removeOnConfirm(int id, string requestType)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            string remove = "";
+
+            if (requestType.Equals("Facilitator"))
+                remove = "Delete from RequestFacilitator where Id = @RequestID";
+
+            if (requestType.Equals("Absence"))
+                remove = "Delete from Absence where Id = @RequestID";
+
+            SqlCommand rm = new SqlCommand(remove, con);
+            rm.Parameters.AddWithValue("@RequestID", id);
+            SqlDataReader reader = rm.ExecuteReader();
+            reader.Close();
+            con.Close();
+
+        }
+
         private void displayFacilRequests(SqlDataReader reader)
         {
             while (reader.Read())
@@ -110,7 +132,7 @@ namespace _395project.dash.Admin
                 Label notificationLabel = makeLabel("Facilitator", reader);
 
                 //Confirm
-                string confirmCmdArg = reader.GetValue(1).ToString() + "," + reader.GetValue(2).ToString() + "," + reader.GetValue(3).ToString();
+                string confirmCmdArg = reader.GetValue(1).ToString() + "," + reader.GetValue(2).ToString() + "," + reader.GetValue(3).ToString() + "," + reader.GetValue(0).ToString();
                 Button confirm = makeConfirm(confirmCmdArg, "Facilitator");
 
                 //Clear
