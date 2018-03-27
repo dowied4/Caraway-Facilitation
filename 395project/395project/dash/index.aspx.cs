@@ -30,7 +30,7 @@ namespace _395project.Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            WeeklyHoursLabel.ForeColor = System.Drawing.Color.Red;
             DateTime startDate;
             //startdate would be grabbed from database
             startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 13, 45, 6);
@@ -122,8 +122,14 @@ namespace _395project.Pages
             //Bind the data
             GridView2.DataBind();
             childReader.Close();
-           /*Label1.Visible = true;
-            Label1.Text = GetWeekOfMonth.GetWeekOfYear(new DateTime(2018, 2,28)).ToString();*/
+            /*Label1.Visible = true;
+             Label1.Text = GetWeekOfMonth.GetWeekOfYear(new DateTime(2018, 2,28)).ToString();*/
+            
+            //Get number of children
+            string numKids = "SELECT COUNT(*) FROM Children Where Id = @CurrentUser";
+            SqlCommand getNumKids = new SqlCommand(numKids, con);
+            getNumKids.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
+            int count = (int)getNumKids.ExecuteScalar();
 
             //Get Weekly Hours
             string WeeklyHours = "SELECT SUM(S.WeeklyHours) as WeeklyHours FROM dbo.Stats AS S WHERE S.Id = @CurrentUser AND S.WeekOfYear = @WeekOfYear " +
@@ -133,10 +139,16 @@ namespace _395project.Pages
             getWeeklyHours.Parameters.AddWithValue("@WeekOfYear", GetWeekOfMonth.GetWeekOfYear(DateTime.Now));
             getWeeklyHours.Parameters.AddWithValue("@Year", DateTime.Now.Year);
 
-
             SqlDataReader WeeklyHoursReader = getWeeklyHours.ExecuteReader();
             if (WeeklyHoursReader.Read())
+            {
                 WeeklyHoursLabel.Text = WeeklyHoursReader["WeeklyHours"].ToString();
+                float weeklyTotal = float.Parse(WeeklyHoursLabel.Text);
+                if (weeklyTotal >= 2.5 && count < 2)
+                    WeeklyHoursLabel.ForeColor = System.Drawing.Color.Green;
+                if (weeklyTotal >= 5 && count >= 2)
+                    WeeklyHoursLabel.ForeColor = System.Drawing.Color.Green;
+            }
             WeeklyHoursReader.Close();
 
             //Get Monthly Hours
@@ -206,7 +218,10 @@ namespace _395project.Pages
             {
                 array = endDate[0].Split('/');
                 month = array[0];
-                year = "20"+array[2];
+                if (array[2].Length == 2)
+                    year = "20" + array[2];
+                else
+                    year = array[2];
             }
 
 

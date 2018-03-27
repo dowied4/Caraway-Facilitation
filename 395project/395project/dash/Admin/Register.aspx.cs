@@ -23,19 +23,6 @@ namespace _395project.Account
             MasterPageFile = choose.GetMaster();
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            string vars = (string)(Session["register"]);
-            if (vars != null)
-            {
-                string[] myStrings = vars.Split(',');
-                FacilitatorEmail.Text = myStrings[0];
-                FacilitatorFirst.Text = myStrings[1];
-                FacilitatorLast.Text = myStrings[2];
-                Session.Remove("register");
-            }
-        }
-
         protected void ChangeClass(object sender, EventArgs e)
         {
             String value = Rank.SelectedItem.Value;
@@ -58,7 +45,8 @@ namespace _395project.Account
             var check = manager.FindByName(ChildEmail.Text);
             if (check == null)
             {
-                ErrorMessage.Text = "There is no account with that email";
+                ErrorMessages.Text = "There is no account with that email";
+                ErrorMessages.ForeColor = System.Drawing.Color.Red;
                 ChildEmail.Text = string.Empty;
                 ChildFirst.Text = string.Empty;
                 ChildLast.Text = string.Empty;
@@ -109,7 +97,8 @@ namespace _395project.Account
                 Room.Enabled = true;
                 //Rank.Text = string.Empty;
                // Room.Text = string.Empty;
-                ErrorMessage.Text = "Child Successfully Added";
+                ErrorMessages.Text = "Child Successfully Added";
+                ErrorMessages.ForeColor = System.Drawing.Color.Green;
             }
         }
 
@@ -120,7 +109,8 @@ namespace _395project.Account
             var check = manager.FindByName(FacilitatorEmail.Text);
             if (check == null)
             {
-                ErrorMessage.Text = "There is no account with that email";
+                ErrorMessages.Text = "There is no account with that email";
+                ErrorMessages.ForeColor = System.Drawing.Color.Red;
                 FacilitatorEmail.Text = string.Empty;
                 FacilitatorFirst.Text = string.Empty;
                 FacilitatorLast.Text = string.Empty;
@@ -144,7 +134,8 @@ namespace _395project.Account
                 conn.Close();
                 FacilitatorFirst.Text = string.Empty;
                 FacilitatorLast.Text = string.Empty;
-                ErrorMessage.Text = "Facilitator Successfully Added";
+                ErrorMessages.Text = "Facilitator Successfully Added";
+                ErrorMessages.ForeColor = System.Drawing.Color.Green;
             }
 
         }
@@ -157,7 +148,8 @@ namespace _395project.Account
             var check = manager.FindByName(Email.Text);
             if (check != null)
             {
-                ErrorMessage.Text = "There is already an account with that email";
+                ErrorMessages.Text = "There is already an account with that email";
+                ErrorMessages.ForeColor = System.Drawing.Color.Red;
                 Email.Text = string.Empty;
             }
             else
@@ -178,7 +170,8 @@ namespace _395project.Account
 
                     /* signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
                     IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response); */
-                    ErrorMessage.Text = "Account Successfully Created an email was sent to " + user.Id;
+                    ErrorMessages.Text = "Account Successfully Created an email was sent to " + user.Id;
+                    ErrorMessages.ForeColor = System.Drawing.Color.Green;
                     //Set the child and facilitator email fields and clear the new account email field
                     FacilitatorEmail.Text = Email.Text;
                     ChildEmail.Text = Email.Text;
@@ -186,7 +179,8 @@ namespace _395project.Account
                 }
                 else
                 {
-                    ErrorMessage.Text = result.Errors.FirstOrDefault();
+                    ErrorMessages.Text = result.Errors.FirstOrDefault();
+                    ErrorMessages.ForeColor = System.Drawing.Color.Red;
                 }
             }
         }

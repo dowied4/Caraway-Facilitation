@@ -5,7 +5,7 @@
    <h2 class="page-title"><%: Title %></h2>
     <hr />
     <p class="error-text">
-        <asp:Literal runat="server" ID="ErrorMessage" />
+        <asp:Label runat="server" ID="ErrorMessages" />
     </p>
     <div class="form-horizontal">
         <asp:ValidationSummary runat="server" CssClass="error-text" />

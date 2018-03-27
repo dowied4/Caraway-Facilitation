@@ -4,7 +4,7 @@
    <link href="../../Content/dashboard.css" rel="stylesheet" />
    <h2 class="page-title"><%: Title %></h2>
     <p class="error-text">
-        <asp:Literal runat="server" ID="ErrorMessage" />
+        <asp:Label runat="server" ID="ErrorMessages" />
     </p>
 
     <!-- MANAGE ACCOUNT: Clear Button -->
