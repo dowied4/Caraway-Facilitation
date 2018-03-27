@@ -283,12 +283,12 @@ namespace _395project.Pages
         /* Decline button for the completed hours gridview
          */
         protected void DeclineButton(object sender, System.EventArgs e)
-        {
+        {   /*
             //Get the button that raised the event
             LinkButton btn = (LinkButton)sender;
 
             //Get the row that contains this button
-            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;*/
 
             //Grid row number
             int num = gvr.RowIndex;
@@ -363,6 +363,20 @@ namespace _395project.Pages
             ModalPopupExtender1.Show();
         }
 
+        protected void onDeclineGrid(object sender, System.EventArgs e)
+        {
+            LinkButton btn = (LinkButton)sender;
+            gvr = (GridViewRow)btn.NamingContainer;
+            ModalPopupExtender2.Show();
+        }
+
+        protected void onCancelGrid(object sender, System.EventArgs e)
+        {
+            LinkButton btn = (LinkButton)sender;
+            gvr = (GridViewRow)btn.NamingContainer;
+            ModalPopupExtender3.Show();
+        }
+
         //Gets the facilitators and populates the dropdown from the Email Textbox
         protected void EmailTextbox_TextChanged(object sender, EventArgs e)
         {
@@ -431,7 +445,10 @@ namespace _395project.Pages
             {
                 array = endDate[0].Split('/');
                 month = array[0];
-                year = "20" + array[2];
+                if (array[2].Length == 2)
+                    year = "20" + array[2];
+                else
+                    year = array[2];
             }
 
 
@@ -498,6 +515,16 @@ namespace _395project.Pages
         protected void onCancel(object sender, EventArgs e)
         {
             ModalPopupExtender1.Hide();
+        }
+
+        protected void onCancelDecline(object sender, EventArgs e)
+        {
+            ModalPopupExtender2.Hide();
+        }
+
+        protected void onCancelUpcoming(object sender, EventArgs e)
+        {
+            ModalPopupExtender3.Hide();
         }
 
 
