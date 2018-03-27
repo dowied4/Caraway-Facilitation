@@ -14,7 +14,10 @@
     <h2 class="page-title"><%: Title %></h2>
 
     <hr />
-    
+    <p class="error-text">
+        <asp:Literal runat="server" Visible="false" ID="ErrorMessage" />
+    </p>
+    <asp:ValidationSummary runat="server" CssClass="error-text" />
     <div class="dashboardMargins" id="signupLabel" style="padding-bottom:60px; text-decoration:underline;">
 			<asp:Label ID="SignUpLabel" runat="server" CssClass="section-header">Sign Up</asp:Label>
 	</div>

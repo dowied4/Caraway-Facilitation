@@ -24,6 +24,7 @@ namespace _395project.dash
         //Loads the calendar and scheduler
         protected void Page_Load(object sender, EventArgs e)
         {
+            ErrorMessage.Visible = false;
             if (!IsPostBack)
             {   
                 LoadResources();
@@ -135,11 +136,35 @@ namespace _395project.dash
             return 1;
 
         }
+        protected Boolean checkHours(String FirstName, String LastName, DateTime Current)
+        {
+            String[] checkCurrent = Current.ToString().Split(' ');
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            conn.Open();
+            SqlCommand checkTimeSlot = new SqlCommand("SELECT * FROM Calendar WHERE Id = @CurrentUser AND" +
+                " FacilitatorFirstName = @FirstName AND FacilitatorLastName = @LastName", conn);
+            checkTimeSlot.Parameters.AddWithValue("@CurrentUser", User.Identity.Name);
+            checkTimeSlot.Parameters.AddWithValue("@FirstName", FirstName);
+            checkTimeSlot.Parameters.AddWithValue("@LastName", LastName);
+            SqlDataReader reader = checkTimeSlot.ExecuteReader();
+            while(reader.Read())
+            {
+                String[] time = reader["StartTime"].ToString().Split(' ');
+
+                if(time[0] == checkCurrent[0])
+                {
+                    return false;
+                }
+
+            }
+            
+            return true;
+        }
 
         //Adds a signup to the database
         protected void SignUpButton_Click(object sender, EventArgs e)            
-        {   
-            
+        {
+            //check if they are in upcoming table, and if the function returns true then give error message
             //Split the name into first and last name
             string[] name = FacilitatorDropDown.Text.Split(' ');
             //Get Start and End times
@@ -147,7 +172,7 @@ namespace _395project.dash
             int startMinute = 0;
             int endHour = 0;
             int endMinute = 0;
-
+            
             //Checks for a properly formatted time in start time
             if (StartTimeTextBox.Text.Contains(':'))
                 {
@@ -167,21 +192,29 @@ namespace _395project.dash
             {
                 DateTime Start = ChangeTime(startHour, startMinute);
                 DateTime End = ChangeTime(endHour, endMinute);
-
-                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-                conn.Open();
-                string volunteer = "Insert into Calendar(Id, FacilitatorFirstName, FacilitatorLastName, StartTime, EndTime, RoomId) " +
-                                    "Values (@Id, @FirstName, @LastName, @Start, @End, @Room)";
-                SqlCommand cmd = new SqlCommand(volunteer, conn);
-                cmd.Parameters.AddWithValue("@Id", User.Identity.Name);
-                cmd.Parameters.AddWithValue("@FirstName", name[0]);
-                cmd.Parameters.AddWithValue("@LastName", name[1]);
-                cmd.Parameters.AddWithValue("@Start", Start);
-                cmd.Parameters.AddWithValue("@End", End);
-                cmd.Parameters.AddWithValue("@Room", GetRoom(RoomDropDown.Text));
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                Page_Load(null, EventArgs.Empty);
+                DateTime Current = new DateTime(Calendar.SelectedDate.Year, Calendar.SelectedDate.Month, Calendar.SelectedDate.Day);
+                Boolean check = checkHours(name[0], name[1], Current);
+                if (check == true)
+                {
+                    SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                    conn.Open();
+                    string volunteer = "Insert into Calendar(Id, FacilitatorFirstName, FacilitatorLastName, StartTime, EndTime, RoomId) " +
+                                        "Values (@Id, @FirstName, @LastName, @Start, @End, @Room)";
+                    SqlCommand cmd = new SqlCommand(volunteer, conn);
+                    cmd.Parameters.AddWithValue("@Id", User.Identity.Name);
+                    cmd.Parameters.AddWithValue("@FirstName", name[0]);
+                    cmd.Parameters.AddWithValue("@LastName", name[1]);
+                    cmd.Parameters.AddWithValue("@Start", Start);
+                    cmd.Parameters.AddWithValue("@End", End);
+                    cmd.Parameters.AddWithValue("@Room", GetRoom(RoomDropDown.Text));
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    Page_Load(null, EventArgs.Empty);
+                } else
+                {
+                    ErrorMessage.Visible = true;
+                    ErrorMessage.Text = "You already have a facilitator for that day!";
+                }
             }
 
 
@@ -240,8 +273,10 @@ namespace _395project.dash
             SetTimeTextBoxes();
         }
 
+
         protected void onConfirm(object sender, EventArgs e)
         {
+            
             //Get Start and End times
             int startHour = 0;
             int startMinute = 0;
