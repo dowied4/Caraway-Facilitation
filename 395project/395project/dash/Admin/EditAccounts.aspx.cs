@@ -49,11 +49,18 @@ namespace _395project.dash.Admin
             String ID = Request.QueryString["ID"];
             String Name = ChildLast.Text;
             String[] FullName = EditChildrenDropDown.Text.Split(' ');
-            UpdateVariableDB(ID, "Children", "LastName", Name, FullName);
-            ErrorMessage.Text = "Sucessfully Renamed: " + EditChildrenDropDown.Text + " to: " + Name;
-            EditChildrenDropDown.DataBind();
-            ChildrenDropDown.DataBind();
-            ChildLast.Text = "";
+            if (ChildLast.Text == "" || ChildLast.Text == FullName[1])
+            {
+                ErrorMessage.Text = "Please enter a valid last name";
+            }
+            else
+            {
+                UpdateVariableDB(ID, "Children", "LastName", Name, FullName);
+                ErrorMessage.Text = "Sucessfully Renamed: " + EditChildrenDropDown.Text + " to: " + Name;
+                EditChildrenDropDown.DataBind();
+                ChildrenDropDown.DataBind();
+                ChildLast.Text = "";
+            }
         }
 
         protected void ChildFirst_Rename(object sender, EventArgs e)
@@ -61,11 +68,18 @@ namespace _395project.dash.Admin
             String ID = Request.QueryString["ID"];
             String Name = ChildFirst.Text;
             String[] FullName = EditChildrenDropDown.Text.Split(' ');
-            UpdateVariableDB(ID, "Children", "FirstName", Name, FullName);
-            ErrorMessage.Text = "Sucessfully Renamed: " + EditChildrenDropDown.Text + " to: " + Name;
-            EditChildrenDropDown.DataBind();
-            ChildrenDropDown.DataBind();
-            ChildFirst.Text = "";
+            if (ChildFirst.Text == "" || ChildFirst.Text == FullName[0])
+            {
+                ErrorMessage.Text = "Please eneter a valid first name";
+            }
+            else
+            {
+                UpdateVariableDB(ID, "Children", "FirstName", Name, FullName);
+                ErrorMessage.Text = "Sucessfully Renamed: " + EditChildrenDropDown.Text + " to: " + Name;
+                EditChildrenDropDown.DataBind();
+                ChildrenDropDown.DataBind();
+                ChildFirst.Text = "";
+            }
         }
         
         protected void FacilitatorFirst_Rename(object sender, EventArgs e)
@@ -73,24 +87,39 @@ namespace _395project.dash.Admin
             String ID = Request.QueryString["ID"];
             String Name = FacilitatorFirst.Text;
             String[] FullName = EditFacilitatorDropDown.Text.Split(' ');
-            UpdateVariableDB(ID, "Stats", "FacilitatorFirstName", Name, FullName);
-            UpdateVariableDB(ID, "Facilitators", "FirstName", Name, FullName);
-            ErrorMessage.Text = "Sucessfully Renamed: " + EditFacilitatorDropDown.Text + " to: " + Name;
-            EditFacilitatorDropDown.DataBind();
-            FacilitatorDropDown.DataBind();
-            FacilitatorFirst.Text = "";
+
+            if (FacilitatorFirst.Text == "" || FacilitatorFirst.Text == FullName[0])
+            {
+                ErrorMessage.Text = "Please enter a valid first name";
+            }
+            else
+            {
+                UpdateVariableDB(ID, "Stats", "FacilitatorFirstName", Name, FullName);
+                UpdateVariableDB(ID, "Facilitators", "FirstName", Name, FullName);
+                ErrorMessage.Text = "Sucessfully Renamed: " + EditFacilitatorDropDown.Text + " to: " + Name;
+                EditFacilitatorDropDown.DataBind();
+                FacilitatorDropDown.DataBind();
+                FacilitatorFirst.Text = "";
+            }
         }
         protected void FacilitatorLast_Rename(object sender, EventArgs e)
         {
             String ID = Request.QueryString["ID"];
             String Name = FacilitatorLast.Text;
             String[] FullName = EditFacilitatorDropDown.Text.Split(' ');
-            UpdateVariableDB(ID, "Stats", "FacilitatorLastName", Name, FullName);
-            UpdateVariableDB(ID, "Facilitators", "LastName", Name, FullName);
-            ErrorMessage.Text = "Sucessfully Renamed: " + EditFacilitatorDropDown.Text + " to: " + Name;
-            EditFacilitatorDropDown.DataBind();
-            FacilitatorDropDown.DataBind();
-            FacilitatorLast.Text = "";
+            if(FacilitatorLast.Text == "" || FacilitatorLast.Text == FullName[1])
+            {
+                ErrorMessage.Text = "Please enter a valid last name";
+            }
+            else
+            {
+                UpdateVariableDB(ID, "Stats", "FacilitatorLastName", Name, FullName);
+                UpdateVariableDB(ID, "Facilitators", "LastName", Name, FullName);
+                ErrorMessage.Text = "Sucessfully Renamed: " + EditFacilitatorDropDown.Text + " to: " + Name;
+                EditFacilitatorDropDown.DataBind();
+                FacilitatorDropDown.DataBind();
+                FacilitatorLast.Text = "";
+            }
         }
         
         protected void UpdateVariableDB(String ID, String DB, String DBValue, String Update, String[] Name)
@@ -252,10 +281,10 @@ namespace _395project.dash.Admin
 
             switch(value)
             {
-                case "K": ClassDropDown.Enabled = true; break;
-                case "1": ClassDropDown.Enabled = true; break;
-                case "2": ClassDropDown.Enabled = true; break;
-                default: ClassDropDown.Enabled = false; ClassDropDown.ToolTip = "Disabled"; break;
+                case "K": ClassDropDown.Visible = true; ClassDropDown.Visible = true; break;
+                case "1": ClassDropDown.Visible = true; ClassDropDown.Visible = true; break;
+                case "2": ClassDropDown.Visible = true; ClassDropDown.Visible = true; break;
+                default: ClassDropDown.Visible = false; ClassDropDown.Visible = false; break;
             }
 
            
