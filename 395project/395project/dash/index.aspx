@@ -128,8 +128,7 @@
                     <asp:BoundField DataField="Room" HeaderText="Room" />
 					<asp:TemplateField HeaderText="Cancel">
                         <ItemTemplate>
-                            <asp:LinkButton ID="CancelButton" runat="server" Text="Cancel" OnClick="DeclineButton" />
-                            <ajaxToolkit:ConfirmButtonExtender ID="ConfirmButtonExtender1" runat="server" ConfirmText="Are you sure you want to cancel your shift?" TargetControlID="CancelButton" ConfirmOnFormSubmit="True" />
+                            <asp:LinkButton ID="CancelButton" runat="server" Text="Cancel" OnClick="onCancelGrid" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -169,8 +168,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Decline">
                         <ItemTemplate>
-                            <asp:LinkButton ID="declineButtons" runat="server" Text="Decline" OnClick="DeclineButton" />
-                            <ajaxToolkit:ConfirmButtonExtender ID="ConfirmButtonExtender2" runat="server" ConfirmText="Are you sure you want to decline your shift?" TargetControlID="declineButtons" ConfirmOnFormSubmit="True" />
+                            <asp:LinkButton ID="declineButtons" runat="server" Text="Decline" OnClick="onDeclineGrid" />
                         </ItemTemplate>
                     </asp:TemplateField>
 					<asp:TemplateField HeaderText="Donate">
@@ -199,7 +197,7 @@
             </div>
             <div class="col-md-4">
                 <div class="dashboardMargins" id="dashboardDonateFac">
-                    <asp:TextBox ID="EmailTextbox" AutoPostBack="true" runat="server" CssClass="signupDropDown" OnTextChanged="EmailTextbox_TextChanged"></asp:TextBox>
+                    <asp:TextBox ID="EmailTextbox" AutoPostBack="true" runat="server" CssClass="signupDropDown" OnTextChanged="EmailTextbox_TextChanged" Width="200px"></asp:TextBox>
                 </div>
 	        </div>
         </div>
@@ -211,7 +209,7 @@
             </div>
             <div class="col-md-4">
                 <div class="dashboardMargins" id="dashboardDonateFacDrop">
-                    <asp:DropDownList ID="FacilitatorDropDown" runat="server" DataSourceID="Facilitators" DataTextField="FullName" DataValueField="FullName" CssClass="signupDropDown"></asp:DropDownList>
+                    <asp:DropDownList ID="FacilitatorDropDown" runat="server" DataSourceID="Facilitators" DataTextField="FullName" DataValueField="FullName" CssClass="signupDropDown" Width="200px"></asp:DropDownList>
                     <asp:SqlDataSource ID="Facilitators" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT FullName FROM Facilitators WHERE (Id = @SelectedUser)">
                         <SelectParameters>
 	                        <asp:Parameter DefaultValue="Anonymous" Name="SelectedUser" />
@@ -222,10 +220,79 @@
         </div>
 
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="dashboardMargins" id="dashboardDonateButtons">
 			        <asp:Button ID="okButton" runat="server" Text="Confirm" OnClick="onConfirm" CssClass="mybutton"/>
 			        <asp:Button ID="cancelButton" runat="server" Text="Cancel" OnClick="onCancel" CssClass="mybutton"/>
+                </div>
+            </div>
+        </div>
+     </asp:Panel>
+
+    <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender2" runat="server" PopupControlID="Panel2" 
+		BackgroundCssClass="modalBackground" TargetControlID="btn" X="-1" Y="-1" 
+		RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
+
+    <asp:Panel ID="Panel2"  CssClass="dashboardMargins" runat="server">
+        <div class="dashboardMargins" id="dashboardDecline">
+            <asp:Label runat="server" CssClass="section-header">Decline Hours</asp:Label>
+        </div>
+        <div class="row" style="padding-bottom:10px">
+            <div class="col-md-12">
+	            <div class="dashboardMargins" id="dashboardDeclineTxt" style="padding-left: 55px;">
+		            <asp:Label ID="Label7" runat="server" Text="Email" CssClass="input-header">Decline your shift?</asp:Label>
+                </div>
+            </div>
+            <!--
+            <div class="col-md-4">
+                <div class="dashboardMargins" id="dashboardDeclineInfo">
+                    <asp:Label ID="shiftInfo" runat="server" CssClass="input-header"></asp:Label>
+                </div>
+	        </div> -->
+        </div>
+        <!--
+        <div class="row" style="padding-bottom:10px">
+            <div class="col-md-4">
+	            <div class="dashboardMargins" id="dashboardDeclineTotal">
+		            <asp:Label ID="shiftHours" runat="server" Text="Email" CssClass="input-header">Shift Hours:</asp:Label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboardMargins" id="dashboardDeclineNum">
+                    <asp:Label ID="shiftTotal" runat="server" CssClass="input-header"></asp:Label>
+                </div>
+	        </div>
+        </div>-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="dashboardMargins" id="dashboardDeclineButtons" style="padding-left: 70px;">
+			        <asp:Button ID="Button1" runat="server" Text="Confirm" OnClick="DeclineButton" CssClass="mybutton"/>
+			        <asp:Button ID="Button2" runat="server" Text="Cancel" OnClick="onCancelDecline" CssClass="mybutton"/>
+                </div>
+            </div>
+        </div>
+     </asp:Panel>
+
+    <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender3" runat="server" PopupControlID="Panel3" 
+		BackgroundCssClass="modalBackground" TargetControlID="btn" X="-1" Y="-1" 
+		RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
+
+    <asp:Panel ID="Panel3"  CssClass="dashboardMargins" runat="server">
+        <div class="dashboardMargins" id="dashboardCancel">
+            <asp:Label runat="server" CssClass="section-header">Shift Cancellation</asp:Label>
+        </div>
+        <div class="row" style="padding-bottom:10px">
+            <div class="col-md-12">
+	            <div class="dashboardMargins" id="dashboardCancelTxt" style="padding-left: 90px;">
+		            <asp:Label ID="Label8" runat="server" Text="Email" CssClass="input-header">Cancel your shift?</asp:Label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="dashboardMargins" id="dashboardCancelButtons" style="padding-left: 100px;">
+			        <asp:Button ID="Button3" runat="server" Text="Confirm" OnClick="DeclineButton" CssClass="mybutton"/>
+			        <asp:Button ID="Button4" runat="server" Text="Cancel" OnClick="onCancelUpcoming" CssClass="mybutton"/>
                 </div>
             </div>
         </div>

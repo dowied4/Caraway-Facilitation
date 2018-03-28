@@ -45,7 +45,7 @@
                 <!-- Facilitator Choice -->
                 <asp:Label id="FacilitatorLabel" runat="server" CssClass="input-header">Facilitator</asp:Label>
                 <div class="row" style="padding-bottom:10px;padding-right:14px;">
-                    <asp:DropDownList ID="FacilitatorDropDown" runat="server" DataSourceID="Facilitators" DataTextField="FullName" DataValueField="FullName" CssClass="signupDropDown"></asp:DropDownList>
+                    <asp:DropDownList ID="FacilitatorDropDown" runat="server" DataSourceID="Facilitators" DataTextField="FullName" DataValueField="FullName" CssClass="signupDropDown" Width="200px"></asp:DropDownList>
                     <asp:SqlDataSource ID="Facilitators" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT FullName FROM Facilitators WHERE (Id = @CurrentUser)">
                         <SelectParameters>
 	                        <asp:Parameter DefaultValue="Anonymous" Name="CurrentUser" />
@@ -58,7 +58,7 @@
 	                <asp:Label ID="RoomLabel" runat="server" CssClass="input-header">Room</asp:Label>
                 </div>
                 <div class="row" style="padding-bottom:10px;padding-right:14px;">
-	                <asp:DropDownList ID="RoomDropDown" runat="server" DataSourceID="Rooms" DataTextField="Room" DataValueField="Room" CssClass="signupDropDown"></asp:DropDownList>
+	                <asp:DropDownList ID="RoomDropDown" runat="server" DataSourceID="Rooms" DataTextField="Room" DataValueField="Room" CssClass="signupDropDown" Width="200px"></asp:DropDownList>
 	                <asp:SqlDataSource ID="Rooms" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT [Room] FROM [Rooms]"></asp:SqlDataSource>
                 </div>
 
@@ -67,7 +67,7 @@
                     <asp:Label ID="TimeSlotLabel" runat="server" CssClass="input-header">Time Slot</asp:Label>
                 </div>										
 				<div class="row" style="padding-bottom:10px;" >
-					<asp:DropDownList ID="TimeSlotDropDown" runat="server" AutoPostBack="true" CssClass="signupDropDown" OnSelectedIndexChanged="TimeSlotDropDown_SelectedIndexChanged">
+					<asp:DropDownList ID="TimeSlotDropDown" runat="server" AutoPostBack="true" CssClass="signupDropDown" OnSelectedIndexChanged="TimeSlotDropDown_SelectedIndexChanged" Width="168px">
 					</asp:DropDownList>
                     <button runat="server" id="editRun" class="btn btn-default" title="Edit">
                         <i class="fa fa-edit"></i>
