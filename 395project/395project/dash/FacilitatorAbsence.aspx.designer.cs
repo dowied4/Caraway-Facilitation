@@ -13,85 +13,49 @@ namespace _395project.Pages {
     public partial class FacilitatorAbsence {
         
         /// <summary>
-        /// ErrorMessage control.
+        /// ErrorMessages control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ErrorMessage;
+        protected global::System.Web.UI.WebControls.Label ErrorMessages;
         
         /// <summary>
-        /// fromLabel control.
+        /// From control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label fromLabel;
+        protected global::System.Web.UI.WebControls.Label From;
         
         /// <summary>
-        /// fromYear control.
+        /// datepickerFrom control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList fromYear;
+        protected global::System.Web.UI.WebControls.TextBox datepickerFrom;
         
         /// <summary>
-        /// fromMonth control.
+        /// To control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList fromMonth;
+        protected global::System.Web.UI.WebControls.Label To;
         
         /// <summary>
-        /// fromDay control.
+        /// datepickerTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList fromDay;
-        
-        /// <summary>
-        /// toLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label toLabel;
-        
-        /// <summary>
-        /// toYear control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList toYear;
-        
-        /// <summary>
-        /// toMonth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList toMonth;
-        
-        /// <summary>
-        /// toDay control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList toDay;
+        protected global::System.Web.UI.WebControls.TextBox datepickerTo;
         
         /// <summary>
         /// Reason control.
