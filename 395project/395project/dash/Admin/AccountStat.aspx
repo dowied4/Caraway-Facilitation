@@ -74,63 +74,24 @@
      <div class="row" style="padding-bottom: 30px; text-align: center;">
         <div class="dashboardMargins" id="statsHoursLabel">
             <asp:Label runat="server" CssClass="section-header">HOURS</asp:Label>
-        </div>
+			<div class="row">
+				<asp:Label ID="Label1" runat="server" Text="Month" CssClass="input-header"></asp:Label>
+        		<asp:DropDownList ID="MonthDropDown" runat="server" CssClass="signupDropDown">
+				</asp:DropDownList>
+			</div>  
+			<div></div>
+
+			<div class="row">
+				<asp:Label ID="Label2" runat="server" Text="Year" CssClass="input-header"></asp:Label>
+				<asp:DropDownList ID="YearDropDown" runat="server" CssClass="signupDropDown" DataSourceID="GetYears" DataTextField="Year" DataValueField="Year">
+				</asp:DropDownList>
+				<asp:SqlDataSource ID="GetYears" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT DISTINCT Year FROM dbo.Stats WHERE Year IS NOT NULL"></asp:SqlDataSource>
+			</div>			
+			<div></div>
+			<asp:Button ID="UpdateButton" runat="server" Text="Get Stats" CssClass="mybutton" OnClick="UpdateButton_Click" />
+		</div>
     </div>
 
-<div class="row" style="padding-bottom:50px">
-    <!-- Weekley Section -->
-     <div class="col-md-offset-1 col-md-2">
-            <div class="dashboardMargins" id="Week1Label">
-                <asp:Label runat="server" CssClass="dash-header">Week 1</asp:Label>
-            </div>
-            <div class="row">
-                <div id="week1" class="dashboardMargins">
-                    <div>
-                        <asp:Label runat="server" CssClass="stats-info" ID="weekLabel1">0</asp:Label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    <div class="col-md-offset-1 col-md-2">
-            <div class="dashboardMargins" id="Week2Label">
-                <asp:Label runat="server" CssClass="dash-header">Week 2</asp:Label>
-            </div>
-            <div class="row">
-                <div id="week2" class="dashboardMargins">
-                    <div>
-                        <asp:Label runat="server" CssClass="stats-info" ID="weekLabel2">0</asp:Label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    <div class="col-md-offset-1 col-md-2">
-            <div class="dashboardMargins" id="Week3Label">
-                <asp:Label runat="server" CssClass="dash-header">Week 3</asp:Label>
-            </div>
-            <div class="row">
-                <div id="week3" class="dashboardMargins">
-                    <div>
-                        <asp:Label runat="server" CssClass="stats-info" ID="weekLabel3">0</asp:Label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    <div class="col-md-offset-1 col-md-2">
-            <div class="dashboardMargins" id="Week4Label">
-                <asp:Label runat="server" CssClass="dash-header">Week 4</asp:Label>
-            </div>
-            <div class="row">
-                <div id="week4" class="dashboardMargins">
-                    <div>
-                        <asp:Label runat="server" CssClass="stats-info" ID="weekLabel4">0</asp:Label>
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>
 <div class="row">
        
         <div class="col-md-offset-2 col-md-3">
@@ -159,6 +120,19 @@
             </div>
         </div>
     </div>
+	<hr />
+	<div class="row" id="Div1" runat="server">
+		<div id="FacilitatorHours" class="dashboardMargins">
+			<div class="rounded_corners" style="width: 600px">
+			<asp:GridView ID="FacilitatorHoursGridView" runat="server" style="width: 600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+							<HeaderStyle CssClass="HeaderStyle" />
+							<FooterStyle CssClass="FooterStyle" />
+							<RowStyle CssClass="RowStyle" />
+							<AlternatingRowStyle CssClass="AlternatingRowStyle" />
+			</asp:GridView>
+			</div>
+		</div>
+	</div>
      
 
 
