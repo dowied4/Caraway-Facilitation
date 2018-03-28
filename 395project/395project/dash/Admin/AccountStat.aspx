@@ -124,7 +124,7 @@
 	<div class="row" id="Div1" runat="server">
 		<div id="FacilitatorHours" class="dashboardMargins">
 			<div class="rounded_corners" style="width: 600px">
-			<asp:GridView ID="FacilitatorHoursGridView" runat="server" style="width: 600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+			<asp:GridView ID="FacilitatorHoursGridView" AutoGenerateColumns="true" runat="server" style="width: 600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
 							<HeaderStyle CssClass="HeaderStyle" />
 							<FooterStyle CssClass="FooterStyle" />
 							<RowStyle CssClass="RowStyle" />
@@ -133,7 +133,7 @@
 			</div>
 		</div>
 	</div>
-     
+     <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
 
 
 </asp:Content>

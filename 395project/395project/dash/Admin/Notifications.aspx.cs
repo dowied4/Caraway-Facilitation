@@ -38,7 +38,7 @@ namespace _395project.dash.Admin
             reader.Close();
 
             //Query to fetch data from the absence db
-            query = "Select * from [Absence]";
+            query = "Select * from [Absence] where Confirmed = 0";
 
 
             SqlCommand = new SqlCommand(query, con);
@@ -77,6 +77,8 @@ namespace _395project.dash.Admin
                 //ErrorMessage.Text = "Added " + splitVars[1] + " " + splitVars[2] + " as a Facilitator to " + splitVars[0];
 
             }
+            //add query so it updates the confirmed column to 1 and subtract hours they
+            //are missing from monthly and yearly
             if (((Button)sender).CommandName.Equals("Absence")){
                 Session["absence"] = ((Button)sender).CommandArgument;
                 Server.Transfer("GiveAbsence.aspx", true);
