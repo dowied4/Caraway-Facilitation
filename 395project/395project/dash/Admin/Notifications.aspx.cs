@@ -80,8 +80,16 @@ namespace _395project.dash.Admin
             //add query so it updates the confirmed column to 1 and subtract hours they
             //are missing from monthly and yearly
             if (((Button)sender).CommandName.Equals("Absence")){
-                Session["absence"] = ((Button)sender).CommandArgument;
-                Server.Transfer("GiveAbsence.aspx", true);
+                string confirm = ((Button)sender).CommandArgument;
+                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                conn.Open();
+                string update = "UPDATE Absence SET Confirmed = @confirm Where Id = @Id";
+                SqlCommand cmd = new SqlCommand(update, conn);
+                cmd.Parameters.AddWithValue("@confirm", 1);
+                cmd.Parameters.AddWithValue("@Id", Int32.Parse(confirm));
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                Response.Redirect(Request.RawUrl);
             }
         }
 
@@ -158,8 +166,7 @@ namespace _395project.dash.Admin
                 Label notificationLabel = makeLabel("Absence", reader);
 
                 //Confirm
-                string confirmCmdArg = reader.GetValue(1).ToString() + "," + reader.GetValue(2).ToString() + "," + reader.GetValue(3).ToString() + "," + reader.GetValue(4).ToString();
-                Button confirm = makeConfirm(confirmCmdArg, "Absence");
+                Button confirm = makeConfirm(reader.GetValue(0).ToString(), "Absence");
 
                 //Clear
                 Button clear = makeClear(reader.GetValue(0).ToString(), "Absence");
