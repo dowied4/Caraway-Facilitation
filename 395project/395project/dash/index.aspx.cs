@@ -258,9 +258,9 @@ namespace _395project.Pages
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             con.Open();
-            string CompletedHours = ("INSERT INTO Stats (Id, FacilitatorFirstName, FacilitatorLastName, " +
+            string CompletedHours = ("INSERT INTO Stats (Id, FacilitatorFirstName, FacilitatorLastName, RoomId, " +
                                       "WeekOfMonth, WeekOfYear, Month, Year, WeeklyHours) VALUES (@CurrentUser, @FirstName, " +
-                                      "@LastName, @WeekOfMonth, @WeekOfYear, @Month, @Year, @WeeklyHours); " +
+                                      "@LastName, @Room, @WeekOfMonth, @WeekOfYear, @Month, @Year, @WeeklyHours); " +
                                       "DELETE FROM Calendar WHERE Id = @CurrentUser and FacilitatorFirstName = @FirstName and FacilitatorLastName = @LastName " +
                                       "and StartTime = @StartTime and EndTime = @EndTime and RoomId = @Room");
             SqlCommand GetCompletedHours = new SqlCommand(CompletedHours, con);
@@ -485,9 +485,9 @@ namespace _395project.Pages
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             con.Open();
-            string CompletedHours = ("INSERT INTO Stats (Id, FacilitatorFirstName, FacilitatorLastName, " +
+            string CompletedHours = ("INSERT INTO Stats (Id, FacilitatorFirstName, FacilitatorLastName, RoomId, " +
                                       "WeekOfMonth, WeekOfYear, Month, Year, WeeklyHours) VALUES (@NewUser, @NewFirstName, " +
-                                      "@NewLastName, @WeekOfMonth, @WeekOfYear, @Month, @Year, @WeeklyHours); " +
+                                      "@NewLastName, @Room, @WeekOfMonth, @WeekOfYear, @Month, @Year, @WeeklyHours); " +
                                       "DELETE FROM Calendar WHERE Id = @CurrentUser and FacilitatorFirstName = @FirstName and FacilitatorLastName = @LastName " +
                                       "and StartTime = @StartTime and EndTime = @EndTime and RoomId = @Room");
             SqlCommand GetCompletedHours = new SqlCommand(CompletedHours, con);

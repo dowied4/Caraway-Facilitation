@@ -58,40 +58,58 @@ namespace _395project.dash.Admin {
         protected global::System.Web.UI.WebControls.GridView ChildView;
         
         /// <summary>
-        /// weekLabel1 control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label weekLabel1;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// weekLabel2 control.
+        /// MonthDropDown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label weekLabel2;
+        protected global::System.Web.UI.WebControls.DropDownList MonthDropDown;
         
         /// <summary>
-        /// weekLabel3 control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label weekLabel3;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// weekLabel4 control.
+        /// YearDropDown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label weekLabel4;
+        protected global::System.Web.UI.WebControls.DropDownList YearDropDown;
+        
+        /// <summary>
+        /// GetYears control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource GetYears;
+        
+        /// <summary>
+        /// UpdateButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button UpdateButton;
         
         /// <summary>
         /// monthlyHoursLabel control.
@@ -110,5 +128,23 @@ namespace _395project.dash.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label yearlyHoursLabel;
+        
+        /// <summary>
+        /// Div1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
+        
+        /// <summary>
+        /// FacilitatorHoursGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView FacilitatorHoursGridView;
     }
 }
