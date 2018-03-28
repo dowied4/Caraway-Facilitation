@@ -144,6 +144,7 @@ namespace _395project.dash.Admin
         private void BindFacilitatorHours(string month, string year)
         {
             int firstWeekOfMonth = GetWeekOfMonth.FirstMonday(Convert.ToInt32(month));
+            Label3.Text = firstWeekOfMonth.ToString();
             String ID = Request.QueryString["ID"];
             //Open Connection
             SqlConnection con = new SqlConnection
