@@ -151,6 +151,7 @@ namespace _395project.dash.Admin
             BindFacilitatorHours(MonthDropDown.Text, YearDropDown.Text);
             BindFacilitatorRoomHours(MonthDropDown.Text, YearDropDown.Text);
             BindRoomHours(MonthDropDown.Text, YearDropDown.Text);
+            BindTotalStats(MonthDropDown.Text, YearDropDown.Text);
         }
 
         //Databinds FacilitatorHoursGridView
@@ -369,30 +370,62 @@ namespace _395project.dash.Admin
 
             con.Open();
 
+            //Gets the number of kids the family has
             string countKids = "SELECT COUNT(*) FROM Children Where Id = @User";
             SqlCommand getNumKids = new SqlCommand(countKids, con);
             getNumKids.Parameters.AddWithValue("@User", ID);
             int numKids = (int)getNumKids.ExecuteScalar();
 
-            string absences = "SELECT sum(DaysMissed) FROM Absence where YEAR(StartDate) = @Year AND Email = @User";
+            //Gets the total absent days the facilitator is missing for the year
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            string absences = "SELECT StartDate, EndDate FROM Absence where Email = @User AND YEAR(StartDate) " +
+                "= @Year AND Confirmed = 1";
             SqlCommand getAbsences = new SqlCommand(absences, con);
+            adapter.SelectCommand = new SqlCommand(absences, con);
             getAbsences.Parameters.AddWithValue("@Year", year);
             getAbsences.Parameters.AddWithValue("@User", ID);
-            /*int numAbsences = (int)getAbsences.ExecuteScalar();
+            SqlDataReader reader = getAbsences.ExecuteReader();
+            Double absentDays = 0;
 
-            int totalWeeks = 44 - (numAbsences / 7);
-            double yearlyHours;
+            //Gets the total weeks so far in the year (based on the selected dropdown date)
+            Double totalWeeks = ((new DateTime(Int32.Parse(year), Int32.Parse(month), DateTime.DaysInMonth(Int32.Parse(year), Int32.Parse(month))) - new DateTime(DateTime.Now.Year, 1, 1)).TotalDays) / 7;
+            Double totalYearlyHours;
+            //Subtracts the absent days from the total days
+            while (reader.Read())
+            {
+                DateTime start = (DateTime)reader.GetValue(0);
+                DateTime end = (DateTime)reader.GetValue(1);
+                absentDays += (end - start).Days;
+            }
+            Label2.Text = absentDays.ToString();
+            totalWeeks -= (absentDays / 7);
+            //Gets how many hours the facilitator needs to work for the year
             switch (numKids)
             {
+                case 0:
+                    totalYearlyHours = 0;
+                    break;
                 case 1:
-                    yearlyHours = totalWeeks * 2.5;
+                    totalYearlyHours = totalWeeks * 2.5;
                     break;
                 default:
-                    yearlyHours = totalWeeks * 5;
-                    break;
+                    totalYearlyHours = totalWeeks * 5;
+                    break; 
             }
-            Label1.Text = yearlyHours.ToString();*/
-            //Label1.Text = getAbsences.ExecuteScalar().GetType().ToString();
+            //Rounds to the nearest hour
+            totalYearlyHours = Math.Round(totalYearlyHours);
+            Label1.Text = totalYearlyHours.ToString();
+
+            //Gets the total hours the family has worked this year
+            DataTable dt = new DataTable();
+            DataRow dr = dt.NewRow();
+            dr["MonthlyTotal"] = string.Empty;
+            dr["YearlyTotal"] = (Int32.Parse(yearlyHoursLabel.Text) - totalYearlyHours).ToString();
+
+            dt.Rows.Add(dr);
+            TotalStatsGridView.DataSource = dt;
+            TotalStatsGridView.DataBind();
+            //TotalStatsGridView.Rows[0].Cells[1].Text = (Int32.Parse(yearlyHoursLabel.Text) - totalYearlyHours).ToString();
         }
     }
 }

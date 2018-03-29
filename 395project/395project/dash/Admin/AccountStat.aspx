@@ -149,6 +149,10 @@
 								<FooterStyle CssClass="FooterStyle" />
 								<RowStyle CssClass="RowStyle" />
 								<AlternatingRowStyle CssClass="AlternatingRowStyle" />
+							<Columns>
+								<asp:BoundField DataField="MonthlyTotal" HeaderText="Monthly Total" />
+								<asp:BoundField DataField="YearlyTotal" HeaderText="Yearly Total" />
+							</Columns>
 						</asp:GridView>
 					</div>
 				</div>
