@@ -163,7 +163,7 @@
                     <asp:BoundField DataField="Room" HeaderText="Room" />
                     <asp:TemplateField HeaderText="Confirm">
                         <ItemTemplate>
-                            <asp:LinkButton ID="comfirmButtons" runat="server" Text="Confirm" OnClick="ConfirmButton" />
+                            <asp:LinkButton ID="comfirmButtons" runat="server" Text="Confirm" OnClick="ConfirmLink" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Decline">
@@ -180,7 +180,20 @@
             </asp:GridView>
         </div>
     </div>
-
+    <ajaxToolkit:ModalPopupExtender ID="ConfirmPopupExtender2" runat="server" PopupControlID="Panel4" 
+        BackgroundCssClass="modalBackground" TargetControlID="btn" X="-1" Y="-1" 
+		RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
+    <asp:Panel ID="Panel4" runat ="server">
+      <div class="row" style="padding-bottom:10px;" >
+        <asp:TextBox ID="StartTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
+	  </div>
+	  <div class="row" style="padding-bottom:10px;">
+	    <asp:TextBox ID="EndTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
+	  </div>
+      <asp:Button ID="Button5" runat="server" Text="Confirm" OnClick="onConfirm" CssClass="mybutton"/>
+      <asp:Button ID="Button6" runat="server" Text="Cancel" OnClick="onCancel" CssClass="mybutton"/>
+     <asp:Label ID="testLabel" Visible="false" runat="server"></asp:Label>
+     </asp:Panel>
 	<ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="Panel1" 
 		BackgroundCssClass="modalBackground" TargetControlID="btn" X="-1" Y="-1" 
 		RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>

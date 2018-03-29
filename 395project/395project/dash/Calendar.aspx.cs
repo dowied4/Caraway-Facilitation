@@ -317,9 +317,9 @@ namespace _395project.dash
             TimeSlotDropDown.SelectedIndex = 0;
             ModalPopupExtender1.Hide();
         }
-        protected void editButton_Click(object sender, EventArgs e)
+        protected void editClick(object sender, EventArgs e)
         {
-
+            ModalPopupExtender1.Show();
         }
     }
 }

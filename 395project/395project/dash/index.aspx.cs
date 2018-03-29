@@ -168,7 +168,11 @@ namespace _395project.Pages
 
 
         }
-
+        //Confirm Button to open popup extender
+        protected void ConfirmLink(object sender, System.EventArgs e)
+        {
+            ConfirmPopupExtender2.Show();
+        }
 
         //Confirm button on completed hours grid
         protected void ConfirmButton(object sender, System.EventArgs e)
