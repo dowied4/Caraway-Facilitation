@@ -76,10 +76,10 @@
                 
                 <asp:Panel ID="Panel1" runat ="server">
                     <div class="row" style="padding-bottom:10px;" >
-               		    <asp:TextBox ID="StartTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
+               		    <asp:TextBox ID="StartTimeTextBox" type="time" runat="server" CssClass="signupDropDown"></asp:TextBox>
 					</div>
 					<div class="row" style="padding-bottom:10px;">
-					    <asp:TextBox ID="EndTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
+					    <asp:TextBox ID="EndTimeTextBox" type="time" runat="server" CssClass="signupDropDown"></asp:TextBox>
 					</div>
                     <asp:Button ID="okButton" runat="server" Text="Confirm" OnClick="onConfirm" CssClass="mybutton"/>
                     <asp:Button ID="cancelButton" runat="server" Text="Cancel" OnClick="onCancel" CssClass="mybutton"/>
@@ -90,8 +90,6 @@
                 <div class="row">
 		            <asp:Button ID="SignUpButton" runat="server" Text="Sign Up" OnClick="SignUpButton_Click" CssClass="mybutton"/>
                 </div>
-
-
             </div>
         </div>
     </div>
