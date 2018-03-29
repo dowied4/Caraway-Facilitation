@@ -59,8 +59,19 @@ namespace _395project.dash.Admin
 
                 //Sets MonthDropDown to the current month
                 MonthDropDown.SelectedValue = DateTime.Now.Month.ToString();
+
                 //Binds the Facilitator hour table to the current date
                 BindFacilitatorHours(MonthDropDown.Text, YearDropDown.Text);
+
+                //Binds the Facilitator Room hour table to the current date
+                BindFacilitatorRoomHours(MonthDropDown.Text, YearDropDown.Text);
+
+                //Binds the Room hour table to the current date
+                BindRoomHours(MonthDropDown.Text, YearDropDown.Text);
+
+                //Binds the total stats table to the current date
+                BindTotalStats(MonthDropDown.Text, YearDropDown.Text);
+
             }
 
 
@@ -138,13 +149,14 @@ namespace _395project.dash.Admin
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
             BindFacilitatorHours(MonthDropDown.Text, YearDropDown.Text);
+            BindFacilitatorRoomHours(MonthDropDown.Text, YearDropDown.Text);
+            BindRoomHours(MonthDropDown.Text, YearDropDown.Text);
         }
 
         //Databinds FacilitatorHoursGridView
         private void BindFacilitatorHours(string month, string year)
         {
             int firstWeekOfMonth = GetWeekOfMonth.FirstMonday(Convert.ToInt32(month));
-            Label3.Text = firstWeekOfMonth.ToString();
             String ID = Request.QueryString["ID"];
             //Open Connection
             SqlConnection con = new SqlConnection
@@ -206,6 +218,181 @@ namespace _395project.dash.Admin
             FacilitatorHoursGridView.DataBind();
 
             upcompQuery.Close();
+        }
+        
+        //Databinds FacilitatorRoomHours Gridview
+        private void BindFacilitatorRoomHours(string month, string year)
+        {
+            int firstWeekOfMonth = GetWeekOfMonth.FirstMonday(Convert.ToInt32(month));
+            String ID = Request.QueryString["ID"];
+            //Open Connection
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+            };
+
+            con.Open();
+
+            //Gets each week, the month and the year for each facilitator
+            string upc = "SELECT Facilitators.Name, Yearly.Room, Week1.Week1 AS 'Week 1', Week2.Week2 AS 'Week 2',  Week3.Week3 AS 'Week 3', " +
+              "Week4.Week4 AS 'Week 4', Monthly.MonthTotal, Yearly.YearTotal " +
+              "FROM(SELECT(S.FacilitatorFirstName + ' ' + S.FacilitatorLastName) AS Name, R.Room, sum(WeeklyHours) as MonthTotal " +
+              "FROM Stats as S, Rooms as R WHERE R.RoomId = S.RoomId AND " +
+              "S.Month = @Month GROUP BY(S.FacilitatorFirstName + ' ' + S.FacilitatorLastName), R.Room) AS Monthly " +
+              "FULL JOIN " +
+              "(SELECT (S.FacilitatorFirstName +' ' + S.FacilitatorLastName) AS Name, R.Room, sum(WeeklyHours) as YearTotal " +
+              "FROM Stats as S, Rooms as R WHERE R.RoomId = S.RoomId AND " +
+              "S.Year = @Year GROUP BY(S.FacilitatorFirstName +' ' + S.FacilitatorLastName), R.Room) AS Yearly " +
+              "ON Monthly.Name = Yearly.Name AND Yearly.Room = Monthly.Room " +
+              "FULL JOIN( " +
+              "(SELECT SUM(S.WeeklyHours) AS Week1, (S.FacilitatorFirstName +' ' + S.FacilitatorLastName) AS Name, R.Room " +
+              "FROM dbo.Stats AS S, Rooms AS R WHERE R.RoomId = S.RoomId AND S.Id = @User AND S.Month = @Month " +
+              "AND S.Year = @Year AND S.WeekOfYear = @Week1 GROUP BY(S.FacilitatorFirstName +' ' + S.FacilitatorLastName), R.Room) " +
+              ") AS Week1 " +
+              "ON Week1.Name = Yearly.Name AND Yearly.Room = Week1.Room " +
+              "FULL JOIN " +
+              "(SELECT SUM(S.WeeklyHours) AS Week2, (S.FacilitatorFirstName +' ' + S.FacilitatorLastName) AS Name, R.Room " +
+              "FROM dbo.Stats AS S, Rooms AS R WHERE R.RoomId = S.RoomId AND S.Id = @User AND S.Month = @Month " +
+              "AND S.Year = @Year AND S.WeekOfYear = @Week2 GROUP BY(S.FacilitatorFirstName +' ' + S.FacilitatorLastName), R.Room) " +
+              "AS Week2 " +
+              "ON Week2.Name = Yearly.Name AND Yearly.Room = Week2.Room " +
+              "FULL JOIN " +
+              "(SELECT SUM(S.WeeklyHours) AS Week3, (S.FacilitatorFirstName +' ' + S.FacilitatorLastName) AS Name, R.Room " +
+              "FROM dbo.Stats AS S, Rooms AS R WHERE R.RoomId = S.RoomId AND S.Id = @User AND S.Month = @Month " +
+              "AND S.Year = @Year AND S.WeekOfYear = @Week3 GROUP BY(S.FacilitatorFirstName +' ' + S.FacilitatorLastName), R.Room) " +
+              "AS Week3 " +
+              "ON Week3.Name = Yearly.Name AND Yearly.Room = Week3.Room " +
+              "FULL JOIN " +
+              "(SELECT SUM(S.WeeklyHours) AS Week4, (S.FacilitatorFirstName +' ' + S.FacilitatorLastName) AS Name, R.Room " +
+              "FROM dbo.Stats AS S, Rooms AS R WHERE R.RoomId = S.RoomId AND S.Id = @User AND S.Month = @Month " +
+              "AND S.Year = @Year AND S.WeekOfYear = @Week4 GROUP BY(S.FacilitatorFirstName +' ' + S.FacilitatorLastName), R.Room) " +
+              "AS Week4 " +
+              "ON Week4.Name = Yearly.Name AND Yearly.Room = Week4.Room " +
+              "RIGHT JOIN " +
+              "(SELECT (F.FirstName +' ' + F.LastName) AS Name FROM dbo.Facilitators AS F WHERE F.Id = @User) AS Facilitators " +
+              "ON Facilitators.Name = Yearly.Name";
+            SqlCommand getup = new SqlCommand(upc, con);
+            getup.Parameters.AddWithValue("@Week1", firstWeekOfMonth);
+            getup.Parameters.AddWithValue("@Week2", firstWeekOfMonth + 1);
+            getup.Parameters.AddWithValue("@Week3", firstWeekOfMonth + 2);
+            getup.Parameters.AddWithValue("@Week4", firstWeekOfMonth + 3);
+            getup.Parameters.AddWithValue("@Month", month);
+            getup.Parameters.AddWithValue("@Year", year);
+            getup.Parameters.AddWithValue("@User", ID);
+
+            //Execture the querey
+            SqlDataReader upcompQuery = getup.ExecuteReader();
+            FacilitatorRoomHoursGridView.DataSource = upcompQuery;
+
+            FacilitatorRoomHoursGridView.DataBind();
+
+            upcompQuery.Close();
+        }
+
+        //Databinds RoomHoursGridView
+        private void BindRoomHours(string month, string year)
+        {
+            int firstWeekOfMonth = GetWeekOfMonth.FirstMonday(Convert.ToInt32(month));
+            String ID = Request.QueryString["ID"];
+            //Open Connection
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+            };
+
+            con.Open();
+
+            //Gets each week, the month and the year for each facilitator
+            string upc = "SELECT Rooms.Room, Week1.Week1 AS 'Week 1', Week2.Week2 AS 'Week 2',  Week3.Week3 AS 'Week 3', " +
+                "Week4.Week4 AS 'Week 4', Monthly.MonthTotal, Yearly.YearTotal " +
+                "FROM(SELECT R.Room, sum(WeeklyHours) as MonthTotal " +
+                "FROM Stats as S, Rooms as R WHERE R.RoomId = S.RoomId AND " +
+                "S.Month = 3 GROUP BY R.Room) AS Monthly " +
+                "LEFT JOIN " +
+                "(SELECT R.Room, sum(WeeklyHours) as YearTotal " +
+                "FROM Stats as S, Rooms as R WHERE R.RoomId = S.RoomId AND " +
+                "S.Year = 2018 GROUP BY R.Room) AS Yearly " +
+                "ON Yearly.Room = Monthly.Room " +
+                "FULL JOIN( " +
+                "(SELECT SUM(S.WeeklyHours) AS Week1, R.Room " +
+                "FROM dbo.Stats AS S, Rooms AS R WHERE R.RoomId = S.RoomId AND S.Id = 'sullivanr5@mymacewan.ca' AND S.Month = 3 " +
+                "AND S.Year = 2018 AND S.WeekOfYear = 10 GROUP BY R.Room)) " +
+                "AS Week1 " +
+                "ON Yearly.Room = Week1.Room " +
+                "FULL JOIN " +
+                "(SELECT SUM(S.WeeklyHours) AS Week2, R.Room " +
+                "FROM dbo.Stats AS S, Rooms AS R WHERE R.RoomId = S.RoomId AND S.Id = 'sullivanr5@mymacewan.ca' AND S.Month = 3 " +
+                "AND S.Year = 2018 AND S.WeekOfYear = 11 GROUP BY R.Room) AS Week2 " +
+                "ON Week2.Room = Yearly.Room " +
+                "FULL JOIN " +
+                "(SELECT SUM(S.WeeklyHours) AS Week3, R.Room " +
+                "FROM dbo.Stats AS S, Rooms AS R WHERE R.RoomId = S.RoomId AND S.Id = 'sullivanr5@mymacewan.ca' AND S.Month = 3 " +
+                "AND S.Year = 2018 AND S.WeekOfYear = 12 GROUP BY R.Room) " +
+                "AS Week3 " +
+                "ON Week3.Room = Yearly.Room " +
+                "FULL JOIN " +
+                "(SELECT SUM(S.WeeklyHours) AS Week4, R.Room " +
+                "FROM dbo.Stats AS S, Rooms AS R WHERE R.RoomId = S.RoomId AND S.Id = 'sullivanr5@mymacewan.ca' AND S.Month = 3 " +
+                "AND S.Year = 2018 AND S.WeekOfYear = 13 GROUP BY R.Room) AS Week4 " +
+                "ON Week4.Room = Yearly.Room " +
+                "RIGHT JOIN " +
+                "(SELECT Room FROM Rooms) AS Rooms " +
+                "ON Rooms.Room = Yearly.Room";
+
+            SqlCommand getup = new SqlCommand(upc, con);
+            getup.Parameters.AddWithValue("@Week1", firstWeekOfMonth);
+            getup.Parameters.AddWithValue("@Week2", firstWeekOfMonth + 1);
+            getup.Parameters.AddWithValue("@Week3", firstWeekOfMonth + 2);
+            getup.Parameters.AddWithValue("@Week4", firstWeekOfMonth + 3);
+            getup.Parameters.AddWithValue("@Month", month);
+            getup.Parameters.AddWithValue("@Year", year);
+            getup.Parameters.AddWithValue("@User", ID);
+
+            //Execture the querey
+            SqlDataReader upcompQuery = getup.ExecuteReader();
+            RoomHoursGridView.DataSource = upcompQuery;
+
+            RoomHoursGridView.DataBind();
+
+            upcompQuery.Close();
+        }
+
+        //Binds the TotalStatsGridView **DOES NOT WORK WHEN AN ABSENCE EXTENDS INTO A NEW CALENDAR YEAR***
+        protected void BindTotalStats(string month, string year)
+        {
+            String ID = Request.QueryString["ID"];
+            //Open Connection
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+            };
+
+            con.Open();
+
+            string countKids = "SELECT COUNT(*) FROM Children Where Id = @User";
+            SqlCommand getNumKids = new SqlCommand(countKids, con);
+            getNumKids.Parameters.AddWithValue("@User", ID);
+            int numKids = (int)getNumKids.ExecuteScalar();
+
+            string absences = "SELECT sum(DaysMissed) FROM Absence where YEAR(StartDate) = @Year AND Email = @User";
+            SqlCommand getAbsences = new SqlCommand(absences, con);
+            getAbsences.Parameters.AddWithValue("@Year", year);
+            getAbsences.Parameters.AddWithValue("@User", ID);
+            /*int numAbsences = (int)getAbsences.ExecuteScalar();
+
+            int totalWeeks = 44 - (numAbsences / 7);
+            double yearlyHours;
+            switch (numKids)
+            {
+                case 1:
+                    yearlyHours = totalWeeks * 2.5;
+                    break;
+                default:
+                    yearlyHours = totalWeeks * 5;
+                    break;
+            }
+            Label1.Text = yearlyHours.ToString();*/
+            //Label1.Text = getAbsences.ExecuteScalar().GetType().ToString();
         }
     }
 }
