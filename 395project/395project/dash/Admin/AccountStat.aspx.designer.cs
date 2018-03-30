@@ -130,15 +130,6 @@ namespace _395project.dash.Admin {
         protected global::System.Web.UI.WebControls.Label yearlyHoursLabel;
         
         /// <summary>
-        /// Div1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
-        
-        /// <summary>
         /// FacilitatorHoursGridView control.
         /// </summary>
         /// <remarks>
@@ -148,12 +139,30 @@ namespace _395project.dash.Admin {
         protected global::System.Web.UI.WebControls.GridView FacilitatorHoursGridView;
         
         /// <summary>
-        /// Label3 control.
+        /// TotalStatsGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.GridView TotalStatsGridView;
+        
+        /// <summary>
+        /// FacilitatorRoomHoursGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView FacilitatorRoomHoursGridView;
+        
+        /// <summary>
+        /// RoomHoursGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView RoomHoursGridView;
     }
 }

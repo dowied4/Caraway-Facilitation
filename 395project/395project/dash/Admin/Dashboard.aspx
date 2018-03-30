@@ -11,9 +11,23 @@
     <h2 id="head" runat="server">Dashboard</h2>
     <hr />
 
-    <h2 id="role" runat="server">Current Absences:</h2>
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="true"></asp:GridView>
-
+	<div class="col-md-offset-2 col-md-3">
+		<div class="dashboardMargins" id="dashboardFacilitatorsLabel">
+			<asp:Label runat="server" CssClass="dash-header">Current Absences</asp:Label>
+		</div>
+		<div class="row" id="userFacil" runat="server">
+			<div id="dashboardGridFacilitator" class="dashboardMargins">
+				<div class="rounded_corners" style="width: 500px">
+					<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="true" CssClass="myGridView" style="width: 500px" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+						<HeaderStyle CssClass="HeaderStyle" />
+						<FooterStyle CssClass="FooterStyle" />
+						<RowStyle CssClass="RowStyle" />
+						<AlternatingRowStyle CssClass="AlternatingRowStyle" />
+					</asp:GridView>
+				</div>
+			</div>
+		</div>
+		</div>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="footer" runat="server">
 </asp:Content>
