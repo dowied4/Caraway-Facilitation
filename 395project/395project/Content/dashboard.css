@@ -283,7 +283,8 @@ tr.AlternatingRowStyle:hover {
 #Week2Label, #Week3Label, #Week4Label, #statsYearlyLabel, #yearlyHoursLabel, #monthlyHoursLabel, #statsMonthlyLabel,
 #alSearch, #dashboardDonate, #dashboardDonateButtons, #dashboardDonateFac, #dashboardDonateEmail, #dashboardDonateEmailTxt,
 #dashboardDonateFacDrop, #dashboardDecline, #dashboardDeclineTxt, #dashboardDeclineInfo, #dashboardDecline, 
-#dashboardDeclineTotal, #dashboardDeclineNum, #dashboardDeclineButtons {
+#dashboardDeclineTotal, #dashboardDeclineNum, #dashboardDeclineButtons, #facilitatorConfirm, #notiAdd, #notiConfirmText, #notiFacilButtons, #absenceConfirmPanel, 
+#absenceAdd, #absenceConfirmTxt, #notAbsButtons {
     width: 100%;
     text-align: center;
     padding-bottom: 5px;
