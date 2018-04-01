@@ -11,7 +11,6 @@
     <hr />
 
     <div class="form-horizontal">
-        <asp:ValidationSummary runat="server" CssClass="error-text" />
 
         <!-- Time From -->
         <div class="thing">
@@ -35,6 +34,7 @@
                     <div>
                         <asp:TextBox runat="server" ID="Reason" CssClass="signupDropDown" Width="200px"></asp:TextBox>
                     </div>
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="Reason" CssClass="error-text" ErrorMessage="The 'Reason' field is required." />
                 </div>
             </div>
 
