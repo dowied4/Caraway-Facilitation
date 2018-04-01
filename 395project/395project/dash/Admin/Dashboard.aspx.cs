@@ -21,28 +21,7 @@ namespace _395project.dash.Admin
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Open Connection
-            SqlConnection con = new SqlConnection
-            {
-                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
-            };
-
-            con.Open();
-
-            //Get facilitators that are currently on approved leave
-            string upc = "SELECT Email, StartDate, EndDate FROM Absence WHERE StartDate <= @CurrentDate " +
-                "AND EndDate >= @CurrentDate AND Confirmed = 1";
-            SqlCommand getup = new SqlCommand(upc, con);
-            getup.Parameters.AddWithValue("@CurrentDate", DateTime.Now);
-
-
-            //Execture the querey
-            SqlDataReader upcompQuery = getup.ExecuteReader();
-            GridView1.DataSource = upcompQuery;
-
-            GridView1.DataBind();
-            con.Close();
-            //DataBindFacilitatorAbsence();
+            DataBindFacilitatorAbsence();
         }
 
         protected void DataBindFacilitatorAbsence()
@@ -57,11 +36,12 @@ namespace _395project.dash.Admin
             con.Open();
 
             //Get facilitators that are currently on approved leave
-            string upc = "SELECT Email, StartDate, EndDate FROM Absence WHERE StartDate >= @CurrentDate " +
-                "AND EndDate <= @CurrentDate AND Confirmed = 1";
+            string upc = "SELECT Email, CONVERT(DATE, StartDate) as 'Start Date', CONVERT(DATE, EndDate) as 'End Date' " +
+                "FROM Absence WHERE StartDate <= @CurrentDate " +
+                "AND EndDate >= @CurrentDate AND Confirmed = 1";
             SqlCommand getup = new SqlCommand(upc, con);
             getup.Parameters.AddWithValue("@CurrentDate", DateTime.Now);
-            
+
 
             //Execture the querey
             SqlDataReader upcompQuery = getup.ExecuteReader();

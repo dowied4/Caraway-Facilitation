@@ -62,40 +62,50 @@
 	                <asp:SqlDataSource ID="Rooms" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT [Room] FROM [Rooms]"></asp:SqlDataSource>
                 </div>
 
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                <ContentTemplate>
                 <!-- Time Slot Choice -->
                 <div class="row" style="padding-right:14px;">
                     <asp:Label ID="TimeSlotLabel" runat="server" CssClass="input-header">Time Slot</asp:Label>
                 </div>										
 				<div class="row" style="padding-bottom:10px;" >
-					<asp:DropDownList ID="TimeSlotDropDown" runat="server" AutoPostBack="true" CssClass="signupDropDown" OnSelectedIndexChanged="TimeSlotDropDown_SelectedIndexChanged" Width="168px">
+					<asp:DropDownList ID="TimeSlotDropDown" runat="server" AutoPostBack="false" CssClass="signupDropDown" OnSelectedIndexChanged="TimeSlotDropDown_SelectedIndexChanged" Width="168px">
 					</asp:DropDownList>
-                    <button runat="server" id="editRun" class="btn btn-default" title="Edit">
+                    <button runat="server" id="editRun" class="btn btn-default" AutoPostBack="false" onserverclick="editClick" title="Edit">
                         <i class="fa fa-edit"></i>
                     </button>
 				</div>
+                </ContentTemplate>
+                </asp:UpdatePanel>
                 
                 <asp:Panel ID="Panel1" runat ="server">
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
                     <div class="row" style="padding-bottom:10px;" >
-               		    <asp:TextBox ID="StartTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
+               		    <asp:TextBox ID="StartTimeTextBox" type="time" runat="server" CssClass="signupDropDown"></asp:TextBox>
 					</div>
 					<div class="row" style="padding-bottom:10px;">
-					    <asp:TextBox ID="EndTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
+					    <asp:TextBox ID="EndTimeTextBox" type="time" runat="server" CssClass="signupDropDown"></asp:TextBox>
 					</div>
                     <asp:Button ID="okButton" runat="server" Text="Confirm" OnClick="onConfirm" CssClass="mybutton"/>
                     <asp:Button ID="cancelButton" runat="server" Text="Cancel" OnClick="onCancel" CssClass="mybutton"/>
                     <asp:Label ID="testLabel" Visible="false" runat="server"></asp:Label>
+                    </ContentTemplate>
+                    </asp:UpdatePanel>
                 </asp:Panel>
-                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="Panel1" BackgroundCssClass="modalBackground" TargetControlID="editRun" X="-1" Y="-1" RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
+                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="Panel1" BackgroundCssClass="modalBackground" TargetControlID="btn" X="-1" Y="-1" RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
                 <!-- Sign Up Button -->
                 <div class="row">
 		            <asp:Button ID="SignUpButton" runat="server" Text="Sign Up" OnClick="SignUpButton_Click" CssClass="mybutton"/>
                 </div>
-
-
             </div>
         </div>
     </div>
 
+    <!-- Hidden button to link to modalpopup -->
+	<div style="visibility:hidden">
+		<asp:Button id="btn" runat="server"/>
+	</div>
     <asp:Label ID="Label1" runat="server" Text="Label" Visible="False" Font-Size="Large"></asp:Label>	
     
     <DayPilot:DayPilotScheduler 
