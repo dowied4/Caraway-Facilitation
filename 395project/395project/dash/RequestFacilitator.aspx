@@ -8,7 +8,6 @@
         <asp:Label runat="server" ID="ErrorMessages" />
     </p>
     <div class="form-horizontal">
-        <asp:ValidationSummary runat="server" CssClass="error-text" />
 
         <!-- REQUEST: First Name -->
         <div class="thing">
@@ -20,6 +19,7 @@
 			<div class="row">
                 <div class="col-md-6">
                     <asp:TextBox runat="server" ID="FacilitatorFirst" CssClass="form-control" Width="300px" />
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="FacilitatorFirst" CssClass="error-text" ErrorMessage="The 'First Name' field is required." />
                 </div>
 			</div>
 		</div>
@@ -34,6 +34,7 @@
 			<div class="row">
                 <div class="col-md-6">
                     <asp:TextBox runat="server" ID="FacilitatorLast" CssClass="form-control" Width="300px" />
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="FacilitatorLast" CssClass="error-text" ErrorMessage="The 'Last Name' field is required." />
                 </div>
 			</div>
 		</div>

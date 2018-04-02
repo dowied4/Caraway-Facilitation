@@ -50,11 +50,16 @@ namespace _395project.dash.Admin
             displayAbsenceRequests(reader);
             reader.Close();
             con.Close();
+
+            if (alerts.Controls.Count > 0)
+                noNotifications.Visible = false;
+            else
+                noNotifications.Visible = true;
         }
 
         protected void Confirm_Click(object sender, EventArgs e)
         {
-            if (((Button)sender).CommandName.Equals("Facilitator")){
+            if (((Button)sender).CommandName.Equals("Facilitator")) {
                 string vars = ((Button)sender).CommandArgument;
                 string[] splitVars = vars.Split(',');
                 SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
@@ -73,13 +78,14 @@ namespace _395project.dash.Admin
                 rm.ExecuteNonQuery();
                 conn.Close();
                 removeOnConfirm(Int32.Parse(splitVars[3]), ((Button)sender).CommandName);
+                ConfirmPopupExtender.Hide();
                 Response.Redirect(Request.RawUrl);
                 //ErrorMessage.Text = "Added " + splitVars[1] + " " + splitVars[2] + " as a Facilitator to " + splitVars[0];
 
             }
             //add query so it updates the confirmed column to 1 and subtract hours they
             //are missing from monthly and yearly
-            if (((Button)sender).CommandName.Equals("Absence")){
+            if (((Button)sender).CommandName.Equals("Absence")) {
                 string confirm = ((Button)sender).CommandArgument;
                 SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 conn.Open();
@@ -89,6 +95,7 @@ namespace _395project.dash.Admin
                 cmd.Parameters.AddWithValue("@Id", Int32.Parse(confirm));
                 cmd.ExecuteNonQuery();
                 conn.Close();
+                AbsencePopupExtender.Hide();
                 Response.Redirect(Request.RawUrl);
             }
         }
@@ -102,7 +109,7 @@ namespace _395project.dash.Admin
 
             if (cmdName.Equals("Facilitator"))
                 remove = "Delete from RequestFacilitator where Id = @RequestID";
-  
+
             if (cmdName.Equals("Absence"))
                 remove = "Delete from Absence where Id = @RequestID";
 
@@ -189,7 +196,10 @@ namespace _395project.dash.Admin
             confirm.CommandArgument = cmdArg;
             confirm.Attributes.Add("runat", "server");
             confirm.Attributes.Add("class", "mybutton");
-            confirm.Click += new EventHandler(Confirm_Click);
+            if (requestType.Equals("Facilitator"))
+                confirm.Click += new EventHandler(confirmFacilitator);
+            if(requestType.Equals("Absence"))
+                confirm.Click += new EventHandler(confirmAbsenceReq);
             confirm.Text = "Confirm";
             confirm.Style.Add("float", "right");
             confirm.Style.Add("margin-right", "20px");
@@ -221,6 +231,37 @@ namespace _395project.dash.Admin
             notificationsLabel.Attributes.Add("class", "input-header");
 
             return notificationsLabel;
+        }
+
+        protected void confirmFacilitator(object sender, System.EventArgs e)
+        {
+            ConfirmPopupExtender.Show();
+            string vars = ((Button)sender).CommandArgument;
+            string[] splitVars = vars.Split(',');
+            facilConfirmButton.CommandName = ((Button)sender).CommandName;
+            facilConfirmButton.CommandArgument = vars;
+
+            infoLabel.Text = "Add " + splitVars[1] + " " + splitVars[2] + " as a facilitator to " + splitVars[0];
+
+        }
+
+        protected void cancelFacilitator(object sender, System.EventArgs e)
+        {
+            ConfirmPopupExtender.Hide();
+        }
+
+        protected void confirmAbsenceReq(object sender, System.EventArgs e)
+        {
+            AbsencePopupExtender.Show();
+            confirmAbsence.CommandName = ((Button)sender).CommandName;
+            confirmAbsence.CommandArgument = ((Button)sender).CommandArgument;
+
+            infoLabel2.Text = "Allow absence for stated period?";
+        }
+
+        protected void cancelAbsenceReq(object sender, System.EventArgs e)
+        {
+            AbsencePopupExtender.Hide();
         }
     }
 }

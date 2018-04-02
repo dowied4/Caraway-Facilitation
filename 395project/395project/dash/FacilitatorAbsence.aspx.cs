@@ -31,51 +31,43 @@ namespace _395project.Pages
             DateTime endValid = new DateTime(2020, 1, 1);
 
 
-            if (Reason.Text.Length > 0)
+            try
             {
-                try
+                DateTime startTime = new DateTime(Int32.Parse(fromDate[0]), Int32.Parse(fromDate[1]), Int32.Parse(fromDate[2]));
+                DateTime endTime = new DateTime(Int32.Parse(toDate[0]), Int32.Parse(toDate[1]), Int32.Parse(toDate[2]));
+
+                if (startTime < endTime && startTime > startValid && endTime < endValid)
                 {
-                    DateTime startTime = new DateTime(Int32.Parse(fromDate[0]), Int32.Parse(fromDate[1]), Int32.Parse(fromDate[2]));
-                    DateTime endTime = new DateTime(Int32.Parse(toDate[0]), Int32.Parse(toDate[1]), Int32.Parse(toDate[2]));
+                    SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                    conn.Open();
+                    string insert = "insert into Absence(Email, StartDate, EndDate, Reason) values (@CurrentUser, @StartDate, @EndDate, @Reason)";
+                    SqlCommand cmd = new SqlCommand(insert, conn);
+                    cmd.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
+                    cmd.Parameters.AddWithValue("@StartDate", startTime);
+                    cmd.Parameters.AddWithValue("@EndDate", endTime);
+                    cmd.Parameters.AddWithValue("@Reason", Reason.Text);
 
-                    if (startTime < endTime && startTime > startValid && endTime < endValid)
-                    {
-                        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-                        conn.Open();
-                        string insert = "insert into Absence(Email, StartDate, EndDate, Reason) values (@CurrentUser, @StartDate, @EndDate, @Reason)";
-                        SqlCommand cmd = new SqlCommand(insert, conn);
-                        cmd.Parameters.AddWithValue("@CurrentUser", User.Identity.GetUserId());
-                        cmd.Parameters.AddWithValue("@StartDate", startTime);
-                        cmd.Parameters.AddWithValue("@EndDate", endTime);
-                        cmd.Parameters.AddWithValue("@Reason", Reason.Text);
+                    cmd.ExecuteNonQuery();
 
-                        cmd.ExecuteNonQuery();
+                    string remove = "delete from Absence where Email = '' or StartDate = '' or EndDate = '' or Reason = ''";
+                    SqlCommand rm = new SqlCommand(remove, conn);
+                    rm.ExecuteNonQuery();
+                    conn.Close();
 
-                        string remove = "delete from Absence where Email = '' or StartDate = '' or EndDate = '' or Reason = ''";
-                        SqlCommand rm = new SqlCommand(remove, conn);
-                        rm.ExecuteNonQuery();
-                        conn.Close();
-
-                        Reason.Text = string.Empty;
-                        ErrorMessages.ForeColor = System.Drawing.Color.Green;
-                        ErrorMessages.Text = "Absence Request Sent!";
-                    }
-                    else
-                    {
-                        ErrorMessages.ForeColor = System.Drawing.Color.Red;
-                        ErrorMessages.Text = "Invalid date(s) chosen";
-                    }
+                    Reason.Text = string.Empty;
+                    ErrorMessages.ForeColor = System.Drawing.Color.Green;
+                    ErrorMessages.Text = "Absence Request Sent!";
                 }
-                catch (FormatException ex)
+                else
                 {
                     ErrorMessages.ForeColor = System.Drawing.Color.Red;
                     ErrorMessages.Text = "Invalid date(s) chosen";
                 }
             }
-            else
+            catch (FormatException ex)
             {
                 ErrorMessages.ForeColor = System.Drawing.Color.Red;
-                ErrorMessages.Text = "Invalid 'Reason' input";
+                ErrorMessages.Text = "Invalid date(s) chosen";
             }
         }
     }
