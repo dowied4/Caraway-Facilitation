@@ -1,30 +1,29 @@
-﻿using System;
+﻿using _395project.App_Code;
+using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Owin;
-using _395project.Models;
-using System.Data.Entity;
-using System.Data.SqlClient;
-using System.Configuration;
-using _395project.App_Code;
-using System.Data;
-using System.Globalization;
 using System.Web.UI.WebControls;
 
-namespace _395project.dash.Admin
+namespace _395project.dash
 {
-    public partial class AccountStat : System.Web.UI.Page
+    public partial class UserStats : System.Web.UI.Page
     {
+
+
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
             ChooseMaster choose = new ChooseMaster();
             MasterPageFile = choose.GetMaster();
         }
-        
+
         //Adds all the months of the year to the month dropdown
         protected void MonthBind()
         {
@@ -39,16 +38,15 @@ namespace _395project.dash.Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             //Gets the Selected User
-            String ID = Request.QueryString["ID"];
-            head.InnerHtml = "Account: " + ID;
+            String ID = User.Identity.GetUserId();
 
             if (!IsPostBack)
-            { 
+            {
                 //Adds the months of the year to the MonthDropDown
                 MonthBind();
                 //Databinds the years to YearDropDown
                 YearDropDown.DataBind();
-                
+
                 /*Checks if the current year is in the dropdown (They have volunteered this year)
                  * and if not makes the starting value the bottom value (the most recent year)
                  * */
@@ -71,7 +69,7 @@ namespace _395project.dash.Admin
                 BindFacilitatorRoomHours(MonthDropDown.Text, YearDropDown.Text, ID);
 
                 //Binds the Room hour table to the current date
-                BindRoomHours(MonthDropDown.Text, YearDropDown.Text,ID);
+                BindRoomHours(MonthDropDown.Text, YearDropDown.Text, ID);
 
                 //Binds the total stats table to the current date
                 BindTotalStats(MonthDropDown.Text, YearDropDown.Text, ID);
@@ -122,7 +120,7 @@ namespace _395project.dash.Admin
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
             //Gets the Selected User
-            String ID = Request.QueryString["ID"];
+            String ID = User.Identity.GetUserId();
 
             BindFacilitatorHours(MonthDropDown.Text, YearDropDown.Text, ID);
             BindFacilitatorRoomHours(MonthDropDown.Text, YearDropDown.Text, ID);
@@ -252,7 +250,7 @@ namespace _395project.dash.Admin
 
             upcompQuery.Close();
         }
-        
+
         //Databinds FacilitatorRoomHours Gridview
         private void BindFacilitatorRoomHours(string month, string year, string ID)
         {
@@ -467,7 +465,7 @@ namespace _395project.dash.Admin
                 default:
                     totalYearlyHours = yearTotalWeeks * 5;
                     totalMonthlyHours = monthTotalWeeks * 5;
-                    break; 
+                    break;
             }
             //Rounds to the nearest hour
             totalYearlyHours = Math.Round(totalYearlyHours, 1);
@@ -484,6 +482,6 @@ namespace _395project.dash.Admin
             dt.Rows.Add(dr);
             TotalStatsGridView.DataSource = dt;
             TotalStatsGridView.DataBind();
-            }
+        }
     }
 }

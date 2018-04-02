@@ -104,7 +104,7 @@
                             <a href="/dash/Calendar.aspx"><i class="fa fa-table fa-fw"></i> Sign Up</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Personal Statistics</a>
+                            <a href="/dash/UserStats.aspx"><i class="fa fa-bar-chart-o fa-fw"></i> Personal Statistics</a>
                             
                         </li>
                         <li>
