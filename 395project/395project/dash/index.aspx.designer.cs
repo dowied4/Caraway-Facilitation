@@ -184,22 +184,22 @@ namespace _395project.Pages {
         protected global::System.Web.UI.WebControls.Panel Panel4;
         
         /// <summary>
-        /// StartTimeTextBox control.
+        /// startTimeTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox StartTimeTextBox;
+        protected global::System.Web.UI.WebControls.TextBox startTimeTextBox;
         
         /// <summary>
-        /// EndTimeTextBox control.
+        /// endTimeTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EndTimeTextBox;
+        protected global::System.Web.UI.WebControls.TextBox endTimeTextBox;
         
         /// <summary>
         /// Button5 control.
