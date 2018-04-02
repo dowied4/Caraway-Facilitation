@@ -329,9 +329,67 @@ namespace _395project.dash
             TimeSlotDropDown.SelectedIndex = 0;
             ModalPopupExtender1.Hide();
         }
-        protected void editClick(object sender, EventArgs e)
+        protected void editClick(object sender, System.EventArgs e)
         {
             ModalPopupExtender1.Show();
+        }
+
+        protected int checkCurrentSlot()
+        {
+            //Get Start and End times
+            int startHour = 0;
+            int startMinute = 0;
+            int endHour = 0;
+            int endMinute = 0;
+
+            //Checks for a properly formatted time in start time
+            if (StartTimeTextBox.Text.Contains(':'))
+            {
+                string[] startTime = StartTimeTextBox.Text.Split(':');
+                Int32.TryParse(startTime[0], out startHour);
+                Int32.TryParse(startTime[1], out startMinute);
+            }
+            //Checks for a properly formatted time in end time
+            if (EndTimeTextBox.Text.Contains(':'))
+            {
+                string[] endTime = EndTimeTextBox.Text.Split(':');
+                Int32.TryParse(endTime[0], out endHour);
+                Int32.TryParse(endTime[1], out endMinute);
+            }
+            DateTime currentStart = new DateTime(Calendar.SelectedDate.Year, Calendar.SelectedDate.Month, Calendar.SelectedDate.Day, startHour, startMinute, 59);
+            DateTime currentEnd;
+            //So that a time slot that starts the same minute as another slot ending doesnt count towards overlaps 
+            if(endMinute != 0)
+                currentEnd = new DateTime(Calendar.SelectedDate.Year, Calendar.SelectedDate.Month, Calendar.SelectedDate.Day, endHour, endMinute-1, 59);
+            else
+                currentEnd = new DateTime(Calendar.SelectedDate.Year, Calendar.SelectedDate.Month, Calendar.SelectedDate.Day, endHour-1, 59, 59);
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+            };
+            con.Open();
+            string test = "SELECT COUNT (*) FROM Calendar WHERE RoomId = @currentRoom AND (@currentStart BETWEEN StartTime AND EndTime OR @currentEnd BETWEEN StartTime AND EndTime)";
+            SqlCommand getNumSign = new SqlCommand(test, con);
+            getNumSign.Parameters.AddWithValue("@currentStart", currentStart);
+            getNumSign.Parameters.AddWithValue("@currentend", currentEnd);
+            getNumSign.Parameters.AddWithValue("@currentRoom", GetRoom(RoomDropDown.Text));
+            int count = (int)getNumSign.ExecuteScalar();
+            con.Close();
+            return count;
+        }
+
+        protected void onFullCancel(object sender, System.EventArgs e)
+        {
+            ModalPopupExtender2.Hide();
+        }
+
+        protected void onSignUp(object sender, System.EventArgs e)
+        {
+            int count = checkCurrentSlot();
+            if (count >= 3)
+                ModalPopupExtender2.Show();
+            else
+                SignUpButton_Click(sender, e);
         }
     }
 }
