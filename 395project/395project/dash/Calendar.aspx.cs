@@ -196,20 +196,32 @@ namespace _395project.dash
                 Boolean check = checkHours(name[0], name[1], Current);
                 if (check == true)
                 {
-                    SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-                    conn.Open();
-                    string volunteer = "Insert into Calendar(Id, FacilitatorFirstName, FacilitatorLastName, StartTime, EndTime, RoomId) " +
-                                        "Values (@Id, @FirstName, @LastName, @Start, @End, @Room)";
-                    SqlCommand cmd = new SqlCommand(volunteer, conn);
-                    cmd.Parameters.AddWithValue("@Id", User.Identity.Name);
-                    cmd.Parameters.AddWithValue("@FirstName", name[0]);
-                    cmd.Parameters.AddWithValue("@LastName", name[1]);
-                    cmd.Parameters.AddWithValue("@Start", Start);
-                    cmd.Parameters.AddWithValue("@End", End);
-                    cmd.Parameters.AddWithValue("@Room", GetRoom(RoomDropDown.Text));
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-                    Page_Load(null, EventArgs.Empty);
+                    //Check for proper start and end times
+                    if (Start < End && Start >= new DateTime(Start.Year, Start.Month, Start.Day, 8, 45, 0) && End <= new DateTime(Start.Year, Start.Month, Start.Day, 15, 15, 0))
+                    {
+                        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                        conn.Open();
+                        string volunteer = "Insert into Calendar(Id, FacilitatorFirstName, FacilitatorLastName, StartTime, EndTime, RoomId) " +
+                                            "Values (@Id, @FirstName, @LastName, @Start, @End, @Room)";
+                        SqlCommand cmd = new SqlCommand(volunteer, conn);
+                        cmd.Parameters.AddWithValue("@Id", User.Identity.Name);
+                        cmd.Parameters.AddWithValue("@FirstName", name[0]);
+                        cmd.Parameters.AddWithValue("@LastName", name[1]);
+                        cmd.Parameters.AddWithValue("@Start", Start);
+                        cmd.Parameters.AddWithValue("@End", End);
+                        cmd.Parameters.AddWithValue("@Room", GetRoom(RoomDropDown.Text));
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                        Page_Load(null, EventArgs.Empty);
+                    }
+                    else
+                    {
+                        ErrorMessage.Visible = true;
+                        if(Start > End)
+                            ErrorMessage.Text = "Please make sure you start before you end!";
+                        else
+                            ErrorMessage.Text = "Please select a time slot within school hours!";
+                    }
                 } else
                 {
                     ErrorMessage.Visible = true;
