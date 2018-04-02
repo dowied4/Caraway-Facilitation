@@ -40,6 +40,15 @@ namespace _395project.dash.Admin {
         protected global::System.Web.UI.WebControls.PlaceHolder alerts;
         
         /// <summary>
+        /// noNotifications control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel noNotifications;
+        
+        /// <summary>
         /// ScriptManager1 control.
         /// </summary>
         /// <remarks>

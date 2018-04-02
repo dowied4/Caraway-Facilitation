@@ -105,6 +105,14 @@
     letter-spacing: 2px;
 }
 
+.noti-header {
+    font-family: 'Raleway Semi-Bold', sans-serif;
+    font-size: 46px;
+    padding-top: 30px;
+    letter-spacing: 2px;
+    color: rgba(51,51,51, 0.5);
+}
+
 .stats-info {
     font-family: 'Raleway', sans-serif;
     letter-spacing: 2px;
@@ -284,7 +292,7 @@ tr.AlternatingRowStyle:hover {
 #alSearch, #dashboardDonate, #dashboardDonateButtons, #dashboardDonateFac, #dashboardDonateEmail, #dashboardDonateEmailTxt,
 #dashboardDonateFacDrop, #dashboardDecline, #dashboardDeclineTxt, #dashboardDeclineInfo, #dashboardDecline, 
 #dashboardDeclineTotal, #dashboardDeclineNum, #dashboardDeclineButtons, #facilitatorConfirm, #notiAdd, #notiConfirmText, #notiFacilButtons, #absenceConfirmPanel, 
-#absenceAdd, #absenceConfirmTxt, #notAbsButtons {
+#absenceAdd, #absenceConfirmTxt, #notAbsButtons, #notiNothing, #noNotifications {
     width: 100%;
     text-align: center;
     padding-bottom: 5px;

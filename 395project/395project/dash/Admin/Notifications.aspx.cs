@@ -50,6 +50,11 @@ namespace _395project.dash.Admin
             displayAbsenceRequests(reader);
             reader.Close();
             con.Close();
+
+            if (alerts.Controls.Count > 0)
+                noNotifications.Visible = false;
+            else
+                noNotifications.Visible = true;
         }
 
         protected void Confirm_Click(object sender, EventArgs e)

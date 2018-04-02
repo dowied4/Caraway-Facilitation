@@ -18,6 +18,12 @@
         <asp:PlaceHolder id="alerts" runat="server" />
     </div>
 
+    <asp:Panel runat="server" ID="noNotifications">
+        <div class="dashboardMargins" id="notiNothing" style="padding-top:100px;">
+            <asp:Label runat="server" CssClass="noti-header">Nothing to annoy you with :)</asp:Label>
+        </div>
+    </asp:Panel>
+
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <ajaxToolkit:ModalPopupExtender ID="ConfirmPopupExtender" runat="server" PopupControlID="facilitatorConfirm" 
