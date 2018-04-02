@@ -185,12 +185,12 @@
 		RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
     <asp:Panel ID="Panel4" runat ="server">
       <div class="row" style="padding-bottom:10px;" >
-        <asp:TextBox ID="StartTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
+        <asp:TextBox ID="startTimeTextBox" type="time" runat="server" CssClass="signupDropDown"></asp:TextBox>
 	  </div>
 	  <div class="row" style="padding-bottom:10px;">
-	    <asp:TextBox ID="EndTimeTextBox" runat="server" CssClass="signupDropDown"></asp:TextBox>
+	    <asp:TextBox ID="endTimeTextBox" type="time" runat="server" CssClass="signupDropDown"></asp:TextBox>
 	  </div>
-      <asp:Button ID="Button5" runat="server" Text="Confirm" OnClick="onConfirm" CssClass="mybutton"/>
+      <asp:Button ID="Button5" runat="server" Text="Confirm" OnClick="ConfirmButton" CssClass="mybutton"/>
       <asp:Button ID="Button6" runat="server" Text="Cancel" OnClick="onCancel" CssClass="mybutton"/>
      <asp:Label ID="testLabel" Visible="false" runat="server"></asp:Label>
      </asp:Panel>

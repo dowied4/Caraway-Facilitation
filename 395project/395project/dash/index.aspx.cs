@@ -172,17 +172,17 @@ namespace _395project.Pages
         protected void ConfirmLink(object sender, System.EventArgs e)
         {
             ConfirmPopupExtender2.Show();
+            //Get the button that raised the event
+            LinkButton btn = (LinkButton)sender;
+            gvr = (GridViewRow)btn.NamingContainer;
+            DateTime start = Convert.ToDateTime(gvr.Cells[1].Text);
+            DateTime end = Convert.ToDateTime(gvr.Cells[2].Text);
+            startTimeTextBox.Text = start.ToString("HH:mm:ss");
+            endTimeTextBox.Text = end.ToString("HH:mm:ss");
         }
-
         //Confirm button on completed hours grid
         protected void ConfirmButton(object sender, System.EventArgs e)
         {
-            //Get the button that raised the event
-            LinkButton btn = (LinkButton)sender;
-
-            //Get the row that contains this button
-            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-
             //Grid row number
             int num = gvr.RowIndex;
             int WeekOfMonth = GetWeekOfMonth.GetWeekNumberOfMonth(Convert.ToDateTime(gvr.Cells[2].Text));
@@ -198,39 +198,54 @@ namespace _395project.Pages
             string[] array;
             string month;
             string year;
-            DateTime dt = Convert.ToDateTime(gvr.Cells[1].Text);
-            DateTime dt1 = Convert.ToDateTime(gvr.Cells[2].Text);
-
-            float totalHours = (float)(dt1 - dt).TotalHours;
-
+            string day;
+            int hour;
+            int min;
+            DateTime calendarStart = Convert.ToDateTime(gvr.Cells[1].Text);
+            DateTime calendarEnd = Convert.ToDateTime(gvr.Cells[2].Text);
             name = gvr.Cells[0].Text.Split(' ');
             firstName = name[0];
             lastName = name[1];
-
             startDate = gvr.Cells[1].Text.Split(' ');
-            startTime = startDate[1];
+            startTime = startTimeTextBox.Text;
             endDate = gvr.Cells[2].Text.Split(' ');
-            endTime = endDate[1];
+            endTime = endTimeTextBox.Text;
             //fixes the case where time is split on "-" or "/"
             if (endDate[0].Contains('-'))
             {
                 array = endDate[0].Split('-');
                 month = array[1];
                 year = array[0];
+                day = array[2];
+
             }
+
             else
             {
                 array = endDate[0].Split('/');
                 month = array[0];
+                day = array[1];
                 if (array[2].Length == 2)
                     year = "20" + array[2];
                 else
                     year = array[2];
             }
 
+            array = startTimeTextBox.Text.Split(':');
+            hour = Convert.ToInt32(array[0]);
+            min = Convert.ToInt32(array[1]);
+            DateTime dt = new DateTime(Convert.ToInt32(year), Convert.ToInt32(month), Convert.ToInt32(day), hour, min, 0);
+            System.Diagnostics.Debug.WriteLine(dt.ToString());
+            array = endTimeTextBox.Text.Split(':');
+            hour = Convert.ToInt32(array[0]);
+            min = Convert.ToInt32(array[1]);
+            DateTime dt1 = new DateTime(Convert.ToInt32(year), Convert.ToInt32(month), Convert.ToInt32(day), hour, min, 0);
+            System.Diagnostics.Debug.WriteLine(dt1.ToString());
+
+            float totalHours = (float)(dt1 - dt).TotalHours;
 
             //Checks if the timeslot is the lunch hour and gives double time if it is
-            if((TimeSpan.Compare(dt.TimeOfDay, new TimeSpan(12,0,0)) == 0 || 
+            if ((TimeSpan.Compare(dt.TimeOfDay, new TimeSpan(12,0,0)) == 0 || 
                 TimeSpan.Compare(dt.TimeOfDay, new TimeSpan(12, 0, 0)) == -1) &&
                (TimeSpan.Compare(dt1.TimeOfDay, new TimeSpan(13, 0, 0)) == 0 ||
                 TimeSpan.Compare(dt1.TimeOfDay, new TimeSpan(13, 0, 0)) == 1))
@@ -276,8 +291,8 @@ namespace _395project.Pages
             GetCompletedHours.Parameters.AddWithValue("@Month", month);
             GetCompletedHours.Parameters.AddWithValue("@Year", year);
             GetCompletedHours.Parameters.AddWithValue("@WeeklyHours", totalHours);
-            GetCompletedHours.Parameters.AddWithValue("@StartTime", dt);
-            GetCompletedHours.Parameters.AddWithValue("@EndTime", dt1);
+            GetCompletedHours.Parameters.AddWithValue("@StartTime", calendarStart);
+            GetCompletedHours.Parameters.AddWithValue("@EndTime", calendarEnd);
             GetCompletedHours.Parameters.AddWithValue("@Room", GetRoomId(gvr.Cells[3].Text));
             SqlDataReader addHoursReader = GetCompletedHours.ExecuteReader();
             //Page_Load(null, EventArgs.Empty);
