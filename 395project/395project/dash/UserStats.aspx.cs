@@ -415,7 +415,8 @@ namespace _395project.dash
             Double yearAabsentDays = 0;
 
             //Gets the total weeks so far in the year (based on the selected dropdown date)
-            Double yearTotalWeeks = ((new DateTime(Int32.Parse(year), Int32.Parse(month), DateTime.DaysInMonth(Int32.Parse(year), Int32.Parse(month))) - new DateTime(Int32.Parse(year), 1, 1)).TotalDays) / 7;
+            Double yearTotalWeeks = GetWeekOfMonth.GetWeekOfYear(new DateTime(Int32.Parse(year), Int32.Parse(month), DateTime.DaysInMonth(Int32.Parse(year), Int32.Parse(month)))); 
+            //((new DateTime(Int32.Parse(year), Int32.Parse(month), DateTime.DaysInMonth(Int32.Parse(year), Int32.Parse(month))) - new DateTime(Int32.Parse(year), 1, 1)).TotalDays) / 7;
             Double totalYearlyHours;
             //Subtracts the absent days from the total days
             while (reader.Read())
