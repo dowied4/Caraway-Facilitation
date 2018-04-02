@@ -491,7 +491,7 @@ namespace _395project.Pages
             con.Open();
             string CompletedHours = ("INSERT INTO Stats (Id, FacilitatorFirstName, FacilitatorLastName, RoomId, " +
                                       "WeekOfMonth, WeekOfYear, Month, Year, WeeklyHours, Donate) VALUES (@NewUser, @NewFirstName, " +
-                                      "@NewLastName, @Room, @WeekOfMonth, @WeekOfYear, @Month, @Year, @WeeklyHours, 1); " +
+                                      "@NewLastName, @Room, @WeekOfMonth, @WeekOfYear, @Month, @Year, @WeeklyHours, @CurrentUser); " +
                                       "DELETE FROM Calendar WHERE Id = @CurrentUser and FacilitatorFirstName = @FirstName and FacilitatorLastName = @LastName " +
                                       "and StartTime = @StartTime and EndTime = @EndTime and RoomId = @Room");
             SqlCommand GetCompletedHours = new SqlCommand(CompletedHours, con);
