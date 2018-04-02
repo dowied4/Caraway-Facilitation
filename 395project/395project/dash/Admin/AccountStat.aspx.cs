@@ -436,7 +436,7 @@ namespace _395project.dash.Admin
             SqlCommand getMonthAbsences = new SqlCommand(monthAbsences, con);
             monthAdapter.SelectCommand = new SqlCommand(monthAbsences, con);
             getMonthAbsences.Parameters.AddWithValue("@Year", year);
-            getMonthAbsences.Parameters.AddWithValue("@Month", year);
+            getMonthAbsences.Parameters.AddWithValue("@Month", month);
             getMonthAbsences.Parameters.AddWithValue("@User", ID);
             SqlDataReader monthReader = getMonthAbsences.ExecuteReader();
             Double monthAbsentDays = 0;
@@ -453,7 +453,6 @@ namespace _395project.dash.Admin
             }
             monthTotalWeeks -= (monthAbsentDays / 7);
             monthReader.Close();
-
             //Gets how many hours the facilitator needs to work for the year
             switch (numKids)
             {
@@ -472,6 +471,7 @@ namespace _395project.dash.Admin
             }
             //Rounds to the nearest hour
             totalYearlyHours = Math.Round(totalYearlyHours);
+            totalMonthlyHours = Math.Round(totalMonthlyHours);
 
             //Gets the total hours the family has worked this year
             DataTable dt = new DataTable();
