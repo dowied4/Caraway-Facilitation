@@ -71,13 +71,17 @@
 				<div class="row" style="padding-bottom:10px;" >
 					<asp:DropDownList ID="TimeSlotDropDown" runat="server" AutoPostBack="false" CssClass="signupDropDown" OnSelectedIndexChanged="TimeSlotDropDown_SelectedIndexChanged" Width="168px">
 					</asp:DropDownList>
-                    <button runat="server" id="editRun" class="btn btn-default" AutoPostBack="false" onserverclick="editClick" title="Edit">
+                    <button runat="server" id="editRun" class="btn btn-default" AutoPostBack="false" title="Edit" onserverclick="editClick" o>
                         <i class="fa fa-edit"></i>
                     </button>
 				</div>
                 </ContentTemplate>
                 </asp:UpdatePanel>
                 
+                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="Panel1" 
+                    BackgroundCssClass="modalBackground" TargetControlID="btn2" X="-1" Y="-1" 
+                    RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
+
                 <asp:Panel ID="Panel1" runat ="server">
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
@@ -89,23 +93,39 @@
 					</div>
                     <asp:Button ID="okButton" runat="server" Text="Confirm" OnClick="onConfirm" CssClass="mybutton"/>
                     <asp:Button ID="cancelButton" runat="server" Text="Cancel" OnClick="onCancel" CssClass="mybutton"/>
-                    <asp:Label ID="testLabel" Visible="false" runat="server"></asp:Label>
                     </ContentTemplate>
                     </asp:UpdatePanel>
                 </asp:Panel>
-                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="Panel1" BackgroundCssClass="modalBackground" TargetControlID="btn" X="-1" Y="-1" RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
+
+                <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender2" runat="server" PopupControlID="Panel2"
+                    BackgroundCssClass="modalBackground" TargetControlID="btn" 
+                    X="-1" Y="-1" RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
+
+                <asp:Panel ID="Panel2" runat ="server">
+                    <div class="row" style="padding-bottom:10px;" >
+               		    <asp:Label ID="popLabel" runat="server" CssClass="input-header">There are 3 or more users signed up sometime in your time slot, continue?</asp:Label>
+					</div>
+                    <asp:Button ID="Button1" runat="server" Text="Confirm" OnClick="SignUpButton_Click" CssClass="mybutton"/>
+                    <asp:Button ID="Button2" runat="server" Text="Cancel" OnClick="onFullCancel" CssClass="mybutton" />
+                </asp:Panel>
+
+
                 <!-- Sign Up Button -->
                 <div class="row">
-		            <asp:Button ID="SignUpButton" runat="server" Text="Sign Up" OnClick="SignUpButton_Click" CssClass="mybutton"/>
+		            <asp:Button ID="SignUpButton" runat="server" Text="Sign Up" OnClick="onSignUp" CssClass="mybutton"/>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Hidden button to link to modalpopup -->
-	<div style="visibility:hidden">
+    <div style="visibility:hidden">
+		<asp:Button id="btn2" runat="server"/>
+	</div>
+
+    <div style="visibility:hidden">
 		<asp:Button id="btn" runat="server"/>
 	</div>
+
     <asp:Label ID="Label1" runat="server" Text="Label" Visible="False" Font-Size="Large"></asp:Label>	
     
     <DayPilot:DayPilotScheduler 
