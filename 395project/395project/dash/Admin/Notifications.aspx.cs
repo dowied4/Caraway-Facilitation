@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -59,9 +61,11 @@ namespace _395project.dash.Admin
 
         protected void Confirm_Click(object sender, EventArgs e)
         {
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            string vars = ((Button)sender).CommandArgument;
+            string[] splitVars = vars.Split(',');
+
             if (((Button)sender).CommandName.Equals("Facilitator")) {
-                string vars = ((Button)sender).CommandArgument;
-                string[] splitVars = vars.Split(',');
                 SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 conn.Open();
                 string insert = "BEGIN IF NOT EXISTS (select * from Facilitators as F where F.Id = @Email and F.FirstName = @FacilitatorFirst and F.LastName = @FacilitatorLast)" +
@@ -79,6 +83,7 @@ namespace _395project.dash.Admin
                 conn.Close();
                 removeOnConfirm(Int32.Parse(splitVars[3]), ((Button)sender).CommandName);
                 ConfirmPopupExtender.Hide();
+                manager.SendEmail(splitVars[0], "Facilitator Request", "Your request to have " + splitVars[1] + " " + splitVars[2] + " as a facilitator has been ACCEPTED!");
                 Response.Redirect(Request.RawUrl);
                 //ErrorMessage.Text = "Added " + splitVars[1] + " " + splitVars[2] + " as a Facilitator to " + splitVars[0];
 
@@ -86,16 +91,16 @@ namespace _395project.dash.Admin
             //add query so it updates the confirmed column to 1 and subtract hours they
             //are missing from monthly and yearly
             if (((Button)sender).CommandName.Equals("Absence")) {
-                string confirm = ((Button)sender).CommandArgument;
                 SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 conn.Open();
                 string update = "UPDATE Absence SET Confirmed = @confirm Where Id = @Id";
                 SqlCommand cmd = new SqlCommand(update, conn);
                 cmd.Parameters.AddWithValue("@confirm", 1);
-                cmd.Parameters.AddWithValue("@Id", Int32.Parse(confirm));
+                cmd.Parameters.AddWithValue("@Id", Int32.Parse(splitVars[3]));
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 AbsencePopupExtender.Hide();
+                manager.SendEmail(splitVars[0], "Absence Request", "Your request to have a facilitation absence from " + splitVars[1] + " to " + splitVars[2] + " has been ACCEPTED!");
                 Response.Redirect(Request.RawUrl);
             }
         }
@@ -104,17 +109,27 @@ namespace _395project.dash.Admin
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             con.Open();
+
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            string vars = ((Button)sender).CommandArgument;
+            string[] splitVars = vars.Split(',');
+
             string remove = "";
             string cmdName = ((Button)sender).CommandName;
 
+
             if (cmdName.Equals("Facilitator"))
+            {
                 remove = "Delete from RequestFacilitator where Id = @RequestID";
-
+                manager.SendEmail(splitVars[0], "Facilitator Request", "Your request to have " + splitVars[1] + " " + splitVars[2] + " as a facilitator has been DENIED :(");
+            }
             if (cmdName.Equals("Absence"))
+            {
                 remove = "Delete from Absence where Id = @RequestID";
-
+                manager.SendEmail(splitVars[0], "Absence Request", "Your request to have a facilitation absence from " + splitVars[1] + " to " + splitVars[2] + " has been DENIED :(");
+            }
             SqlCommand rm = new SqlCommand(remove, con);
-            rm.Parameters.AddWithValue("@RequestID", Int32.Parse(((Button)sender).CommandArgument));
+            rm.Parameters.AddWithValue("@RequestID", Int32.Parse(splitVars[3]));
             SqlDataReader reader = rm.ExecuteReader();
             reader.Close();
             con.Close();
@@ -149,11 +164,11 @@ namespace _395project.dash.Admin
                 Label notificationLabel = makeLabel("Facilitator", reader);
 
                 //Confirm
-                string confirmCmdArg = reader.GetValue(1).ToString() + "," + reader.GetValue(2).ToString() + "," + reader.GetValue(3).ToString() + "," + reader.GetValue(0).ToString();
-                Button confirm = makeConfirm(confirmCmdArg, "Facilitator");
+                string cmdArg = reader.GetValue(1).ToString() + "," + reader.GetValue(2).ToString() + "," + reader.GetValue(3).ToString() + "," + reader.GetValue(0).ToString();
+                Button confirm = makeConfirm(cmdArg, "Facilitator");
 
                 //Clear
-                Button clear = makeClear(reader.GetValue(0).ToString(), "Facilitator");
+                Button clear = makeClear(cmdArg, "Facilitator");
 
                 //Add controls
                 alerts.Controls.Add(notificationLabel);
@@ -171,12 +186,13 @@ namespace _395project.dash.Admin
             {
                 //Label
                 Label notificationLabel = makeLabel("Absence", reader);
+                string cmdArg = reader.GetValue(1).ToString() + "," + reader.GetValue(2).ToString() + "," + reader.GetValue(3).ToString() + "," + reader.GetValue(0).ToString();
 
-                //Confirm
-                Button confirm = makeConfirm(reader.GetValue(0).ToString(), "Absence");
+               //Confirm
+                Button confirm = makeConfirm(cmdArg, "Absence");
 
                 //Clear
-                Button clear = makeClear(reader.GetValue(0).ToString(), "Absence");
+                Button clear = makeClear(cmdArg, "Absence");
 
                 //Add controls
                 alerts.Controls.Add(notificationLabel);
@@ -207,11 +223,12 @@ namespace _395project.dash.Admin
             return confirm;
         }
 
-        private Button makeClear(string databaseID, string requestType)
+        private Button makeClear(string cmdArg, string requestType)
         {
             Button clear = new Button();
             clear.CommandName = requestType;
-            clear.CommandArgument = databaseID;
+            clear.CommandArgument = cmdArg;
+            clear.Attributes.Add("runat", "server");
             clear.Attributes.Add("class", "mybutton");
             clear.Click += new EventHandler(Clear_Click);
             clear.Text = "Clear";
@@ -253,10 +270,12 @@ namespace _395project.dash.Admin
         protected void confirmAbsenceReq(object sender, System.EventArgs e)
         {
             AbsencePopupExtender.Show();
+            string vars = ((Button)sender).CommandArgument;
+            string[] splitVars = vars.Split(',');
             confirmAbsence.CommandName = ((Button)sender).CommandName;
-            confirmAbsence.CommandArgument = ((Button)sender).CommandArgument;
+            confirmAbsence.CommandArgument = vars;
 
-            infoLabel2.Text = "Allow absence for stated period?";
+            infoLabel2.Text = "Allow absence for " + splitVars[0] + " from " + splitVars[1] + " to " + splitVars[2] + "?";
         }
 
         protected void cancelAbsenceReq(object sender, System.EventArgs e)
