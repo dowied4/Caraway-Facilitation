@@ -220,6 +220,42 @@
 				</div>
 			</div>
 		</div>
+
+    <hr />
+
+    	    <div class="row">
+			<div class="col-md-offset-2 col-md-3">
+				<div class="dashboardMargins" id="recievedLabel">
+					<asp:Label runat="server" CssClass="dash-header">Hours Recieved</asp:Label>
+				</div>
+				<div id="recievedHours" class="dashboardMargins">
+					<div class="rounded_corners" style="width: 600px">
+						<asp:GridView ID="hoursRecievedGrid" AutoGenerateColumns="true" runat="server" style="width: 600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+										<HeaderStyle CssClass="HeaderStyle" />
+										<FooterStyle CssClass="FooterStyle" />
+										<RowStyle CssClass="RowStyle" />
+										<AlternatingRowStyle CssClass="AlternatingRowStyle" />
+						</asp:GridView>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-offset-2 col-md-3">
+				<div class="dashboardMargins" id="givenLabel">
+					<asp:Label runat="server" CssClass="dash-header">Hours Given</asp:Label>
+				</div>
+				<div id="givenHours" class="dashboardMargins">
+					<div class="rounded_corners" style="width: 600px">
+						<asp:GridView ID="hoursGivenGrid" AutoGenerateColumns="true" runat="server" style="width: 600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+										<HeaderStyle CssClass="HeaderStyle" />
+										<FooterStyle CssClass="FooterStyle" />
+										<RowStyle CssClass="RowStyle" />
+										<AlternatingRowStyle CssClass="AlternatingRowStyle" />
+						</asp:GridView>
+					</div>
+				</div>
+			</div>
+		</div>
      
 
 </asp:Content>
