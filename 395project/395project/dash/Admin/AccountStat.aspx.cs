@@ -504,6 +504,8 @@ namespace _395project.dash.Admin
             con.Close();
         }
 
+        /*Binds which users donated and how many hours the user received from them in the 
+         * selected month and how many that user has given the selected year*/
         protected void BindDonationRecieved(string month, string year, string ID)
         {
             SqlConnection con = new SqlConnection
@@ -513,8 +515,9 @@ namespace _395project.dash.Admin
 
             con.Open();
 
-            string query = "SELECT Donate, SUM(WeeklyHours) AS totalDonated FROM Stats WHERE Id = @CurrentUser AND Month = @Month AND " +
-                "Year = @Year AND datalength(Donate)!=0 GROUP BY Donate";
+            //Get users that donated to selected user in the selected month and year and the month total
+            string query = "SELECT Donate, SUM(WeeklyHours) AS totalDonated FROM Stats WHERE Id = @CurrentUser AND " +
+                "Month = @Month AND Year = @Year AND datalength(Donate)!=0 GROUP BY Donate ORDER BY Donate";
 
             SqlCommand recieved = new SqlCommand(query, con);
             recieved.Parameters.AddWithValue("@CurrentUser", ID);
@@ -525,20 +528,56 @@ namespace _395project.dash.Admin
             DataTable dt = new DataTable();
             dt.Columns.Add("From", typeof(string));
             dt.Columns.Add("Month Total", typeof(string));
+            dt.Columns.Add("Year Total", typeof(float));
             DataRow dr;
+
+            //Add a row for each unique user
             while (reader.Read())
             {
                 dr = dt.NewRow();
                 dr["From"] = reader.GetValue(0);
                 dr["Month Total"] = reader.GetValue(1).ToString();
+                dr["Year Total"] = 0.00;
                 dt.Rows.Add(dr);
             }
+            reader.Close();
+
+            //Get users that donated to selected user in the selected year and the year total
+            query = "SELECT Donate, SUM(WeeklyHours) AS totalDonated FROM Stats WHERE Id = @CurrentUser AND " +
+                "Year = @Year AND datalength(Donate)!=0 GROUP BY Donate ORDER BY Donate";
+
+            recieved = new SqlCommand(query, con);
+            recieved.Parameters.AddWithValue("@CurrentUser", ID);
+            recieved.Parameters.AddWithValue("@Year", year);
+
+            reader = recieved.ExecuteReader();
+            int index = 0;
+            DataRow[] foundRows;
+            string expression;
+
+            //Read the results
+            while (reader.Read())
+            {
+                /*Only add the year total if the user who donated to the selected user exists in 
+                 * the table (only if they donated the selected month)*/
+                expression = "From = '" + reader.GetValue(0) + "'";
+                foundRows = dt.Select(expression);
+                if (foundRows.Length > 0)
+                {
+                    dr = dt.Rows[index];
+                    dr.SetField("Year Total", reader.GetValue(1));
+                    index += 1;
+                }
+            }
+
             reader.Close();
             hoursRecievedGrid.DataSource = dt;
             hoursRecievedGrid.DataBind();
             con.Close();
         }
 
+        /*Binds which users received and how many hours the user gave to them in the 
+         * selected month and how many that user has given the selected year*/
         protected void BindDonationGiven(string month, string year, string ID)
         {
             SqlConnection con = new SqlConnection
@@ -548,8 +587,9 @@ namespace _395project.dash.Admin
 
             con.Open();
 
-            string query = "SELECT Id, SUM(WeeklyHours) AS totalDonated FROM Stats WHERE Donate = @CurrentUser AND Month = @Month AND " +
-                "Year = @Year GROUP BY Id";
+            //Get users that received donated hours from the selected user in the selected month and year and the month total
+            string query = "SELECT Id, SUM(WeeklyHours) AS totalDonated FROM Stats WHERE Donate = @CurrentUser AND " +
+                "Month = @Month AND Year = @Year GROUP BY Id ORDER BY Id";
 
             SqlCommand recieved = new SqlCommand(query, con);
             recieved.Parameters.AddWithValue("@CurrentUser", ID);
@@ -560,14 +600,48 @@ namespace _395project.dash.Admin
             DataTable dt = new DataTable();
             dt.Columns.Add("Recipient", typeof(string));
             dt.Columns.Add("Month Total", typeof(string));
+            dt.Columns.Add("Year Total", typeof(float));
             DataRow dr;
+
+            //Add a row for each unique user
             while (reader.Read())
             {
                 dr = dt.NewRow();
                 dr["Recipient"] = reader.GetValue(0);
                 dr["Month Total"] = reader.GetValue(1).ToString();
+                dr["Year Total"] = 0.00;
                 dt.Rows.Add(dr);
             }
+            reader.Close();
+
+            //Get users that recieved donated hours from the selected user in the selected year and the year total
+            query = "SELECT Id, SUM(WeeklyHours) AS totalDonated FROM Stats WHERE Donate = @CurrentUser AND " +
+                "Year = @Year AND datalength(Donate)!=0 GROUP BY Id ORDER BY Id";
+
+            recieved = new SqlCommand(query, con);
+            recieved.Parameters.AddWithValue("@CurrentUser", ID);
+            recieved.Parameters.AddWithValue("@Year", year);
+
+            reader = recieved.ExecuteReader();
+            int index = 0;
+            DataRow[] foundRows;
+            string expression;
+
+            //Read the results
+            while (reader.Read())
+            {
+                /*Only add the year total if the user who received hours from the selected user 
+                 * exists in the table (only if they received the selected month)*/
+                expression = "Recipient = '" + reader.GetValue(0) + "'";
+                foundRows = dt.Select(expression);
+                if (foundRows.Length > 0)
+                {
+                    dr = dt.Rows[index];
+                    dr.SetField("Year Total", reader.GetValue(1));
+                    index += 1;
+                }
+            }
+
             reader.Close();
             hoursGivenGrid.DataSource = dt;
             hoursGivenGrid.DataBind();
