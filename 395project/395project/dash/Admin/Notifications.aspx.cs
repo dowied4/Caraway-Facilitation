@@ -231,7 +231,7 @@ namespace _395project.dash.Admin
             clear.Attributes.Add("runat", "server");
             clear.Attributes.Add("class", "mybutton");
             clear.Click += new EventHandler(Clear_Click);
-            clear.Text = "Clear";
+            clear.Text = "Deny";
             clear.Style.Add("float", "right");
 
             return clear;
