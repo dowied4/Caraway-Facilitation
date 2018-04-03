@@ -39,6 +39,8 @@ namespace _395project.dash
         {
             //Gets the Selected User
             String ID = User.Identity.GetUserId();
+            string month;
+            string year;
 
             if (!IsPostBack)
             {
@@ -62,21 +64,26 @@ namespace _395project.dash
                 //Sets MonthDropDown to the current month
                 MonthDropDown.SelectedValue = DateTime.Now.Month.ToString();
 
+                month = MonthDropDown.Text;
+                year = YearDropDown.Text;
+
                 //Binds the Facilitator hour table to the current date
-                BindFacilitatorHours(MonthDropDown.Text, YearDropDown.Text, ID);
+                BindFacilitatorHours(month, year, ID);
 
                 //Binds the Facilitator Room hour table to the current date
-                BindFacilitatorRoomHours(MonthDropDown.Text, YearDropDown.Text, ID);
+                BindFacilitatorRoomHours(month, year, ID);
 
                 //Binds the Room hour table to the current date
-                BindRoomHours(MonthDropDown.Text, YearDropDown.Text, ID);
+                BindRoomHours(month, year, ID);
 
                 //Binds the total stats table to the current date
-                BindTotalStats(MonthDropDown.Text, YearDropDown.Text, ID);
+                BindTotalStats(month, year, ID);
 
-                monthlyHoursLabel.Text = GetMonthlyHours(MonthDropDown.Text, YearDropDown.Text, ID);
+                monthlyHoursLabel.Text = GetMonthlyHours(month, year, ID);
 
-                yearlyHoursLabel.Text = GetYearlyHours(MonthDropDown.Text, YearDropDown.Text, ID);
+                yearlyHoursLabel.Text = GetYearlyHours(month, year, ID);
+                BindDonationRecieved(month, year, ID);
+                BindDonationGiven(month, year, ID);
 
             }
 
@@ -115,19 +122,24 @@ namespace _395project.dash
             //Bind the data
             ChildView.DataBind();
             childrenReader.Close();
+            con.Close();
         }
 
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
             //Gets the Selected User
             String ID = User.Identity.GetUserId();
+            string month = MonthDropDown.Text;
+            string year = YearDropDown.Text;
 
-            BindFacilitatorHours(MonthDropDown.Text, YearDropDown.Text, ID);
-            BindFacilitatorRoomHours(MonthDropDown.Text, YearDropDown.Text, ID);
-            BindRoomHours(MonthDropDown.Text, YearDropDown.Text, ID);
-            BindTotalStats(MonthDropDown.Text, YearDropDown.Text, ID);
-            monthlyHoursLabel.Text = GetMonthlyHours(MonthDropDown.Text, YearDropDown.Text, ID);
-            yearlyHoursLabel.Text = GetYearlyHours(MonthDropDown.Text, YearDropDown.Text, ID);
+            BindFacilitatorHours(month, year, ID);
+            BindFacilitatorRoomHours(month, year, ID);
+            BindRoomHours(month, year, ID);
+            BindTotalStats(month, year, ID);
+            BindDonationRecieved(month, year, ID);
+            BindDonationGiven(month, year, ID);
+            monthlyHoursLabel.Text = GetMonthlyHours(month, year, ID);
+            yearlyHoursLabel.Text = GetYearlyHours(month, year, ID);
         }
 
         //Gets the hours worked that month
@@ -249,6 +261,7 @@ namespace _395project.dash
             FacilitatorHoursGridView.DataBind();
 
             upcompQuery.Close();
+            con.Close();
         }
 
         //Databinds FacilitatorRoomHours Gridview
@@ -317,6 +330,7 @@ namespace _395project.dash
             FacilitatorRoomHoursGridView.DataBind();
 
             upcompQuery.Close();
+            con.Close();
         }
 
         //Databinds RoomHoursGridView
@@ -384,6 +398,7 @@ namespace _395project.dash
             RoomHoursGridView.DataBind();
 
             upcompQuery.Close();
+            con.Close();
         }
 
         //Binds the TotalStatsGridView **DOES NOT WORK WHEN AN ABSENCE EXTENDS INTO A NEW CALENDAR YEAR***
@@ -470,7 +485,7 @@ namespace _395project.dash
             }
             //Rounds to the nearest hour
             totalYearlyHours = Math.Round(totalYearlyHours, 1);
-            totalMonthlyHours = Math.Round(totalMonthlyHours, 1);
+            totalMonthlyHours = Math.Round(totalMonthlyHours, 2);
 
             //Gets the total hours the family has worked this year
             DataTable dt = new DataTable();
@@ -483,6 +498,77 @@ namespace _395project.dash
             dt.Rows.Add(dr);
             TotalStatsGridView.DataSource = dt;
             TotalStatsGridView.DataBind();
+            con.Close();
+        }
+
+        protected void BindDonationRecieved(string month, string year, string ID)
+        {
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+            };
+
+            con.Open();
+
+            string query = "SELECT Donate, SUM(WeeklyHours) AS totalDonated FROM Stats WHERE Id = @CurrentUser AND " +
+                "Month = @Month AND Year = @Year AND datalength(Donate)!=0 GROUP BY Donate";
+
+            SqlCommand recieved = new SqlCommand(query, con);
+            recieved.Parameters.AddWithValue("@CurrentUser", ID);
+            recieved.Parameters.AddWithValue("@Month", month);
+            recieved.Parameters.AddWithValue("@Year", year);
+
+            SqlDataReader reader = recieved.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("From", typeof(string));
+            dt.Columns.Add("Month Total", typeof(string));
+            DataRow dr;
+            while (reader.Read())
+            {
+                dr = dt.NewRow();
+                dr["From"] = reader.GetValue(0);
+                dr["Month Total"] = reader.GetValue(1).ToString();
+                dt.Rows.Add(dr);
+            }
+            reader.Close();
+            hoursRecievedGrid.DataSource = dt;
+            hoursRecievedGrid.DataBind();
+            con.Close();
+        }
+
+        protected void BindDonationGiven(string month, string year, string ID)
+        {
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+            };
+
+            con.Open();
+
+            string query = "SELECT Id, SUM(WeeklyHours) AS totalDonated FROM Stats WHERE Donate = @CurrentUser AND " +
+                "Month = @Month AND Year = @Year GROUP BY Id";
+
+            SqlCommand recieved = new SqlCommand(query, con);
+            recieved.Parameters.AddWithValue("@CurrentUser", ID);
+            recieved.Parameters.AddWithValue("@Month", month);
+            recieved.Parameters.AddWithValue("@Year", year);
+
+            SqlDataReader reader = recieved.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Recipient", typeof(string));
+            dt.Columns.Add("Month Total", typeof(string));
+            DataRow dr;
+            while (reader.Read())
+            {
+                dr = dt.NewRow();
+                dr["Recipient"] = reader.GetValue(0);
+                dr["Month Total"] = reader.GetValue(1).ToString();
+                dt.Rows.Add(dr);
+            }
+            reader.Close();
+            hoursGivenGrid.DataSource = dt;
+            hoursGivenGrid.DataBind();
+            con.Close();
         }
     }
 }

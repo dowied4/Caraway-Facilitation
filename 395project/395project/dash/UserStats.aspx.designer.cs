@@ -164,5 +164,23 @@ namespace _395project.dash {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView RoomHoursGridView;
+        
+        /// <summary>
+        /// hoursRecievedGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView hoursRecievedGrid;
+        
+        /// <summary>
+        /// hoursGivenGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView hoursGivenGrid;
     }
 }
