@@ -122,6 +122,11 @@ namespace _395project.dash.Stats
                 "'subcaptionFontSize': '14'" +
                 "},");
 
+            for(int i = 1; i < 5; i++)
+            {
+
+            }
+
             Title.Append("'data': [" +
         "{" +
                 "'label': 'Jan'," +

@@ -429,11 +429,12 @@ namespace _395project.dash.Admin
             adapter.SelectCommand = new SqlCommand(absences, con);
             getAbsences.Parameters.AddWithValue("@Year", year);
             getAbsences.Parameters.AddWithValue("@User", ID);
+            getAbsences.Parameters.AddWithValue("@Month", month);
             SqlDataReader reader = getAbsences.ExecuteReader();
             Double yearAabsentDays = 0;
 
             //Gets the total weeks so far in the year (based on the selected dropdown date)
-            Double yearTotalWeeks = GetWeekOfMonth.GetWeekOfYear(new DateTime(Int32.Parse(year), Int32.Parse(month), DateTime.DaysInMonth(Int32.Parse(year), Int32.Parse(month))));
+            Double yearTotalWeeks = GetWeekOfMonth.GetWeekOfYear(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)));
             //((new DateTime(Int32.Parse(year), Int32.Parse(month), DateTime.DaysInMonth(Int32.Parse(year), Int32.Parse(month))) - new DateTime(Int32.Parse(year), 1, 1)).TotalDays) / 7;
             Double totalYearlyHours;
             //Subtracts the absent days from the total days
