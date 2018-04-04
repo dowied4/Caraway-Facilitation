@@ -68,8 +68,6 @@
     <hr />
 
 
-
-
     <link href="/Content/dashboard.css" rel="stylesheet" />
      <div class="row" style="padding-bottom: 30px; text-align: center;">
         <div class="dashboardMargins" id="statsHoursLabel">
