@@ -278,8 +278,8 @@ namespace _395project.Pages
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             con.Open();
             string CompletedHours = ("INSERT INTO Stats (Id, FacilitatorFirstName, FacilitatorLastName, RoomId, " +
-                                      "WeekOfMonth, WeekOfYear, Month, Year, WeeklyHours) VALUES (@CurrentUser, @FirstName, " +
-                                      "@LastName, @Room, @WeekOfMonth, @WeekOfYear, @Month, @Year, @WeeklyHours); " +
+                                      "WeekOfMonth, WeekOfYear, Month, Year, WeeklyHours, Donate) VALUES (@CurrentUser, @FirstName, " +
+                                      "@LastName, @Room, @WeekOfMonth, @WeekOfYear, @Month, @Year, @WeeklyHours, @Donate); " +
                                       "DELETE FROM Calendar WHERE Id = @CurrentUser and FacilitatorFirstName = @FirstName and FacilitatorLastName = @LastName " +
                                       "and StartTime = @StartTime and EndTime = @EndTime and RoomId = @Room");
             SqlCommand GetCompletedHours = new SqlCommand(CompletedHours, con);
@@ -293,6 +293,7 @@ namespace _395project.Pages
             GetCompletedHours.Parameters.AddWithValue("@WeeklyHours", totalHours);
             GetCompletedHours.Parameters.AddWithValue("@StartTime", calendarStart);
             GetCompletedHours.Parameters.AddWithValue("@EndTime", calendarEnd);
+            GetCompletedHours.Parameters.AddWithValue("@Donate", "");
             GetCompletedHours.Parameters.AddWithValue("@Room", GetRoomId(gvr.Cells[3].Text));
             SqlDataReader addHoursReader = GetCompletedHours.ExecuteReader();
             //Page_Load(null, EventArgs.Empty);
