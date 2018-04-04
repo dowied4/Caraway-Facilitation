@@ -6,6 +6,9 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="Title" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
+
+    <script type="text/javascript" src="/Scripts/fusioncharts/fusioncharts.js"></script>
+    <script type="text/javascript" src="/Scripts/fusioncharts/fusioncharts.js"></script>
     <link href="/Content/dashboard.css" rel="stylesheet" />
     <h2 class="page-title"><%: Title %></h2>
     <h2 id="head" runat="server">Statistics: By Date</h2>
