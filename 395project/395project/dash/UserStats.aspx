@@ -8,7 +8,7 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
 
-    <link href="/Content/dashboard.css" rel="stylesheet" />
+   <link href="/Content/dashboard.css" rel="stylesheet" />
     <h2 class="page-title"><%: Title %></h2>
     <h2 id="head" runat="server">Account Stats</h2>
     <hr />
@@ -69,8 +69,6 @@
     <hr />
 
 
-
-
     <link href="/Content/dashboard.css" rel="stylesheet" />
      <div class="row" style="padding-bottom: 30px; text-align: center;">
         <div class="dashboardMargins" id="statsHoursLabel">
@@ -122,6 +120,24 @@
         </div>
     </div>
 	<hr />
+        <div class="row">
+			<div class="col-md-offset-2 col-md-3">
+				<div class="dashboardMargins" id="TotalStatsLabel">
+					<asp:Label runat="server" CssClass="dash-header">Totals</asp:Label>
+				</div>
+				<div id="TotalStats" class="dashboardMargins">
+					<div class="rounded_corners" style="width: 600px">
+						<asp:GridView ID="TotalStatsGridView" AutoGenerateColumns="true" runat="server" style="width: 600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+								<HeaderStyle CssClass="HeaderStyle" />
+								<FooterStyle CssClass="FooterStyle" />
+								<RowStyle CssClass="RowStyle" />
+								<AlternatingRowStyle CssClass="AlternatingRowStyle" />
+						</asp:GridView>
+					</div>
+				</div>
+			</div>
+		</div>
+    <br />
 	    <div class="row">
 			<div class="col-md-offset-2 col-md-3">
 				<div class="dashboardMargins" id="FacilitatorWeeklyTotalLabel">
@@ -147,25 +163,8 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="col-md-offset-2 col-md-3">
-				<div class="dashboardMargins" id="TotalStatsLabel">
-					<asp:Label runat="server" CssClass="dash-header">Totals</asp:Label>
-				</div>
-				<div id="TotalStats" class="dashboardMargins">
-					<div class="rounded_corners" style="width: 600px">
-						<asp:GridView ID="TotalStatsGridView" AutoGenerateColumns="true" runat="server" style="width: 600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
-								<HeaderStyle CssClass="HeaderStyle" />
-								<FooterStyle CssClass="FooterStyle" />
-								<RowStyle CssClass="RowStyle" />
-								<AlternatingRowStyle CssClass="AlternatingRowStyle" />
-						</asp:GridView>
-					</div>
-				</div>
-			</div>
-
-
-		</div>
+            </div>
+    <br />
 	<hr />
 
 	    <div class="row">
@@ -194,7 +193,9 @@
 					</div>
 				</div>
 			</div>
-
+            </div>
+    <br />
+    <div class="row">
 			<div class="col-md-offset-2 col-md-3">
 				<div class="dashboardMargins" id="ClassLabel">
 					<asp:Label runat="server" CssClass="dash-header">Total By Class</asp:Label>
@@ -221,7 +222,7 @@
 			</div>
 		</div>
 
-    <hr />
+        <hr />
 
     	    <div class="row">
 			<div class="col-md-offset-2 col-md-3">
@@ -239,7 +240,8 @@
 					</div>
 				</div>
 			</div>
-
+                </div>
+    <div class="row">
 			<div class="col-md-offset-2 col-md-3">
 				<div class="dashboardMargins" id="givenLabel">
 					<asp:Label runat="server" CssClass="dash-header">Hours Given</asp:Label>
