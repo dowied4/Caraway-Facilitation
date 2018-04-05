@@ -68,7 +68,6 @@
     <hr />
 
 
-    <link href="/Content/dashboard.css" rel="stylesheet" />
      <div class="row" style="padding-bottom: 30px; text-align: center;">
         <div class="dashboardMargins" id="statsHoursLabel">
             <asp:Label runat="server" CssClass="section-header">HOURS</asp:Label>
@@ -119,144 +118,130 @@
         </div>
     </div>
 	<hr />
-        <div class="row">
-			<div class="col-md-offset-2 col-md-3">
-				<div class="dashboardMargins" id="TotalStatsLabel">
-					<asp:Label runat="server" CssClass="dash-header">Totals</asp:Label>
-				</div>
-				<div id="TotalStats" class="dashboardMargins">
-					<div class="rounded_corners" style="width: 600px">
-						<asp:GridView ID="TotalStatsGridView" AutoGenerateColumns="true" runat="server" style="width: 600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
-								<HeaderStyle CssClass="HeaderStyle" />
-								<FooterStyle CssClass="FooterStyle" />
-								<RowStyle CssClass="RowStyle" />
-								<AlternatingRowStyle CssClass="AlternatingRowStyle" />
-						</asp:GridView>
-					</div>
-				</div>
-			</div>
+
+    <!-- Totals -->
+	<div class="dashboardMargins" id="statsTotalLabel">
+		<asp:Label runat="server" CssClass="dash-header">Totals</asp:Label>
+	</div>
+	<div id="TotalStats" class="dashboardMargins">
+		<div class="rounded_corners" style="width: 600px">
+			<asp:GridView ID="TotalStatsGridView" AutoGenerateColumns="true" runat="server" Width="600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+					<HeaderStyle CssClass="HeaderStyle" />
+					<FooterStyle CssClass="FooterStyle" />
+					<RowStyle CssClass="RowStyle" />
+					<AlternatingRowStyle CssClass="AlternatingRowStyle" />
+			</asp:GridView>
 		</div>
+	</div>
     <br />
-	    <div class="row">
-			<div class="col-md-offset-2 col-md-3">
-				<div class="dashboardMargins" id="FacilitatorWeeklyTotalLabel">
-					<asp:Label runat="server" CssClass="dash-header">Facilitator Hours This Month</asp:Label>
-				</div>
-				<div id="FacilitatorHours" class="dashboardMargins">
-					<div class="rounded_corners" style="width: 600px">
-						<asp:GridView ID="FacilitatorHoursGridView" AutoGenerateColumns="false" runat="server" style="width: 600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
-								<HeaderStyle CssClass="HeaderStyle" />
-								<FooterStyle CssClass="FooterStyle" />
-								<RowStyle CssClass="RowStyle" />
-								<AlternatingRowStyle CssClass="AlternatingRowStyle" />
-							<Columns>
-								<asp:BoundField DataField="Name" HeaderText="Name" NullDisplayText="0" />
-								<asp:BoundField DataField="Week1" HeaderText="Week 1" NullDisplayText="0" />
-								<asp:BoundField DataField="Week2" HeaderText="Week 2" NullDisplayText="0" />
-								<asp:BoundField DataField="Week3" HeaderText="Week 3" NullDisplayText="0" />
-								<asp:BoundField DataField="Week4" HeaderText="Week 4" NullDisplayText="0" />
-								<asp:BoundField DataField="MonthTotal" HeaderText="Month Total" NullDisplayText="0" />
-								<asp:BoundField DataField="YearTotal" HeaderText="Year Total" NullDisplayText="0" />
-							</Columns>
-						</asp:GridView>
-					</div>
-				</div>
-			</div>
-            </div>
+
+    <!-- Facilitator hours this month -->
+	<div class="dashboardMargins" id="statsTotalMonthLabel">
+		<asp:Label runat="server" CssClass="dash-header">Facilitator Hours This Month</asp:Label>
+	</div>
+	<div id="FacilitatorHours" class="dashboardMargins">
+		<div class="rounded_corners" style="width: 600px">
+			<asp:GridView ID="FacilitatorHoursGridView" AutoGenerateColumns="false" runat="server" Width="600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+					<HeaderStyle CssClass="HeaderStyle" />
+					<FooterStyle CssClass="FooterStyle" />
+					<RowStyle CssClass="RowStyle" />
+					<AlternatingRowStyle CssClass="AlternatingRowStyle" />
+				<Columns>
+					<asp:BoundField DataField="Name" HeaderText="Name" NullDisplayText="0" />
+					<asp:BoundField DataField="Week1" HeaderText="Week 1" NullDisplayText="0" />
+					<asp:BoundField DataField="Week2" HeaderText="Week 2" NullDisplayText="0" />
+					<asp:BoundField DataField="Week3" HeaderText="Week 3" NullDisplayText="0" />
+					<asp:BoundField DataField="Week4" HeaderText="Week 4" NullDisplayText="0" />
+					<asp:BoundField DataField="MonthTotal" HeaderText="Month Total" NullDisplayText="0" />
+					<asp:BoundField DataField="YearTotal" HeaderText="Year Total" NullDisplayText="0" />
+				</Columns>
+			</asp:GridView>
+		</div>
+	</div>
+
     <br />
 	<hr />
 
-	    <div class="row">
-			<div class="col-md-offset-2 col-md-3">
-				<div class="dashboardMargins" id="FacilitatorByClassLabel">
-					<asp:Label runat="server" CssClass="dash-header">Facilitators By Class</asp:Label>
-				</div>
-				<div id="FacilitatorRoomHours" class="dashboardMargins">
-					<div class="rounded_corners" style="width: 600px">
-						<asp:GridView ID="FacilitatorRoomHoursGridView" AutoGenerateColumns="false" runat="server" style="width: 600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
-										<HeaderStyle CssClass="HeaderStyle" />
-										<FooterStyle CssClass="FooterStyle" />
-										<RowStyle CssClass="RowStyle" />
-										<AlternatingRowStyle CssClass="AlternatingRowStyle" />
-							<Columns>
-								<asp:BoundField DataField="Name" HeaderText="Name" NullDisplayText="0" />
-								<asp:BoundField DataField="Room" HeaderText="Room" />
-								<asp:BoundField DataField="Week1" HeaderText="Week 1" NullDisplayText="0" />
-								<asp:BoundField DataField="Week2" HeaderText="Week 2" NullDisplayText="0" />
-								<asp:BoundField DataField="Week3" HeaderText="Week 3" NullDisplayText="0" />
-								<asp:BoundField DataField="Week4" HeaderText="Week 4" NullDisplayText="0" />
-								<asp:BoundField DataField="MonthTotal" HeaderText="Month Total" NullDisplayText="0" />
-								<asp:BoundField DataField="YearTotal" HeaderText="Year Total" NullDisplayText="0" />
-							</Columns>
-						</asp:GridView>
-					</div>
-				</div>
-			</div>
-            </div>
+    <!-- Facilitators by class -->
+	<div class="dashboardMargins" id="FacilitatorByClassLabel">
+		<asp:Label runat="server" CssClass="dash-header">Facilitators By Class</asp:Label>
+	</div>
+	<div id="FacilitatorRoomHours" class="dashboardMargins">
+		<div class="rounded_corners" style="width: 600px">
+			<asp:GridView ID="FacilitatorRoomHoursGridView" AutoGenerateColumns="false" runat="server" Width="600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+							<HeaderStyle CssClass="HeaderStyle" />
+							<FooterStyle CssClass="FooterStyle" />
+							<RowStyle CssClass="RowStyle" />
+							<AlternatingRowStyle CssClass="AlternatingRowStyle" />
+				<Columns>
+					<asp:BoundField DataField="Name" HeaderText="Name" NullDisplayText="0" />
+					<asp:BoundField DataField="Room" HeaderText="Room" />
+					<asp:BoundField DataField="Week1" HeaderText="Week 1" NullDisplayText="0" />
+					<asp:BoundField DataField="Week2" HeaderText="Week 2" NullDisplayText="0" />
+					<asp:BoundField DataField="Week3" HeaderText="Week 3" NullDisplayText="0" />
+					<asp:BoundField DataField="Week4" HeaderText="Week 4" NullDisplayText="0" />
+					<asp:BoundField DataField="MonthTotal" HeaderText="Month Total" NullDisplayText="0" />
+					<asp:BoundField DataField="YearTotal" HeaderText="Year Total" NullDisplayText="0" />
+				</Columns>
+			</asp:GridView>
+		</div>
+	</div>
     <br />
-    <div class="row">
-			<div class="col-md-offset-2 col-md-3">
-				<div class="dashboardMargins" id="ClassLabel">
-					<asp:Label runat="server" CssClass="dash-header">Total By Class</asp:Label>
-				</div>
-				<div id="RoomHours" class="dashboardMargins">
-					<div class="rounded_corners" style="width: 600px">
-						<asp:GridView ID="RoomHoursGridView" AutoGenerateColumns="false" runat="server" style="width: 600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
-										<HeaderStyle CssClass="HeaderStyle" />
-										<FooterStyle CssClass="FooterStyle" />
-										<RowStyle CssClass="RowStyle" />
-										<AlternatingRowStyle CssClass="AlternatingRowStyle" />
-							<Columns>
-								<asp:BoundField DataField="Room" HeaderText="Room" />
-								<asp:BoundField DataField="Week1" HeaderText="Week 1" NullDisplayText="0" />
-								<asp:BoundField DataField="Week2" HeaderText="Week 2" NullDisplayText="0" />
-								<asp:BoundField DataField="Week3" HeaderText="Week 3" NullDisplayText="0" />
-								<asp:BoundField DataField="Week4" HeaderText="Week 4" NullDisplayText="0" />
-								<asp:BoundField DataField="MonthTotal" HeaderText="Month Total" NullDisplayText="0" />
-								<asp:BoundField DataField="YearTotal" HeaderText="Year Total" NullDisplayText="0" />
-							</Columns>
-						</asp:GridView>
-					</div>
-				</div>
-			</div>
+    <!-- Total by class -->
+	<div class="dashboardMargins" id="ClassLabel">
+		<asp:Label runat="server" CssClass="dash-header">Total By Class</asp:Label>
+	</div>
+	<div id="RoomHours" class="dashboardMargins">
+		<div class="rounded_corners" style="width: 600px">
+			<asp:GridView ID="RoomHoursGridView" AutoGenerateColumns="false" runat="server" Width="600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+							<HeaderStyle CssClass="HeaderStyle" />
+							<FooterStyle CssClass="FooterStyle" />
+							<RowStyle CssClass="RowStyle" />
+							<AlternatingRowStyle CssClass="AlternatingRowStyle" />
+				<Columns>
+					<asp:BoundField DataField="Room" HeaderText="Room" />
+					<asp:BoundField DataField="Week1" HeaderText="Week 1" NullDisplayText="0" />
+					<asp:BoundField DataField="Week2" HeaderText="Week 2" NullDisplayText="0" />
+					<asp:BoundField DataField="Week3" HeaderText="Week 3" NullDisplayText="0" />
+					<asp:BoundField DataField="Week4" HeaderText="Week 4" NullDisplayText="0" />
+					<asp:BoundField DataField="MonthTotal" HeaderText="Month Total" NullDisplayText="0" />
+					<asp:BoundField DataField="YearTotal" HeaderText="Year Total" NullDisplayText="0" />
+				</Columns>
+			</asp:GridView>
 		</div>
+	</div>
 
-        <hr />
-
-    	    <div class="row">
-			<div class="col-md-offset-2 col-md-3">
-				<div class="dashboardMargins" id="recievedLabel">
-					<asp:Label runat="server" CssClass="dash-header">Hours Recieved</asp:Label>
-				</div>
-				<div id="recievedHours" class="dashboardMargins">
-					<div class="rounded_corners" style="width: 600px">
-						<asp:GridView ID="hoursRecievedGrid" AutoGenerateColumns="true" runat="server" style="width: 600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
-										<HeaderStyle CssClass="HeaderStyle" />
-										<FooterStyle CssClass="FooterStyle" />
-										<RowStyle CssClass="RowStyle" />
-										<AlternatingRowStyle CssClass="AlternatingRowStyle" />
-						</asp:GridView>
-					</div>
-				</div>
-			</div>
-                </div>
-    <div class="row">
-			<div class="col-md-offset-2 col-md-3">
-				<div class="dashboardMargins" id="givenLabel">
-					<asp:Label runat="server" CssClass="dash-header">Hours Given</asp:Label>
-				</div>
-				<div id="givenHours" class="dashboardMargins">
-					<div class="rounded_corners" style="width: 600px">
-						<asp:GridView ID="hoursGivenGrid" AutoGenerateColumns="true" runat="server" style="width: 600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
-										<HeaderStyle CssClass="HeaderStyle" />
-										<FooterStyle CssClass="FooterStyle" />
-										<RowStyle CssClass="RowStyle" />
-										<AlternatingRowStyle CssClass="AlternatingRowStyle" />
-						</asp:GridView>
-					</div>
-				</div>
-			</div>
+    <hr />
+    <!-- Recieved -->
+	<div class="dashboardMargins" id="recievedLabel">
+		<asp:Label runat="server" CssClass="dash-header">Hours Recieved</asp:Label>
+	</div>
+	<div id="recievedHours" class="dashboardMargins">
+		<div class="rounded_corners" style="width: 600px">
+			<asp:GridView ID="hoursRecievedGrid" AutoGenerateColumns="true" runat="server" Width="600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+							<HeaderStyle CssClass="HeaderStyle" />
+							<FooterStyle CssClass="FooterStyle" />
+							<RowStyle CssClass="RowStyle" />
+							<AlternatingRowStyle CssClass="AlternatingRowStyle" />
+			</asp:GridView>
 		</div>
+	</div>
+
+    <br />
+    <!-- Given -->
+    <div class="dashboardMargins" id="givenLabel">
+	    <asp:Label runat="server" CssClass="dash-header">Hours Given</asp:Label>
+    </div>
+    <div id="givenHours" class="dashboardMargins">
+	    <div class="rounded_corners" style="width: 600px">
+		    <asp:GridView ID="hoursGivenGrid" AutoGenerateColumns="true" runat="server" Width="600px" CssClass="myGridView" PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+						    <HeaderStyle CssClass="HeaderStyle" />
+						    <FooterStyle CssClass="FooterStyle" />
+						    <RowStyle CssClass="RowStyle" />
+						    <AlternatingRowStyle CssClass="AlternatingRowStyle" />
+		    </asp:GridView>
+	    </div>
+    </div>
      
 
 </asp:Content>

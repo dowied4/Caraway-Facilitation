@@ -266,7 +266,7 @@ tr.AlternatingRowStyle:hover {
     margin-right: auto;
 }
 
-#dashboardGridCompleted, #dashboardGridUpcoming {
+#dashboardGridCompleted, #dashboardGridUpcoming, #TotalStats, #FacilitatorHours, #FacilitatorRoomHours, #RoomHours, #recievedHours, #givenHours {
     width: 600px;
 }
 
@@ -290,9 +290,9 @@ tr.AlternatingRowStyle:hover {
 #dashboardNoneLabel2, #signupLabel, #signupFacilitator, #weekLabel1, #weekLabel2, #weekLabel3, #weekLabel4, #Week1Label,
 #Week2Label, #Week3Label, #Week4Label, #statsYearlyLabel, #yearlyHoursLabel, #monthlyHoursLabel, #statsMonthlyLabel,
 #alSearch, #dashboardDonate, #dashboardDonateButtons, #dashboardDonateFac, #dashboardDonateEmail, #dashboardDonateEmailTxt,
-#dashboardDonateFacDrop, #dashboardDecline, #dashboardDeclineTxt, #dashboardDeclineInfo, #dashboardDecline, 
-#dashboardDeclineTotal, #dashboardDeclineNum, #dashboardDeclineButtons, #facilitatorConfirm, #notiAdd, #notiConfirmText, #notiFacilButtons, #absenceConfirmPanel, 
-#absenceAdd, #absenceConfirmTxt, #notAbsButtons, #notiNothing, #noNotifications {
+#dashboardDonateFacDrop, #dashboardDecline, #dashboardDeclineTxt, #dashboardDeclineInfo, #dashboardDecline,
+#dashboardDeclineTotal, #dashboardDeclineNum, #dashboardDeclineButtons, #facilitatorConfirm, #notiAdd, #notiConfirmText, #notiFacilButtons, #absenceConfirmPanel,
+#absenceAdd, #absenceConfirmTxt, #notAbsButtons, #notiNothing, #noNotifications, #statsTotalLabel, #statsTotalMonthLabel, #FacilitatorByClassLabel, #ClassLabel, #recievedLabel, #givenLabel {
     width: 100%;
     text-align: center;
     padding-bottom: 5px;
