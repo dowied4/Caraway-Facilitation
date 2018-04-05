@@ -51,6 +51,10 @@
     <Reference Include="DayPilot, Version=5.0.303.0, Culture=neutral, PublicKeyToken=ce5d34538e20ef65, processorArchitecture=MSIL">
       <HintPath>..\packages\DayPilot.5.0.303\lib\DayPilot.dll</HintPath>
     </Reference>
+    <Reference Include="FusionCharts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8a5c332341e1e53f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\FusionCharts.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -205,14 +209,21 @@
     <Content Include="About.aspx" />
     <Content Include="bin\395project.dll" />
     <Content Include="bin\395project.pdb" />
+    <Content Include="bin\FusionCharts.dll" />
     <Content Include="dash\AddPhoneNumber.aspx" />
     <Content Include="dash\Admin\AccountStat.aspx" />
+    <Content Include="dash\Admin\Dashboard.aspx" />
     <Content Include="dash\Admin\EditAccounts.aspx" />
+    <Content Include="dash\Admin\FieldTrip.aspx" />
+    <Content Include="dash\Admin\GiveAbsence.aspx" />
     <Content Include="dash\Admin\Notifications.aspx" />
     <Content Include="dash\Calendar.aspx" />
     <Content Include="dash\Confirm.aspx" />
     <Content Include="dash\Lockout.aspx" />
     <Content Include="dash\Logout.aspx" />
+    <Content Include="dash\Stats\Date.aspx" />
+    <Content Include="dash\UserStats.aspx" />
+    <Content Include="dash\ViewCalendar.aspx" />
     <Content Include="Forgot.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="dash\Manage.aspx" />
@@ -311,12 +322,33 @@
     <Compile Include="dash\Admin\AccountStat.aspx.designer.cs">
       <DependentUpon>AccountStat.aspx</DependentUpon>
     </Compile>
+    <Compile Include="dash\Admin\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dash\Admin\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="dash\Admin\EditAccounts.aspx.cs">
       <DependentUpon>EditAccounts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="dash\Admin\EditAccounts.aspx.designer.cs">
       <DependentUpon>EditAccounts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dash\Admin\FieldTrip.aspx.cs">
+      <DependentUpon>FieldTrip.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dash\Admin\FieldTrip.aspx.designer.cs">
+      <DependentUpon>FieldTrip.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dash\Admin\GiveAbsence.aspx.cs">
+      <DependentUpon>GiveAbsence.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dash\Admin\GiveAbsence.aspx.designer.cs">
+      <DependentUpon>GiveAbsence.aspx</DependentUpon>
     </Compile>
     <Compile Include="dash\Admin\Notifications.aspx.cs">
       <DependentUpon>Notifications.aspx</DependentUpon>
@@ -352,6 +384,27 @@
     </Compile>
     <Compile Include="dash\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dash\Stats\Date.aspx.cs">
+      <DependentUpon>Date.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dash\Stats\Date.aspx.designer.cs">
+      <DependentUpon>Date.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dash\UserStats.aspx.cs">
+      <DependentUpon>UserStats.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dash\UserStats.aspx.designer.cs">
+      <DependentUpon>UserStats.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dash\ViewCalendar.aspx.cs">
+      <DependentUpon>ViewCalendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dash\ViewCalendar.aspx.designer.cs">
+      <DependentUpon>ViewCalendar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forgot.aspx.cs">
       <DependentUpon>Forgot.aspx</DependentUpon>

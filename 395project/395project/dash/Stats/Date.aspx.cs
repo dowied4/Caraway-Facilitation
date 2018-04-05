@@ -80,6 +80,22 @@ namespace _395project.dash.Stats
             CreateDataXML();
         }
 
+        protected int getNumChildren()
+        {
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+            };
+            con.Open();
+            //Get number of children
+            string numKids = "SELECT COUNT(*) FROM Children Where Id = @CurrentUser";
+            SqlCommand getNumKids = new SqlCommand(numKids, con);
+            getNumKids.Parameters.AddWithValue("@CurrentUser", User.Identity.Name);
+            int count = (int)getNumKids.ExecuteScalar();
+            con.Close();
+            return count;
+        }
+
         protected void MonthBind()
         {
             DateTimeFormatInfo info = DateTimeFormatInfo.GetInstance(null);
@@ -92,18 +108,21 @@ namespace _395project.dash.Stats
 
         protected void CreateDataXML()
         {
+            String ID = User.Identity.Name;
+            String hours;
+            int month;
+            int year;
+            int NumChildren = getNumChildren();
             StringBuilder Main = new StringBuilder();
             StringBuilder Title = new StringBuilder();
             StringBuilder Labels = new StringBuilder();
             StringBuilder Line = new StringBuilder();
-            
+            //Label3.Text = getNumChildren().ToString();
             Title.Append("{\n" +
                 "'chart': {"+
-                "'caption': 'Monthly revenue for last year', " +
-                "'subcaption': 'Harrys SuperMart', " +
-                "'xAxisName': 'Month'," + 
-                "'yAxisName': 'revenues'," +
-                "'numberPrefix': '$'," +
+                "'caption': 'Monthly Hours For " + MonthDropDown.SelectedItem + "', " +
+                "'xAxisName': 'Weeks'," + 
+                "'yAxisName': 'Hours'," +
                 "'paletteColors': '#0075c2'," +
                 "'bgColor': '#ffffff'," +
                 "'borderAlpha': '20'," +
@@ -122,28 +141,41 @@ namespace _395project.dash.Stats
                 "'subcaptionFontSize': '14'" +
                 "},");
 
+            //Label3.Text = getTotalHours(3, 3, 2018, ID);
+            Title.Append("'data': [");
             for(int i = 1; i < 5; i++)
             {
-
+                month = Convert.ToInt32(MonthDropDown.SelectedValue);
+                year = Convert.ToInt32(YearDropDown.SelectedValue);
+                hours = getTotalHours(i, month, year, ID);
+                Title.Append("{");
+                Title.Append("'label': 'Week " + i.ToString() + "',");
+                Title.Append("'value': '" + hours + "'");
+                Title.Append("},");
             }
+            Title.Append("],");
 
-            Title.Append("'data': [" +
-        "{" +
-                "'label': 'Jan'," +
-            "'value': '420000'" +
-        "}," +
-        "{" +
-                "'label': 'Feb'," +
-            "'value': '810000'" +
-        "}," +
-        "]," +
-        "}");
-            //Label3.Text = Title.ToString();
+            Title.Append("'trendlines': [");
+            Title.Append("{");
+            Title.Append("'line': [ {");
+            if (NumChildren == 1)
+            {
+                Title.Append("'startvalue': '2.5',");
+            }
+            else
+            {
+                Title.Append("'startvalue': '5',");
+            }
+            Title.Append("'color': '#1aaf5d',");
+            Title.Append("'valueOnRight': '1',");
+            Title.Append("'displayvalue': 'Weekly Target'");
+            Title.Append("} ] } ] ");
+            Title.Append("}");
             Chart sales = new Chart("column2d", "myChart", "600", "350", "json", Title.ToString());
             //Render the chart.
             Literal1.Text = sales.Render();
         }
-        protected String getTotalHours(int Month, int Week, int Year, String ID)
+        protected String getTotalHours(int Week, int Month, int Year, String ID)
         {
             
             //int firstWeekOfMonth = GetWeekOfMonth.FirstMonday(Convert.ToInt32(Month));
@@ -152,9 +184,7 @@ namespace _395project.dash.Stats
             {
                 ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
             };
-
             con.Open();
-
             //Gets each week, the month and the year for each facilitator
             string upc = "SELECT SUM(WeeklyHours) AS totalWeekly FROM Stats WHERE Id = @User AND Month = @Month" +
               " AND Year = @Year AND WeekOfMonth = @Week";
