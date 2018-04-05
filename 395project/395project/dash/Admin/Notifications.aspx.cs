@@ -19,7 +19,7 @@ namespace _395project.dash.Admin
             //opens a connection to the server
             SqlConnection con = new SqlConnection
             {
-                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString()
+                ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString() 
             };
 
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -36,7 +36,7 @@ namespace _395project.dash.Admin
             //Execute the querey
             SqlDataReader reader = SqlCommand.ExecuteReader();
 
-            displayFacilRequests(reader);
+            displayFacilRequests(reader, con);
             reader.Close();
 
             //Query to fetch data from the absence db
@@ -49,7 +49,7 @@ namespace _395project.dash.Admin
             //Execute the querey
             reader = SqlCommand.ExecuteReader();
 
-            displayAbsenceRequests(reader);
+            displayAbsenceRequests(reader, con);
             reader.Close();
             con.Close();
 
@@ -156,15 +156,26 @@ namespace _395project.dash.Admin
 
         }
 
-        private void displayFacilRequests(SqlDataReader reader)
+        private void displayFacilRequests(SqlDataReader reader, SqlConnection con)
         {
+            string nameQuery = "SELECT TOP 1 FullName FROM Facilitators WHERE Id = @Email";
+            SqlCommand facilCmd = new SqlCommand(nameQuery, con);
+            facilCmd.Parameters.AddWithValue("@Email", "");
+
+
             while (reader.Read())
             {
+                facilCmd.Parameters["@Email"].Value = reader.GetValue(1).ToString();
+
+                //Execute the querey
+                SqlDataReader nameReader = facilCmd.ExecuteReader();
+                nameReader.Read();
                 //Label
-                Label notificationLabel = makeLabel("Facilitator", reader);
+                Label notificationLabel = makeLabel("Facilitator", reader, nameReader.GetValue(0).ToString(), "", "");
 
                 //Confirm
-                string cmdArg = reader.GetValue(1).ToString() + "," + reader.GetValue(2).ToString() + "," + reader.GetValue(3).ToString() + "," + reader.GetValue(0).ToString();
+                string cmdArg = reader.GetValue(1).ToString() + "," + reader.GetValue(2).ToString() + "," + reader.GetValue(3).ToString() + "," + reader.GetValue(0).ToString() + "," + nameReader.GetValue(0).ToString();
+                nameReader.Close();
                 Button confirm = makeConfirm(cmdArg, "Facilitator");
 
                 //Clear
@@ -180,14 +191,30 @@ namespace _395project.dash.Admin
             }
         }
 
-        private void displayAbsenceRequests(SqlDataReader reader)
+        private void displayAbsenceRequests(SqlDataReader reader, SqlConnection con)
         {
+            string nameQuery = "SELECT TOP 1 FullName FROM Facilitators WHERE Id = @Email";
+            SqlCommand absenceCmd = new SqlCommand(nameQuery, con);
+            absenceCmd.Parameters.AddWithValue("@Email", "");
             while (reader.Read())
             {
-                //Label
-                Label notificationLabel = makeLabel("Absence", reader);
-                string cmdArg = reader.GetValue(1).ToString() + "," + reader.GetValue(2).ToString() + "," + reader.GetValue(3).ToString() + "," + reader.GetValue(0).ToString();
+                absenceCmd.Parameters["@Email"].Value = reader.GetValue(1).ToString();
 
+                //Execute the querey
+                SqlDataReader nameReader = absenceCmd.ExecuteReader();
+                nameReader.Read();
+           
+                //Get start and end days without times
+                DateTime start = (DateTime)(reader.GetValue(2));
+                DateTime end = (DateTime)(reader.GetValue(3));
+                string startString = start.ToShortDateString();
+                string endString = end.ToShortDateString();
+
+                //Label
+                Label notificationLabel = makeLabel("Absence", reader, nameReader.GetValue(0).ToString(), startString, endString);
+
+                string cmdArg = reader.GetValue(1).ToString() + "," + startString + "," + endString + "," + reader.GetValue(0).ToString() + "," + nameReader.GetValue(0).ToString();
+                nameReader.Close();
                //Confirm
                 Button confirm = makeConfirm(cmdArg, "Absence");
 
@@ -237,14 +264,14 @@ namespace _395project.dash.Admin
             return clear;
         }
 
-        private Label makeLabel(string requestType, SqlDataReader reader)
+        private Label makeLabel(string requestType, SqlDataReader reader, string fullName, string startDate, string endDate)
         {
             Label notificationsLabel = new Label();
 
             if (requestType.Equals("Facilitator"))
-                notificationsLabel.Text = reader.GetValue(1).ToString() + " has requested an " + "ADDITIONAL FACILITATOR: " + reader.GetValue(2).ToString() + " " + reader.GetValue(3).ToString();
+                notificationsLabel.Text = reader.GetValue(1).ToString() + " (" + fullName + ")" + " has requested an " + "ADDITIONAL FACILITATOR: " + reader.GetValue(2).ToString() + " " + reader.GetValue(3).ToString();
             if (requestType.Equals("Absence"))
-                notificationsLabel.Text = reader.GetValue(1).ToString() + " has requested an " + "ABSENCE from hours FROM: " + reader.GetValue(2).ToString() + " TO: " + reader.GetValue(3).ToString() + ". Reason: " + reader.GetValue(4).ToString();
+                notificationsLabel.Text = reader.GetValue(1).ToString() + " (" + fullName + ")" + " has requested an " + "ABSENCE from hours FROM: " + startDate + " TO: " + endDate + ". Reason: " + reader.GetValue(4).ToString();
             notificationsLabel.Attributes.Add("class", "input-header");
 
             return notificationsLabel;
@@ -258,7 +285,7 @@ namespace _395project.dash.Admin
             facilConfirmButton.CommandName = ((Button)sender).CommandName;
             facilConfirmButton.CommandArgument = vars;
 
-            infoLabel.Text = "Add " + splitVars[1] + " " + splitVars[2] + " as a facilitator to " + splitVars[0];
+            infoLabel.Text = "Add " + splitVars[1] + " " + splitVars[2] + " as a facilitator to " + splitVars[0] + " (" + splitVars[4] + ")?";
 
         }
 
@@ -275,7 +302,7 @@ namespace _395project.dash.Admin
             confirmAbsence.CommandName = ((Button)sender).CommandName;
             confirmAbsence.CommandArgument = vars;
 
-            infoLabel2.Text = "Allow absence for " + splitVars[0] + " from " + splitVars[1] + " to " + splitVars[2] + "?";
+            infoLabel2.Text = "Allow absence for " + splitVars[0] + " (" + splitVars[4] + ")" + " from " + splitVars[1] + " to " + splitVars[2] + "?";
         }
 
         protected void cancelAbsenceReq(object sender, System.EventArgs e)
