@@ -537,8 +537,8 @@ namespace _395project.Pages
             GetCompletedHours.Parameters.AddWithValue("@FirstName", firstName);
             GetCompletedHours.Parameters.AddWithValue("@LastName", lastName);
             SqlDataReader addHoursReader = GetCompletedHours.ExecuteReader();
-            manager.SendEmail(EmailTextbox.Text, "Facilitation Hours Recieved", firstName + " " + lastName + " has recieved " + totalHours + " hours from " + 
-                User.Identity.GetUserId() + " for the month of " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Int32.Parse(month)) + "!");
+            manager.SendEmail(EmailTextbox.Text, "Facilitation Hours Recieved", newFirstName + " " + newLastName + " has recieved " + totalHours + " hours from " + 
+                User.Identity.GetUserId() + " (" + firstName + " " + lastName + ")" + " for the month of " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Int32.Parse(month)) + "!");
             Response.Redirect(Request.RawUrl); 
 
         }
