@@ -43,13 +43,14 @@
             
 
                 <ul class="nav navbar-top-links navbar-right">
+                    <li><a runat="server" title="Manage your account">Welcome <%: Context.User.Identity.GetUserName()  %> </a></li>
                     <!-- /.dropdown-user -->
                     <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="/dash/Manage.aspx"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="/dash/Logout.aspx"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -74,7 +75,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.aspx"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="WebForm1.aspx"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="/dash/ViewCalendar.aspx"><i class="fa fa-table fa-fw"></i> View Calendar</a>
@@ -88,18 +89,6 @@
                                         <li>
                                             <a href="/dash/Stats/Date.aspx"">By Date</a>
                                         </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-edit fa-fw"></i> Request Forms<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="RequestFacilitator.aspx">Additional Facilitator</a>
-                                </li>
-                                <li>
-                                    <a href="FacilitatorAbsence.aspx">Facilitator Absence</a>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
