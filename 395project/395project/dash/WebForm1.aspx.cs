@@ -39,7 +39,7 @@ namespace _395project.dash
 
         protected void getRoom(string room, int roomId, Color textColor, SqlConnection con, PlaceHolder roomHolder)
         {
-            string query = "Select FacilitatorFirstName, FacilitatorLastName, StartTime FROM Calendar WHERE RoomId = @RoomId AND (StartTime > @startTodayTime AND StartTime < @endTodayTime) Order BY StartTime";
+            string query = "Select FacilitatorFirstName, FacilitatorLastName, StartTime, EndTime FROM Calendar WHERE RoomId = @RoomId AND (StartTime > @startTodayTime AND StartTime < @endTodayTime) Order BY StartTime";
             DateTime today = DateTime.Now;
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("@RoomId", roomId);
@@ -64,11 +64,12 @@ namespace _395project.dash
         {
             Label personLabel = new Label();
             string[] vars = reader.GetValue(2).ToString().Split(' ');
+            string[] vars2 = reader.GetValue(3).ToString().Split(' ');
             if (vars[2].Length == 7)
             {
                 vars[1] = vars[1] + " ";
             }
-            personLabel.Text = vars[1] + "  " + vars[2] + " " + reader.GetValue(0).ToString() + " " + reader.GetValue(1).ToString();
+            personLabel.Text = vars[1] + " " + vars[2] + " - " + vars2[1] + " " + vars2[2] + " " + reader.GetValue(0).ToString() + " " + reader.GetValue(1).ToString();
             personLabel.Attributes.Add("class", "stats-info");
             personLabel.ForeColor = textColor;
 

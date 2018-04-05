@@ -33,9 +33,6 @@
 				</div>
 			</div>
 		</div>
-        <div class="row">
-            <asp:Literal ID="Literal1" runat="server"></asp:Literal>
-        </div>
 	</div>
 
     

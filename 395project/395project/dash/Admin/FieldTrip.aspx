@@ -7,6 +7,11 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
 	<link href="../../Content/dashboard.css" rel="stylesheet" />
+    <h2 id="head" runat="server">Add Field Trip</h2>
+    <hr />
+    <p class="error-text">
+        <asp:Label runat="server" ID="ErrorMessages" />
+    </p>
 		<br />
 		<br />
 		<br />
@@ -37,20 +42,20 @@
                 <asp:TextBox ID="LocationTextBox" runat="server" CssClass="form-control" Width="300px"></asp:TextBox>   
                 </div>
 
-                <!-- Room Choice -->
+                <!-- Start Time Choice -->
                 <div class="row">
 	                <asp:Label ID="Label4" runat="server" Text="Start Time"  CssClass="input-header"></asp:Label>
                 </div>
                 <div class="row" style="padding-bottom:10px;">
-	            	<asp:TextBox ID="StartTimeTextBox" runat="server" CssClass="form-control" Width="300px"></asp:TextBox>
+	            	<asp:TextBox ID="StartTimeTextBox" runat="server" type="time" CssClass="form-control" Width="300px"></asp:TextBox>
                 </div>
 
-                <!-- Time Slot Choice -->
+                <!-- End Time Choice -->
                 <div class="row">
                     <asp:Label ID="Label3" runat="server" Text="End Time"  CssClass="input-header"></asp:Label>
                 </div>										
 				<div class="row" style="padding-bottom:10px;">
-						<asp:TextBox ID="EndTimeTextBox" runat="server" CssClass="form-control" Width="300px"></asp:TextBox>
+						<asp:TextBox ID="EndTimeTextBox" type="time" runat="server" CssClass="form-control" Width="300px"></asp:TextBox>
 				</div>
 
                 <!-- Sign Up Button -->

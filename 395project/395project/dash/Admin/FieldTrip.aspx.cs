@@ -16,7 +16,7 @@ namespace _395project.dash.Admin
             //Sets the default time to 8:30-4:00 (all day)
             if (!IsPostBack)
             {
-                StartTimeTextBox.Text = "8:45";
+                StartTimeTextBox.Text = "08:45";
                 EndTimeTextBox.Text = "15:15";
                 Calendar.SelectedDate = DateTime.Now.Date;
             }
@@ -25,7 +25,7 @@ namespace _395project.dash.Admin
         //Adds the FieldTrip to the database
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
-            //Takes the selected date and adds the start/end times to it
+             //Takes the selected date and adds the start/end times to it
             DateTime day = Calendar.SelectedDate;
             DateTime startTime = day.Add(TimeSpan.Parse(StartTimeTextBox.Text));
             DateTime endTime = day.Add(TimeSpan.Parse(EndTimeTextBox.Text));
@@ -38,6 +38,9 @@ namespace _395project.dash.Admin
             cmd.Parameters.AddWithValue("@Location", LocationTextBox.Text);
             cmd.ExecuteNonQuery();
             LocationTextBox.Text = String.Empty;
+            ErrorMessages.Visible = true;
+            ErrorMessages.Text = "Field Trip successfully added!";
+            ErrorMessages.ForeColor = System.Drawing.Color.Green;
         }
     }
 }

@@ -93,7 +93,7 @@
         <asp:Literal ID="Literal1" runat="server"></asp:Literal>
         
     </div>
-    <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+  
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="footer" runat="server">
 </asp:Content>

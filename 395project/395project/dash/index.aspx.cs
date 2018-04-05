@@ -27,6 +27,15 @@ namespace _395project.Pages
             base.OnPreInit(e);
             ChooseMaster choose = new ChooseMaster();
             MasterPageFile = choose.GetMaster();
+
+            if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+            {
+                Response.Redirect("/dash/Admin/Notifications.aspx");
+            }
+            if (User.IsInRole("Teacher"))
+            {
+                Response.Redirect("/dash/WebForm1.aspx");
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
