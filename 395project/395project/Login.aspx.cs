@@ -36,14 +36,7 @@ namespace _395project.Account
                 {
                     case SignInStatus.Success:
                         Response.Redirect("/Dash/index.aspx");
-                       /* if(User.IsInRole("Admin") || User.IsInRole("SuperUser")) 
-                        {
-                            Response.Redirect("/dash/Admin/Register.aspx");
-                        }
-                        else
-                        {
-                            Response.Redirect("/dash/Manage.aspx");
-                        }*/
+                        //var user = await UserManager.FindAsync(ModelBindingExecutionContext.Email, ModelBindingExecutionContext.Password);
                         //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                         break;
                     case SignInStatus.LockedOut:

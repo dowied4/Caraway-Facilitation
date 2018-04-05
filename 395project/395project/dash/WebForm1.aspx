@@ -6,6 +6,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="Title" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
+    
     <link href="/Content/dashboard.css" rel="stylesheet" />
     <h2 class="page-title"><%: Title %></h2>
     <p class="error-text">
