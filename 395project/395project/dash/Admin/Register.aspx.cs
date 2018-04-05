@@ -29,10 +29,10 @@ namespace _395project.Account
 
             switch (value)
             {
-                case "K": Room.Enabled = true; break;
-                case "1": Room.Enabled = true; break;
-                case "2": Room.Enabled = true; break;
-                default: Room.Enabled = false; Room.ToolTip = "Disabled";  break;
+                case "K": Room.Visible = true; Room.Visible = true; Class.Text = "Class";  break;
+                case "1": Room.Visible = true; Room.Visible = true; Class.Text = "Class"; break;
+                case "2": Room.Visible = true; Room.Visible = true; Class.Text = "Class"; break;
+                default: Room.Visible = false; Class.Text = "*Class is automatically set"; break;
             }
 
 
