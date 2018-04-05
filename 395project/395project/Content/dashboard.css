@@ -292,7 +292,8 @@ tr.AlternatingRowStyle:hover {
 #alSearch, #dashboardDonate, #dashboardDonateButtons, #dashboardDonateFac, #dashboardDonateEmail, #dashboardDonateEmailTxt,
 #dashboardDonateFacDrop, #dashboardDecline, #dashboardDeclineTxt, #dashboardDeclineInfo, #dashboardDecline,
 #dashboardDeclineTotal, #dashboardDeclineNum, #dashboardDeclineButtons, #facilitatorConfirm, #notiAdd, #notiConfirmText, #notiFacilButtons, #absenceConfirmPanel,
-#absenceAdd, #absenceConfirmTxt, #notAbsButtons, #notiNothing, #noNotifications, #statsTotalLabel, #statsTotalMonthLabel, #FacilitatorByClassLabel, #ClassLabel, #recievedLabel, #givenLabel {
+#absenceAdd, #absenceConfirmTxt, #notAbsButtons, #notiNothing, #noNotifications, #statsTotalLabel, #statsTotalMonthLabel, #FacilitatorByClassLabel, #ClassLabel, #recievedLabel, #givenLabel,
+#blueLabel, #bluePeople, #purpleLabel, #purplePeople, #greenLabel, #greenPeople, #redLabel, #redPeople, #greyLabel, #greyPeople {
     width: 100%;
     text-align: center;
     padding-bottom: 5px;
@@ -380,4 +381,20 @@ td.calSelector a {
 	background-color: #EBEBEB;
 	filter: alpha(opacity=70);
 	opacity: 0.7;
+}
+
+#blueLabel{
+    color: dodgerblue;
+}
+#purpleLabel {
+    color: mediumpurple;
+}
+#greenLabel {
+    color: forestgreen;
+}
+#redLabel {
+    color: red;
+}
+#greyLabel {
+    color: grey;
 }
