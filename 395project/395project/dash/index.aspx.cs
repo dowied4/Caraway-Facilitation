@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using System.Globalization;
 using System.Data;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace _395project.Pages
 {
@@ -420,7 +421,7 @@ namespace _395project.Pages
             //Grid row number
             int num = gvr.RowIndex;
             int WeekOfMonth = GetWeekOfMonth.GetWeekNumberOfMonth(Convert.ToDateTime(gvr.Cells[2].Text));
-
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
             string[] name;
             string firstName;
@@ -527,7 +528,8 @@ namespace _395project.Pages
             GetCompletedHours.Parameters.AddWithValue("@FirstName", firstName);
             GetCompletedHours.Parameters.AddWithValue("@LastName", lastName);
             SqlDataReader addHoursReader = GetCompletedHours.ExecuteReader();
-
+            manager.SendEmail(EmailTextbox.Text, "Facilitation Hours Recieved", firstName + " " + lastName + " has recieved " + totalHours + " hours from " + 
+                User.Identity.GetUserId() + " for the month of " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Int32.Parse(month)) + "!");
             Response.Redirect(Request.RawUrl); 
 
         }
