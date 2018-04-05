@@ -209,7 +209,7 @@
 		<div class="thing">
             <div class="row">
                 <div class="col-md-6">
-			        <asp:Label runat="server" AssociatedControlID="Room" CssClass="input-header">Class</asp:Label>
+			        <asp:Label runat="server" AssociatedControlID="Room" ID="Class" CssClass="input-header">Class</asp:Label>
                 </div>
             </div>
 			<div class="row">
@@ -232,5 +232,6 @@
             </div>
         </div>
     </div>
+    <br />
 </asp:Content>
 
