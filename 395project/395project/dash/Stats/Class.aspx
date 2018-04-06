@@ -10,7 +10,7 @@
     <script type="text/javascript" src="/Scripts/fusioncharts/fusioncharts.js"></script>
     <link href="/Content/dashboard.css" rel="stylesheet" />
     <h2 class="page-title"><%: Title %></h2>
-    <h2 id="head" runat="server">Statistics: By Date</h2>
+    <h2 id="head" runat="server">Statistics: By Class</h2>
     <hr />
     <div class="row" style="padding-bottom: 30px;">
         <div class="dashboardMargins" id="dashboardInfoLabel">
@@ -70,16 +70,6 @@
     <div class="row" style="padding-bottom: 30px; text-align: center;">
         <div class="dashboardMargins" id="statsHoursLabel">
             <asp:Label runat="server" CssClass="section-header">DATE</asp:Label>
-            <div class="row">
-				<asp:Label ID="Label3" runat="server" Text="Week" CssClass="input-header"></asp:Label>
-                <asp:DropDownList ID="WeekDropDown" runat="server" CssClass="signupDropDown">
-                    <asp:ListItem Value = "1" Text="1"></asp:ListItem>
-                    <asp:ListItem Value = "2" Text="2"></asp:ListItem>
-                    <asp:ListItem Value = "3" Text="3"></asp:ListItem>
-                    <asp:ListItem Value = "4" Text="4"></asp:ListItem>
-                </asp:DropDownList>
-			</div>
-            <br />
 			<div class="row">
 				<asp:Label ID="Label1" runat="server" Text="Month" CssClass="input-header"></asp:Label>
         		<asp:DropDownList ID="MonthDropDown" runat="server" CssClass="signupDropDown">
@@ -96,9 +86,15 @@
 			<asp:Button ID="UpdateButton" runat="server" Text="Get Stats" CssClass="mybutton" />
 		</div>
     </div>
-    <div class="row" style="text-align: center;">
-        <asp:Literal ID="Literal2" runat="server"></asp:Literal>
-    </div>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <div class="row" style="text-align: center;">
+                <asp:Literal ID="Literal2"  runat="server"></asp:Literal>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
 
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="footer" runat="server">

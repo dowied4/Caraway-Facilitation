@@ -84,8 +84,15 @@
                             <a href="/dash/Calendar.aspx"><i class="fa fa-table fa-fw"></i> Sign Up</a>
                         </li>
                         <li>
-                            <a href="/dash/UserStats.aspx"><i class="fa fa-bar-chart-o fa-fw"></i> Personal Statistics</a>
-                            
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="/dash/UserStats.aspx">Personal Statistics</a>
+                                        </li>
+                                        <li>
+                                            <a href="/dash/Stats/Date.aspx">By Date</a>
+                                        </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Request Forms<span class="fa arrow"></span></a>
