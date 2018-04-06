@@ -88,10 +88,7 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Statistics<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                         <li>
-                                            <a href="#">By Classroom</a>
-                                        </li>
-                                        <li>
-                                            <a href="/dash/Stats/Date.aspx"">By Date</a>
+                                            <a href="/dash/Stats/Class.aspx">By Classroom</a>
                                         </li>
                             </ul>
                             <!-- /.nav-second-level -->

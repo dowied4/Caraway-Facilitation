@@ -99,7 +99,7 @@ namespace _395project.dash.Stats
             }
         }
 
-        protected String getTotalClass(int Week, int Month, int Year, int Room, String ID)
+        protected String getTotalClass(int Month, int Year, int Room, String ID)
         {
             //Open Connection
             SqlConnection con = new SqlConnection
@@ -109,10 +109,10 @@ namespace _395project.dash.Stats
             con.Open();
             //Gets each week, the month and the year for each facilitator
             string upc = "SELECT COUNT(RoomId) AS totalRoom FROM Stats WHERE Month = @Month" +
-              " AND Year = @Year AND WeekOfMonth = @Week AND RoomId = @Room";
+              " AND Year = @Year AND RoomId = @Room";
             SqlCommand getup = new SqlCommand(upc, con);
             getup.Parameters.AddWithValue("@Room", Room);
-            getup.Parameters.AddWithValue("@Week", Week);
+            //getup.Parameters.AddWithValue("@Week", Week);
             getup.Parameters.AddWithValue("@Month", Month);
             getup.Parameters.AddWithValue("@Year", Year);
             //getup.Parameters.AddWithValue("@User", ID);
@@ -131,7 +131,6 @@ namespace _395project.dash.Stats
         {
             String ID = User.Identity.Name;
             String hours;
-            int week;
             int month;
             int year;
             StringBuilder Title = new StringBuilder();
@@ -139,7 +138,6 @@ namespace _395project.dash.Stats
             Title.Append("{\n" +
                 "'chart': {" +
                 "'caption': 'Frequency of All Facilitators in " + MonthDropDown.SelectedItem + "', " +
-                "'subCaption': 'Week " + WeekDropDown.SelectedItem + "'," +
                 "'xAxisName': 'Classrooms'," +
                 "'yAxisName': 'Frequency'," +
                 "'paletteColors': '#0075c2'," +
@@ -164,14 +162,15 @@ namespace _395project.dash.Stats
             Title.Append("'data': [");
             for (int i = 1; i < 6; i++)
             {
-                week = Convert.ToInt32(WeekDropDown.SelectedValue);
+                //week = Convert.ToInt32(WeekDropDown.SelectedValue);
                 month = Convert.ToInt32(MonthDropDown.SelectedValue);
                 year = Convert.ToInt32(YearDropDown.SelectedValue);
-                hours = getTotalClass(week, month, year, i, ID);
+                hours = getTotalClass(month, year, i, ID);
 
                 Title.Append("{");
                 Title.Append("'label': ' " + ClassRoom(i) + "',");
-                Title.Append("'value': '" + hours + "'");
+                Title.Append("'value': '" + hours + "',");
+                Title.Append(ClassColour(i));
                 Title.Append("},");
             }
             Title.Append("],");
@@ -179,6 +178,20 @@ namespace _395project.dash.Stats
             Chart sales = new Chart("column2d", "myChart", "600", "350", "json", Title.ToString());
             //Render the chart.
             Literal2.Text = sales.Render();
+        }
+
+        protected String ClassColour(int Room)
+        {
+            switch (Room)
+            {
+                case 1: return "'color': '#0000ff'";
+                case 2: return "'color': '#800080'";
+                case 3: return "'color': '#008000'";
+                case 4: return "'color': '#ff0000'"; 
+                case 5: return "'color': '#808080'"; 
+            }
+
+            return "'color': '#008ee4'";
         }
 
         protected String ClassRoom(int Room)
