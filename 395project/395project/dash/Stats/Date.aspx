@@ -70,7 +70,7 @@
     <hr />
     <div class="row" style="padding-bottom: 30px; text-align: center;">
         <div class="dashboardMargins" id="statsHoursLabel">
-            <asp:Label runat="server" CssClass="section-header">HOURS</asp:Label>
+            <asp:Label runat="server" CssClass="section-header">DATE</asp:Label>
 			<div class="row">
 				<asp:Label ID="Label1" runat="server" Text="Month" CssClass="input-header"></asp:Label>
         		<asp:DropDownList ID="MonthDropDown" runat="server" CssClass="signupDropDown">
@@ -83,7 +83,7 @@
 				<asp:DropDownList ID="YearDropDown" runat="server" CssClass="signupDropDown" DataSourceID="GetYears" DataTextField="Year" DataValueField="Year">
 				</asp:DropDownList>
 				<asp:SqlDataSource ID="GetYears" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT DISTINCT Year FROM dbo.Stats WHERE Year IS NOT NULL"></asp:SqlDataSource>
-			</div>			
+			</div>	
 			<br />
 			<asp:Button ID="UpdateButton" runat="server" Text="Get Stats" CssClass="mybutton" />
 		</div>
@@ -91,8 +91,7 @@
 
     <div class="row" style="text-align: center;">
         <asp:Literal ID="Literal1" runat="server"></asp:Literal>
-        
-    </div>
+        </div>
   
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="footer" runat="server">
