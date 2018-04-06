@@ -15,6 +15,19 @@ namespace _395project.dash.Stats
 {
     public partial class Date : System.Web.UI.Page
     {
+
+        protected override void OnPreInit(EventArgs e)
+        {
+            base.OnPreInit(e);
+            if (User.IsInRole("SuperUser"))
+                MasterPageFile = "/Master/Main.master";
+            else if (User.IsInRole("Admin"))
+                MasterPageFile = "/Master/BoardMember.master";
+            else if (User.IsInRole("Teacher"))
+                MasterPageFile = "/Master/Teacher.master";
+            else if (User.IsInRole("Facilitator"))
+                MasterPageFile = "/Master/Facilitator.master";
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -76,7 +89,6 @@ namespace _395project.dash.Stats
             //Bind the data
             ChildView.DataBind();
             childrenReader.Close();
-            //Label3.Text = getTotalHours(3, 3, 2018, ID);
             CreateDataXML();
         }
 
@@ -113,10 +125,7 @@ namespace _395project.dash.Stats
             int month;
             int year;
             int NumChildren = getNumChildren();
-            StringBuilder Main = new StringBuilder();
             StringBuilder Title = new StringBuilder();
-            StringBuilder Labels = new StringBuilder();
-            StringBuilder Line = new StringBuilder();
             //Label3.Text = getNumChildren().ToString();
             Title.Append("{\n" +
                 "'chart': {"+
@@ -204,5 +213,5 @@ namespace _395project.dash.Stats
             return "0";
         }
 
-     }
+    }
 }
