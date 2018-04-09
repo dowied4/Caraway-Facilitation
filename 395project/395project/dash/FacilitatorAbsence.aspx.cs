@@ -27,7 +27,7 @@ namespace _395project.Pages
             string[] fromDate = datepickerFrom.Text.Split('-');
             string[] toDate = datepickerTo.Text.Split('-');
 
-            DateTime startValid = new DateTime(2018, 1, 1);
+            DateTime startValid = DateTime.Today;
             DateTime endValid = new DateTime(2020, 1, 1);
 
 
