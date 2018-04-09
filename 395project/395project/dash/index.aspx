@@ -184,10 +184,23 @@
         BackgroundCssClass="modalBackground" TargetControlID="btn" X="-1" Y="-1" 
 		RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
     <asp:Panel ID="Panel4" runat ="server">
+      <div class="dashboardMargins" id="dashboardConfirm">
+            <asp:Label runat="server" CssClass="section-header">Confirm Hours</asp:Label>
+      </div>
       <div class="row" style="padding-bottom:10px;" >
+        <div class="col-md-4">
+	        <div class="dashboardMargins" id="start">
+		        <asp:Label ID="Label9" runat="server" Text="Start" CssClass="input-header"></asp:Label>
+            </div>
+        </div>
         <asp:TextBox ID="startTimeTextBox" type="time" runat="server" CssClass="signupDropDown"></asp:TextBox>
 	  </div>
 	  <div class="row" style="padding-bottom:10px;">
+        <div class="col-md-4">
+	        <div class="dashboardMargins" id="end">
+		        <asp:Label ID="Label10" runat="server" Text="End" CssClass="input-header"></asp:Label>
+            </div>
+        </div>
 	    <asp:TextBox ID="endTimeTextBox" type="time" runat="server" CssClass="signupDropDown"></asp:TextBox>
 	  </div>
       <asp:Button ID="Button5" runat="server" Text="Confirm" OnClick="ConfirmButton" CssClass="mybutton"/>
@@ -199,9 +212,7 @@
 		RepositionMode="RepositionOnWindowResizeAndScroll"></ajaxToolkit:ModalPopupExtender>
 
 	<asp:Panel ID="Panel1"  CssClass="dashboardMargins" runat="server">
-        <div class="dashboardMargins" id="dashboardDonate">
-            <asp:Label runat="server" CssClass="section-header">Donate Hours</asp:Label>
-        </div>
+        
         <div class="row" style="padding-bottom:10px">
             <div class="col-md-4">
 	            <div class="dashboardMargins" id="dashboardDonateEmail">
