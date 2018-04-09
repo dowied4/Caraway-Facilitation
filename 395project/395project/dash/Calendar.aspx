@@ -85,6 +85,9 @@
                 <asp:Panel ID="Panel1" runat ="server">
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
+                    <p class="error-text">
+                        <asp:Label runat="server" ID="ErrorMessages" />
+                    </p>    
                     <div class="row" style="padding-bottom:10px;" >
                		    <asp:TextBox ID="StartTimeTextBox" type="time" runat="server" CssClass="signupDropDown"></asp:TextBox>
 					</div>
