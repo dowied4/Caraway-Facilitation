@@ -85,13 +85,23 @@
                 <asp:Panel ID="Panel1" runat ="server">
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                    <p class="error-text">
-                        <asp:Label runat="server" ID="ErrorMessages" />
-                    </p>    
+                    <div class="dashboardMargins" id="calendarTime">
+                        <asp:Label runat="server" CssClass="section-header">Custom Time Slot</asp:Label>
+                    </div>             
                     <div class="row" style="padding-bottom:10px;" >
+                    <div class="col-md-4">
+                        <div class="dashboardMargins" id="calendarStart">
+                            <asp:Label ID="Label2" runat="server" Text="Start" CssClass="input-header"></asp:Label>
+                        </div>
+                    </div>
                		    <asp:TextBox ID="StartTimeTextBox" type="time" runat="server" CssClass="signupDropDown"></asp:TextBox>
 					</div>
 					<div class="row" style="padding-bottom:10px;">
+                        <div class="col-md-4">
+                            <div class="dashboardMargins" id="calendarEnd">
+                                <asp:Label ID="Label9" runat="server" Text="End" CssClass="input-header"></asp:Label>
+                            </div>
+                    </div>
 					    <asp:TextBox ID="EndTimeTextBox" type="time" runat="server" CssClass="signupDropDown"></asp:TextBox>
 					</div>
                     <asp:Button ID="okButton" runat="server" Text="Confirm" OnClick="onConfirm" CssClass="mybutton"/>
