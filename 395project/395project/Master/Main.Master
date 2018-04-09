@@ -98,6 +98,9 @@
                             <a href="/dash/Admin/Notifications"><i class="fa fa-bell fa-fw"></i> Notifications</a>
                         </li>
                         <li>
+                            <a href="/dash/WebForm1.aspx">Todays Schedule</a>
+                        </li>
+                        <li>
                             <a href="/dash/ViewCalendar.aspx"><i class="fa fa-table fa-fw"></i> View Calendar</a>
                         </li>
                         <li>
